@@ -23,7 +23,7 @@ export const LoginForm = () => {
       </div>
       <div className="form-footer">
         <div className="external-login-title">
-          <h5>Service externe</h5>
+          <h5>Services externes</h5>
         </div>
         <div className="link-holders">
           <a href="#">

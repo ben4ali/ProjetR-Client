@@ -3,14 +3,15 @@ import { BackgroundCarousel } from "../components/authentification/BackgroundCar
 import { LoginForm } from "../components/authentification/LoginForm";
 import "../styles/style-authentification.css";
 import Threads from '../blocks/Backgrounds/Threads/Threads';
+import { MetallicLogo } from "../components/MetallicLogo";
 // import logo from '../assets/logos/LogoBrutNoir.png'
 
 export const Authentification = () => {
   return (
     <div className="authentification-container">
         <div className="logoHolder">
-            {/* <img src={logo} alt="logo" /> */}
-            <h2>DEVHUB</h2>
+          <MetallicLogo/>
+          <h2>DEVHUB</h2>
         </div>
       <LoginForm />
       <BackgroundCarousel />
