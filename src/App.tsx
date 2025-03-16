@@ -1,11 +1,18 @@
 import React from 'react';
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
 import { Authentification } from './pages/Authentification';
-function App() {
+import { Home } from './pages/Home';
 
+function App() {
   return (
-    <Authentification />
+    <Router>
+      <Routes>
+        <Route path="/authentification" element={<Authentification />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App
+export default App;

@@ -3,7 +3,7 @@ import { BackgroundCarousel } from "../components/authentification/BackgroundCar
 import { LoginForm } from "../components/authentification/LoginForm";
 import "../styles/style-authentification.css";
 import Threads from '../blocks/Backgrounds/Threads/Threads';
-import { MetallicLogo } from "../components/MetallicLogo";
+import { MetallicLogo } from "../components/ui/MetallicLogo";
 // import logo from '../assets/logos/LogoBrutNoir.png'
 
 export const Authentification = () => {

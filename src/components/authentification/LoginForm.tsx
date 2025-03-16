@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 export const LoginForm = () => {
   return (
     <div className="form-container">
@@ -17,7 +18,7 @@ export const LoginForm = () => {
             <input type="password" placeholder="Mot de passe" />
           </div>
 
-          <a href="#">Mot de passe oublié ?</a>
+          <Link to="/">Mot de passe oublié ?</Link>
 
           <button type="submit">Connexion</button>
         </form>

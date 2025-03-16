@@ -6,6 +6,7 @@
     --light-text-color: rgb(0,0,0,0.6);
     --contrast-text-color: rgb(255,255,255,0.8);
     --highlight-text-color: rgb(82, 140, 234);
+    --primary-text-color: rgb(108, 121, 140);
 
     --font-family: 'Inter', sans-serif;
     --default-transition: all 0.2s ease-in-out;
