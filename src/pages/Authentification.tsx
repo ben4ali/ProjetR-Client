@@ -1,4 +1,4 @@
-
+import React from "react";
 import { BackgroundCarousel } from "../components/authentification/BackgroundCarousel";
 import { LoginForm } from "../components/authentification/LoginForm";
 import "../styles/style-authentification.css";

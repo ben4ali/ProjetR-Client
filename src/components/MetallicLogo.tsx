@@ -1,3 +1,4 @@
+import React from 'react';
 import MetallicPaint, { parseLogoImage } from '../blocks/Animations/MetallicPaint/MetallicPaint';
 import { useState, useEffect } from 'react';
 import logo from '../assets/logos/LogoRosemont.svg';

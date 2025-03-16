@@ -1,3 +1,4 @@
+import React from "react";
 export const LoginForm = () => {
   return (
     <div className="form-container">
@@ -38,7 +39,7 @@ export const LoginForm = () => {
         </div>
         <div className="register-link">
           <h5>
-            Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
+            Vous n&apos;avez pas de compte ? <a href="#">Inscrivez-vous</a>
           </h5>
         </div>
       </div>
