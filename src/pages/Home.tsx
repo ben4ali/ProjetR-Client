@@ -5,6 +5,9 @@ import { HeroParallaxComponent } from "../components/home/HeroParallaxComponent"
 import { ClassCards } from "../components/home/ClassCards";
 import { Presentation } from "../components/home/Presentation";
 import { MembersComponent } from "../components/home/MembersComponent";
+import { StartComponent } from "../components/home/StartComponent";
+
+
 export const Home = () => {
 
     return(
@@ -24,6 +27,10 @@ export const Home = () => {
 
             <section id="membres-section">
                 <MembersComponent/>
+            </section>
+
+            <section id="start-section">
+                <StartComponent/>
             </section>
         </div>
     );

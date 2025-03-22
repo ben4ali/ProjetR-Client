@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SpotlightCard from '../../blocks/Components/SpotlightCard/SpotlightCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,25 +42,70 @@ export const Presentation = () => {
 
     return (
         <div className="presentation-container">
-            <div className='video-container' ref={videoRef}>
-                <video autoPlay muted loop id="myVideo">
-                    <source src="https://www.aliben.me/artSyncDemo.6f635296.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <div className='comment-container'>
-                <div className="comments-holder" ref={commentsRef}>
-                    {data.map((comment, index) => (
-                        <div className='comment' key={index}>
-                            <div className='user'>
-                                <i className="bi bi-person-fill"></i>
-                                <p>{comment.user}</p>
-                            </div>
-                            <div className='content'>
-                                <p>{comment.content}</p>
-                            </div>
-                        </div>
-                    ))}
+            <div className="video-presentation">
+                <div className='video-container' ref={videoRef}>
+                    <video autoPlay muted loop id="myVideo">
+                        <source src="https://www.aliben.me/artSyncDemo.6f635296.mp4" type="video/mp4" />
+                    </video>
                 </div>
+                <div className='comment-container'>
+                    <div className="comments-holder" ref={commentsRef}>
+                        {data.map((comment, index) => (
+                            <div className='comment' key={index}>
+                                <div className='user'>
+                                    <i className="bi bi-person-fill"></i>
+                                    <p>{comment.user}</p>
+                                </div>
+                                <div className='content'>
+                                    <p>{comment.content}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className='features-holder'>
+                <div className='spotlight-holder'>
+                    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(255, 255, 255, 0.2)">
+                        <i className="bi bi-send-check"></i>
+                        <h5>PUBLIER</h5>
+                        <p>
+                            Publier vos projets dont vous êtes fiers.
+                        </p>
+                    </SpotlightCard>
+                </div>
+
+                <div className='spotlight-holder'>
+                    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(255, 255, 255, 0.2)">
+                    <i className="bi bi-share"></i>
+                        <h5>PARTAGER</h5>
+                        <p>
+                            Partager les projets que vous aimez avec vos amis.
+                        </p>
+                    </SpotlightCard>
+                </div>
+
+                <div className='spotlight-holder'>
+                    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(255, 255, 255, 0.2)">
+                        <i className="bi bi-chat-left-dots"></i>
+                        <h5>COMMENTER</h5>
+                        <p>
+                            Demander ou donner des conseils sur les projets.
+                        </p>
+                    </SpotlightCard>
+                </div>
+
+                
+                <div className='spotlight-holder'>
+                    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(255, 255, 255, 0.2)">
+                    <i className="bi bi-star"></i>
+                        <h5>INSPIRER-VOUS</h5>
+                        <p>
+                            Trouver l'inspiration pour vos prochains projets.
+                        </p>
+                    </SpotlightCard>
+                </div>
+
             </div>
         </div>
     );

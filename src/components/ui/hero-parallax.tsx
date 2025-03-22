@@ -8,6 +8,10 @@ import {
   MotionValue,
 } from "motion/react";
 import { MetallicLogo } from "./MetallicLogo";
+import TrueFocus from '../../blocks/TextAnimations/TrueFocus/TrueFocus';
+import ShinyText from "../../blocks/TextAnimations/ShinyText/ShinyText";
+import { Link } from "react-router-dom";
+
 export const HeroParallax = ({
   products,
 }: {
@@ -108,12 +112,21 @@ export const Header = () => {
         </div>
 
         <div className="main-text">
-            <h1>
-              DEVHUB
-            </h1>
+        <TrueFocus 
+          sentence="DEV HUB"
+          manualMode={false}
+          blurAmount={7}
+          borderColor="rgb(56, 106, 186)"
+          animationDuration={0.2}
+          pauseBetweenAnimations={2}
+          />
             <p className="">
               Découvrez et présentez des projets informatiques innovants du Cégep de Rosemont.
             </p>
+            <Link to="/authentification" className="shinyBtn-start">
+              <ShinyText text="COMMENCER" disabled={false} speed={3} className='custom-class' />
+            </Link>
+            
         </div>
     </div>
   );

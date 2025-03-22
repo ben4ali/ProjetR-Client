@@ -37,21 +37,32 @@
 .main-text h1{
     font-size: 140px;
     margin: 0;
-    font-weight: 200;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     height: 10rem;
 }
 
 .hero-text-holder p{
     padding-top: 0.5rem;
-    border-top: 2px solid var(--primary-text-color);
+    /* border-top: 2px solid var(--primary-text-color); */
     margin: 0;
     width: 60%;
     font-size: 25px;
     margin-left: 0.5rem;
 }
+.shinyBtn-start{
+    font-size:1.5rem;
+    border: 1px solid rgb(68, 66, 66);
+    padding: 1rem 2rem;
+    outline: none;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+}
 
-
+.shinyBtn-start:hover{
+    background-color: rgb(68, 66, 66,0.2);
+    color: white;
+}
 
 .back-thumbnail{
     flex-shrink: 0;
@@ -147,13 +158,19 @@
 
 .presentation-container{
     display: flex;
-
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2rem;
     width: 100%;
 }
-
+.video-presentation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+}
 .video-container{
     height: 35rem;
     width: 55rem;
@@ -208,153 +225,121 @@
     gap: 0.2rem;
     align-items: center;
 }
+.features-holder{
+    display: flex;
 
+    gap: 2rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 30rem;
+
+    margin-top: 5rem;
+}
+
+.spotlight-holder{
+    height: 21rem;
+    width: 21rem;
+    color: rgb(255,255,255,0.8)
+}
+
+.spotlight-holder h5{
+    font-size: 23px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.spotlight-holder i{
+    font-size: 2.5rem;
+}
 /* ----------------------**MEMBER SECTION**---------------------- */
 
 #membres-section{
     background-color: white;
-    padding-block: 5%;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.mission{
-    height: 100%;
-    width: 100%;
     position: relative;
 }
 
+.squareBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.5;
+    z-index:0;
+}
+.membres-holder{
+    height: fit-content;
+    position: relative;
+    width: 100%;
+    height: 60rem;
+}
+.membres-carousel{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -0%;
 
+}
 
 #titleSection{
-    margin-top: 3%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 1rem;
+    margin-top: 5%;
    text-align: center;
    font-size: 3rem;
 }
 
-.mission-content{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
-    margin: 0 auto;
-    height: 34rem;
-    margin-top: 5rem;
 
+
+/* ----------------------**START SECTION**---------------------- */
+
+#start-section{
+    background-color: black;
+    height: 30rem;
 }
 
-.MemberHolder{
+.start-container{
     position: relative;
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-    background-color: black;
-    width: 25.5rem;
-    border-radius: 15px;
+    width: 100%;
     height: 100%;
-
 }
 
-.cardFooter{
-    position: absolute;
-    display: flex;
-    bottom: 5%;
-    color: white;
+.start-container h2{
+    top: 30%;
+    left: 50%;
     width: 100%;
-    justify-content: space-between;
-
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 5rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.345);
+    text-align: center;
+    margin-top: 5rem;
 }
 
-.cardFooter h6, .cardFooter h5{
-    margin: 0
-}
-
-.cardFooter h6{
-    font-size: 1.15rem;
-    opacity: 0.75;
-}
-
-.cardFooter h5{
+.start-container a{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 1.5rem 4rem;
     font-size: 1.5rem;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-top: 2rem;
+    border-radius: 1px;
+    border: 1px solid white;
 }
 
-.cardInfo{
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    gap: 0;
-    margin-left: 1rem;
-}
-
-.socials{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 25%;
-}
-
-.socials i{
-    font-size: 1.9rem;
-    color: white;
-    opacity: 0.85;
-}
-
-
-.socials i:hover{
-    opacity: 1;
-}
-
-.missionInfo{
-    display: flex;
-    flex-direction: column;
-    width: 40rem;
-    justify-self: flex-end;
-    margin-top: auto;
-}
-
-.mission p{
-    font-size: 2.25rem;
-
-}
-
-.missionInfo p{
-    font-size: 20px;
-    margin-bottom: 1rem;
-    
-}
-
-
-.missionStats{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.stat{
-    background-color: black;
-    color: white;
-    padding: 1rem;
-    border-radius: 10px;
-    position: relative;
-    height: 10rem;
-    align-items: center;
-}
-
-.stat h5{
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.stat p{
-   position: absolute;
-   bottom: 5%;
-   right: 7.5%;
-   font-size: 40px;
-   margin: 0;
+.start-container a:hover{
+    background-color: rgb(255, 255, 255, 0);
+    color: rgb(255, 255, 255);
 }
