@@ -66,7 +66,7 @@ export const Explore = () => {
             </div>
             <hr />
             <div className="post-holder">
-                <Link to="/explore" className="post">
+                <Link to="/watch/1" className="post">
                     <div className="image-holder">
                         <div className="post-overlay"></div>
                         <img src="https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain" alt="post" />

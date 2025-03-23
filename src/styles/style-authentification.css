@@ -135,8 +135,10 @@
 .form-container {
     position: relative;
     z-index: 3;
-    height: 32rem;
-    width: 25rem;
+    height: 65vh;
+    width: 32vw;
+    min-width: 10rem;
+    max-width: 28rem;
     border-radius: 5px;
     background: red;
     display: flex;
@@ -164,7 +166,7 @@
 .form-content {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 95%;
 }
 
 .form-content form {
@@ -237,10 +239,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     color: rgb(0, 0, 0, 0.5);
     position: relative;
     height: 2rem;
+    margin-top: 1rem;
 }
 
 .external-login-title::before,
@@ -294,9 +298,19 @@
 
 @media screen and (max-width: 768px) {
 
-
+    .authentification-container{
+        height: fit-content;
+        padding-block: 2rem;
+    }
     .form-container {
+        width: 90vw;
         margin-top: 25%;
+        margin-top: 25vh;
+        height: fit-content;
+    }
+
+    .thread-container{
+        display: none;
     }
     .path-container{
         display: none;
@@ -312,6 +326,7 @@
         top: 1%;
         left: 0%;
         flex-direction: column;
+        margin-top: 5vh;
     }
 
     .logoHolder h2{
@@ -319,8 +334,8 @@
     }
 
     .logoHolder div{
-        height: 7rem;
-        width: 7rem;
+        height: 6rem;
+        width: 6rem;
     }
 
 

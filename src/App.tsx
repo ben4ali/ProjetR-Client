@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { Explore } from "./pages/Explore";
 import rosemontLogo from "./assets/logos/RosemontLogoBrute.png";
 import { Profil } from "./pages/Profil";
+import { Watch } from "./pages/Watch";
 
 function Navbar() {
   return (
@@ -22,7 +23,7 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/profil">Profil</Link>
+          <Link to="/profil/2">Profil</Link>
         </li>
         <li>
           <Link to="/explore">Explore</Link>
@@ -50,7 +51,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/authentification" element={<Authentification />} />
-        <Route path="/profil" element={<Profil/>} />
+        <Route path="/profil/:id" element={<Profil/>} />
+        <Route path="/watch/:id" element={<Watch />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>

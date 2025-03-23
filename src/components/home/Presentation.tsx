@@ -43,15 +43,15 @@ export const Presentation = () => {
     return (
         <div className="presentation-container">
             <div className="video-presentation">
-                <div className='video-container' ref={videoRef}>
+                <div className='video-container-presentation' ref={videoRef}>
                     <video autoPlay muted loop id="myVideo">
                         <source src="https://www.aliben.me/artSyncDemo.6f635296.mp4" type="video/mp4" />
                     </video>
                 </div>
-                <div className='comment-container'>
-                    <div className="comments-holder" ref={commentsRef}>
+                <div className='comment-container-presentation'>
+                    <div className="comments-holder-presentation" ref={commentsRef}>
                         {data.map((comment, index) => (
-                            <div className='comment' key={index}>
+                            <div className='comment-presentation' key={index}>
                                 <div className='user'>
                                     <i className="bi bi-person-fill"></i>
                                     <p>{comment.user}</p>

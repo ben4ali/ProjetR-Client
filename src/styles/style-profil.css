@@ -117,3 +117,50 @@
     height: 18rem;
     cursor: pointer;
 }
+
+@media (max-width: 1080px) {
+    .profil-header {
+        margin-top: 25%;
+        flex-direction: column;
+        height: auto;
+        width: 95%;
+    }
+
+    .profil-picture {
+        height: 9rem;
+        width: 9rem;
+        top: 35%;
+    }
+
+    .profil-picture img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .profil-content {
+        margin-top: 4rem;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .profil-info h1 {
+        font-size: 1.8rem;
+    }
+
+    .profil-stats {
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .profil-stats p{
+        font-size: 0.9rem;
+    }
+
+    .profil-post-holder {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    .profil-body{
+        width: 95%;
+    }
+}
