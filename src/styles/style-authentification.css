@@ -137,7 +137,7 @@
     z-index: 3;
     height: 65vh;
     width: 32vw;
-    min-width: 10rem;
+    min-width: 30rem;
     max-width: 28rem;
     border-radius: 5px;
     background: red;
@@ -294,6 +294,21 @@
     text-decoration: none;
 }
 
+.signup{
+    margin-top: 5%;
+    height: 80vh;
+}
+
+.duo{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.duo input, .duo label{
+    width: 100%;
+}
+
 /* ---------------------------*MEDIA QUEREIS*--------------------------- */
 
 @media screen and (max-width: 768px) {
@@ -301,11 +316,12 @@
     .authentification-container{
         height: fit-content;
         padding-block: 2rem;
+        padding-bottom: 25vh;
     }
     .form-container {
         width: 90vw;
-        margin-top: 25%;
-        margin-top: 25vh;
+        margin-top: 35%;
+        min-width: 10rem;
         height: fit-content;
     }
 
@@ -336,6 +352,10 @@
     .logoHolder div{
         height: 6rem;
         width: 6rem;
+    }
+
+    .signup{
+        margin-top: 25%;
     }
 
 

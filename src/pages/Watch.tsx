@@ -123,6 +123,21 @@ export const Watch = () => {
                                     <p>Super vidéo !</p>
                                 </div>
                             </div>
+
+                            <div className="comment">
+                                <div className="comment-author">
+                                    <img src="https://wallpapercave.com/wp/wp4877950.jpg" alt="autheur"/>
+                                </div>
+                               
+                                <div className="comment-info">
+                                    <h4>Ali Benkarrouch</h4>
+                                    <p>Super vidéo !</p>
+                                </div>
+                            </div>
+
+       
+
+            
                         </div>
                     </div>
                 </div>

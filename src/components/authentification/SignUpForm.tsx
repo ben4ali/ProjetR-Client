@@ -1,18 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface LoginFormProps {
+interface SignupProps {
   toggleForm: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
+export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   return (
-    <div className="form-container">
+    <div className="form-container signup">
       <div className="form-header">
-        <h3>CONNEXION</h3>
+        <h3>INSCRIPTION</h3>
       </div>
       <div className="form-content">
         <form>
+          <div className="input-group duo">
+            <div className="input-group">
+              <label>Prénom</label>
+              <input id="firstName" name="firstName" type="text" placeholder="Prénom" />
+            </div>
+            <div className="input-group">
+              <label>Nom</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Nom" />
+            </div>
+          </div>
           <div className="input-group">
             <label>Courriel</label>
             <input id="email" name="email" type="email" placeholder="johndoe@gmail.com" />
@@ -23,9 +33,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
             <input id="password" name="password" type="password" placeholder="Mot de passe" />
           </div>
 
-          <Link to="/">Mot de passe oublié ?</Link>
+          <div className="input-group">
+            <label>Confirmer mot de passe</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirmer votre mot de passe" />
+          </div>
 
-          <button type="submit">Connexion</button>
+          <button type="submit">S'inscrire</button>
         </form>
       </div>
       <div className="form-footer">
@@ -45,7 +58,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         </div>
         <div className="register-link">
           <h5>
-            Vous n&apos;avez pas de compte ? <a href="#" onClick={toggleForm}>Inscrivez-vous</a>
+            Vous avez déjà un compte ? <a href="#" onClick={toggleForm}>Connectez-vous</a>
           </h5>
         </div>
       </div>
