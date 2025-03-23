@@ -5,6 +5,7 @@ import { Authentification } from "./pages/Authentification";
 import { Home } from "./pages/Home";
 import { Explore } from "./pages/Explore";
 import rosemontLogo from "./assets/logos/RosemontLogoBrute.png";
+import { Profil } from "./pages/Profil";
 
 function Navbar() {
   return (
@@ -19,6 +20,9 @@ function Navbar() {
       <ul className="nav-links">
         <li>
           <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/profil">Profil</Link>
         </li>
         <li>
           <Link to="/explore">Explore</Link>
@@ -46,6 +50,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/authentification" element={<Authentification />} />
+        <Route path="/profil" element={<Profil/>} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>
   );
