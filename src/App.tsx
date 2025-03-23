@@ -10,12 +10,14 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
+        <Link to="/">
         <img src={rosemontLogo} alt="logo" />
-        <Link to="/">Rosemont DevHub</Link>
+        <p>Rosemont DevHub</p>
+        </Link>
       </div>
 
       <ul className="nav-links">
-      <li>
+        <li>
           <Link to="/">Home</Link>
         </li>
         <li>
@@ -42,7 +44,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Explore />} />
+        <Route path="/explore" element={<Explore />} />
         <Route path="/authentification" element={<Authentification />} />
       </Routes>
     </Router>

@@ -1,5 +1,5 @@
 .navbar{
-    position: fixed;
+    position: absolute;
     z-index: 100;
     width: 100%;
     display: flex;
@@ -22,6 +22,12 @@
 .logo img{
     height: 2.5rem;
     opacity: 0.8;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .nav-links{
@@ -83,4 +89,34 @@
     position: absolute;
     left: 1.25rem;
     color: rgba(255, 255, 255, 0.527);
+}
+@media (max-width: 1080px) {
+    .navbar {
+        padding-inline: 2%;
+    }
+
+    .nav-links {
+        width: 90%;
+    }
+
+    .nav-links a{
+        font-size: 1.2rem;
+    }
+
+    .search-holder {
+        width: 100%;
+    }
+
+    .logo img {
+        height: 3rem;
+    }
+
+    .logo p{
+        display: none;
+    }
+
+    .userLink {
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
 }
