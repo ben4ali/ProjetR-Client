@@ -14,11 +14,18 @@ export const useApi = <T>() => {
     isLoading: false,
   });
 
-  const request = async (method: "get" | "post" | "put" | "delete", url: string, data?: any, config?: AxiosRequestConfig) => {
+  const request = async (
+    method: "get" | "post" | "put" | "delete",
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ) => {
     setResponse({ data: null, error: null, isLoading: true });
 
     try {
-      const res = await axios({ method, url, data, ...config });
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const res = await axios({ method, url, data, headers, ...config });
       setResponse({ data: res.data, error: null, isLoading: false });
       return res.data;
     } catch (error: any) {

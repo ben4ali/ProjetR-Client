@@ -12,10 +12,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
-      await request("post", "http://localhost:5000/api/v1/auth/login", { email, password });
-      console.log("Utilisateur connecté :", data);
+      const response = await request("post", "http://localhost:5000/api/v1/auth/login", { email, password });
+      console.log("Utilisateur connecté :", response.user);
+      localStorage.setItem("token", response.token);
       window.location.href = "/explore";
     } catch (err) {
       console.error("Erreur lors de la connexion :", error);
@@ -29,11 +30,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     }
 
     (window as any).google.accounts.id.initialize({
-      client_id: "1004569696196-9bi6e054cctl0mk8orut7c89aqr8rqjn.apps.googleusercontent.com",
+      client_id: "607899403583-if4ui37ar583m5nvbmi328b76u0d8g1f.apps.googleusercontent.com",
       callback: async (response: any) => {
         try {
           await request("post", "http://localhost:5000/api/v1/auth/google-login", { idToken: response.credential });
+          localStorage.setItem("token", response.token);
           console.log("Utilisateur connecté :", data);
+          window.location.href = "/explore";
         } catch (err) {
           console.error("Erreur lors de la connexion avec Google :", error);
         }

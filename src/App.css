@@ -56,6 +56,21 @@
 .userLink:hover{
     background-color: rgb(255,255,255,0.3);
 }
+
+.logout-button {
+    background-color: rgb(220, 53, 69);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: rgb(200, 35, 50);
+  }
 .search-holder{
     display: flex;
     align-items: center;

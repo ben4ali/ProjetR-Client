@@ -8,8 +8,12 @@ import rosemontLogo from "./assets/logos/RosemontLogoBrute.png";
 import { Profil } from "./pages/Profil";
 import { Watch } from "./pages/Watch";
 import { Publish } from "./pages/Publish";
+import { useAuth } from "./hooks/useAuth";
 
 function Navbar() {
+
+  const { isLoggedIn, logout } = useAuth();
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -34,11 +38,19 @@ function Navbar() {
           <input type="text" placeholder="Rechercher..." />
         </div>
 
-        <li>
-          <Link className="userLink" to="/authentification">
-            <i className="bi bi-person-fill"></i>
-          </Link>
-        </li>
+        {isLoggedIn ? (
+          <li>
+            <button className="logout-button" onClick={logout}>
+              Déconnexion
+            </button>
+          </li>
+        ) : (
+          <li>
+            <Link className="userLink" to="/authentification">
+              <i className="bi bi-person-fill"></i>
+            </Link>
+          </li>
+        )}
       </ul>
       <script src="https://accounts.google.com/gsi/client" async defer></script>
     </nav>
