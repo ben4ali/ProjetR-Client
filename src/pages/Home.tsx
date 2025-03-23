@@ -7,31 +7,28 @@ import { Presentation } from "../components/home/Presentation";
 import { MembersComponent } from "../components/home/MembersComponent";
 import { StartComponent } from "../components/home/StartComponent";
 
-
 export const Home = () => {
+  return (
+    <div className="home-container">
+      <section id="hero-section">
+        <HeroParallaxComponent />
+      </section>
 
-    return(
-        <div className="home-container">
+      <section id="about-section">
+        <ClassCards />
+      </section>
 
-            <section id="hero-section">
-                <HeroParallaxComponent />
-            </section>
+      <section id="presentation-section">
+        <Presentation />
+      </section>
 
-            <section id="about-section">
-                <ClassCards />
-            </section>
+      <section id="membres-section">
+        <MembersComponent />
+      </section>
 
-            <section id="presentation-section">
-                 <Presentation/>
-            </section>
-
-            <section id="membres-section">
-                <MembersComponent/>
-            </section>
-
-            <section id="start-section">
-                <StartComponent/>
-            </section>
-        </div>
-    );
+      <section id="start-section">
+        <StartComponent />
+      </section>
+    </div>
+  );
 };

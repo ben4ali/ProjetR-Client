@@ -46,8 +46,7 @@ export const projects = [
   {
     title: "Artsync",
     link: "#",
-    thumbnail:
-      "https://www.nicholsonrj.com/Picture.84ec4241.webp",
+    thumbnail: "https://www.nicholsonrj.com/Picture.84ec4241.webp",
   },
 
   {

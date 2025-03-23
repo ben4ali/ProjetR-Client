@@ -17,7 +17,7 @@ export function ClassCards() {
         opacity: 1,
         duration: 1,
         stagger: 0.2,
-        ease:"sine",
+        ease: "sine",
         scrollTrigger: {
           trigger: ".classCardHolder",
           start: "top 80%",

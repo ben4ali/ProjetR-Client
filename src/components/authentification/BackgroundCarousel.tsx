@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import boreal from '../../assets/images/boreal.jpg';
-import desert from '../../assets/images/desert.jpg';
-import flower from '../../assets/images/flower.jpg';
-import fuji from '../../assets/images/fuji.jpg';
-import mountain from '../../assets/images/mountains.jpg';
-import volcano from '../../assets/images/volcano.png';
-import plains from '../../assets/images/plains.jpg';
-import sunset from '../../assets/images/sunset.jpg';
-import moon from '../../assets/images/moon.jpg';
-import earth from '../../assets/images/earth.jpg';
+import boreal from "../../assets/images/boreal.jpg";
+import desert from "../../assets/images/desert.jpg";
+import flower from "../../assets/images/flower.jpg";
+import fuji from "../../assets/images/fuji.jpg";
+import mountain from "../../assets/images/mountains.jpg";
+import volcano from "../../assets/images/volcano.png";
+import plains from "../../assets/images/plains.jpg";
+import sunset from "../../assets/images/sunset.jpg";
+import moon from "../../assets/images/moon.jpg";
+import earth from "../../assets/images/earth.jpg";
 
 const images = [
   boreal,
@@ -21,7 +21,7 @@ const images = [
   plains,
   sunset,
   moon,
-  earth
+  earth,
 ];
 
 export const BackgroundCarousel = () => {

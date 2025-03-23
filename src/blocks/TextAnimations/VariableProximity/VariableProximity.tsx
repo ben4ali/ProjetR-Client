@@ -1,13 +1,12 @@
 /*
 	Installed from https://reactbits.dev/ts/default/
 */
-
+import React from "react";
 import {
   forwardRef,
   useMemo,
   useRef,
   useEffect,
-  MutableRefObject,
   RefObject,
 } from "react";
 import { motion } from "framer-motion";
@@ -68,7 +67,7 @@ interface VariableProximityProps {
   className?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(

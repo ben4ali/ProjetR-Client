@@ -5,10 +5,6 @@
 import React, { useRef } from "react";
 import "./SpotlightCard.css";
 
-interface Position {
-  x: number;
-  y: number;
-}
 
 interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;

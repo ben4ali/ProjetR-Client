@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BackgroundCarousel } from "../components/authentification/BackgroundCarousel";
 import { LoginForm } from "../components/authentification/LoginForm";
 import "../styles/style-authentification.css";
-import Threads from '../blocks/Backgrounds/Threads/Threads';
-import { MetallicLogo } from "../components/ui/MetallicLogo";
+import Threads from "../blocks/Backgrounds/Threads/Threads";
+// import { MetallicLogo } from "../components/ui/MetallicLogo";
 import { Signup } from "../components/authentification/SignUpForm";
 
 export const Authentification = () => {
@@ -26,7 +26,11 @@ export const Authentification = () => {
       )}
       <BackgroundCarousel />
       <div className="thread-container">
-        <Threads amplitude={4.9} distance={0.8} enableMouseInteraction={false} />
+        <Threads
+          amplitude={4.9}
+          distance={0.8}
+          enableMouseInteraction={false}
+        />
       </div>
     </div>
   );

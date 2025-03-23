@@ -15,12 +15,22 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         <form>
           <div className="input-group">
             <label>Courriel</label>
-            <input id="email" name="email" type="email" placeholder="johndoe@gmail.com" />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="johndoe@gmail.com"
+            />
           </div>
 
           <div className="input-group">
             <label>Mot de passe</label>
-            <input id="password" name="password" type="password" placeholder="Mot de passe" />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Mot de passe"
+            />
           </div>
 
           <Link to="/">Mot de passe oublié ?</Link>
@@ -45,7 +55,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         </div>
         <div className="register-link">
           <h5>
-            Vous n&apos;avez pas de compte ? <a href="#" onClick={toggleForm}>Inscrivez-vous</a>
+            Vous n&apos;avez pas de compte ?{" "}
+            <a href="#" onClick={toggleForm}>
+              Inscrivez-vous
+            </a>
           </h5>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 interface SignupProps {
   toggleForm: () => void;
@@ -16,29 +15,54 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
           <div className="input-group duo">
             <div className="input-group">
               <label>Prénom</label>
-              <input id="firstName" name="firstName" type="text" placeholder="Prénom" />
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="Prénom"
+              />
             </div>
             <div className="input-group">
               <label>Nom</label>
-              <input id="lastName" name="lastName" type="text" placeholder="Nom" />
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Nom"
+              />
             </div>
           </div>
           <div className="input-group">
             <label>Courriel</label>
-            <input id="email" name="email" type="email" placeholder="johndoe@gmail.com" />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="johndoe@gmail.com"
+            />
           </div>
 
           <div className="input-group">
             <label>Mot de passe</label>
-            <input id="password" name="password" type="password" placeholder="Mot de passe" />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Mot de passe"
+            />
           </div>
 
           <div className="input-group">
             <label>Confirmer mot de passe</label>
-            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirmer votre mot de passe" />
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirmer votre mot de passe"
+            />
           </div>
 
-          <button type="submit">S'inscrire</button>
+          <button type="submit">S&apos;inscrire</button>
         </form>
       </div>
       <div className="form-footer">
@@ -58,7 +82,10 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
         </div>
         <div className="register-link">
           <h5>
-            Vous avez déjà un compte ? <a href="#" onClick={toggleForm}>Connectez-vous</a>
+            Vous avez déjà un compte ?{" "}
+            <a href="#" onClick={toggleForm}>
+              Connectez-vous
+            </a>
           </h5>
         </div>
       </div>

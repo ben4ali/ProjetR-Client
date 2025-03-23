@@ -12,9 +12,14 @@
     gap: 1rem;
 }
 
-.video-container{
+
+.video-section-container{
     width: 70%;
     height: 100rem;
+}
+
+.video-container{
+    width: 100%;
 }
 
 .video{
@@ -263,7 +268,7 @@
         height: auto;
     }
 
-    .video-container {
+    .video-section-container {
         margin-top: 25%;
         width: 100%;
         height: auto;
