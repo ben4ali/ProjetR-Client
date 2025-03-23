@@ -134,7 +134,9 @@
 /* ----------------**FORMS STYLES**---------------- */
 .form-container {
     z-index: 3;
-    height: 65vh;
+
+    height: fit-content;
+    padding-bottom: 5rem;
     width: 32vw;
     min-width: 30rem;
     max-width: 28rem;
@@ -278,13 +280,14 @@
     gap: 1rem;
 }
 
-.link-holders a {
+.link-holders button {
     color: rgb(0, 0, 0, 0.5);
     font-size: 20px;
     transition: var(--default-transition);
+    cursor: pointer;
 }
 
-.link-holders a:hover {
+.link-holders button:hover {
     color: rgba(52, 123, 228, 0.8);
 }
 
@@ -312,7 +315,7 @@
 
 .signup{
     margin-top: 5%;
-    height: 80vh;
+    min-height: 70vh;
 }
 
 .duo{
@@ -325,6 +328,13 @@
     width: 100%;
 }
 
+.error-message-valdiation{
+    color: red;
+    font-size: 15px;
+    font-weight: 300;
+    text-align: center;
+
+}
 
 /* ---------------------------*MEDIA QUEREIS*--------------------------- */
 

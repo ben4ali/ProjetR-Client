@@ -3,7 +3,7 @@ import "../styles/style-publish.css";
 
 export const Publish = () => {
   const [video, setVideo] = useState<File | null>(null);
-  const [videoPreview, setVideoPreview] = useState<string | null>(null); // Pour l'aperçu vidéo
+  const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [titre, setTitre] = useState("");
   const [description, setDescription] = useState("");
   const [codeLink, setCodeLink] = useState("");
@@ -21,14 +21,14 @@ export const Publish = () => {
         URL.revokeObjectURL(videoPreview);
       }
 
-      setVideoPreview(URL.createObjectURL(file)); // Génère une nouvelle URL pour l'aperçu
+      setVideoPreview(URL.createObjectURL(file));
     }
   };
 
   useEffect(() => {
     return () => {
       if (videoPreview) {
-        URL.revokeObjectURL(videoPreview); // Nettoie l'ancienne URL pour éviter les fuites de mémoire
+        URL.revokeObjectURL(videoPreview);
       }
     };
   }, [videoPreview]);

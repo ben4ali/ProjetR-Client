@@ -63,6 +63,7 @@ export const Authentification = () => {
 
   return (
     <div className="authentification-container">
+
       <div ref={loginRef} className="form-wrapper">
         <LoginForm toggleForm={toggleForm} />
       </div>
