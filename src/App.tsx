@@ -7,6 +7,7 @@ import { Explore } from "./pages/Explore";
 import rosemontLogo from "./assets/logos/RosemontLogoBrute.png";
 import { Profil } from "./pages/Profil";
 import { Watch } from "./pages/Watch";
+import { Publish } from "./pages/Publish";
 
 function Navbar() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="/authentification" element={<Authentification />} />
         <Route path="/profil/:id" element={<Profil/>} />
         <Route path="/watch/:id" element={<Watch />} />
+        <Route path="/publish" element={<Publish />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>

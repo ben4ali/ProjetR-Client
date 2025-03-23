@@ -6,19 +6,19 @@ import { FilterBar } from "./FilterBar";
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const [error, setError] = useState("");
-  const [isListening, setIsListening] = useState(false); // État pour le bouton actif
+  const [isListening, setIsListening] = useState(false);
 
   const handleVoiceInput = () => {
-    setIsListening(true); // Active le bouton
+    setIsListening(true);
     startVoiceRecognition(
       (transcript) => {
-        setSearchText(transcript); // Met à jour la barre de recherche avec le texte transcrit
-        setError(""); // Réinitialise les erreurs
-        setIsListening(false); // Désactive le bouton après la transcription
+        setSearchText(transcript);
+        setError("");
+        setIsListening(false);
       },
       (error) => {
-        setError(error); // Affiche une erreur si la reconnaissance échoue
-        setIsListening(false); // Désactive le bouton en cas d'erreur
+        setError(error);
+        setIsListening(false);
       }
     );
   };
@@ -37,15 +37,15 @@ export const SearchBar = () => {
             <i className="bi bi-search"></i>
           </button>
           <button
-            className={`voice-btn ${isListening ? "active" : ""}`} // Ajoute une classe active
+            className={`voice-btn ${isListening ? "active" : ""}`}
             onClick={handleVoiceInput}
-            disabled={isListening} // Désactive le bouton pendant l'écoute
+            disabled={isListening}
           >
             <i className="bi bi-mic"></i>
           </button>
         </div>
         <div className="create-post">
-          <Link to="/explore" className="create-post-btn">
+          <Link to="/publish" className="create-post-btn">
             <i className="bi bi-plus"></i>
             <p>Publier un projet</p>
           </Link>
