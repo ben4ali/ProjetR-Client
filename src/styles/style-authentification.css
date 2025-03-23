@@ -133,7 +133,6 @@
 
 /* ----------------**FORMS STYLES**---------------- */
 .form-container {
-    position: relative;
     z-index: 3;
     height: 65vh;
     width: 32vw;
@@ -145,12 +144,18 @@
     flex-direction: column;
     padding: 2rem;
     background-color: rgb(255, 255, 255, 0.5);
-    backdrop-filter: blur(50px) saturate(180%);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
     box-shadow: 5px 5px 10px 5px rgb(0, 0, 0, 0.2);
     align-items: center;
 }
-
+.form-wrapper {
+    position: relative;
+    z-index: 5;
+    backdrop-filter: blur(50px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}
 .form-header {
     display: flex;
     justify-content: center;
@@ -167,12 +172,15 @@
     display: flex;
     flex-direction: column;
     width: 95%;
+    height: 100%;
 }
 
 .form-content form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 100%;
+    position: relative;
 }
 
 .input-group {
@@ -209,16 +217,19 @@
 }
 
 .form-content button {
-    margin-top: auto;
     background-color: rgb(80, 134, 220);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding-inline: 1rem;
     padding-block: 0.5rem;
-    height: 3rem;
+    height: 4rem;
     font-size: 25px;
     cursor: pointer;
+    justify-self: end;
+    width: 100%;
+    margin-top: auto;
+
 }
 
 .form-content button:hover {
@@ -233,6 +244,11 @@
     gap: 1rem;
     margin-top: auto;
     align-items: center;
+}
+
+.invite{
+    color: var(--highlight-text-color);
+    font-size: 15px;
 }
 
 .external-login-title {
@@ -309,6 +325,7 @@
     width: 100%;
 }
 
+
 /* ---------------------------*MEDIA QUEREIS*--------------------------- */
 
 @media screen and (max-width: 768px) {
@@ -319,6 +336,7 @@
         padding-bottom: 25vh;
     }
     .form-container {
+ 
         width: 90vw;
         margin-top: 35%;
         min-width: 10rem;

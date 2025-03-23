@@ -83,7 +83,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
         <div className="register-link">
           <h5>
             Vous avez déjà un compte ?{" "}
-            <a href="#" onClick={toggleForm}>
+            <a className="invite" href="#" onClick={toggleForm}>
               Connectez-vous
             </a>
           </h5>

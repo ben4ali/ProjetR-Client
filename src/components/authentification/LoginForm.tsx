@@ -33,7 +33,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
             />
           </div>
 
-          <Link to="/">Mot de passe oublié ?</Link>
+          <Link className="invite" to="/">Mot de passe oublié ?</Link>
 
           <button type="submit">Connexion</button>
         </form>
@@ -56,7 +56,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         <div className="register-link">
           <h5>
             Vous n&apos;avez pas de compte ?{" "}
-            <a href="#" onClick={toggleForm}>
+            <a className="invite" href="#" onClick={toggleForm}>
               Inscrivez-vous
             </a>
           </h5>
