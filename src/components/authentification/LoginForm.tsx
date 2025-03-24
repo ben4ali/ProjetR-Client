@@ -33,9 +33,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       client_id: "607899403583-if4ui37ar583m5nvbmi328b76u0d8g1f.apps.googleusercontent.com",
       callback: async (response: any) => {
         try {
-          await request("post", "http://localhost:5000/api/v1/auth/google-login", { idToken: response.credential });
-          localStorage.setItem("token", response.token);
-          console.log("Utilisateur connecté :", data);
+          const apiResponse = await request("post", "http://localhost:5000/api/v1/auth/google-login", { idToken: response.credential });
+          localStorage.setItem("token", apiResponse.token); // Stocke le token
+          console.log("Utilisateur connecté :", apiResponse.user);
           window.location.href = "/explore";
         } catch (err) {
           console.error("Erreur lors de la connexion avec Google :", error);

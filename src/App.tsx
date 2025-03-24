@@ -12,14 +12,14 @@ import { useAuth } from "./hooks/useAuth";
 
 function Navbar() {
 
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, user, logout } = useAuth();
 
   return (
     <nav className="navbar">
       <div className="logo">
         <Link to="/">
-        <img src={rosemontLogo} alt="logo" />
-        <p>Rosemont DevHub</p>
+          <img src={rosemontLogo} alt="logo" />
+          <p>Rosemont DevHub</p>
         </Link>
       </div>
 
@@ -39,11 +39,22 @@ function Navbar() {
         </div>
 
         {isLoggedIn ? (
-          <li>
-            <button className="logout-button" onClick={logout}>
-              Déconnexion
-            </button>
-          </li>
+          <>
+            <li>
+              <button className="logout-button" onClick={logout}>
+                Déconnexion
+              </button>
+            </li>
+            <li>
+              <Link className="userLink" to={`/profil/${user?.id}`}>
+                <img
+                  src={user?.avatar || "https://robohash.org/default.png"}
+                  alt="Avatar"
+                  className="user-avatar"
+                />
+              </Link>
+            </li>
+          </>
         ) : (
           <li>
             <Link className="userLink" to="/authentification">
