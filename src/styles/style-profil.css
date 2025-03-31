@@ -31,9 +31,12 @@
     object-fit: cover;
     scale: 1.05;
     transition: var(--default-transition);
-}
 
-.profil-banner img:hover{
+}
+.banner-effect{
+    cursor: pointer;
+}
+.banner-effect img:hover{
     scale: 1.015;
     filter: blur(10px);
 }
@@ -49,12 +52,17 @@
     width: 15rem;
     border-radius: 50%;
     border: 7px solid rgba(255, 255, 255, 0.281);
-    cursor: pointer;
     transition: var(--default-transition);
     box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    object-fit: cover;
 }
 
-.profil-picture img:hover{
+.profile-effect{
+    cursor: pointer;
+}
+
+.profile-effect img:hover{
     scale: 1.005;
     transform: translateY(-1%);
     box-shadow: 0px 15px 22px 10px rgba(0, 0, 0, 0.2);

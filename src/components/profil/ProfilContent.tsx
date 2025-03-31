@@ -1,12 +1,22 @@
 import React from "react";
 import { ProfilStats } from "./ProfilStats";
 
-export const ProfilContent = () => {
+interface ProfilContentProps {
+  firstName: string;
+  lastName: string;
+  pseudo: string;
+}
+
+export const ProfilContent : React.FC<ProfilContentProps> = ({
+  firstName,
+  lastName,
+  pseudo,
+}) => {
   return (
     <div className="profil-content">
       <div className="profil-info">
-        <h1>Ali Benkarrouch</h1>
-        <p>@ben4ali</p>
+        <h1>{firstName} {lastName}</h1>
+        <p>@{pseudo}</p>
       </div>
       <ProfilStats />
     </div>

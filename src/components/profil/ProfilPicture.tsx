@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { ChangeProfilePictureModal } from "../modals/changePfpModal";
+import { User } from "../../types/User";
 
-export const ProfilPicture = () => {
+interface ProfilePictureProps {
+  user: User;
+  isCurrentUser?: boolean;
+}
+
+export const ProfilPicture: React.FC<ProfilePictureProps> = ({ user, isCurrentUser }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   return (
-    <div className="profil-picture">
-      <img
-        src="https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain"
-        alt="profil-pic"
+    <div>
+      <div
+        className={`profil-picture ${isCurrentUser ? "profile-effect" : ""}`}
+        onClick={isCurrentUser ? handleOpenModal : undefined}
+      >
+        <img src={user.avatar || "avatar.png"} alt="profil-pic" crossOrigin="anonymous" />
+      </div>
+      <ChangeProfilePictureModal
+        currentPfp={user.avatar || ""}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        userId={user.id}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 import { Authentification } from "./pages/Authentification";
@@ -9,13 +9,32 @@ import { Profil } from "./pages/Profil";
 import { Watch } from "./pages/Watch";
 import { Publish } from "./pages/Publish";
 import { useAuth } from "./hooks/useAuth";
+import { useApi } from "./hooks/useApi";
 import gsap from "gsap";
 
 function Navbar() {
 
   const { isLoggedIn, user, logout } = useAuth();
+  const { request } = useApi();
+  const [userAvatar, setUserAvatar] = useState<string | null>(null); 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const fetchUserAvatar = async () => {
+      if (isLoggedIn && user?.id) {
+        try {
+          const response = await request("get", `http://localhost:5000/api/v1/users/${user.id}`);
+          setUserAvatar(response.avatar || "https://robohash.org/default.png");
+        } catch (error) {
+          console.error("Failed to fetch user avatar:", error);
+          setUserAvatar("https://robohash.org/default.png");
+        }
+      }
+    };
+
+    fetchUserAvatar();
+  }, [isLoggedIn, user?.id]);
 
   const toggleDialog = () => {
     setIsDialogOpen((prev: unknown) => {
@@ -54,9 +73,10 @@ function Navbar() {
             <li>
               <div className="userLink loggedUser" onClick={toggleDialog}>
                 <img
-                  src={user?.avatar || "https://robohash.org/default.png"}
+                  src={userAvatar || "https://robohash.org/default.png"}
                   alt="Avatar"
                   className="user-avatar"
+                  crossOrigin="anonymous"
                 />
                 <div className="user-dialog" ref={dialogRef} style={{ display: "none", opacity: 0 }}>
                   <p>{user?.firstName} {user?.lastName}</p>

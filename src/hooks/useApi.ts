@@ -24,8 +24,11 @@ export const useApi = <T>() => {
 
     try {
       const token = localStorage.getItem("token");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      const res = await axios({ method, url, data, headers, ...config });
+      const headers = {
+        Authorization: token ? `Bearer ${token}` : undefined,
+        ...config?.headers,
+      };
+      const res = await axios({ method, url, data, headers});
       setResponse({ data: res.data, error: null, isLoading: false });
       return res.data;
     } catch (error: any) {
