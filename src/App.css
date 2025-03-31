@@ -62,7 +62,6 @@
     background-color: rgb(255,255,255,0.15);
     border: 1px solid rgb(58, 57, 57);
     object-fit: cover;
-    object-fit: cover;
     overflow: hidden;
 }
 
@@ -209,6 +208,5 @@
 
     .userLink {
         font-size: 1rem;
-        padding: 0.4rem;
     }
 }

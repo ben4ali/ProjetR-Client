@@ -6,6 +6,7 @@ import { VideoOptions } from "../components/watch/VideoOptions";
 import { VideoDescription } from "../components/watch/VideoDescription";
 import { CommentSection } from "../components/watch/CommentSection";
 import { VideoSuggestion } from "../components/watch/VideoSuggestion";
+import { VideoLinks } from "../components/watch/VideoLinks";
 
 export const Watch = () => {
   return (
@@ -16,6 +17,7 @@ export const Watch = () => {
           <VideoInfo />
           <VideoOptions />
           <VideoDescription />
+          <VideoLinks />
           <CommentSection />
         </section>
 

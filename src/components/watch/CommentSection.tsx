@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Comment } from "./Comment";
 import { useAuth } from "../../hooks/useAuth";
 
 export const CommentSection = () => {
   const { isLoggedIn, user } = useAuth();
+  const [commentText, setCommentText] = useState("");
 
   const comments = [
     { author: "Ali Benkarrouch", text: "Super vidéo !" },
     { author: "John Doe", text: "Merci pour le partage !" },
     { author: "Jane Smith", text: "Très intéressant, merci !" },
   ];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentText(e.target.value);
+  };
+
+  const handleComment = () => {
+    // TODO: logique pour comment
+    console.log("Comment submitted:", commentText);
+    setCommentText("");
+  };
 
   return (
     <div className="comment-container">
@@ -19,12 +30,24 @@ export const CommentSection = () => {
           <img
             src={user?.avatar || "https://robohash.org/default.png"}
             alt="Auteur du commentaire"
+            crossOrigin="anonymous"
           />
           <div className="comment-input">
-            <input type="text" placeholder="Ajouter un commentaire..." />
+            <input
+              type="text"
+              placeholder="Ajouter un commentaire..."
+              value={commentText}
+              onChange={handleInputChange}
+            />
             <div className="comment-options">
-              <button>Annuler</button>
-              <button>Commenter</button>
+              <button onClick={() => setCommentText("")}>Annuler</button>
+                <button
+                className={commentText.trim() ? "commenter" : ""}
+                onClick={handleComment}
+                disabled={!commentText.trim()}
+                >
+                Commenter
+                </button>
             </div>
           </div>
         </div>
