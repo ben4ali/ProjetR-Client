@@ -55,6 +55,7 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
   };
 
   const handleOnClose = () => {
+    setNewBannerUrl(currentBanner || null);
     setIsPicked(false);
     onClose();
   };
