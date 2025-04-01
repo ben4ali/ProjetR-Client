@@ -78,7 +78,7 @@ function Navbar() {
                   className="user-avatar"
                   crossOrigin="anonymous"
                 />
-                <div className="user-dialog" ref={dialogRef} style={{ display: "none", opacity: 0 }}>fafafafaf
+                <div className="user-dialog" ref={dialogRef} style={{ display: "none", opacity: 0 }}>
                   <p>{user?.firstName} {user?.lastName}</p>
                   <div className="user-dialog-links">
                     <Link to={`/profil/${user?.id}`}>Profil</Link>

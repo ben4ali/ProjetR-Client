@@ -77,6 +77,7 @@
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .author-holder h3{
@@ -224,6 +225,145 @@
     font-size: 19px;
 }
 
+.contributors-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.35rem;
+    width: 100%;
+}
+
+.contributors-holder{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    border-top: 2px solid rgb(0,0,0,0.1);
+    padding-top: 1rem;
+}
+
+.contributors-container h2{
+    font-size: 1.6rem;
+    color: rgb(58, 57, 57,0.8);
+    margin: 0;
+}
+
+.contributors-container h3{
+    font-size: 1.1rem;
+    color: rgb(58, 57, 57,0.8);
+    margin: 0;
+}
+
+.contributors-holder img{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.teacher-card{
+    flex-shrink: 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: start;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    height: 4rem;
+    width: 100%;
+    box-shadow: 3px 4px 5px 0.5px rgba(0, 0, 0, 0.17);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: rgb(0, 0, 0, 0.05);
+}
+
+.teacher-card:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 1px 0.5px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease-in-out;
+    transform: translateX(3px) translateY(3px);
+}
+
+.teacher-card img{
+    transition: all 0.2s ease-in-out;
+}
+
+.teacher-card img:hover {
+    scale: 1.025;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.teacher-card h4{
+    font-size: 1.2rem;
+    color: rgb(58, 57, 57,0.8);
+    margin: 0;
+    line-height: 1.2rem;
+   
+}
+
+.teacher-holder,.contributor-list-holder{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+.teacher-holder{
+    justify-content: start;
+
+}
+.contributors-list{
+    flex-shrink: 0;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0, 0.05);
+    box-shadow: 3px 4px 5px 0.5px rgba(0, 0, 0, 0.17);
+    justify-content: start;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    transition: all 0.25s ease-in-out;
+}
+
+.contributors-list:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+    transform: translateX(3px) translateY(3px);
+}
+.inner-container{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    margin-right: 1;
+}
+
+.course-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-right: 1rem;
+    opacity: 0.8;
+    margin-top: auto;
+    margin-left: auto;
+    /* background-color: rgb(0, 0, 0, 0.05); */
+    border-radius: 8px;
+}
+
+.course-holder h3{
+    font-size: 1.2rem;
+    color: rgb(58, 57, 57,0.8);
+
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0;
+}
+
+
 .link-holder{
     display: flex;
     gap: 1rem;
@@ -321,6 +461,7 @@
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
+    object-fit: cover;
 }
 .comment-input{
     display: flex;
@@ -535,6 +676,8 @@
         font-size: 1rem;
         display: flex;
         align-items: center;
+        justify-content: center;
+        max-width: 15rem;
     }
 
     .video-interaction div p{
@@ -591,5 +734,29 @@
         background-color: rgb(0, 0, 0, 0.1);
         padding: 0.8rem;
         border-radius: 8px;
+    }
+    .contributors-holder{
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-left: 1rem;
+    }
+    .teacher-holder{
+       width: 1;
+    }
+    .course-holder{
+        border-top: 3px solid rgb(0,0,0,0.1);
+        margin-top: 1rem;
+        padding-top: 1rem;
+        width: 100%;
+        background-color: transparent;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .course-holder h3{
+        font-size: 1.2rem;
+        color: rgb(58, 57, 57,0.8);
+        padding: 0;
+        width: auto;
     }
 }
