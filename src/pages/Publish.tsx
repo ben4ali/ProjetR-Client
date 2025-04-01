@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/style-publish.css";
+import { useApi } from "../hooks/useApi";
 
 export const Publish = () => {
   const [video, setVideo] = useState<File | null>(null);
@@ -14,6 +15,7 @@ export const Publish = () => {
   const [session, setSession] = useState("");
   const [teacher, setTeacher] = useState("");
   const [searchResults, setSearchResults] = useState<string[]>([]);
+  const { request, error: errorMessage } = useApi(); // Assuming you have a custom hook for API requests
 
   // Handle video upload
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,24 +48,50 @@ export const Publish = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const projectData = {
-      video,
-      titre,
+      title: titre,
       description,
-      lienGitHub,
-      lienGitlab,
-      categories,
+      githubUrl: lienGitHub,
+      gitLabUrl: lienGitlab,
+      tags: categories,
       collaborators,
       course,
       teacher,
-      nb_views: 0,
-      nb_likes: 0,
-      comments: [],
     };
     console.log("Project Data:", projectData);
     // TODO: Send data to the backend
+    const formData = new FormData();
+    if (video) {
+      formData.append("video", video);
+    }
+    formData.append("projet", JSON.stringify(projectData));
+
+    try {
+      const response = await request("post", "http://localhost:5000/api/v1/projects", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      })
+      
+      console.log("Project published successfully:", response);
+    } catch (error) {
+      console.error("Error publishing project:", error);
+      console.error("Error message:", errorMessage);
+    } finally {
+      // Reset form fields after successful submission
+      setVideo(null);
+      setTitre("");
+      setDescription("");
+      setLienGitHub("");
+      setLienGitlab("");
+      setCategories([]);
+      setCollaborators([]);
+      setCourse("");
+      setSession("");
+      setTeacher("");
+    }
   };
 
   // Check if the form is valid
