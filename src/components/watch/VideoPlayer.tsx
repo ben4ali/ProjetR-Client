@@ -1,10 +1,17 @@
 import React from "react";
+import { Projet } from "../../types/Projet";
 
-export const VideoPlayer = () => {
+interface VideoPlayerProps {
+  projet: Projet | null;
+}
+
+export const VideoPlayer = (
+  { projet }: VideoPlayerProps
+) => {
   return (
     <div className="video-container">
       <video className="video" controls>
-        <source src="video.mp4" type="video/mp4" />
+        <source src={projet?.demoUrl} type="video/mp4" />
       </video>
     </div>
   );

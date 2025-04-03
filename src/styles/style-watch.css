@@ -167,6 +167,7 @@
     margin-top: 1rem;
     width: 100%;
     line-height: 1.5rem;
+    min-height: 10rem;
     max-height: 15rem;
     overflow: hidden;
     padding: 1rem;

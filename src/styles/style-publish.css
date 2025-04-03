@@ -232,6 +232,7 @@
     margin-right: 0.5rem;
     background-color: black;
     object-fit: cover;
+    overflow: hidden;
 }
 
 .search-result-item-publish:hover{

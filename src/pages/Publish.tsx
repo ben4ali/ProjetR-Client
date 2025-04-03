@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/style-publish.css";
 import { useApi } from "../hooks/useApi";
+import { User } from "../types/User";
+import default_profil from "../assets/images/default_profil.png";
 
 export const Publish = () => {
   const [video, setVideo] = useState<File | null>(null);
@@ -14,10 +16,47 @@ export const Publish = () => {
   const [course, setCourse] = useState("");
   const [session, setSession] = useState("");
   const [teacher, setTeacher] = useState("");
-  const [searchResults, setSearchResults] = useState<string[]>([]);
-  const { request, error: errorMessage } = useApi(); // Assuming you have a custom hook for API requests
+  const [searchResults, setSearchResults] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [availableTags, setAvailableTags] = useState([]);
+  const [availableCourses, setAvailableCourses] = useState([]);
+  const { request } = useApi();
 
-  // Handle video upload
+  // Fetch tags
+  const fetchTags = async () => {
+    try {
+      const response = await request("get", "http://localhost:5000/api/v1/tags");
+      setAvailableTags(response);
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }
+  };
+
+  // Fetch courses
+  const fetchCourses = async () => {
+    try {
+      const response = await request("get", "http://localhost:5000/api/v1/courses");
+      setAvailableCourses(response);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
+  // Fetch contributors
+  const fetchContributors = async () => {
+    if (searchTerm.length < 3) return;
+    try {
+      const response = await request(
+        "get",
+        `http://localhost:5000/api/v1/users/name/${searchTerm}`
+      );
+      setSearchResults(response);
+    } catch (error) {
+      console.error("Error fetching contributors:", error);
+    }
+  };
+
+  // video upload
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -31,23 +70,43 @@ export const Publish = () => {
     }
   };
 
-  // Cleanup video preview URL on unmount
-  useEffect(() => {
-    return () => {
-      if (videoPreview) {
-        URL.revokeObjectURL(videoPreview);
-      }
-    };
-  }, [videoPreview]);
-
-  // Add a category
+  // add tag
   const handleCategoryAdd = (category: string) => {
     if (category.trim() !== "" && !categories.includes(category)) {
       setCategories([...categories, category]);
     }
   };
 
-  // Handle form submission
+  // add collaborator
+  const handleCollaboratorSelect = (user: User) => {
+    const userName = `${user.firstName} ${user.lastName}`;
+    if (!collaborators.includes(userName)) {
+      setCollaborators([...collaborators, userName]);
+    }
+    setSearchResults([]);
+    setSearchTerm("");
+  };
+
+  // add unknown collaborator
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && searchTerm.trim() !== "") {
+      event.preventDefault();
+      const userName = searchTerm.trim();
+      if (!collaborators.includes(userName)) {
+        setCollaborators([...collaborators, userName]);
+      }
+      setSearchResults([]);
+      setSearchTerm("");
+    }
+  };
+
+  const handleDefaultBehavior = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+
+  // form submit
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const projectData = {
@@ -59,9 +118,9 @@ export const Publish = () => {
       collaborators,
       course,
       teacher,
+      session,
     };
-    console.log("Project Data:", projectData);
-    // TODO: Send data to the backend
+
     const formData = new FormData();
     if (video) {
       formData.append("video", video);
@@ -70,36 +129,35 @@ export const Publish = () => {
 
     try {
       const response = await request("post", "http://localhost:5000/api/v1/projects", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }
-      })
-      
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       console.log("Project published successfully:", response);
+      window.location.href = `/watch/${response.id}`;
     } catch (error) {
       console.error("Error publishing project:", error);
-      console.error("Error message:", errorMessage);
     } finally {
-      // Reset form fields after successful submission
-      setVideo(null);
-      setTitre("");
-      setDescription("");
-      setLienGitHub("");
-      setLienGitlab("");
-      setCategories([]);
-      setCollaborators([]);
-      setCourse("");
-      setSession("");
-      setTeacher("");
+      resetForm();
     }
   };
 
-  // Check if the form is valid
-  const isFormValid = () => {
-    return video && titre.trim() !== "" && description.trim() !== "";
+  // reset fields
+  const resetForm = () => {
+    setVideo(null);
+    setTitre("");
+    setDescription("");
+    setLienGitHub("");
+    setLienGitlab("");
+    setCategories([]);
+    setCollaborators([]);
+    setCourse("");
+    setSession("");
+    setTeacher("");
   };
 
-  // Get validation message for missing fields
+  // form validation
+  const isFormValid = () => video && titre.trim() !== "" && description.trim() !== "";
+
+  // validation message
   const getValidationMessage = () => {
     const missingFields = [];
     if (!video) missingFields.push("Vidéo");
@@ -110,63 +168,15 @@ export const Publish = () => {
       : "";
   };
 
-  // Handle search input change
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.toLowerCase();
-    const mockUsers = ["Alice", "Bob", "Charlie", "David", "Eve"];
-    const results = mockUsers.filter((user) =>
-      user.toLowerCase().includes(query)
-    );
+  // useffects
+  useEffect(() => {
+    fetchTags();
+    fetchCourses();
+  }, []);
 
-    setSearchResults(results);
-
-    const searchResultsBox = document.querySelector(
-      ".search-results-publish"
-    ) as HTMLElement;
-    if (searchResultsBox) {
-      searchResultsBox.style.display =
-        query.trim() === "" || results.length === 0 ? "none" : "flex";
-    }
-  };
-
-  // Handle adding a collaborator when pressing Enter
-  const handleCollaboratorInputKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const input = (e.target as HTMLInputElement).value.trim();
-
-      if (input.length >= 3 && !collaborators.includes(input)) {
-        setCollaborators([...collaborators, input]);
-      }
-
-      (e.target as HTMLInputElement).value = "";
-      setSearchResults([]);
-      const searchResultsBox = document.querySelector(
-        ".search-results-publish"
-      ) as HTMLElement;
-      if (searchResultsBox) searchResultsBox.style.display = "none";
-    }
-  };
-
-  // Handle selecting a collaborator from the search results
-  const handleCollaboratorSelect = (user: string) => {
-    if (!collaborators.includes(user)) {
-      setCollaborators([...collaborators, user]);
-    }
-
-    const inputField = document.querySelector(
-      ".searchInput-publish input"
-    ) as HTMLInputElement;
-    if (inputField) inputField.value = "";
-
-    const searchResultsBox = document.querySelector(
-      ".search-results-publish"
-    ) as HTMLElement;
-    if (searchResultsBox) searchResultsBox.style.display = "none";
-    setSearchResults([]);
-  };
+  useEffect(() => {
+    fetchContributors();
+  }, [searchTerm]);
 
   return (
     <div className="publish-project-container">
@@ -175,22 +185,18 @@ export const Publish = () => {
         <div className="form-info">
           {/* Video Upload */}
           <div className="label-group">
-          <label id="uploadlabel">Fichier vidéo</label>
-          <i className="bi bi-info-circle" title="
-            Vidéos au format MP4, MOV ou AVI, d'une taille maximale de 500 Mo.
-          "></i>
+            <label id="uploadlabel">Fichier vidéo</label>
+            <i
+              className="bi bi-info-circle"
+              title="Vidéos au format MP4, MOV ou AVI, d'une taille maximale de 500 Mo."
+            ></i>
           </div>
-
           <div className="videoUpload">
             <div className="holder-upload">
               <div className="upload-box">
                 <p>Cliquez pour sélectionner un fichier</p>
               </div>
-              <input
-                type="file"
-                accept="video/*"
-                onChange={handleVideoUpload}
-              />
+              <input type="file" accept="video/*" onChange={handleVideoUpload} onKeyDown={handleDefaultBehavior}/>
             </div>
           </div>
 
@@ -204,6 +210,7 @@ export const Publish = () => {
               placeholder="Titre du projet"
               value={titre}
               onChange={(e) => setTitre(e.target.value)}
+              onKeyDown={handleDefaultBehavior}
             />
           </div>
 
@@ -216,35 +223,32 @@ export const Publish = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Décrivez votre projet..."
+              onKeyDown={handleDefaultBehavior}
             />
           </div>
 
           {/* Categories */}
           <div className="form-group">
             <div className="label-group">
-            <label>Catégories (Tags)</label>
-            <i className="bi bi-info-circle" title="
-              Ajouter des tags améliore la visibilité de ton projet."></i>
+              <label>Catégories (Tags)</label>
+              <i
+                className="bi bi-info-circle"
+                title="Ajouter des tags améliore la visibilité de ton projet."
+              ></i>
             </div>
             <div className="select-group">
-              <select
-                onChange={(e) => handleCategoryAdd(e.target.value)}
-                defaultValue=""
-              >
+              <select onChange={(e) => handleCategoryAdd(e.target.value)} defaultValue="">
                 <option value="" disabled>
                   Sélectionner une catégorie
                 </option>
-                <option value="Développement Web">Développement Web</option>
-                <option value="Intelligence Artificielle">
-                  Intelligence Artificielle
-                </option>
-                <option value="Design UI/UX">Design UI/UX</option>
-                <option value="Développement Mobile">Développement Mobile</option>
-                <option value="Autre">Autre</option>
+                {availableTags.map((tag: { id: string; name: string }) => (
+                  <option key={tag.id} value={tag.name}>
+                    {tag.name}
+                  </option>
+                ))}
               </select>
-                <i className="bi bi-chevron-down"></i>
+              <i className="bi bi-chevron-down"></i>
             </div>
-
             <div className="tags-publish">
               {categories.map((category, index) => (
                 <span
@@ -261,96 +265,78 @@ export const Publish = () => {
             </div>
           </div>
 
-          {/* Links */}
-          <div className="shared-form-group">
-            <div className="form-group">
-              <label>
-                <i className="bi bi-github"></i>
-                Lien GitHub
-              </label>
-              <input
-                type="url"
-                value={lienGitHub}
-                onChange={(e) => setLienGitHub(e.target.value)}
-                placeholder="Lien vers le code source GitHub"
-              />
+          {/* Collaborators */}
+          <div className="form-group">
+            <div className="label-group">
+              <label>Collaborateurs</label>
+              <i
+                className="bi bi-info-circle"
+                title="Si tu ne trouve pas ton collaborateur, tu peux écrire son nom et appuyer la touche entrer."
+              ></i>
             </div>
-            <div className="form-group">
-              <label>
-                <i className="bi bi-gitlab"></i>
-                Lien Gitlab
-              </label>
+            <div className="search-input-group-publish">
               <input
-                type="url"
-                value={lienGitlab}
-                onChange={(e) => setLienGitlab(e.target.value)}
-                placeholder="Lien vers le code source Gitlab"
+                className="searchInput-publish"
+                type="text"
+                placeholder="Rechercher un collaborateur"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={handleKeyPress}
               />
-            </div>
-          </div>
-
-         {/* Collaborators */}
-        <div className="form-group ">
-          <div className="label-group">
-          <label>Collaborateurs</label>
-          <i className="bi bi-info-circle" title="
-              Si tu ne trouve pas ton collaborateur, tu peux écrire son nom et appuyer la touche entrer."></i>
-          </div>
-          <div className="search-input-group-publish">
-            <input
-             className="searchInput-publish"
-              type="text"
-              placeholder="Rechercher un collaborateur"
-              onChange={handleSearchChange}
-              onKeyDown={handleCollaboratorInputKeyDown}
-            />
-            <button className="search-button-publish" type="button">
-              <i className="bi bi-search"></i>
-            </button>
-
-            <div className="search-results-publish">
-              {searchResults.map((user, index) => (
                 <div
+                className="search-results-publish"
+                style={{
+                  display: searchResults.length > 0 && searchTerm.length >= 2 ? "flex" : "none",
+                }}
+                >
+                {searchResults.map((user, index) => (
+                  <div
                   key={index}
                   className="search-result-item-publish"
                   onClick={() => handleCollaboratorSelect(user)}
-                >
-                  <img src="https://via.placeholder.com/20" alt="User Avatar" />
-                  {user}
+                  >
+                  <img
+                  src={user.avatar || default_profil}
+                  alt="User Avatar"
+                  crossOrigin="anonymous"
+                  />
+                  {user.firstName} {user.lastName}
+                  </div>
+                ))}
                 </div>
+            </div>
+            <div className="collaborators">
+              {collaborators.map((collaborator, index) => (
+                <span
+                  key={index}
+                  className="collaborator-publish"
+                  onClick={() =>
+                    setCollaborators(
+                      collaborators.filter((col) => col !== collaborator)
+                    )
+                  }
+                >
+                  <p>{collaborator}</p> <i className="bi bi-x-lg"></i>
+                </span>
               ))}
             </div>
           </div>
-          <div className="collaborators">
-            {collaborators.map((collaborator, index) => (
-              <span
-                key={index}
-                className="collaborator-publish"
-                onClick={() =>
-                  setCollaborators(
-                    collaborators.filter((col) => col !== collaborator)
-                  )
-                }
-              >
-                <p>{collaborator}</p> <i className="bi bi-x-lg"></i>
-              </span>
-            ))}
-          </div>
-        </div>
 
           {/* Teacher */}
           <div className="form-group">
             <div className="label-group">
               <label>Enseignant</label>
-              <i className="bi bi-info-circle" title="
-                Nom de l'enseignant qui a supervisé le projet."></i>
+              <i
+                className="bi bi-info-circle"
+                title="Nom de l'enseignant qui a supervisé le projet."
+              ></i>
             </div>
-
             <input
               type="text"
               value={teacher}
               onChange={(e) => setTeacher(e.target.value)}
               placeholder="Nom de l'enseignant"
+              onKeyDown={handleDefaultBehavior}
             />
           </div>
 
@@ -366,70 +352,65 @@ export const Publish = () => {
                   <option value="" disabled>
                     Sélectionner un cours
                   </option>
-                  <option value="Développement Web">Développement Web</option>
-                  <option value="Intelligence Artificielle">
-                    Intelligence Artificielle
-                  </option>
-                  <option value="Design UI/UX">Design UI/UX</option>
-                  <option value="Développement Mobile">
-                    Développement Mobile
-                  </option>
+                  {availableCourses.map((course: { id: string; name: string }) => (
+                    <option key={course.id} value={course.name}>
+                      {course.title}
+                    </option>
+                  ))}
                   <option value="Aucun">Aucun</option>
                 </select>
                 <i className="bi bi-chevron-down"></i>
               </div>
-
             </div>
             <div className="form-group">
               <label>Session</label>
               <div className="select-group">
-              <select
-                value={session}
-                onChange={(e) => setSession(e.target.value)}
-              >
-                <option value="" disabled>
-                  Sélectionner une session
-                </option>
-                {(() => {
-                  const currentYear = new Date().getFullYear();
-                  const currentMonth = new Date().getMonth();
-                  const sessions = [];
+                <select
+                  value={session}
+                  onChange={(e) => setSession(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Sélectionner une session
+                  </option>
+                  {(() => {
+                    const currentYear = new Date().getFullYear();
+                    const currentMonth = new Date().getMonth();
+                    const sessions = [];
 
-                  const currentSemester =
-                    currentMonth >= 6 ? "Automne" : "Hiver";
+                    const currentSemester =
+                      currentMonth >= 6 ? "Automne" : "Hiver";
 
-                  for (let i = 0; i < 6; i++) {
-                    const year = currentYear - Math.floor(i / 2);
-                    const semester = i % 2 === 0 ? "Hiver" : "Automne";
+                    for (let i = 0; i < 6; i++) {
+                      const year = currentYear - Math.floor(i / 2);
+                      const semester = i % 2 === 0 ? "Hiver" : "Automne";
 
-                    if (i === 0 && semester === currentSemester) {
-                      sessions.push(
-                        <option
-                          key={`${semester} ${year}`}
-                          value={`${semester} ${year}`}
-                        >
-                          {semester} {year}
-                        </option>
-                      );
-                    } else {
-                      sessions.push(
-                        <option
-                          key={`${semester} ${year}`}
-                          value={`${semester} ${year}`}
-                        >
-                          {semester} {year}
-                        </option>
-                      );
+                      if (i === 0 && semester === currentSemester) {
+                        sessions.push(
+                          <option
+                            key={`${semester} ${year}`}
+                            value={`${semester} ${year}`}
+                          >
+                            {semester} {year}
+                          </option>
+                        );
+                      } else {
+                        sessions.push(
+                          <option
+                            key={`${semester} ${year}`}
+                            value={`${semester} ${year}`}
+                          >
+                            {semester} {year}
+                          </option>
+                        );
+                      }
                     }
-                  }
 
-                  return sessions;
-                })()}
-                <option value="Aucune">Aucune</option>
-              </select>
-              <i className="bi bi-chevron-down"></i>
+                    return sessions;
+                  })()}
+                  <option value="Aucune">Aucune</option>
+                </select>
+                <i className="bi bi-chevron-down"></i>
               </div>
-
             </div>
           </div>
         </div>

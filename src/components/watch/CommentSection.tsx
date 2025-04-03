@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { Comment } from "./Comment";
 import { useAuth } from "../../hooks/useAuth";
+import { Projet } from "../../types/Projet";
 
-export const CommentSection = () => {
+interface CommentSectionProps {
+  projet : Projet | null;
+}
+
+export const CommentSection = (
+  { projet }: CommentSectionProps
+) => {
   const { isLoggedIn, user } = useAuth();
   const [commentText, setCommentText] = useState("");
 

@@ -1,9 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Projet } from "../../types/Projet";
+import { useApi } from "../../hooks/useApi";
+import { User } from "../../types/User";
+import default_avatar from "../../assets/images/default_profil.png";
 
-export const VideoOptions = () => {
+interface VideoOptionsProps {
+  projet: Projet | null; // Remplacez 'any' par le type approprié pour votre projet
+}
+
+export const VideoOptions = (
+  { projet }: VideoOptionsProps
+) => {
   const [isCopied, setIsCopied] = useState(false);
-  const [isLiked, setIsLiked] = useState(false); // State for "J'aime"
-  const [isSaved, setIsSaved] = useState(false); // State for "Enregistrer"
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [author, setAuthor] = useState< User | null>(null);
+
+  const date = projet?.createdAt
+    ? new Intl.DateTimeFormat("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date(projet.createdAt))
+    : "";
+
+  const { request } = useApi<unknown[]>();
+
+  const fetchAuthor = async () => {
+    if (projet?.author.id) {
+      console.log("authorId", projet?.author.id);
+      try {
+        const data = await request(
+          "get",
+          `http://localhost:5000/api/v1/users/${projet?.author?.id}`
+        );
+        return data;
+      } catch (error) {
+        console.error("Error fetching author data:", error);
+      }
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    console.log("projet?.authorId", projet?.author.id);
+    const fetchData = async () => {
+      const authorData = await fetchAuthor();
+      setAuthor(authorData);
+    };
+    fetchData();
+  }
+  , [projet?.author.id]);
+
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+    // TODO: logique pour like
+  };
 
   const handleShare = () => {
     const videoLink = window.location.href;
@@ -11,11 +64,6 @@ export const VideoOptions = () => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     });
-  };
-
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-    // TODO: logique pour like
   };
 
   const toggleSave = () => {
@@ -26,10 +74,10 @@ export const VideoOptions = () => {
   return (
     <div className="video-options">
       <div className="author-holder">
-        <img src="https://wallpapercave.com/wp/wp4877950.jpg" alt="author" />
+        <img src={author?.avatar ?? default_avatar } alt="author" />
         <div className="author-info">
-          <h3>Ali Benkarrouch</h3>
-          <p>Publié le 15 septembre 2025</p>
+          <h3>{author?.firstName} {author?.lastName}</h3>
+          <p>Publié le {date}</p>
         </div>
       </div>
       <div className="video-interaction">
@@ -38,7 +86,7 @@ export const VideoOptions = () => {
           onClick={toggleLike}
         >
           <i className="bi bi-hand-thumbs-up"></i>
-          <p>J&apos;aime</p>
+          <p>{projet?.likes} J&apos;aime</p>
         </button>
         <button className="share" onClick={handleShare}>
           <i className="bi bi-reply"></i>

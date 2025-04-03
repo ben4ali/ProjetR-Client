@@ -16,8 +16,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("Token récupéré :", token);
-    
     if (token && token.split(".").length === 3) {
       try {
         setIsLoggedIn(true);
