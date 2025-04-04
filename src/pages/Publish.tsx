@@ -196,7 +196,12 @@ export const Publish = () => {
               <div className="upload-box">
                 <p>Cliquez pour sélectionner un fichier</p>
               </div>
-              <input type="file" accept="video/*" onChange={handleVideoUpload} onKeyDown={handleDefaultBehavior}/>
+              <input
+                type="file"
+                accept="video/*"
+                onChange={handleVideoUpload}
+                onKeyDown={handleDefaultBehavior}
+              />
             </div>
           </div>
 
@@ -237,7 +242,10 @@ export const Publish = () => {
               ></i>
             </div>
             <div className="select-group">
-              <select onChange={(e) => handleCategoryAdd(e.target.value)} defaultValue="">
+              <select
+                onChange={(e) => handleCategoryAdd(e.target.value)}
+                defaultValue=""
+              >
                 <option value="" disabled>
                   Sélectionner une catégorie
                 </option>
@@ -264,7 +272,37 @@ export const Publish = () => {
               ))}
             </div>
           </div>
+          {/* Links */}
 
+          <div className="shared-form-group">
+            <div className="form-group">
+              <label>
+                <i className="bi bi-github"></i>
+                Lien GitHub
+              </label>
+
+              <input
+                type="url"
+                value={lienGitHub}
+                onChange={(e) => setLienGitHub(e.target.value)}
+                placeholder="Lien vers le code source GitHub"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>
+                <i className="bi bi-gitlab"></i>
+                Lien Gitlab
+              </label>
+
+              <input
+                type="url"
+                value={lienGitlab}
+                onChange={(e) => setLienGitlab(e.target.value)}
+                placeholder="Lien vers le code source Gitlab"
+              />
+            </div>
+          </div>
           {/* Collaborators */}
           <div className="form-group">
             <div className="label-group">
@@ -283,28 +321,32 @@ export const Publish = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={handleKeyPress}
               />
-                <div
+              <div
                 className="search-results-publish"
                 style={{
-                  display: searchResults.length > 0 && searchTerm.length >= 2 ? "flex" : "none",
+                  display:
+                    searchResults.length > 0 && searchTerm.length >= 2
+                      ? "flex"
+                      : "none",
                 }}
-                >
+              >
                 {searchResults.map((user, index) => (
                   <div
-                  key={index}
-                  className="search-result-item-publish"
-                  onClick={() => handleCollaboratorSelect(user)}
+                    key={index}
+                    className="search-result-item-publish"
+                    onClick={() => handleCollaboratorSelect(user)}
                   >
-                  <img
-                  src={user.avatar || default_profil}
-                  alt="User Avatar"
-                  crossOrigin="anonymous"
-                  />
-                  {user.firstName} {user.lastName}
+                    <img
+                      src={user.avatar || default_profil}
+                      alt="User Avatar"
+                      crossOrigin="anonymous"
+                    />
+                    {user.firstName} {user.lastName}
                   </div>
                 ))}
-                </div>
+              </div>
             </div>
+
             <div className="collaborators">
               {collaborators.map((collaborator, index) => (
                 <span
@@ -352,11 +394,13 @@ export const Publish = () => {
                   <option value="" disabled>
                     Sélectionner un cours
                   </option>
-                  {availableCourses.map((course: { id: string; name: string }) => (
-                    <option key={course.id} value={course.name}>
-                      {course.title}
-                    </option>
-                  ))}
+                  {availableCourses.map(
+                    (course: { id: string; name: string }) => (
+                      <option key={course.id} value={course.name}>
+                        {course.title}
+                      </option>
+                    )
+                  )}
                   <option value="Aucun">Aucun</option>
                 </select>
                 <i className="bi bi-chevron-down"></i>

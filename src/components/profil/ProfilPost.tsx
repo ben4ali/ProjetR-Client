@@ -11,6 +11,7 @@ export const ProfilPost = (
   return (
   <Link to={`/watch/${projet.id}`} className="profil-post">
     <h1>{projet.title}</h1>
+    <div className="post-overlay"></div>
     <video>
       <source src={projet.demoUrl} type="video/mp4" />
       Your browser does not support the video tag.

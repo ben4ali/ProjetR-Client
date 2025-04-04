@@ -9,7 +9,8 @@ export const VideoLinks = (
   { projet }: VideoLinksProps
 ) => {
   const lienGithub = projet?.githubUrl
-  const lienGitlab = projet?.gitlabUrl
+  const lienGitlab = projet?.gitLabUrl
+  console.log(projet)
   return (
     <div className="link-holder">
 

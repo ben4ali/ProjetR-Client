@@ -16,7 +16,7 @@ export interface Projet {
     previewImageUrl: string;
     comments: string[];
     githubUrl: string;
-    gitlabUrl: string;
+    gitLabUrl: string;
     liveUrl: string;
     demoUrl: string;
     session: string;
