@@ -10,7 +10,7 @@ interface CommentComponentProps {
 }
 
 export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) => {
-  const { user } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const { request } = useApi();
   const [isDeleted, setIsDeleted] = useState(false);
   const { author, text, id: commentId } = comment;
@@ -90,7 +90,7 @@ export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) =
         </div>
         <p>{text}</p>
         <div className="reply-options">
-          {!comment.parentComment && (
+          {!comment.parentComment && isLoggedIn && (
    
             <button
               className="reply-button"
@@ -108,7 +108,7 @@ export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) =
             </button>
           )}
         </div>
-        {showReplyInput && (
+        {showReplyInput && isLoggedIn && (
             <div className="reply-input">
               <input
                 value={replyText}
