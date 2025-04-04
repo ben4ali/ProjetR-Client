@@ -26,9 +26,7 @@ export const CommentSection = (
             "get",
             `http://localhost:5000/api/v1/comments/projet/${projet.id}`
           );
-
-          console.log("Fetched comments:", data);
-          setComments(data);
+          setComments(data.filter(comment => !comment.parentComment));
         } catch (error) {
           console.error("Error fetching comments:", error);
         }

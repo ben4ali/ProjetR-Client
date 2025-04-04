@@ -72,7 +72,7 @@ export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) =
 
   return (
     <div className="comment">
-      <h1>{comment.parentComment?.text}</h1>
+
       <div className="comment-author">
         <img src={author.avatar || default_profil} alt="autheur" />
       </div>

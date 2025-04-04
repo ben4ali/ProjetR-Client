@@ -630,7 +630,7 @@
 .comment-replies{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
     padding-left: 2rem;
 }
 .comment-replies img{
@@ -641,6 +641,9 @@
 }
 
 .replies-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     margin-top: 1rem;
 }
 
