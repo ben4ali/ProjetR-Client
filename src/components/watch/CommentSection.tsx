@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Comment } from "./Comment";
+import React, { useEffect, useState } from "react";
+import { CommentComponent } from "./CommentComponent";
 import { useAuth } from "../../hooks/useAuth";
+import { Comment } from "../../types/Comment";
+import {useApi} from "../../hooks/useApi";
 import { Projet } from "../../types/Projet";
 
 interface CommentSectionProps {
@@ -13,20 +15,66 @@ export const CommentSection = (
   const { isLoggedIn, user } = useAuth();
   const [commentText, setCommentText] = useState("");
 
-  const comments = [
-    { author: "Ali Benkarrouch", text: "Super vidéo !" },
-    { author: "John Doe", text: "Merci pour le partage !" },
-    { author: "Jane Smith", text: "Très intéressant, merci !" },
-  ];
+  const [comments, setComments] = useState<Comment[]>([]);
+  const { request } = useApi<Comment[]>();
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (projet) {
+        try {
+          const data = await request(
+            "get",
+            `http://localhost:5000/api/v1/comments/projet/${projet.id}`
+          );
+
+          console.log("Fetched comments:", data);
+          setComments(data);
+        } catch (error) {
+          console.error("Error fetching comments:", error);
+        }
+      }
+    }
+
+    fetchComments();
+  }, []);
+
+  // const comments = [
+  //   { author: "Ali Benkarrouch", text: "Super vidéo !" },
+  //   { author: "John Doe", text: "Merci pour le partage !" },
+  //   { author: "Jane Smith", text: "Très intéressant, merci !" },
+  // ];
+
+
+
+  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentText(e.target.value);
   };
 
   const handleComment = () => {
-    // TODO: logique pour comment
-    console.log("Comment submitted:", commentText);
-    setCommentText("");
+    if (projet?.id && commentText.trim()) {
+      const postComment = async () => {
+        try {
+          const newComment = await request(
+            "post",
+            `http://localhost:5000/api/v1/comments`,
+            {
+              projetId: projet.id,
+              text: commentText.trim(),
+            }
+          );
+          setComments((prevComments) => [...prevComments, newComment]);
+          setCommentText("");
+        } catch (error) {
+          console.error("Erreur lors de la création du commentaire :", error);
+        }
+      };
+  
+      postComment();
+    } else {
+      console.error("L'ID du projet est manquant ou le texte du commentaire est vide.");
+    }
   };
 
   return (
@@ -62,7 +110,7 @@ export const CommentSection = (
 
       <div className="comment-holder">
         {comments.map((comment, index) => (
-          <Comment key={index} author={comment.author} text={comment.text} />
+          <CommentComponent key={index} comment={comment} />
         ))}
       </div>
     </div>

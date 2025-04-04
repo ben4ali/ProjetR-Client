@@ -5,7 +5,7 @@ import { User } from "../../types/User";
 import default_avatar from "../../assets/images/default_profil.png";
 
 interface VideoOptionsProps {
-  projet: Projet | null; // Remplacez 'any' par le type approprié pour votre projet
+  projet: Projet | null;
 }
 
 export const VideoOptions = (

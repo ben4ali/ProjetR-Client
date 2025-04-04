@@ -9,15 +9,12 @@ import { VideoSuggestion } from "../components/watch/VideoSuggestion";
 import { VideoLinks } from "../components/watch/VideoLinks";
 import { Contributors } from "../components/watch/Contributors";
 import { useApi } from "../hooks/useApi";
-import { useAuth } from "../hooks/useAuth";
-import { User } from "../types/User";
 import { Projet } from "../types/Projet";
 
 export const Watch = () => {
   const url = window.location.href;
   const id = url.substring(url.lastIndexOf("/") + 1);
 
-  //projet
   const { data: projet, isLoading: isProjetLoading, request: fetchProjet } = useApi<Projet>();
   const { request: incrementViewCount } = useApi<void>();
 
