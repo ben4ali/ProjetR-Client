@@ -1,5 +1,3 @@
-import React from "react";
-
 import boreal from "../../assets/images/boreal.jpg";
 import desert from "../../assets/images/desert.jpg";
 import flower from "../../assets/images/flower.jpg";
@@ -25,26 +23,21 @@ const images = [
 ];
 
 export const BackgroundCarousel = () => {
+  const visibleImages = images.slice(0, 8);
+  const duplicatedImages = [...visibleImages, ...visibleImages]; 
+  
   return (
     <div className="path-container">
       <div className="top-path">
-        {images.slice(0, 8).map((src, index) => (
-          <div
-            key={`top-${index}`}
-            className="background-card"
-            style={{ "--i": index + 1 }}
-          >
+        {duplicatedImages.map((src, index) => (
+          <div key={`top-${index}`} className="background-card">
             <img src={src} alt={`top-${index}`} />
           </div>
         ))}
       </div>
       <div className="bottom-path">
-        {images.slice(0, 8).map((src, index) => (
-          <div
-            key={`bottom-${index}`}
-            className="background-card"
-            style={{ "--i": index + 1 }}
-          >
+        {duplicatedImages.map((src, index) => (
+          <div key={`bottom-${index}`} className="background-card">
             <img src={src} alt={`bottom-${index}`} />
           </div>
         ))}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useApi } from "../../hooks/useApi";
+import { User } from "../../types/User";
 
 interface SignupProps {
   toggleForm: () => void;
@@ -12,7 +13,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { data, error, isLoading, request } = useApi<{ message: string; user: any }>();
+  const { data, error, isLoading, request } = useApi<{ message: string; user: User }>();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
       });
       console.log("Utilisateur inscrit :", data);
       window.location.href = "/explore";
-    } catch (err) {
+    } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
     }
   };

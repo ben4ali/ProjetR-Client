@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { BackgroundCarousel } from "../components/authentification/BackgroundCarousel";
 import { LoginForm } from "../components/authentification/LoginForm";
