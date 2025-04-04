@@ -53,9 +53,36 @@ export const VideoOptions = (
   , [projet?.author.id]);
 
 
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-    // TODO: logique pour like
+  const toggleLike = async () => {
+    if (!projet?.id) return;
+  
+    const likedProjects = JSON.parse(localStorage.getItem("liked_projects") || "[]");
+  
+    const isAlreadyLiked = likedProjects.includes(projet.id);
+  
+    try {
+      if (isAlreadyLiked) {
+        await request("put", `http://localhost:5000/api/v1/projects/dislike/${projet.id}`);
+        localStorage.setItem(
+          "liked_projects",
+          JSON.stringify(likedProjects.filter((id: number) => id !== projet.id))
+        );
+        setIsLiked(false);
+        if (projet.likes !== undefined) {
+          projet.likes -= 1;
+        }
+      } else {
+        await request("put", `http://localhost:5000/api/v1/projects/like/${projet.id}`);
+        likedProjects.push(projet.id);
+        localStorage.setItem("liked_projects", JSON.stringify(likedProjects));
+        setIsLiked(true);
+        if (projet.likes !== undefined) {
+          projet.likes += 1;
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling like:", error);
+    }
   };
 
   const handleShare = () => {
@@ -70,6 +97,12 @@ export const VideoOptions = (
     setIsSaved(!isSaved);
     // TODO: logique pour save
   };
+  useEffect(() => {
+    if (projet?.id) {
+      const likedProjects = JSON.parse(localStorage.getItem("liked_projects") || "[]");
+      setIsLiked(likedProjects.includes(projet.id));
+    }
+  }, [projet?.id]);
 
   return (
     <div className="video-options">
