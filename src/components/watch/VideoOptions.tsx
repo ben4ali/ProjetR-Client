@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Projet } from "../../types/Projet";
 import { useApi } from "../../hooks/useApi";
+import { useAuth } from "../../hooks/useAuth";
 import { User } from "../../types/User";
 import default_avatar from "../../assets/images/default_profil.png";
 
@@ -11,6 +12,7 @@ interface VideoOptionsProps {
 export const VideoOptions = (
   { projet }: VideoOptionsProps
 ) => {
+  const { isLoggedIn } = useAuth();
   const [isCopied, setIsCopied] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -54,7 +56,7 @@ export const VideoOptions = (
 
 
   const toggleLike = async () => {
-    if (!projet?.id) return;
+    if (!projet?.id || !isLoggedIn) return;
   
     const likedProjects = JSON.parse(localStorage.getItem("liked_projects") || "[]");
   
@@ -115,7 +117,7 @@ export const VideoOptions = (
       </div>
       <div className="video-interaction">
         <button
-          className={`like ${isLiked ? "interaction-active" : ""}`}
+          className={`like ${isLoggedIn && isLiked ? "interaction-active" : ""}`}
           onClick={toggleLike}
         >
           <i className="bi bi-hand-thumbs-up"></i>
