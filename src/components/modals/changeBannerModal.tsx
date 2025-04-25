@@ -15,10 +15,11 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
   userId,
 }) => {
   const [isPicked, setIsPicked] = useState(false);
-  const [newBannerUrl, setNewBannerUrl] = useState<string | null>(currentBanner || null);
+  const [newBannerUrl, setNewBannerUrl] = useState<string | null>(
+    currentBanner || null
+  );
   const [newBannerFile, setNewBannerFile] = useState<File | null>(null);
   const changeBannerMutation = useChangeBanner();
-
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newBanner = event.target.files?.[0];
@@ -44,7 +45,10 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
           onClose();
         },
         onError: (error) => {
-          console.error("Erreur lors de la mise à jour de la bannière :", error);
+          console.error(
+            "Erreur lors de la mise à jour de la bannière :",
+            error
+          );
         },
       }
     );
@@ -70,9 +74,7 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
         </div>
 
         <div className="banner-modal-actions">
-          <button onClick={handleOnConfirm}>
-            Confirmer
-          </button>
+          <button onClick={handleOnConfirm}>Confirmer</button>
           <button onClick={handleOnClose}>Annuler</button>
         </div>
       </div>
