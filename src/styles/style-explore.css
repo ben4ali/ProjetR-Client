@@ -282,7 +282,7 @@
     position: relative;
 }
 
-.image-holder img {
+.image-holder video {
     border-radius: 8px;
     width: 100%;
     height: 100%;
@@ -305,7 +305,7 @@
 
 }
 
-.post:hover .image-holder img {
+.post:hover .image-holder video {
     scale: 1;
 }
 
@@ -340,6 +340,7 @@
 .post-author img {
     width: 3rem;
     height: 3rem;
+    object-fit: cover;
     border-radius: 50%;
     margin-right: 1rem;
 }

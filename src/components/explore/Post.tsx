@@ -1,39 +1,61 @@
-import React from "react";
+import {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
+import { Projet } from "../../types/Projet";
 
 export const Post = ({
-  title,
-  author,
-  views,
-  date,
-  image,
-  profileImage,
-  duration,
+  project
 }: {
-  title: string;
-  author: string;
-  views: string;
-  date: string;
-  image: string;
-  profileImage: string;
-  duration: string;
+  project :Projet;
 }) => {
+
+  const formattedDate = new Date(project.createdAt).toLocaleDateString("fr-CA", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+
+  const [duration, setDuration] = useState<number | null>(null);
+
+  const handleLoadedMetadata = (event: Event) => {
+    const video = event.currentTarget as HTMLVideoElement;
+    setDuration(video.duration);
+  };
+
+  const formatDuration = (seconds: number | null) => {
+    if (seconds === null) return "--:--";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  useEffect(() => {
+    if (project.demoUrl) {
+      const video = document.createElement("video");
+      video.src = project.demoUrl;
+      video.addEventListener("loadedmetadata", handleLoadedMetadata);
+      return () => {
+        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      };
+    }
+  }, [project.demoUrl]);
+
   return (
-    <Link to="/watch/1" className="post">
+    <Link to={"/watch/"+project.id} className="post">
       <div className="image-holder">
         <div className="post-overlay"></div>
-        <img src={image} alt="post" />
-        <p className="temps">{duration}</p>
+        <video src={project.demoUrl} alt="post" width="100%" height="100%" />
+        <p className="temps">{formatDuration(duration)}</p>
       </div>
       <div className="post-footer">
         <div className="post-author">
-          <img src={profileImage} alt="Photo de profil" />
+          <img src={project.author.avatar || ""} alt="Photo de profil" />
         </div>
         <div className="post-info">
-          <h2>{title}</h2>
-          <p>{author}</p>
+          <h2>{project.title}</h2>
+          <p>{project.author.username}</p>
           <p>
-            {views} Visionnements - {date}
+            {project.views} Visionnements - {formattedDate}
           </p>
         </div>
       </div>
