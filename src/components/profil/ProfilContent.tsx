@@ -7,7 +7,7 @@ interface ProfilContentProps {
   pseudo: string;
 }
 
-export const ProfilContent : React.FC<ProfilContentProps> = ({
+export const ProfilContent: React.FC<ProfilContentProps> = ({
   firstName,
   lastName,
   pseudo,
@@ -15,7 +15,9 @@ export const ProfilContent : React.FC<ProfilContentProps> = ({
   return (
     <div className="profil-content">
       <div className="profil-info">
-        <h1>{firstName} {lastName}</h1>
+        <h1>
+          {firstName} {lastName}
+        </h1>
         <p>@{pseudo}</p>
       </div>
       <ProfilStats />

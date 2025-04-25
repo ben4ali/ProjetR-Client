@@ -1,85 +1,103 @@
-import React, { useState, useEffect } from "react";
-import { User } from "../../types/User";
-import { useAuth } from "../../hooks/useAuth";
-import { useApi } from "../../hooks/useApi";
-import default_profil from "../../assets/images/default_profil.png";
+import React, { useState } from "react";
 import { Comment } from "../../types/Comment";
+import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
+import {
+  useReplyToComment,
+  useRepliesToComment,
+  useDeleteComment,
+} from "../../hooks/use-comments";
+import default_profil from "../../assets/images/default_profil.png";
 
 interface CommentComponentProps {
   comment: Comment;
+  projetId: number | string;
 }
 
-export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) => {
-  const { isLoggedIn, user } = useAuth();
-  const { request } = useApi();
-  const [isDeleted, setIsDeleted] = useState(false);
-  const { author, text, id: commentId } = comment;
-  const [commentReplies, setCommentReplies] = useState<Comment[]>([]);
-  const [showReplies, setShowReplies] = useState(false);
-  const [showReplyInput, setShowReplyInput] = useState(false);
+export const CommentComponent = ({
+  comment,
+  projetId,
+}: CommentComponentProps) => {
+  const loggedIn = isLoggedIn();
+  const { data: user } = useCurrentUser();
+  const [isReplying, setIsReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
+  const [showReplies, setShowReplies] = useState(false);
 
-  useEffect(() => {
-    const fetchCommentReplies = async () => {
-      if (comment) {
-        try {
-          const data = await request(
-            "get",
-            `http://localhost:5000/api/v1/comments/replies/${comment.id}`
-          );
-          setCommentReplies(data);
-
-          console.log("Replies fetched:", data);
-        } catch (error) {
-          console.error("Error fetching comments:", error);
-        }
-      }
+  const { data: commentReplies = [] } = useRepliesToComment(comment.id);
+  const [commentDate, setCommentDate] = useState(new Date(comment.createdAt));
+  const formatDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
     };
+    return date.toLocaleDateString("fr-FR", options);
+  };
+  const formattedDate = formatDate(commentDate);
+  const replyMutation = useReplyToComment();
 
-    fetchCommentReplies();
-  }, [comment]);
+  const handleReply = () => {
+    setIsReplying(!isReplying);
+  };
 
-  const handleDeleteComment = async () => {
-    try {
-      await request("delete", `http://localhost:5000/api/v1/comments/${commentId}`);
-      console.log("Commentaire supprimé avec succès");
-      setIsDeleted(true);
-    } catch (error) {
-      console.error("Erreur lors de la suppression du commentaire :", error);
+  const handleSubmitReply = () => {
+    if (replyText.trim() && comment.id) {
+      replyMutation.mutate(
+        {
+          projetId,
+          text: replyText.trim(),
+          parentComment: comment.id,
+        },
+        {
+          onSuccess: () => {
+            setReplyText("");
+            setIsReplying(false);
+          },
+          onError: (error) => {
+            console.error("Erreur lors de la réponse au commentaire :", error);
+          },
+        }
+      );
     }
   };
 
-  const handleReplySubmit = async () => {
-    if (!replyText.trim()) return;
+  const deleteCommentMutation = useDeleteComment();
 
-    try {
-      const newReply = await request("post", `http://localhost:5000/api/v1/comments`, {
-        parentComment: commentId,
-        projetId: comment.projet.id,
-        text: replyText.trim(),
-      });
-      setCommentReplies((prevReplies) => [...prevReplies, newReply]);
-      setReplyText("");
-      setShowReplyInput(false);
-    } catch (error) {
-      console.error("Erreur lors de l'ajout de la réponse :", error);
+  const handleDeleteComment = () => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce commentaire ?")) {
+      deleteCommentMutation.mutate(
+        {
+          commentId: comment.id,
+          projetId,
+          parentCommentId: comment.parentComment,
+        },
+        {
+          onSuccess: () => {
+            console.log("Commentaire supprimé avec succès");
+          },
+          onError: (error) => {
+            console.error(
+              "Erreur lors de la suppression du commentaire :",
+              error
+            );
+          },
+        }
+      );
     }
   };
-
-  if (isDeleted) {
-    return null;
-  }
 
   return (
     <div className="comment">
-
       <div className="comment-author">
-        <img src={author.avatar || default_profil} alt="autheur" />
+        <img src={comment.author.avatar || default_profil} alt="autheur" />
       </div>
       <div className="comment-info">
         <div className="comment-header">
-          <h4>{author.username}</h4>
-          {user?.id === author.id && (
+          <h4>
+            {comment.author?.firstName} {comment.author?.lastName}{" "}
+            <span className="comment-date"> - {formattedDate} </span>
+          </h4>
+          {user?.id === comment.author.id && (
             <button
               className="comment-options-button"
               onClick={handleDeleteComment}
@@ -88,19 +106,16 @@ export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) =
             </button>
           )}
         </div>
-        <p>{text}</p>
+        <p>{comment.text}</p>
+
         <div className="reply-options">
-          {!comment.parentComment && isLoggedIn && (
-   
-            <button
-              className="reply-button"
-              onClick={() => setShowReplyInput(!showReplyInput)}
-            >
-              Répondre         
+          {!comment.parentComment && loggedIn && (
+            <button className="reply-button" onClick={handleReply}>
+              Répondre
             </button>
           )}
           {commentReplies.length > 0 && (
-          <button
+            <button
               className="show-replies-button"
               onClick={() => setShowReplies(!showReplies)}
             >
@@ -108,23 +123,30 @@ export const CommentComponent: React.FC<CommentComponentProps> = ({ comment }) =
             </button>
           )}
         </div>
-        {showReplyInput && isLoggedIn && (
-            <div className="reply-input">
-              <input
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-                placeholder="Écrire une réponse..."
-              />
-              <button className="submit-reply-btn" onClick={handleReplySubmit}>Soumettre</button>
-            </div>
-         )}
+
+        {isReplying && isLoggedIn && (
+          <div className="reply-input">
+            <input
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+              placeholder="Écrire une réponse..."
+            />
+            <button className="submit-reply-btn" onClick={handleSubmitReply}>
+              Soumettre
+            </button>
+          </div>
+        )}
         {commentReplies.length > 0 && (
           <div className="comment-replies">
-
             {showReplies && (
               <div className="replies-list">
                 {commentReplies.map((reply) => (
-                  <CommentComponent key={reply.id} comment={reply} />
+                  // Afficher chaque réponse
+                  <CommentComponent
+                    key={reply.id}
+                    comment={reply}
+                    projetId={projetId}
+                  />
                 ))}
               </div>
             )}

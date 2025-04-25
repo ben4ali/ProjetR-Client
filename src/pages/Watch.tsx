@@ -8,26 +8,26 @@ import { CommentSection } from "../components/watch/CommentSection";
 import { VideoSuggestion } from "../components/watch/VideoSuggestion";
 import { VideoLinks } from "../components/watch/VideoLinks";
 import { Contributors } from "../components/watch/Contributors";
-import { useApi } from "../hooks/useApi";
-import { Projet } from "../types/Projet";
+import { useProjectById, useIncrementViewCount } from "../hooks/use-project";
+import { useParams } from "react-router-dom";
 
 export const Watch = () => {
-  const url = window.location.href;
-  const id = url.substring(url.lastIndexOf("/") + 1);
+  const { id } = useParams<{ id: string }>();
 
-  const { data: projet, isLoading: isProjetLoading, request: fetchProjet } = useApi<Projet>();
-  const { request: incrementViewCount } = useApi<void>();
+  const { data: projet, isLoading, error } = useProjectById(id);
+
+  const incrementViewMutation = useIncrementViewCount();
 
   useEffect(() => {
     if (id) {
-      fetchProjet("get", `http://localhost:5000/api/v1/projects/${id}`);
-      incrementViewCount("put", `http://localhost:5000/api/v1/projects/view/${id}`).catch((err) => {
-        console.error("Failed to increment view count:", err);
-      });
+      incrementViewMutation.mutate(id);
     }
   }, [id]);
 
-  if (isProjetLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Chargement en cours...</p>;
+  if (error) return <p>Erreur de chargement: {error.message}</p>;
+  if (!projet) return <p>Projet non trouvé</p>;
+
   return (
     <div className="watch-container">
       <div className="watch-content">

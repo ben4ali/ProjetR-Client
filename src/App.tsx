@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 import { Authentification } from "./pages/Authentification";
@@ -8,40 +8,41 @@ import rosemontLogo from "./assets/logos/RosemontLogoBrute.png";
 import { Profil } from "./pages/Profil";
 import { Watch } from "./pages/Watch";
 import { Publish } from "./pages/Publish";
-import { useAuth } from "./hooks/useAuth";
-import { useApi } from "./hooks/useApi";
+import { isLoggedIn, useCurrentUser, logout } from "./hooks/use-auth";
 import gsap from "gsap";
 
 function Navbar() {
-
-  const { isLoggedIn, user, logout } = useAuth();
-  const { request } = useApi();
-  const [userAvatar, setUserAvatar] = useState<string | null>(null); 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const loggedIn = isLoggedIn();
+  const { data: user, isSuccess } = useCurrentUser();
+  const [avatarTimestamp, setAvatarTimestamp] = useState(new Date().getTime());
+  const [_, setIsDialogOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const prevAvatarRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const fetchUserAvatar = async () => {
-      if (isLoggedIn && user?.id) {
-        try {
-          const response = await request("get", `http://localhost:5000/api/v1/users/${user.id}`);
-          setUserAvatar(response.avatar || "https://robohash.org/default.png");
-        } catch (error) {
-          console.error("Failed to fetch user avatar:", error);
-          setUserAvatar("https://robohash.org/default.png");
-        }
-      }
-    };
-
-    fetchUserAvatar();
-  }, [isLoggedIn, user?.id]);
+    if (isSuccess && user && user.avatar !== prevAvatarRef.current) {
+      prevAvatarRef.current = user.avatar;
+      setAvatarTimestamp(new Date().getTime());
+      console.log("Avatar changed, updating timestamp:", new Date().getTime());
+    }
+  }, [user?.avatar, isSuccess]);
 
   const toggleDialog = () => {
     setIsDialogOpen((prev: unknown) => {
       if (!prev) {
-        gsap.to(dialogRef.current, { opacity: 1, y: 0, duration: 0.3, display: "flex" });
+        gsap.to(dialogRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          display: "flex",
+        });
       } else {
-        gsap.to(dialogRef.current, { opacity: 0, y: -20, duration: 0.3, display: "none" });
+        gsap.to(dialogRef.current, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          display: "none",
+        });
       }
       return !prev;
     });
@@ -68,22 +69,32 @@ function Navbar() {
           <input type="text" placeholder="Rechercher..." />
         </div>
 
-        {isLoggedIn ? (
+        {loggedIn ? (
           <>
             <li>
               <div className="userLink loggedUser" onClick={toggleDialog}>
                 <img
-                  src={userAvatar || "https://robohash.org/default.png"}
+                  src={`${
+                    user?.avatar || "https://robohash.org/default.png"
+                  }?t=${avatarTimestamp}`}
                   alt="Avatar"
                   className="user-avatar"
                   crossOrigin="anonymous"
                 />
-                <div className="user-dialog" ref={dialogRef} style={{ display: "none", opacity: 0 }}>
-                  <p>{user?.firstName} {user?.lastName}</p>
+                <div
+                  className="user-dialog"
+                  ref={dialogRef}
+                  style={{ display: "none", opacity: 0 }}
+                >
+                  <p>
+                    {user?.firstName} {user?.lastName}
+                  </p>
                   <div className="user-dialog-links">
                     <Link to={`/profil/${user?.id}`}>Profil</Link>
                     <Link to="/publish">Publier</Link>
-                    <Link to="/authentification" onClick={logout}>Déconnexion</Link>
+                    <Link to="/authentification" onClick={logout}>
+                      Déconnexion
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -109,7 +120,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/authentification" element={<Authentification />} />
-        <Route path="/profil/:id" element={<Profil/>} />
+        <Route path="/profil/:id" element={<Profil />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/publish" element={<Publish />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />

@@ -7,7 +7,10 @@ interface ProfilePictureProps {
   isCurrentUser?: boolean;
 }
 
-export const ProfilPicture: React.FC<ProfilePictureProps> = ({ user, isCurrentUser }) => {
+export const ProfilPicture: React.FC<ProfilePictureProps> = ({
+  user,
+  isCurrentUser,
+}) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = () => setModalOpen(true);
@@ -19,7 +22,11 @@ export const ProfilPicture: React.FC<ProfilePictureProps> = ({ user, isCurrentUs
         className={`profil-picture ${isCurrentUser ? "profile-effect" : ""}`}
         onClick={isCurrentUser ? handleOpenModal : undefined}
       >
-        <img src={user.avatar || "avatar.png"} alt="profil-pic" crossOrigin="anonymous" />
+        <img
+          src={`${user.avatar || ""}?t=${new Date().getTime()}`}
+          alt="profil-pic"
+          crossOrigin="anonymous"
+        />
       </div>
       <ChangeProfilePictureModal
         currentPfp={user.avatar || ""}

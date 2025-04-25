@@ -5,9 +5,7 @@ interface VideoPlayerProps {
   projet: Projet | null;
 }
 
-export const VideoPlayer = (
-  { projet }: VideoPlayerProps
-) => {
+export const VideoPlayer = ({ projet }: VideoPlayerProps) => {
   return (
     <div className="video-container">
       <video className="video" controls>

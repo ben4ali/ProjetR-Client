@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-:root{
-    --text-color: rgb(0,0,0,0.8);
-    --light-text-color: rgb(0,0,0,0.6);
-    --contrast-text-color: rgb(255,255,255,0.8);
+:root {
+    --text-color: rgb(0, 0, 0, 0.8);
+    --light-text-color: rgb(0, 0, 0, 0.6);
+    --contrast-text-color: rgb(255, 255, 255, 0.8);
     --highlight-text-color: rgb(82, 140, 234);
     --primary-text-color: rgb(108, 121, 140);
 
     --font-family: 'Inter', sans-serif;
     --default-transition: all 0.2s ease-in-out;
 }
-body{
+
+body {
     padding: 0;
     margin: 0;
     font-family: system-ui;

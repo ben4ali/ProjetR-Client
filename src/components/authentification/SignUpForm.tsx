@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useApi } from "../../hooks/useApi";
+import { useSignup } from "../../hooks/use-auth";
 import { User } from "../../types/User";
 
 interface SignupProps {
@@ -13,7 +13,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { data, error, isLoading, request } = useApi<{ message: string; user: User }>();
+  const signupMutation = useSignup();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,22 +21,18 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
       console.error("Les mots de passe ne correspondent pas.");
       return;
     }
-
-    try {
-      await request("post", "http://localhost:5000/api/v1/auth/signup", {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-      });
-      console.log("Utilisateur inscrit :", data);
-      window.location.href = "/explore";
-    } catch (error) {
-      console.error("Erreur lors de l'inscription :", error);
-    }
+    signupMutation.mutate(
+      { firstName, lastName, username, email, password },
+      {
+        onSuccess: (response) => {
+          window.location.href = "/explore";
+        },
+        onError: (err: any) => {
+          console.error("Erreur lors de l'inscription :", err);
+        },
+      }
+    );
   };
-
   return (
     <div className="form-container signup">
       <div className="form-header">
@@ -104,7 +100,12 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               placeholder="Confirmer votre mot de passe"
             />
           </div>
-          {error && <p className="error-message-valdiation">{error}</p>}
+          {signupMutation.error && (
+            <p className="error-message-valdiation">
+              {(signupMutation.error as any)?.response?.data?.message ||
+                "Erreur d'inscription"}
+            </p>
+          )}
           <div className="register-link">
             <h5>
               Vous avez déjà un compte ?{" "}
@@ -113,9 +114,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               </a>
             </h5>
           </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Inscription..." : "S'inscrire"}
-          </button>
+          <button type="submit">S'inscrire</button>
         </form>
       </div>
     </div>

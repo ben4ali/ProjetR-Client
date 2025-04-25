@@ -1,10 +1,10 @@
-.watch-container{
+.watch-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.watch-content{
+.watch-content {
     margin-top: 7%;
     height: 80vh;
     width: 90%;
@@ -13,17 +13,17 @@
 }
 
 
-.video-section-container{
+.video-section-container {
     width: 70%;
     height: 100rem;
 }
 
-.video-container{
+.video-container {
     height: 35rem;
     width: 100%;
 }
 
-.video{
+.video {
     background-color: black;
     width: 100%;
     height: 35rem !important;
@@ -31,14 +31,14 @@
     border-radius: 8px;
 }
 
-.video-info{
+.video-info {
     margin-top: 0.9rem;
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.tag-list{
+.tag-list {
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem;
@@ -47,66 +47,68 @@
     flex-wrap: wrap;
 }
 
-.video-tag{
+.video-tag {
     flex-shrink: 0;
-    background-color: rgb(0,0,0,0.08);
+    background-color: rgb(0, 0, 0, 0.08);
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 1rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
 }
 
-.video-info h2{
+.video-info h2 {
     font-size: 1.9rem;
-    color: rgb(58, 57, 57,0.9);
+    color: rgb(58, 57, 57, 0.9);
     width: 100%;
     margin-block: 0.5rem;
 }
 
-.video-options{
+.video-options {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgb(0,0,0,0.1);
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
 }
 
-.author-holder{
+.author-holder {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-.author-holder img{
+
+.author-holder img {
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.author-holder h3{
+.author-holder h3 {
     font-size: 1.3rem;
     font-weight: 500;
     color: rgb(18, 18, 18);
     margin: 0;
 }
 
-.author-holder p{
+.author-holder p {
     font-size: 0.8rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
 }
-.author-info{
+
+.author-info {
     line-height: 1.4rem;
 }
 
-.video-interaction{
+.video-interaction {
     display: flex;
     gap: 1rem;
 
 }
 
-.video-interaction button{
+.video-interaction button {
     display: flex;
     gap: 0.5rem;
     align-items: center;
@@ -118,18 +120,18 @@
     cursor: pointer;
 }
 
-.video-interaction button:hover{
+.video-interaction button:hover {
     background-color: rgba(0, 0, 0, 0.075);
     transition: all 0.1s ease-in-out;
 }
 
-.interaction-active{
+.interaction-active {
     color: rgb(187, 49, 90) !important;
     background-color: rgba(255, 77, 103, 0.151) !important;
     border: 1px solid rgba(153, 44, 48, 0.498) !important;
 }
 
-.interaction-active:hover{
+.interaction-active:hover {
     color: rgb(91, 27, 44) !important;
     background-color: rgba(255, 77, 104, 0.073) !important;
     border: 1px solid rgba(153, 44, 48, 0.498) !important;
@@ -140,7 +142,7 @@
     position: fixed;
     bottom: 10%;
     display: flex;
-    gap:1rem;
+    gap: 1rem;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.8);
@@ -150,24 +152,27 @@
     font-size: 1rem;
     z-index: 1000;
     animation: fade-in-out 2s ease-in-out;
-  }
-  
-  @keyframes fade-in-out {
-    0% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(10px);
-    }
-    10%, 90% {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(10px);
-    }
-  }
+}
 
-.video-description{
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    10%,
+    90% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+.video-description {
     margin-top: 1rem;
     width: 100%;
     line-height: 1.5rem;
@@ -182,6 +187,7 @@
     gap: 1.5rem;
     transition: all 0.1s ease-in-out;
 }
+
 .video-description.expanded-desc {
     max-height: none;
     overflow: visible;
@@ -190,7 +196,8 @@
 .video-description.expanded-desc .desc-fade-in {
     display: none;
 }
-.desc-fade-in{
+
+.desc-fade-in {
     position: absolute;
     bottom: -1rem;
     background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
@@ -199,20 +206,21 @@
     border-radius: 8px;
     border-radius: 8px;
 }
-.video-description-header{
+
+.video-description-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
 }
 
-.video-description-header p{
+.video-description-header p {
     font-size: 0.9rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
 }
 
-.see-more{
+.see-more {
     background-color: transparent;
     text-decoration: underline;
     color: rgb(216, 75, 117);
@@ -222,50 +230,51 @@
     cursor: pointer;
 }
 
-.see-more:hover{
+.see-more:hover {
     color: rgb(236, 150, 163);
     transition: all 0.2s ease-in-out;
 }
-.description{
+
+.description {
     font-size: 19px;
 }
 
-.contributors-container{
+.contributors-container {
     display: flex;
     flex-direction: column;
     margin-top: 1.35rem;
     width: 100%;
 }
 
-.contributors-holder{
+.contributors-holder {
     display: flex;
     gap: 1rem;
     align-items: center;
     width: 100%;
-    border-top: 2px solid rgb(0,0,0,0.1);
+    border-top: 2px solid rgb(0, 0, 0, 0.1);
     padding-top: 1rem;
 }
 
-.contributors-container h2{
+.contributors-container h2 {
     font-size: 1.6rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
 }
 
-.contributors-container h3{
+.contributors-container h3 {
     font-size: 1.1rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
 }
 
-.contributors-holder img{
+.contributors-holder img {
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.teacher-card{
+.teacher-card {
     flex-shrink: 0;
     display: flex;
     gap: 1rem;
@@ -281,14 +290,14 @@
     background-color: rgb(0, 0, 0, 0.05);
 }
 
-.teacher-card:hover{
+.teacher-card:hover {
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0px 0px 1px 0.5px rgba(0, 0, 0, 0.25);
     transition: all 0.2s ease-in-out;
     transform: translateX(3px) translateY(3px);
 }
 
-.teacher-card img{
+.teacher-card img {
     transition: all 0.2s ease-in-out;
 }
 
@@ -298,25 +307,28 @@
 }
 
 
-.teacher-card h4{
+.teacher-card h4 {
     font-size: 1.2rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
     line-height: 1.2rem;
-   
+
 }
 
-.teacher-holder,.contributor-list-holder{
+.teacher-holder,
+.contributor-list-holder {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     flex-shrink: 0;
 }
-.teacher-holder{
+
+.teacher-holder {
     justify-content: start;
 
 }
-.contributors-list{
+
+.contributors-list {
     flex-shrink: 0;
     height: 4rem;
     display: flex;
@@ -331,12 +343,13 @@
     transition: all 0.25s ease-in-out;
 }
 
-.contributors-list:hover{
+.contributors-list:hover {
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
     transform: translateX(3px) translateY(3px);
 }
-.inner-container{
+
+.inner-container {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -344,7 +357,7 @@
     margin-right: 1;
 }
 
-.course-holder{
+.course-holder {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -358,9 +371,9 @@
     border-radius: 8px;
 }
 
-.course-holder h3{
+.course-holder h3 {
     font-size: 1.2rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
 
     padding: 0.5rem 1rem;
     width: 100%;
@@ -369,7 +382,7 @@
 }
 
 
-.link-holder{
+.link-holder {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
@@ -379,38 +392,40 @@
     width: 100%;
     margin-top: 2rem;
 }
-.git-link{
+
+.git-link {
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(0,0,0,0.06);
+    background-color: rgb(0, 0, 0, 0.06);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     width: 100%;
     height: 6rem;
 }
 
-.link-header{
+.link-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
 }
-.link-header h3{
+
+.link-header h3 {
     font-weight: 600;
     font-size: 1.3rem;
     color: rgba(18, 18, 18, 0.9);
     margin: 0;
 }
 
-.link-header p{
+.link-header p {
     font-size: 0.9rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
 }
 
-.github-button{
+.github-button {
     display: flex;
     gap: 1rem;
     font-size: 20px;
@@ -422,12 +437,12 @@
     cursor: pointer;
 }
 
-.github-button:hover{
+.github-button:hover {
     background-color: rgb(0, 0, 0, 0.8);
     transition: all 0.2s ease-in-out;
 }
 
-.gitlab-button{
+.gitlab-button {
     display: flex;
     gap: 1rem;
     font-size: 20px;
@@ -438,43 +453,47 @@
     border: none;
     cursor: pointer;
 }
-.gitlab-button:hover{
+
+.gitlab-button:hover {
     background-color: rgb(255, 109, 65, 0.8);
     transition: all 0.2s ease-in-out;
 }
 
 
-.comment-container{
+.comment-container {
     display: flex;
     flex-direction: column;
     margin-top: 3rem;
     width: 100%;
 }
-.comment-container h3{
+
+.comment-container h3 {
     font-size: 1.6rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
 }
 
-.comment-form{
+.comment-form {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
 }
 
-.comment-form img{
+.comment-form img {
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
     object-fit: cover;
 }
-.comment-input{
+
+.comment-input {
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: end;
 }
-.comment-input input{
+
+.comment-input input {
     border: none;
     border-radius: 15px;
     padding: 0.76rem 1rem;
@@ -485,18 +504,19 @@
     transition: all 0.2s ease-in-out;
 }
 
-.comment-input input:focus{
+.comment-input input:focus {
     border: 1px solid rgba(115, 181, 219, 0.498);
     background-color: rgba(115, 144, 176, 0.116);
 
 }
 
-.comment-options{
+.comment-options {
     margin-top: 1rem;
     display: flex;
     gap: 1rem;
     justify-content: end;
 }
+
 .comment-options button {
 
     color: white;
@@ -516,12 +536,12 @@
     cursor: not-allowed;
 }
 
-.commenter{
+.commenter {
     background-color: black !important;
     cursor: pointer;
 }
 
-.commenter:hover{
+.commenter:hover {
     background-color: rgb(63, 63, 63) !important;
     transition: all 0.2s ease-in-out;
 }
@@ -530,7 +550,7 @@
     background-color: rgba(50, 50, 50, 0.9);
 }
 
-.comment-options button:first-child{
+.comment-options button:first-child {
     background-color: transparent;
     color: black;
     padding: 0.5rem 1rem;
@@ -538,7 +558,8 @@
     border: none;
     cursor: pointer;
 }
-.comment-options button{
+
+.comment-options button {
     background-color: rgba(95, 95, 95, 0.712);
     color: white;
     padding: 0.5rem 1rem;
@@ -547,19 +568,19 @@
     cursor: pointer;
 }
 
-.comment-holder{
+.comment-holder {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.9rem;
 
-    border-top: 1px solid rgb(0,0,0,0.2);
+    border-top: 1px solid rgb(0, 0, 0, 0.2);
     padding-top: 3em;
     padding-bottom: 4rem;
 }
 
 
-.comment{
+.comment {
     color: black;
     display: flex;
     flex-direction: row;
@@ -571,12 +592,19 @@
 
 }
 
-.comment-author{
+.comment-date {
+    opacity: 0.5;
+    font-size: 0.8rem;
+    color: rgb(58, 57, 57, 0.8);
+}
+
+.comment-author {
     height: 3rem;
     width: 3rem;
     object-fit: cover;
 }
-.comment img{
+
+.comment img {
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
@@ -584,43 +612,44 @@
     background-color: blue;
 }
 
-.comment-header{
+.comment-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.comment-header button i{
+.comment-header button i {
     margin: 0;
     font-size: 20px;
 }
 
-.comment-info{
+.comment-info {
     width: 95%;
     display: flex;
     flex-direction: column;
 
 }
 
-.comment-info p{
+.comment-info p {
     font-size: 0.95rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     margin: 0;
     width: 90%;
 }
 
-.comment-header button{
+.comment-header button {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
-.comment-header button:hover{
+
+.comment-header button:hover {
     color: rgb(217, 51, 51);
 }
 
-.show-replies-button{
+.show-replies-button {
     background-color: transparent;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     border: none;
@@ -628,56 +657,59 @@
     font-size: 0.9rem;
 }
 
-.comment-replies{
+.comment-replies {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding-left: 2rem;
 }
-.comment-replies img{
+
+.comment-replies img {
     height: 2.35rem;
     width: 2.35rem;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.replies-list{
+.replies-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
 }
 
-.reply-options{
+.reply-options {
     display: flex;
     gap: 1rem;
     margin-top: 0.1rem;
     align-items: center;
 }
-.reply-button{
+
+.reply-button {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     color: rgba(106, 179, 221, 0.941);
-    
+
     height: 2.5rem;
     border-radius: 10px;
 
     cursor: pointer;
 }
-.reply-button:hover{
+
+.reply-button:hover {
     opacity: 0.5;
     transition: all 0.1s ease-in-out;
 }
 
-.reply-input{
+.reply-input {
     display: flex;
     gap: 2rem;
     width: 90%;
     justify-content: center;
 }
 
-.reply-input input{
+.reply-input input {
     border: none;
     border-radius: 15px;
     padding: 0.4rem 1rem;
@@ -689,7 +721,7 @@
 
 }
 
-.submit-reply-btn{
+.submit-reply-btn {
     background-color: black;
     color: white;
     padding: 0.5rem 1rem;
@@ -699,12 +731,13 @@
     transition: all 0.2s ease-in-out;
 
 }
-.submit-reply-btn:hover{
+
+.submit-reply-btn:hover {
     background-color: rgb(63, 63, 63);
     transition: all 0.2s ease-in-out;
 }
 
-.video-suggestion-holder{
+.video-suggestion-holder {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -712,25 +745,26 @@
     height: 100rem;
 }
 
-.video-suggestion{
+.video-suggestion {
     display: flex;
-    
+
 }
-.video-suggestion img{
+
+.video-suggestion img {
     height: 7rem;
     width: 12rem;
     border-radius: 8px;
     margin-right: 1rem;
 }
 
-.video-suggestion-info{
+.video-suggestion-info {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.video-suggestion-data{
+.video-suggestion-data {
     margin-top: auto;
     margin-bottom: 0.5rem;
     display: flex;
@@ -738,21 +772,22 @@
     align-items: center;
 }
 
-.video-suggestion p, .video-suggestion h4{
+.video-suggestion p,
+.video-suggestion h4 {
     margin: 0;
 }
 
-.video-suggestion-info{
+.video-suggestion-info {
     padding-top: 0.5rem;
     line-height: 1.2rem;
 }
 
-.video-suggestion h4{
+.video-suggestion h4 {
     font-size: 1.35rem;
-    color: rgb(58, 57, 57,0.8);
+    color: rgb(58, 57, 57, 0.8);
 }
 
-.video-suggestion-data p{
+.video-suggestion-data p {
     opacity: 0.7;
 }
 
@@ -768,24 +803,28 @@
         width: 100%;
         height: auto;
     }
-    .video-options{
+
+    .video-options {
         flex-direction: column;
         gap: 1rem;
     }
 
-    .video-interaction{
+    .video-interaction {
         flex-wrap: wrap;
         gap: 1rem;
     }
-    .tag-list{
+
+    .tag-list {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    .link-header h3{
+
+    .link-header h3 {
         font-size: 1.1rem;
     }
 
-    .github-button, .gitlab-button{
+    .github-button,
+    .gitlab-button {
         width: 100%;
         height: 3rem;
         font-size: 1rem;
@@ -795,14 +834,15 @@
         max-width: 15rem;
     }
 
-    .video-interaction div p{
+    .video-interaction div p {
         display: none;
     }
 
-    .video-container{
+    .video-container {
         width: 100%;
         height: 15rem;
     }
+
     .video {
         height: 15rem !important;
     }
@@ -839,27 +879,33 @@
         padding-top: 2rem;
         gap: 1rem;
     }
-    .comment-author{
+
+    .comment-author {
         width: 5rem;
     }
-    .video-options button{
+
+    .video-options button {
         font-size: 0.9rem;
     }
-    .comment{
+
+    .comment {
         background-color: rgb(0, 0, 0, 0.1);
         padding: 0.8rem;
         border-radius: 8px;
     }
-    .contributors-holder{
+
+    .contributors-holder {
         flex-wrap: wrap;
         gap: 1rem;
         padding-left: 1rem;
     }
-    .teacher-holder{
-       width: 1;
+
+    .teacher-holder {
+        width: 1;
     }
-    .course-holder{
-        border-top: 3px solid rgb(0,0,0,0.1);
+
+    .course-holder {
+        border-top: 3px solid rgb(0, 0, 0, 0.1);
         margin-top: 1rem;
         padding-top: 1rem;
         width: 100%;
@@ -868,25 +914,26 @@
         flex-wrap: wrap;
         justify-content: space-between;
     }
-    .course-holder h3{
+
+    .course-holder h3 {
         font-size: 1.2rem;
-        color: rgb(58, 57, 57,0.8);
+        color: rgb(58, 57, 57, 0.8);
         padding: 0;
         width: auto;
     }
 
-    .replies-list .comment{
+    .replies-list .comment {
         background-color: transparent;
     }
 
-    .comment-replies{
+    .comment-replies {
         padding-left: 1rem;
         width: 100%;
         margin-left: -5rem;
         min-width: 20rem;
     }
 
-    .reply-input{
+    .reply-input {
         gap: 0.8rem;
         margin-left: -2rem;
         width: 100%;
@@ -894,7 +941,7 @@
         justify-content: center;
     }
 
-    .submit-reply-btn{
+    .submit-reply-btn {
         font-size: 0.85rem;
     }
 }

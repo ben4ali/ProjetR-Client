@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/style-publish.css";
-import { useApi } from "../hooks/useApi";
 import { User } from "../types/User";
 import default_profil from "../assets/images/default_profil.png";
+import { useCreateProject } from "../hooks/use-project";
+import { useTags } from "../hooks/use-tags";
+import { useCourses } from "../hooks/use-courses";
+import { useSearchUsers } from "../hooks/use-users";
+import { useNavigate } from "react-router-dom";
 
 export const Publish = () => {
+  const navigate = useNavigate();
   const [video, setVideo] = useState<File | null>(null);
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [titre, setTitre] = useState("");
@@ -16,45 +21,13 @@ export const Publish = () => {
   const [course, setCourse] = useState("");
   const [session, setSession] = useState("");
   const [teacher, setTeacher] = useState("");
-  const [searchResults, setSearchResults] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [availableTags, setAvailableTags] = useState([]);
-  const [availableCourses, setAvailableCourses] = useState([]);
-  const { request } = useApi();
 
-  // Fetch tags
-  const fetchTags = async () => {
-    try {
-      const response = await request("get", "http://localhost:5000/api/v1/tags");
-      setAvailableTags(response);
-    } catch (error) {
-      console.error("Error fetching tags:", error);
-    }
-  };
-
-  // Fetch courses
-  const fetchCourses = async () => {
-    try {
-      const response = await request("get", "http://localhost:5000/api/v1/courses");
-      setAvailableCourses(response);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
-
-  // Fetch contributors
-  const fetchContributors = async () => {
-    if (searchTerm.length < 3) return;
-    try {
-      const response = await request(
-        "get",
-        `http://localhost:5000/api/v1/users/name/${searchTerm}`
-      );
-      setSearchResults(response);
-    } catch (error) {
-      console.error("Error fetching contributors:", error);
-    }
-  };
+  // Utiliser React Query hooks
+  const { data: availableTags = [] } = useTags();
+  const { data: availableCourses = [] } = useCourses();
+  const { data: searchResults = [] } = useSearchUsers(searchTerm);
+  const createProjectMutation = useCreateProject();
 
   // video upload
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +56,6 @@ export const Publish = () => {
     if (!collaborators.includes(userName)) {
       setCollaborators([...collaborators, userName]);
     }
-    setSearchResults([]);
     setSearchTerm("");
   };
 
@@ -95,7 +67,6 @@ export const Publish = () => {
       if (!collaborators.includes(userName)) {
         setCollaborators([...collaborators, userName]);
       }
-      setSearchResults([]);
       setSearchTerm("");
     }
   };
@@ -121,28 +92,27 @@ export const Publish = () => {
       session,
     };
 
-    const formData = new FormData();
-    if (video) {
-      formData.append("video", video);
-    }
-    formData.append("projet", JSON.stringify(projectData));
-
-    try {
-      const response = await request("post", "http://localhost:5000/api/v1/projects", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("Project published successfully:", response);
-      window.location.href = `/watch/${response.id}`;
-    } catch (error) {
-      console.error("Error publishing project:", error);
-    } finally {
-      resetForm();
-    }
+    createProjectMutation.mutate(
+      { projectData, video },
+      {
+        onSuccess: (response) => {
+          console.log("Project published successfully:", response);
+          navigate(`/watch/${response.id}`);
+        },
+        onError: (error) => {
+          console.error("Error publishing project:", error);
+        },
+        onSettled: () => {
+          resetForm();
+        },
+      }
+    );
   };
 
   // reset fields
   const resetForm = () => {
     setVideo(null);
+    setVideoPreview(null);
     setTitre("");
     setDescription("");
     setLienGitHub("");
@@ -155,7 +125,8 @@ export const Publish = () => {
   };
 
   // form validation
-  const isFormValid = () => video && titre.trim() !== "" && description.trim() !== "";
+  const isFormValid = () =>
+    video && titre.trim() !== "" && description.trim() !== "";
 
   // validation message
   const getValidationMessage = () => {
@@ -167,16 +138,6 @@ export const Publish = () => {
       ? `Veuillez remplir les champs suivants : ${missingFields.join(", ")}`
       : "";
   };
-
-  // useffects
-  useEffect(() => {
-    fetchTags();
-    fetchCourses();
-  }, []);
-
-  useEffect(() => {
-    fetchContributors();
-  }, [searchTerm]);
 
   return (
     <div className="publish-project-container">
@@ -249,7 +210,7 @@ export const Publish = () => {
                 <option value="" disabled>
                   Sélectionner une catégorie
                 </option>
-                {availableTags.map((tag: { id: string; name: string }) => (
+                {availableTags.map((tag) => (
                   <option key={tag.id} value={tag.name}>
                     {tag.name}
                   </option>
@@ -394,13 +355,11 @@ export const Publish = () => {
                   <option value="" disabled>
                     Sélectionner un cours
                   </option>
-                  {availableCourses.map(
-                    (course: { id: string; name: string }) => (
-                      <option key={course.id} value={course.name}>
-                        {course.title}
-                      </option>
-                    )
-                  )}
+                  {availableCourses.map((course) => (
+                    <option key={course.id} value={course.title}>
+                      {course.title}
+                    </option>
+                  ))}
                   <option value="Aucun">Aucun</option>
                 </select>
                 <i className="bi bi-chevron-down"></i>
@@ -480,9 +439,11 @@ export const Publish = () => {
           <button
             type="submit"
             className={`submit-button ${!isFormValid() ? "disabled" : ""}`}
-            disabled={!isFormValid()}
+            disabled={!isFormValid() || createProjectMutation.isPending}
           >
-            Publier
+            {createProjectMutation.isPending
+              ? "Publication en cours..."
+              : "Publier"}
           </button>
         </div>
       </form>

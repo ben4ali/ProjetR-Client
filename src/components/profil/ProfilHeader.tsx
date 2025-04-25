@@ -20,7 +20,7 @@ export const ProfilHeader: React.FC<ProfilHeaderProps> = ({
   pseudo,
   user,
   banner,
-  isCurrentUser
+  isCurrentUser,
 }) => {
   const [isBannerModalOpen, setBannerModalOpen] = useState(false);
 
@@ -33,10 +33,18 @@ export const ProfilHeader: React.FC<ProfilHeaderProps> = ({
         className={`profil-banner ${isCurrentUser ? "banner-effect" : ""}`}
         onClick={isCurrentUser ? handleOpenBannerModal : undefined}
       >
-        <img src={banner || defaultBanner} alt="Profile banner" crossOrigin="anonymous" />
+        <img
+          src={`${banner || defaultBanner}?t=${new Date().getTime()}`}
+          alt="Profile banner"
+          crossOrigin="anonymous"
+        />
       </div>
       <ProfilPicture user={user} isCurrentUser={isCurrentUser} />
-      <ProfilContent firstName={firstName} lastName={lastName} pseudo={pseudo} />
+      <ProfilContent
+        firstName={firstName}
+        lastName={lastName}
+        pseudo={pseudo}
+      />
       <ChangeBannerModal
         currentBanner={banner || defaultBanner}
         isOpen={isBannerModalOpen}

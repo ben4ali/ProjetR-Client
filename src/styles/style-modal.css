@@ -1,5 +1,6 @@
 /* ---------------------CHANGE PFP MODAL--------------------- */
-.pfp-modal-overlay, .banner-modal-overlay {
+.pfp-modal-overlay,
+.banner-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +14,8 @@
     z-index: 1000;
 }
 
-.pfp-modal-content, .banner-modal-content {
+.pfp-modal-content,
+.banner-modal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +29,8 @@
     text-align: center;
 }
 
-.pfp-modal-input-holder, .banner-modal-input-holder {
+.pfp-modal-input-holder,
+.banner-modal-input-holder {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -35,7 +38,9 @@
     width: 75%;
     height: 15rem;
 }
-.pfp-modal-input-holder input, .banner-modal-input-holder input {
+
+.pfp-modal-input-holder input,
+.banner-modal-input-holder input {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -52,7 +57,8 @@
 }
 
 
-.oldPfp, .newPfp{
+.oldPfp,
+.newPfp {
     height: 14vh;
     width: 14vh;
     border-radius: 50%;
@@ -66,12 +72,12 @@
     z-index: 1;
 }
 
-.newPfp{
+.newPfp {
     opacity: 0;
 }
 
 
-#arrow{
+#arrow {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -84,27 +90,32 @@
     justify-content: center;
     align-items: center;
 }
-.pfp-modal-input-holder img{
+
+.pfp-modal-input-holder img {
     height: 100%;
     width: 100%;
     background-color: rgb(167, 167, 167);
     object-fit: cover;
 }
-.pfp-modal-content h2, .banner-modal-content h2 {
+
+.pfp-modal-content h2,
+.banner-modal-content h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
     color: #333;
 }
 
-.pfp-modal-actions, .banner-modal-actions {
+.pfp-modal-actions,
+.banner-modal-actions {
     margin-top: auto;
     display: flex;
     justify-content: space-around;
     gap: 2rem;
-  
+
 }
 
-.pfp-modal-actions button, .banner-modal-actions button {
+.pfp-modal-actions button,
+.banner-modal-actions button {
     padding: 0.5rem 1rem;
     min-width: 10rem;
     border: none;
@@ -114,27 +125,30 @@
     background: #e1e0e0;
 }
 
-.pfp-modal-actions button:disabled, .banner-modal-actions button:disabled {
+.pfp-modal-actions button:disabled,
+.banner-modal-actions button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.pfp-modal-actions button:disabled:hover, .banner-modal-actions button:disabled:hover {
+.pfp-modal-actions button:disabled:hover,
+.banner-modal-actions button:disabled:hover {
     background: #e1e0e0;
 }
 
-.pfp-modal-actions button:hover, .banner-modal-actions button:hover {
+.pfp-modal-actions button:hover,
+.banner-modal-actions button:hover {
     background: #a9a9a9;
 }
 
 /* ----------------------CHANGE BANNER MODAL--------------------- */
-.oldBanner{
+.oldBanner {
     height: 20vh;
     width: 100%;
     border-radius: 10px;
 }
 
-.oldBanner img{
+.oldBanner img {
     height: 100%;
     width: 100%;
     border-radius: 10px;
@@ -142,15 +156,15 @@
     overflow: hidden;
 }
 
-.banner-modal-input-holder{
+.banner-modal-input-holder {
     border: 3px dashed rgb(168, 185, 201);
     width: 90%;
     border-radius: 10px;
     transition: var(--default-transition-duration);
 }
 
-.banner-modal-input-holder:hover{
+.banner-modal-input-holder:hover {
     border: 3px dashed rgb(122, 169, 214);
-   filter: brightness(1.2);
+    filter: brightness(1.2);
 
 }

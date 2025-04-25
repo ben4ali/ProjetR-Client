@@ -1,25 +1,22 @@
 import React, { useState } from "react";
 import "../../styles/style-modal.css";
 import gsap from "gsap";
-import { useApi } from "../../hooks/useApi";
+import { useChangePfp } from "../../hooks/use-users";
 
 interface ChangeProfilePictureModalProps {
   currentPfp?: string;
   isOpen: boolean;
   onClose: () => void;
-  userId: string; // Add userId to identify the user
+  userId: string;
 }
 
-export const ChangeProfilePictureModal: React.FC<ChangeProfilePictureModalProps> = ({
-  currentPfp,
-  isOpen,
-  onClose,
-  userId,
-}) => {
+export const ChangeProfilePictureModal: React.FC<
+  ChangeProfilePictureModalProps
+> = ({ currentPfp, isOpen, onClose, userId }) => {
   const [isPicked, setIsPicked] = useState(false);
   const [newPfpUrl, setNewPfpUrl] = useState<string | null>(null);
   const [newPfpFile, setNewPfpFile] = useState<File | null>(null);
-  const { request, isLoading } = useApi();
+  const changePfpMutation = useChangePfp();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPfp = event.target.files?.[0];
@@ -32,8 +29,12 @@ export const ChangeProfilePictureModal: React.FC<ChangeProfilePictureModalProps>
         setNewPfpUrl(reader.result as string);
 
         setTimeout(() => {
-          const newPfpImg = document.querySelector(".newPfp") as HTMLImageElement;
-          const oldPfpImg = document.querySelector(".oldPfp") as HTMLImageElement;
+          const newPfpImg = document.querySelector(
+            ".newPfp"
+          ) as HTMLImageElement;
+          const oldPfpImg = document.querySelector(
+            ".oldPfp"
+          ) as HTMLImageElement;
 
           if (newPfpImg && oldPfpImg) {
             gsap.to(oldPfpImg, {
@@ -58,22 +59,21 @@ export const ChangeProfilePictureModal: React.FC<ChangeProfilePictureModalProps>
 
   const handleOnConfirm = async () => {
     if (!newPfpFile) return;
-  
-    try {
-      const formData = new FormData();
-      formData.append("avatar", newPfpFile);
-  
-      await request("put", `http://localhost:5000/api/v1/users/${userId}/avatar`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+
+    changePfpMutation.mutate(
+      { userId, file: newPfpFile },
+      {
+        onSuccess: () => {
+          onClose();
         },
-      });
-  
-      onClose();
-      window.location.reload();
-    } catch (error) {
-      console.error("Erreur lors de la mise à jour de la photo de profil :", error);
-    }
+        onError: (error) => {
+          console.error(
+            "Erreur lors de la mise à jour de la photo de profil :",
+            error
+          );
+        },
+      }
+    );
   };
 
   const handleOnClose = () => {
@@ -91,19 +91,21 @@ export const ChangeProfilePictureModal: React.FC<ChangeProfilePictureModalProps>
         <h2>Changer la photo de profil</h2>
         <div className="pfp-modal-input-holder">
           <div className="oldPfp">
-            <img src={currentPfp} alt="Old Profile"  crossOrigin="anonymous"/>
+            <img src={currentPfp} alt="Old Profile" crossOrigin="anonymous" />
           </div>
           <i id="arrow" className="bi bi-arrow-right-short"></i>
           <div className="newPfp">
-            <img src={newPfpUrl || "https://via.placeholder.com/150"} crossOrigin="anonymous" alt="New Profile" />
+            <img
+              src={newPfpUrl || "https://via.placeholder.com/150"}
+              crossOrigin="anonymous"
+              alt="New Profile"
+            />
           </div>
           <input type="file" accept="image/*" onChange={handleFileChange} />
         </div>
 
         <div className="pfp-modal-actions">
-          <button onClick={handleOnConfirm} disabled={!isPicked || isLoading}>
-            {isLoading ? "En cours..." : "Confirmer"}
-          </button>
+          <button onClick={handleOnConfirm}>Confirmer</button>
           <button onClick={handleOnClose}>Annuler</button>
         </div>
       </div>

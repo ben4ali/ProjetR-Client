@@ -24,8 +24,8 @@ const images = [
 
 export const BackgroundCarousel = () => {
   const visibleImages = images.slice(0, 8);
-  const duplicatedImages = [...visibleImages, ...visibleImages]; 
-  
+  const duplicatedImages = [...visibleImages, ...visibleImages];
+
   return (
     <div className="path-container">
       <div className="top-path">

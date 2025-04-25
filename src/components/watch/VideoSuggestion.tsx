@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import { Projet } from "../../types/Projet";
 
 interface VideoSuggestionProps {
-  projet : Projet | null;
+  projet: Projet | null;
 }
 
-export const VideoSuggestion = (
-  { projet }: VideoSuggestionProps
-) => {
+export const VideoSuggestion = ({ projet }: VideoSuggestionProps) => {
   return (
     <div className="video-suggestion-holder">
       <Link to="/watch/1" className="video-suggestion">

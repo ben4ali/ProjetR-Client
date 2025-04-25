@@ -1,13 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Projet } from "../../types/Projet";
 
 interface VideoDescriptionProps {
-  projet : Projet | null;
+  projet: Projet | null;
 }
 
-export const VideoDescription = (
-  { projet }: VideoDescriptionProps
-) => {
+export const VideoDescription = ({ projet }: VideoDescriptionProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const description = projet?.description || "Aucune description disponible.";
   const toggleDescription = () => {

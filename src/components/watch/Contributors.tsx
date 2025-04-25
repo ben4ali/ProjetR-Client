@@ -1,11 +1,8 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { Projet } from "../../types/Projet";
 import default_profil from "../../assets/images/default_profil.png";
-
-import { useApi } from "../../hooks/useApi";
+import { useUserByFullName } from "../../hooks/use-users";
 
 interface ContributorsProps {
   projet: Projet | null;
@@ -18,53 +15,82 @@ interface ContributorItem {
 }
 
 export const Contributors = ({ projet }: ContributorsProps) => {
-  const [contributors, setContributors] = useState<ContributorItem[]>([]);
-  const { request } = useApi<unknown[]>();
+  const [contributorItems, setContributorItems] = useState<ContributorItem[]>(
+    []
+  );
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentContributor, setCurrentContributor] = useState<{
+    firstName: string;
+    lastName: string;
+  } | null>(null);
+
+  const collaborators = useMemo(() => {
+    return projet?.collaborators || [];
+  }, [projet?.collaborators]);
+
+  const { data: userData, isSuccess } = useUserByFullName(
+    currentContributor?.firstName,
+    currentContributor?.lastName
+  );
 
   useEffect(() => {
-    const fetchContributors = async () => {
-      if (projet?.collaborators) {
+    if (collaborators.length > 0) {
+      setContributorItems([]);
+      setCurrentIndex(0);
 
-        const contributorPromises = projet.collaborators.map(async (contributor) => {
-          const [contributorFirstName, contributorLastName] = contributor.split(" ");
-
-          try {
-            console.log(`Fetching contributor: ${contributorFirstName} ${contributorLastName}`);
-            const data = await request(
-              "get",
-              `http://localhost:5000/api/v1/users/name/${contributorFirstName}/${contributorLastName}`
-            );
-
-            if (data && data.length > 0) {
-              const user = data[0];
-              return {
-                id: user.id,
-                name: `${user.firstName} ${user.lastName}`,
-                image: user.avatar || default_profil,
-              } as ContributorItem;
-            } else {
-                return {
-                  id: -projet.collaborators.indexOf(contributor) - 1,
-                  name: `${contributorFirstName} ${contributorLastName}`,
-                  image: default_profil,
-                } as ContributorItem;
-            }
-          } catch (error) {
-            console.error("Error fetching contributor data:", error);
-          }
-          return null;
-        });
-
-        const contributorsData = await Promise.all(contributorPromises);
-        const filteredContributors = contributorsData.filter((contributor) => contributor !== null) as ContributorItem[];
-        setContributors(filteredContributors);
-      } else {
-        console.log("No contributors to fetch.");
+      if (collaborators[0]) {
+        const [firstName, lastName] = collaborators[0].split(" ");
+        if (firstName && lastName) {
+          setCurrentContributor({ firstName, lastName });
+        }
       }
-    };
+    }
+  }, [collaborators]);
 
-    fetchContributors();
-  }, [projet]);
+  useEffect(() => {
+    if (
+      isSuccess &&
+      currentContributor &&
+      currentIndex < collaborators.length
+    ) {
+      const fullName = `${currentContributor.firstName} ${currentContributor.lastName}`;
+
+      if (userData && userData.length > 0) {
+        const user = userData[0];
+        setContributorItems((prev) => [
+          ...prev,
+          {
+            id: user.id,
+            name: fullName,
+            image: user.avatar || default_profil,
+          },
+        ]);
+      } else {
+        setContributorItems((prev) => [
+          ...prev,
+          {
+            id: -(currentIndex + 1),
+            name: fullName,
+            image: default_profil,
+          },
+        ]);
+      }
+
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+
+      if (nextIndex < collaborators.length) {
+        const [firstName, lastName] = collaborators[nextIndex].split(" ");
+        if (firstName && lastName) {
+          setCurrentContributor({ firstName, lastName });
+        } else {
+          setCurrentContributor(null);
+        }
+      } else {
+        setCurrentContributor(null);
+      }
+    }
+  }, [userData, isSuccess, currentContributor, currentIndex, collaborators]);
 
   return (
     <div className="contributors-container">
@@ -79,16 +105,17 @@ export const Contributors = ({ projet }: ContributorsProps) => {
           </div>
         )}
 
-        {contributors.length > 0 && (
+        {contributorItems.length > 0 && (
           <div className="contributor-list-holder">
-            <h3>({contributors.length}) Contributeurs</h3>
+            <h3>({contributorItems.length}) Contributeurs</h3>
             <div className="contributors-list">
               <div className="inner-container">
-                <AnimatedTooltip items={contributors} />
+                <AnimatedTooltip items={contributorItems} />
               </div>
             </div>
           </div>
         )}
+
         {projet && (
           <div className="course-holder">
             <h3>{projet?.course ?? ""}</h3>

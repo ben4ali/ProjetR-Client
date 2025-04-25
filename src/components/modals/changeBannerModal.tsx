@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/style-modal.css";
-import { useApi } from "../../hooks/useApi";
-
+import { useChangeBanner } from "../../hooks/use-users";
 interface ChangeBannerModalProps {
   currentBanner?: string;
   isOpen: boolean;
@@ -18,7 +17,8 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
   const [isPicked, setIsPicked] = useState(false);
   const [newBannerUrl, setNewBannerUrl] = useState<string | null>(currentBanner || null);
   const [newBannerFile, setNewBannerFile] = useState<File | null>(null);
-  const { request, isLoading } = useApi();
+  const changeBannerMutation = useChangeBanner();
+
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newBanner = event.target.files?.[0];
@@ -37,21 +37,17 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
 
   const handleOnConfirm = async () => {
     if (!newBannerFile) return;
-
-    try {
-      const formData = new FormData();
-      formData.append("banner", newBannerFile);
-
-      await request("put", `http://localhost:5000/api/v1/users/${userId}/banner`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+    changeBannerMutation.mutate(
+      { userId, file: newBannerFile },
+      {
+        onSuccess: () => {
+          onClose();
         },
-      });
-      onClose();
-      window.location.reload();
-    } catch (error) {
-      console.error("Erreur lors de la mise à jour de la bannière :", error);
-    }
+        onError: (error) => {
+          console.error("Erreur lors de la mise à jour de la bannière :", error);
+        },
+      }
+    );
   };
 
   const handleOnClose = () => {
@@ -74,8 +70,8 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
         </div>
 
         <div className="banner-modal-actions">
-          <button onClick={handleOnConfirm} disabled={!isPicked || isLoading}>
-            {isLoading ? "En cours..." : "Confirmer"}
+          <button onClick={handleOnConfirm}>
+            Confirmer
           </button>
           <button onClick={handleOnClose}>Annuler</button>
         </div>

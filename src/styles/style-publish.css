@@ -35,20 +35,21 @@
     padding-block: 1rem 2rem;
     border-radius: 8px;
 }
-.label-group{
+
+.label-group {
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
 }
 
-.label-group i{
+.label-group i {
     font-size: 1.2rem;
     color: #555;
     cursor: pointer;
 }
 
-.label-group i:hover{
+.label-group i:hover {
     color: #007bff;
 }
 
@@ -87,16 +88,16 @@
     position: relative;
 }
 
-.tags-publish{
+.tags-publish {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.5rem;
 }
 
-.tag-publish{
+.tag-publish {
     background-color: #0d0d0e;
-    color: #ffffff ;
+    color: #ffffff;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
     font-size: 0.5rem;
@@ -106,22 +107,23 @@
     gap: 1rem;
 }
 
-.tag-publish p{
+.tag-publish p {
     font-size: 0.8rem;
     color: #e5e5e6;
     font-weight: 500;
     margin: 0;
 }
 
-.tag-publish i{
+.tag-publish i {
     opacity: 0.8;
     font-size: 0.8rem;
     color: #ffffff;
     cursor: pointer;
 }
-.tag-publish:hover{
+
+.tag-publish:hover {
     background-color: #282828;
-    color: #ffffff ;
+    color: #ffffff;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
     font-size: 0.5rem;
@@ -132,14 +134,14 @@
     cursor: pointer;
 }
 
-.select-group{
+.select-group {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.select-group i{
+.select-group i {
     position: absolute;
     top: 52%;
     right: 1rem;
@@ -166,16 +168,16 @@
     height: fit-content;
 }
 
-.search-input-group-publish{
+.search-input-group-publish {
     width: 100%;
     position: relative;
 }
 
-.search-input-group-publish input{
+.search-input-group-publish input {
     z-index: 1;
 }
 
-.search-input-group-publish button{
+.search-input-group-publish button {
     position: absolute;
     top: 50%;
     right: 0.1rem;
@@ -189,17 +191,17 @@
     height: 3rem;
 }
 
-.search-input-group-publish button:hover{
+.search-input-group-publish button:hover {
     color: #007bff;
     background-color: #f7f7f7;
 }
 
-.searchInput-publish{
+.searchInput-publish {
     position: relative;
     width: 100%;
 }
 
-.search-results-publish{
+.search-results-publish {
     position: absolute;
     top: 100%;
     left: 0;
@@ -215,10 +217,11 @@
     flex-direction: column;
 
 }
-.search-result-item-publish{
+
+.search-result-item-publish {
     padding-block: 1rem;
     padding-inline: 1rem;
- 
+
     border-bottom: 1px solid #ccc;
     cursor: pointer;
     transition: var(--default-transition);
@@ -226,7 +229,7 @@
     align-items: center;
 }
 
-.search-result-item-publish img{
+.search-result-item-publish img {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -236,8 +239,8 @@
     overflow: hidden;
 }
 
-.search-result-item-publish:hover{
-    background-color: rgb(15, 15, 15,0.25);
+.search-result-item-publish:hover {
+    background-color: rgb(15, 15, 15, 0.25);
 }
 
 .collaborator-publish {
@@ -251,9 +254,9 @@
     gap: 1rem;
 }
 
-.collaborator-publish:hover{
+.collaborator-publish:hover {
     background-color: #3e90e8bd;
-    color: #ffffff ;
+    color: #ffffff;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
     font-size: 0.5rem;
@@ -278,7 +281,7 @@
     cursor: pointer;
 }
 
-.video-container-publish{
+.video-container-publish {
     height: 25rem;
     width: 100%;
     gap: 1rem;
@@ -292,18 +295,18 @@
 
 .videoUpload {
     width: 100%;
-    background-color: rgb(15, 15, 15,0.15);
+    background-color: rgb(15, 15, 15, 0.15);
     border: 3px dashed #9b9c9e;
     border-radius: 8px;
     transition: var(--default-transition);
     cursor: pointer;
 }
 
-.videoUpload:hover{
-    background-color: rgb(15, 15, 15,0.25);
+.videoUpload:hover {
+    background-color: rgb(15, 15, 15, 0.25);
 }
 
-#uploadlabel{
+#uploadlabel {
     font-size: 1.2rem;
     color: #74767c;
     font-weight: 600;
@@ -311,7 +314,7 @@
 
 }
 
-.holder-upload{
+.holder-upload {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,14 +328,15 @@
 .videoUpload input {
     cursor: pointer;
     opacity: 0;
-    position: absolute;	
+    position: absolute;
     outline: none;
     border: none;
     width: 100%;
     height: 100%;
- 
+
 }
-.upload-box{
+
+.upload-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -342,6 +346,7 @@
     font-size: 1.1rem;
 
 }
+
 .video-preview {
     position: absolute;
     width: 100%;
@@ -379,10 +384,12 @@
     color: #555;
     margin-bottom: 0.5rem;
 }
-.form-group span{
+
+.form-group span {
     font-size: 1.2rem;
     color: #f35844;
 }
+
 .form-group input,
 .form-group textarea {
     padding: 0.75rem;
@@ -398,7 +405,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: #007bff;
-    background-color: rgb(51, 130, 233,0.1);
+    background-color: rgb(51, 130, 233, 0.1);
 }
 
 textarea {
@@ -426,23 +433,23 @@ textarea {
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 100%;
-  }
-  
-  .submit-button:hover {
+}
+
+.submit-button:hover {
     background-color: #0056b3;
-  }
-  
-  .submit-button.disabled {
+}
+
+.submit-button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
-  }
-  
-  .validation-message {
+}
+
+.validation-message {
     text-align: center;
     color: red;
     font-size: 0.9rem;
     margin-block: 1rem;
-  }
+}
 
 @media (max-width: 1080px) {
     .publish-project-container {
@@ -499,6 +506,7 @@ textarea {
         font-size: 0.9rem;
         padding: 0.5rem 1rem;
     }
+
     .shared-form-group {
         flex-direction: column;
     }

@@ -1,50 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CommentComponent } from "./CommentComponent";
-import { useAuth } from "../../hooks/useAuth";
+import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
 import { Comment } from "../../types/Comment";
-import {useApi} from "../../hooks/useApi";
 import { Projet } from "../../types/Projet";
+import {
+  useCommentsByProject,
+  useCreateComment,
+} from "../../hooks/use-comments";
 
 interface CommentSectionProps {
-  projet : Projet | null;
+  projet: Projet;
 }
 
-export const CommentSection = (
-  { projet }: CommentSectionProps
-) => {
-  const { isLoggedIn, user } = useAuth();
+export const CommentSection = ({ projet }: CommentSectionProps) => {
+  const loggedIn = isLoggedIn();
+  const { data: user } = useCurrentUser();
+
   const [commentText, setCommentText] = useState("");
-
-  const [comments, setComments] = useState<Comment[]>([]);
-  const { request } = useApi<Comment[]>();
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      if (projet) {
-        try {
-          const data = await request(
-            "get",
-            `http://localhost:5000/api/v1/comments/projet/${projet.id}`
-          );
-          setComments(data.filter(comment => !comment.parentComment));
-        } catch (error) {
-          console.error("Error fetching comments:", error);
-        }
-      }
-    }
-
-    fetchComments();
-  }, []);
-
-  // const comments = [
-  //   { author: "Ali Benkarrouch", text: "Super vidéo !" },
-  //   { author: "John Doe", text: "Merci pour le partage !" },
-  //   { author: "Jane Smith", text: "Très intéressant, merci !" },
-  // ];
-
-
-
-  
+  const {
+    data: allComments = [],
+    isLoading,
+    error,
+  } = useCommentsByProject(projet?.id);
+  const comments = allComments.filter((comment) => !comment.parentComment);
+  const createCommentMutation = useCreateComment();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentText(e.target.value);
@@ -52,36 +31,38 @@ export const CommentSection = (
 
   const handleComment = () => {
     if (projet?.id && commentText.trim()) {
-      const postComment = async () => {
-        try {
-          const newComment = await request(
-            "post",
-            `http://localhost:5000/api/v1/comments`,
-            {
-              projetId: projet.id,
-              text: commentText.trim(),
-            }
-          );
-          setComments((prevComments) => [...prevComments, newComment]);
-          setCommentText("");
-        } catch (error) {
-          console.error("Erreur lors de la création du commentaire :", error);
+      createCommentMutation.mutate(
+        {
+          projetId: projet.id,
+          text: commentText.trim(),
+        },
+        {
+          onSuccess: () => {
+            setCommentText("");
+          },
+          onError: (error) => {
+            console.error("Erreur lors de la création du commentaire :", error);
+          },
         }
-      };
-  
-      postComment();
-    } else {
-      console.error("L'ID du projet est manquant ou le texte du commentaire est vide.");
+      );
     }
   };
+
+  if (isLoading) return <div>Chargement des commentaires...</div>;
+  if (error)
+    return (
+      <div>Erreur lors du chargement des commentaires: {error.message}</div>
+    );
 
   return (
     <div className="comment-container">
       <h3>{comments.length} commentaires</h3>
-      {isLoggedIn && (
+      {loggedIn && (
         <div className="comment-form">
           <img
-            src={user?.avatar || "https://robohash.org/default.png"}
+            src={`${
+              user?.avatar || "https://robohash.org/default.png"
+            }?t=${new Date().getTime()}`}
             alt="Auteur du commentaire"
             crossOrigin="anonymous"
           />
@@ -94,21 +75,29 @@ export const CommentSection = (
             />
             <div className="comment-options">
               <button onClick={() => setCommentText("")}>Annuler</button>
-                <button
+              <button
                 className={commentText.trim() ? "commenter" : ""}
                 onClick={handleComment}
-                disabled={!commentText.trim()}
-                >
-                Commenter
-                </button>
+                disabled={
+                  !commentText.trim() || createCommentMutation.isPending
+                }
+              >
+                {createCommentMutation.isPending ? "En cours..." : "Commenter"}
+              </button>
             </div>
           </div>
         </div>
       )}
 
       <div className="comment-holder">
-        {comments.map((comment, index) => (
-          <CommentComponent key={index} comment={comment} />
+        {comments.map((comment) => (
+          <CommentComponent
+            key={comment.id}
+            comment={comment}
+            allComments={allComments}
+            projetId={projet.id}
+            parentComment={null}
+          />
         ))}
       </div>
     </div>

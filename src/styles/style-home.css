@@ -1,20 +1,20 @@
-.home-container{
+.home-container {
     overflow: hidden;
 }
 
 /* ----------------------**HERO SECTION**---------------------- */
-#hero-section{
-  background: rgb(0, 0, 0);
+#hero-section {
+    background: rgb(0, 0, 0);
     /* background: linear-gradient(-130deg, rgb(123, 137, 148) 0%, rgb(198, 206, 220) 35%, rgb(89, 94, 98) 100%); */
 }
 
-.hero-logo{
+.hero-logo {
     height: 20rem;
     width: 20rem;
     flex-shrink: 0;
 }
 
-.hero-text-holder{
+.hero-text-holder {
     position: absolute;
     left: 5%;
     top: 15%;
@@ -22,7 +22,7 @@
     flex-direction: row;
 }
 
-.main-text{
+.main-text {
     flex-shrink: 0;
     align-items: center;
     display: flex;
@@ -34,7 +34,7 @@
     color: var(--primary-text-color);
 }
 
-.main-text h1{
+.main-text h1 {
     font-size: 140px;
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -42,7 +42,7 @@
     height: 10rem;
 }
 
-.hero-text-holder p{
+.hero-text-holder p {
     padding-top: 0.5rem;
     /* border-top: 2px solid var(--primary-text-color); */
     margin: 0;
@@ -50,8 +50,9 @@
     font-size: 25px;
     margin-left: 0.5rem;
 }
-.shinyBtn-start{
-    font-size:1.5rem;
+
+.shinyBtn-start {
+    font-size: 1.5rem;
     border: 1px solid rgb(68, 66, 66);
     padding: 1rem 2rem;
     outline: none;
@@ -59,20 +60,21 @@
     margin-top: 0.5rem;
 }
 
-.shinyBtn-start:hover{
-    background-color: rgb(68, 66, 66,0.2);
+.shinyBtn-start:hover {
+    background-color: rgb(68, 66, 66, 0.2);
     color: white;
 }
 
-.back-thumbnail{
+.back-thumbnail {
     flex-shrink: 0;
     width: 35rem;
     height: 18rem;
     overflow: hidden;
     border-radius: 5px;
-   
+
 }
-.back-thumbnail img{
+
+.back-thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -80,14 +82,14 @@
 
 /* ----------------------**ABOUT SECTION**---------------------- */
 
-#about-section{
+#about-section {
 
     background-color: white;
     padding-block: 10%;
     width: 100vw;
 }
 
-.about-content{
+.about-content {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -96,20 +98,20 @@
 
 }
 
-.about-content h2{
+.about-content h2 {
     font-size: 55px;
     color: var(--text-color);
     width: 90%;
     text-align: left;
 }
 
-.classCardHolder{
+.classCardHolder {
     display: flex;
     gap: 2rem;
     align-items: center;
 }
 
-.classCard{
+.classCard {
     height: 30rem;
     width: 22rem;
     border-radius: 10px;
@@ -117,18 +119,19 @@
     position: relative;
 }
 
-.classCard-img{
+.classCard-img {
     position: absolute;
     width: 100%;
     height: 100%;
 }
-.classCard-img img{
+
+.classCard-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.classCard-content{
+.classCard-content {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -138,17 +141,17 @@
     font-size: 25px;
 }
 
-.classCard-overlay{
+.classCard-overlay {
     position: absolute;
     z-index: 2;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 /* ----------------------**PRESENATIOn SECTION**---------------------- */
 
-#presentation-section{
+#presentation-section {
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -156,7 +159,7 @@
     padding-block: 10%;
 }
 
-.presentation-container{
+.presentation-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,21 +167,23 @@
     gap: 2rem;
     width: 100%;
 }
-.video-presentation{
+
+.video-presentation {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2rem;
     width: 100%;
 }
-.video-container-presentation{
+
+.video-container-presentation {
     height: 35rem;
     width: 55rem;
     border-radius: 12px;
     overflow: hidden;
 }
 
-.video-container-presentation video{
+.video-container-presentation video {
     width: 150%;
 
     object-fit: contain;
@@ -187,14 +192,14 @@
 }
 
 
-.comment-container-presentation{
+.comment-container-presentation {
     overflow: hidden;
     width: 30%;
     height: 35rem;
 
 }
 
-.comments-holder-presentation{
+.comments-holder-presentation {
     margin-top: 2rem;
     width: 100%;
     height: 35rem;
@@ -206,7 +211,7 @@
     gap: 1rem;
 }
 
-.comment-presentation{
+.comment-presentation {
     flex-shrink: 0;
     color: var(--contrast-text-color);
     display: flex;
@@ -214,18 +219,19 @@
     justify-content: center;
     border-radius: 5px;
     padding-inline: 1rem;
-    height:5rem;
-    border: 1px solid rgb(255,255,255,0.25);
+    height: 5rem;
+    border: 1px solid rgb(255, 255, 255, 0.25);
 }
 
-.user{
+.user {
     opacity: 0.85;
     font-weight: 600;
     display: flex;
     gap: 0.2rem;
     align-items: center;
 }
-.features-holder{
+
+.features-holder {
     display: flex;
 
     gap: 2rem;
@@ -237,23 +243,25 @@
     margin-top: 5rem;
 }
 
-.spotlight-holder{
+.spotlight-holder {
     height: 21rem;
     width: 21rem;
-    color: rgb(255,255,255,0.8)
+    color: rgb(255, 255, 255, 0.8)
 }
 
-.spotlight-holder h5{
+.spotlight-holder h5 {
     font-size: 23px;
     font-weight: 500;
     letter-spacing: 1px;
 }
-.spotlight-holder i{
+
+.spotlight-holder i {
     font-size: 2.5rem;
 }
+
 /* ----------------------**MEMBER SECTION**---------------------- */
 
-#membres-section{
+#membres-section {
     background-color: white;
     width: 100vw;
     display: flex;
@@ -262,21 +270,23 @@
     position: relative;
 }
 
-.squareBackground{
+.squareBackground {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgb(255, 255, 255);
     opacity: 0.5;
-    z-index:0;
+    z-index: 0;
 }
-.membres-holder{
+
+.membres-holder {
     height: fit-content;
     position: relative;
     width: 100%;
     height: 60rem;
 }
-.membres-carousel{
+
+.membres-carousel {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -284,32 +294,32 @@
 
 }
 
-#titleSection{
+#titleSection {
     align-items: center;
     justify-content: center;
     display: flex;
     gap: 1rem;
     margin-top: 5%;
-   text-align: center;
-   font-size: 3rem;
+    text-align: center;
+    font-size: 3rem;
 }
 
 
 
 /* ----------------------**START SECTION**---------------------- */
 
-#start-section{
+#start-section {
     background-color: black;
     height: 30rem;
 }
 
-.start-container{
+.start-container {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.start-container h2{
+.start-container h2 {
     top: 30%;
     left: 50%;
     width: 100%;
@@ -323,7 +333,7 @@
     margin-top: 5rem;
 }
 
-.start-container a{
+.start-container a {
     position: absolute;
     top: 75%;
     left: 50%;
@@ -339,7 +349,7 @@
     border: 1px solid white;
 }
 
-.start-container a:hover{
+.start-container a:hover {
     background-color: rgb(255, 255, 255, 0);
     color: rgb(255, 255, 255);
 }

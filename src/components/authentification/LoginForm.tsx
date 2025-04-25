@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useApi } from "../../hooks/useApi";
+import { useLogin, useGoogleLogin } from "../../hooks/use-auth";
 
 interface LoginFormProps {
   toggleForm: () => void;
@@ -8,19 +8,23 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { data, error, isLoading, request } = useApi<{ message: string; user: any }>();
+  const loginMutation = useLogin();
+  const googleLoginMutation = useGoogleLogin();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    try {
-      const response = await request("post", "http://localhost:5000/api/v1/auth/login", { email, password });
-      console.log("Utilisateur connecté :", response.user);
-      localStorage.setItem("token", response.token);
-      window.location.href = "/explore";
-    } catch (err) {
-      console.error("Erreur lors de la connexion :", error);
-    }
+    loginMutation.mutate(
+      { email, password },
+      {
+        onSuccess: (response) => {
+          localStorage.setItem("token", response.token);
+          window.location.href = "/explore";
+        },
+        onError: (err: any) => {
+          // Optionally handle error
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -30,16 +34,21 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     }
 
     (window as any).google.accounts.id.initialize({
-      client_id: "607899403583-if4ui37ar583m5nvbmi328b76u0d8g1f.apps.googleusercontent.com",
-      callback: async (response: any) => {
-        try {
-          const apiResponse = await request("post", "http://localhost:5000/api/v1/auth/google-login", { idToken: response.credential });
-          localStorage.setItem("token", apiResponse.token); // Stocke le token
-          console.log("Utilisateur connecté :", apiResponse.user);
-          window.location.href = "/explore";
-        } catch (err) {
-          console.error("Erreur lors de la connexion avec Google :", error);
-        }
+      client_id:
+        "607899403583-if4ui37ar583m5nvbmi328b76u0d8g1f.apps.googleusercontent.com",
+      callback: (response: any) => {
+        googleLoginMutation.mutate(
+          { idToken: response.credential },
+          {
+            onSuccess: (apiResponse) => {
+              localStorage.setItem("token", apiResponse.token);
+              window.location.href = "/explore";
+            },
+            onError: (err: any) => {
+              console.error("Erreur lors de la connexion avec Google :", err);
+            },
+          }
+        );
       },
     });
 
@@ -80,11 +89,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
             />
           </div>
 
-          {error && <p className="error-message-valdiation">{error}</p>}
+          {loginMutation.error && (
+            <p className="error-message-valdiation">
+              {(loginMutation.error as any)?.response?.data?.message ||
+                "Erreur de connexion"}
+            </p>
+          )}
 
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Connexion..." : "Connexion"}
-          </button>
+          <button type="submit">Connexion</button>
         </form>
       </div>
       <div className="form-footer">
@@ -92,7 +104,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <h5>Services externes</h5>
         </div>
         <div className="link-holders">
-          <div id="google-signin-button"></div> {/* Google Sign-In button */}
+          <div id="google-signin-button"></div>
         </div>
         <div className="register-link">
           <h5>

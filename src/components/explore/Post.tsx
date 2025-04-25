@@ -32,7 +32,9 @@ export const Post = ({
         <div className="post-info">
           <h2>{title}</h2>
           <p>{author}</p>
-          <p>{views} Visionnements - {date}</p>
+          <p>
+            {views} Visionnements - {date}
+          </p>
         </div>
       </div>
     </Link>

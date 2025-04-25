@@ -144,6 +144,7 @@
     box-shadow: 5px 5px 10px 5px rgb(0, 0, 0, 0.2);
     align-items: center;
 }
+
 .form-wrapper {
     position: relative;
     z-index: 5;
@@ -151,6 +152,7 @@
     -webkit-backdrop-filter: blur(50px) !important;
     transition: opacity 0.5s ease, filter 0.5s ease;
 }
+
 .form-header {
     display: flex;
     justify-content: center;
@@ -241,7 +243,7 @@
     align-items: center;
 }
 
-.invite{
+.invite {
     color: var(--highlight-text-color);
     font-size: 15px;
 }
@@ -306,22 +308,23 @@
     text-decoration: none;
 }
 
-.signup{
+.signup {
     margin-top: 5%;
     min-height: 70vh;
 }
 
-.duo{
+.duo {
     display: flex;
     flex-direction: row;
     gap: 1rem;
 }
 
-.duo input, .duo label{
+.duo input,
+.duo label {
     width: 100%;
 }
 
-.error-message-valdiation{
+.error-message-valdiation {
     color: red;
     font-size: 15px;
     font-weight: 300;
@@ -333,49 +336,51 @@
 
 @media screen and (max-width: 768px) {
 
-    .authentification-container{
+    .authentification-container {
         height: fit-content;
         padding-block: 2rem;
         padding-bottom: 25vh;
     }
+
     .form-container {
- 
+
         width: 90vw;
         margin-top: 35%;
         min-width: 10rem;
         height: fit-content;
     }
 
-    .thread-container{
-        display: none;
-    }
-    .path-container{
+    .thread-container {
         display: none;
     }
 
-    .thread-container{
+    .path-container {
+        display: none;
+    }
+
+    .thread-container {
         opacity: 0.5;
     }
 
-    .logoHolder{
+    .logoHolder {
         width: 100%;
-        position:absolute;
+        position: absolute;
         top: 1%;
         left: 0%;
         flex-direction: column;
         margin-top: 5vh;
     }
 
-    .logoHolder h2{
+    .logoHolder h2 {
         font-size: 32px;
     }
 
-    .logoHolder div{
+    .logoHolder div {
         height: 6rem;
         width: 6rem;
     }
 
-    .signup{
+    .signup {
         margin-top: 25%;
     }
 

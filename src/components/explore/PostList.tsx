@@ -8,8 +8,10 @@ export const PostList = () => {
       author: "ben4ali",
       views: "275k",
       date: "2025-03-22",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "18:50",
     },
     {
@@ -17,8 +19,10 @@ export const PostList = () => {
       author: "astrofan",
       views: "1.2M",
       date: "2025-04-10",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "12:30",
     },
     {
@@ -26,8 +30,10 @@ export const PostList = () => {
       author: "designguru",
       views: "850k",
       date: "2025-02-15",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "9:45",
     },
     {
@@ -35,8 +41,10 @@ export const PostList = () => {
       author: "codewizard",
       views: "500k",
       date: "2025-01-20",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "15:00",
     },
     {
@@ -44,8 +52,10 @@ export const PostList = () => {
       author: "oceanlover",
       views: "1.8M",
       date: "2025-03-05",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "20:10",
     },
     {
@@ -53,8 +63,10 @@ export const PostList = () => {
       author: "techgeek",
       views: "2.5M",
       date: "2025-05-01",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "18:00",
     },
     {
@@ -62,8 +74,10 @@ export const PostList = () => {
       author: "chefmaster",
       views: "300k",
       date: "2025-04-18",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "10:25",
     },
     {
@@ -71,8 +85,10 @@ export const PostList = () => {
       author: "spacenerd",
       views: "1.1M",
       date: "2025-03-30",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "22:15",
     },
     {
@@ -80,8 +96,10 @@ export const PostList = () => {
       author: "fitguru",
       views: "750k",
       date: "2025-02-28",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "8:40",
     },
     {
@@ -89,8 +107,10 @@ export const PostList = () => {
       author: "naturefan",
       views: "1.4M",
       date: "2025-03-12",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "14:20",
     },
     {
@@ -98,8 +118,10 @@ export const PostList = () => {
       author: "gamerlife",
       views: "2.2M",
       date: "2025-04-05",
-      image: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
-      profileImage: "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      image:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
+      profileImage:
+        "https://th.bing.com/th/id/OIP.gSumijuFpa7yGTKYERXwgAHaE7?rs=1&pid=ImgDetMain",
       duration: "19:35",
     },
   ];
