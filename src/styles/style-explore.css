@@ -243,6 +243,8 @@
     width: 10rem;
     border-radius: 50px;
     background-color: rgb(238, 238, 238);
+    cursor: pointer;
+    transition: var(--default-transition);
 }
 
 .filter-btn {
@@ -264,9 +266,14 @@
 
 }
 
-.filter-btn:hover {
+.filter-control:hover {
     background-color: rgb(29, 29, 29);
-    color: white;
+    color: white !important;
+}
+
+.filter-control:hover .filter-btn {
+
+    color: white !important;
 }
 
 .post-holder {
