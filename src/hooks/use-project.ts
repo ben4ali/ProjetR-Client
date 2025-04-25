@@ -92,9 +92,6 @@ export function useIncrementViewCount() {
   });
 }
 
-// Ajouter ces fonctions à use-project.ts
-
-// Pour liker un projet
 export function useLikeProject() {
   const queryClient = useQueryClient();
 
@@ -119,7 +116,6 @@ export function useLikeProject() {
   });
 }
 
-// Pour disliker un projet
 export function useDislikeProject() {
   const queryClient = useQueryClient();
 
@@ -143,3 +139,21 @@ export function useDislikeProject() {
     },
   });
 }
+
+export const useRecommendedProjects = (tags: string[] | undefined) => {
+  return useQuery({
+    queryKey: ['recommendedProjects', tags],
+    queryFn: async () => {
+      if (!tags || tags.length === 0) {
+        const response = await axios.get(`${API_URL}/projects`);
+        return response.data;
+      }
+
+      const tagsString = tags.join(',');
+      const response = await axios.get(`${API_URL}/projects/recommended?tags=${tagsString}`);
+      return response.data;
+    },
+    enabled: !!tags,
+    staleTime: 60000,
+  });
+};
