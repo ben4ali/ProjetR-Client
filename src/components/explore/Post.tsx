@@ -1,11 +1,11 @@
-import {useState,useEffect} from "react";
+import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { Projet } from "../../types/Projet";
 
 export const Post = ({
   project
 }: {
-  project :Projet;
+  project: Projet;
 }) => {
 
   const formattedDate = new Date(project.createdAt).toLocaleDateString("fr-CA", {
@@ -13,7 +13,6 @@ export const Post = ({
     month: "long",
     day: "numeric",
   });
-
 
   const [duration, setDuration] = useState<number | null>(null);
 
@@ -40,22 +39,31 @@ export const Post = ({
     }
   }, [project.demoUrl]);
 
+  // Vérifier si project et ses propriétés existent pour éviter les erreurs
+  if (!project) {
+    return <div className="post loading">Chargement...</div>;
+  }
+
+  // Valeurs par défaut pour les propriétés qui pourraient être undefined
+  const authorAvatar = project.author?.avatar || "/default-avatar.png";
+  const authorUsername = project.author?.username || "Utilisateur inconnu";
+
   return (
     <Link to={"/watch/"+project.id} className="post">
       <div className="image-holder">
         <div className="post-overlay"></div>
-        <video src={project.demoUrl} alt="post" width="100%" height="100%" />
+        <video src={project.demoUrl || ""} alt="post" width="100%" height="100%" />
         <p className="temps">{formatDuration(duration)}</p>
       </div>
       <div className="post-footer">
         <div className="post-author">
-          <img src={project.author.avatar || ""} alt="Photo de profil" />
+          <img src={authorAvatar} alt="Photo de profil" />
         </div>
         <div className="post-info">
-          <h2>{project.title}</h2>
-          <p>{project.author.username}</p>
+          <h2>{project.title || "Sans titre"}</h2>
+          <p>{authorUsername}</p>
           <p>
-            {project.views} Visionnements - {formattedDate}
+            {project.views || 0} Visionnements - {formattedDate}
           </p>
         </div>
       </div>

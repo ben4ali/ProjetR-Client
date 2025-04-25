@@ -2,11 +2,49 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { startVoiceRecognition } from "../../utils/VoiceTranscript";
 import { FilterBar } from "./FilterBar";
+import { useProjectsByTitle } from "../../hooks/use-project";
+import { Projet } from "../../types/Projet";
 
-export const SearchBar = () => {
+// Ajout d'une propriété pour recevoir et mettre à jour les projets filtrés
+interface SearchBarProps {
+  onSearchResults: (projects: Projet[]) => void;
+  onFilterResults: (projects: Projet[]) => void;
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ({ 
+  onSearchResults, 
+  onFilterResults 
+}) => {
   const [searchText, setSearchText] = useState("");
+  const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
   const [error, setError] = useState("");
   const [isListening, setIsListening] = useState(false);
+
+  // Utiliser le hook pour la recherche par titre
+  const { data: searchResults, isLoading } = useProjectsByTitle(searchQuery);
+
+  // Mettre à jour les projets dans le composant parent quand les résultats changent
+  React.useEffect(() => {
+    if (searchResults && !isLoading) {
+      onSearchResults(searchResults);
+    }
+  }, [searchResults, isLoading, onSearchResults]);
+
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      setSearchQuery(searchText.trim());
+    } else {
+      // Si la recherche est vide, réinitialiser
+      setSearchQuery(undefined);
+      onSearchResults([]);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const handleVoiceInput = () => {
     setIsListening(true);
@@ -15,6 +53,8 @@ export const SearchBar = () => {
         setSearchText(transcript);
         setError("");
         setIsListening(false);
+        // Lancer la recherche automatiquement après la reconnaissance vocale
+        setSearchQuery(transcript);
       },
       (error) => {
         setError(error);
@@ -32,14 +72,23 @@ export const SearchBar = () => {
             placeholder="Rechercher..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-          <button className="search-btn">
-            <i className="bi bi-search"></i>
+          <button 
+            className="search-btn" 
+            onClick={handleSearch}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <i className="bi bi-hourglass-split"></i>
+            ) : (
+              <i className="bi bi-search"></i>
+            )}
           </button>
           <button
             className={`voice-btn ${isListening ? "active" : ""}`}
             onClick={handleVoiceInput}
-            disabled={isListening}
+            disabled={isListening || isLoading}
           >
             <i className="bi bi-mic"></i>
           </button>
@@ -52,7 +101,7 @@ export const SearchBar = () => {
         </div>
       </div>
       {error && <p className="error-message">{error}</p>}
-      <FilterBar />
+      <FilterBar onFilterResults={onFilterResults} />
     </div>
   );
 };

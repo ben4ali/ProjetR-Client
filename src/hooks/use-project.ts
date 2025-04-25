@@ -157,3 +157,63 @@ export const useRecommendedProjects = (tags: string[] | undefined) => {
     staleTime: 60000,
   });
 };
+
+export function useProjectsByTitle(title?: string) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "title", title],
+    queryFn: async () => {
+      const { data } = await axios.get(`${API_URL}/projects/search/${title}`);
+      return data;
+    },
+    enabled: !!title,
+  });
+}
+
+export function useProjectsByTagsList(tags?: string[]) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "tagsList", tags ? tags.join(',') : 'all'],
+    queryFn: async () => {
+      if (!tags || tags.length === 0) {
+        const { data } = await axios.get(`${API_URL}/projects`);
+        return data;
+      }
+      const tagsString = tags.join(',');
+      const { data } = await axios.get(`${API_URL}/projects/tags/${tagsString}`);
+      return data;
+    },
+    enabled: true,
+  });
+}
+
+export function useProjectsByTeacher(teacher?: string) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "teacher", teacher],
+    queryFn: async () => {
+      const { data } = await axios.get(`${API_URL}/projects/teacher/${teacher}`);
+      return data;
+    },
+    enabled: !!teacher,
+  });
+}
+
+export function useProjectsByCourse(course?: string) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "course", course],
+    queryFn: async () => {
+      const { data } = await axios.get(`${API_URL}/projects/course/${course}`);
+      return data;
+    },
+    enabled: !!course,
+  });
+}
+
+export function useProjectsBySession(session?: string) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "session", session],
+    queryFn: async () => {
+      const { data } = await axios.get(`${API_URL}/projects/session/${session}`);
+      return data;
+    },
+    enabled: !!session,
+  });
+}

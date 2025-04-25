@@ -132,6 +132,11 @@
     transition: var(--default-transition);
 }
 
+.tagSelectedExplore {
+    background-color: rgb(14, 13, 13) !important;
+    color: white !important;
+  }
+
 .create-post-btn i {
     font-size: 2.1rem;
 
@@ -156,6 +161,10 @@
     justify-content: space-between;
 }
 
+.filter-content:hover .filter-scroller {
+    scrollbar-width:thin
+}
+
 .filter-holder {
     display: flex;
     width: 56.5%;
@@ -170,6 +179,7 @@
     padding-left: 2rem;
     padding-right: 4rem;
     height: 100%;
+    min-height: 4rem;
     overflow-x: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -189,6 +199,7 @@
     font-size: 1.5rem;
     cursor: pointer;
     transition: var(--default-transition);
+    pointer-events: none;
 }
 
 .filterOverlayBegin {
@@ -204,13 +215,19 @@
 .filter {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-shrink: 0;
     background-color: rgb(238, 238, 238);
     color: rgba(34, 34, 34, 0.5);
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    max-height: 3rem;
     transition: var(--default-transition);
     cursor: pointer;
+}
+
+.filter i{
+    margin-left: 1rem;
 }
 
 .filter:hover {
