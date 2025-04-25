@@ -4,11 +4,13 @@ import { SearchBar } from "../components/explore/SearchBar";
 import { PostList } from "../components/explore/PostList";
 import { useAllProjects } from "../hooks/use-project";
 import { Projet } from "../types/Projet";
+import { FilterModal } from "../components/explore/FilterModal";
 
 export const Explore = () => {
   const { data: allProjets, isLoading, error } = useAllProjects();
   const [searchResults, setSearchResults] = useState<Projet[]>([]);
   const [filterResults, setFilterResults] = useState<Projet[]>([]);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   
   const displayProjects = () => {
     if (searchResults.length > 0) {
@@ -30,11 +32,22 @@ export const Explore = () => {
     setSearchResults([]);
   };
 
+  const toggleFilterModal = () => {
+    setIsFilterModalOpen(!isFilterModalOpen);
+  };
+
   return (
     <div className="explore-container">
+      {isFilterModalOpen && (
+        <FilterModal 
+          onClose={toggleFilterModal} 
+          onApplyFilters={handleFilterResults}
+        />
+      )}
       <SearchBar 
         onSearchResults={handleSearchResults} 
         onFilterResults={handleFilterResults}
+        onOpenFilterModal={toggleFilterModal}
       />
       <hr />
       {isLoading ? (

@@ -142,15 +142,17 @@ export function useDislikeProject() {
 
 export const useRecommendedProjects = (tags: string[] | undefined) => {
   return useQuery({
-    queryKey: ['recommendedProjects', tags],
+    queryKey: ["recommendedProjects", tags],
     queryFn: async () => {
       if (!tags || tags.length === 0) {
         const response = await axios.get(`${API_URL}/projects`);
         return response.data;
       }
 
-      const tagsString = tags.join(',');
-      const response = await axios.get(`${API_URL}/projects/recommended?tags=${tagsString}`);
+      const tagsString = tags.join(",");
+      const response = await axios.get(
+        `${API_URL}/projects/recommended?tags=${tagsString}`
+      );
       return response.data;
     },
     enabled: !!tags,
@@ -171,14 +173,16 @@ export function useProjectsByTitle(title?: string) {
 
 export function useProjectsByTagsList(tags?: string[]) {
   return useQuery<Projet[], Error>({
-    queryKey: ["projects", "tagsList", tags ? tags.join(',') : 'all'],
+    queryKey: ["projects", "tagsList", tags ? tags.join(",") : "all"],
     queryFn: async () => {
       if (!tags || tags.length === 0) {
         const { data } = await axios.get(`${API_URL}/projects`);
         return data;
       }
-      const tagsString = tags.join(',');
-      const { data } = await axios.get(`${API_URL}/projects/tags/${tagsString}`);
+      const tagsString = tags.join(",");
+      const { data } = await axios.get(
+        `${API_URL}/projects/tags/${tagsString}`
+      );
       return data;
     },
     enabled: true,
@@ -189,10 +193,25 @@ export function useProjectsByTeacher(teacher?: string) {
   return useQuery<Projet[], Error>({
     queryKey: ["projects", "teacher", teacher],
     queryFn: async () => {
-      const { data } = await axios.get(`${API_URL}/projects/teacher/${teacher}`);
+      const { data } = await axios.get(
+        `${API_URL}/projects/teacher/${teacher}`
+      );
       return data;
     },
     enabled: !!teacher,
+  });
+}
+
+export function useProjectsByCollaborator(collaborator?: string) {
+  return useQuery<Projet[], Error>({
+    queryKey: ["projects", "collaborator", collaborator],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${API_URL}/projects/collaborator/${collaborator}`
+      );
+      return data;
+    },
+    enabled: !!collaborator,
   });
 }
 
@@ -211,7 +230,9 @@ export function useProjectsBySession(session?: string) {
   return useQuery<Projet[], Error>({
     queryKey: ["projects", "session", session],
     queryFn: async () => {
-      const { data } = await axios.get(`${API_URL}/projects/session/${session}`);
+      const { data } = await axios.get(
+        `${API_URL}/projects/session/${session}`
+      );
       return data;
     },
     enabled: !!session,

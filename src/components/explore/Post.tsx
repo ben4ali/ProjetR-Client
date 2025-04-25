@@ -39,12 +39,10 @@ export const Post = ({
     }
   }, [project.demoUrl]);
 
-  // Vérifier si project et ses propriétés existent pour éviter les erreurs
   if (!project) {
     return <div className="post loading">Chargement...</div>;
   }
 
-  // Valeurs par défaut pour les propriétés qui pourraient être undefined
   const authorAvatar = project.author?.avatar || "/default-avatar.png";
   const authorUsername = project.author?.username || "Utilisateur inconnu";
 
