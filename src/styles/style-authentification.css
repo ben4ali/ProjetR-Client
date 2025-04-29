@@ -8,7 +8,7 @@
     width: 100vw;
     overflow: hidden;
     background: rgb(255, 255, 255);
-    background: linear-gradient(176deg, rgb(185, 221, 249) 0%, rgb(201, 214, 236) 35%, rgb(202, 229, 247) 100%);
+    /* background: linear-gradient(176deg, rgb(185, 221, 249) 0%, rgb(201, 214, 236) 35%, rgb(202, 229, 247) 100%); */
 }
 
 .logoHolder {

@@ -1,25 +1,14 @@
-import boreal from "../../assets/images/boreal.jpg";
-import desert from "../../assets/images/desert.jpg";
-import flower from "../../assets/images/flower.jpg";
-import fuji from "../../assets/images/fuji.jpg";
-import mountain from "../../assets/images/mountains.jpg";
-import volcano from "../../assets/images/volcano.png";
-import plains from "../../assets/images/plains.jpg";
-import sunset from "../../assets/images/sunset.jpg";
-import moon from "../../assets/images/moon.jpg";
-import earth from "../../assets/images/earth.jpg";
-
 const images = [
-  boreal,
-  desert,
-  flower,
-  fuji,
-  mountain,
-  volcano,
-  plains,
-  sunset,
-  moon,
-  earth,
+  "https://github.com/ben4ali/To-Do-App-Ludex/blob/main/previews/Preview1.png?raw=true",
+  "https://github.com/ben4ali/Valorant-Weapon-Showcase/blob/master/previews/preview1.png?raw=true",
+  "https://github.com/ben4ali/Pokedex/blob/main/previews/preview2.png?raw=true",
+  "https://github.com/ben4ali/Genies/blob/main/previews/preview4.png?raw=true",
+  "https://github.com/ben4ali/Starway-react/blob/main/previews/preview1.png?raw=true",
+  "https://github.com/ben4ali/Netpulse/blob/main/previews/preview2.png?raw=true",
+  "https://www.nicholsonrj.com/Picture.84ec4241.webp",
+  "https://gitlab.com/DmitriyKim01/blackjack-console-game/-/raw/main/screenshots/playing_stage_2.png?ref_type=heads",
+  "https://gitlab.com/DmitriyKim01/room-portfolio/-/raw/main/vite-project/public/screenshots/welcome.png",
+  "https://github.com/Jxddiss/msn/blob/main/images-readme/1.png?raw=true",
 ];
 
 export const BackgroundCarousel = () => {
