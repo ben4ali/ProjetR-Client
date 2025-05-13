@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useSignup } from "../../hooks/use-auth";
-import { User } from "../../types/User";
 
 interface SignupProps {
   toggleForm: () => void;
@@ -24,10 +24,10 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
     signupMutation.mutate(
       { firstName, lastName, username, email, password },
       {
-        onSuccess: (response) => {
+        onSuccess: () => {
           window.location.href = "/explore";
         },
-        onError: (err: any) => {
+        onError: (err: Error | unknown) => {
           console.error("Erreur lors de l'inscription :", err);
         },
       }
@@ -114,7 +114,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               </a>
             </h5>
           </div>
-          <button type="submit">S'inscrire</button>
+          <button type="submit">S&apos;inscrire</button>
         </form>
       </div>
     </div>

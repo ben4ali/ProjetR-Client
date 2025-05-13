@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { useLogin, useGoogleLogin } from "../../hooks/use-auth";
 
@@ -20,9 +21,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           localStorage.setItem("token", response.token);
           window.location.href = "/explore";
         },
-        onError: (err: any) => {
-          // Optionally handle error
-        },
       }
     );
   };
@@ -34,8 +32,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     }
 
     (window as any).google.accounts.id.initialize({
-      client_id:
-        "607899403583-if4ui37ar583m5nvbmi328b76u0d8g1f.apps.googleusercontent.com",
+      client_id : import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: (response: any) => {
         googleLoginMutation.mutate(
           { idToken: response.credential },
