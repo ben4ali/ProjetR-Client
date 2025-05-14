@@ -283,8 +283,7 @@
     padding-block: 2rem;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 0 auto;
-
+    width: 100%;
 }
 
 .post {
@@ -295,6 +294,24 @@
     width: 22.9rem;
     overflow: hidden;
     height: 20rem;
+    cursor: pointer;
+}
+
+.full-post-holder {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 5%;
+    padding-block: 2rem;
+    width: 100%;
+}
+
+.post-full {
+    flex-shrink: 0;
+    display: flex;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    min-height: 15em;
     cursor: pointer;
 }
 

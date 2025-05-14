@@ -51,16 +51,13 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/">
+        <Link to="/explore">
           <img src={rosemontLogo} alt="logo" />
           <p>Rosemont DevHub</p>
         </Link>
       </div>
 
       <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
         <li>
           <Link to="/explore">Explore</Link>
         </li>
@@ -113,9 +110,11 @@ function Navbar() {
 }
 
 function App() {
+  const loggedIn = isLoggedIn();
+
   return (
     <Router>
-      <Navbar />
+      {loggedIn && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />

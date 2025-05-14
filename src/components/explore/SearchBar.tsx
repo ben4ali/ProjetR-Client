@@ -5,8 +5,8 @@ import { FilterBar } from "./FilterBar";
 import { useProjectsByTitle } from "../../hooks/use-project";
 import { Projet } from "../../types/Projet";
 interface SearchBarProps {
-  onSearchResults: (projects: Projet[]) => void;
-  onFilterResults: (projects: Projet[]) => void;
+  onSearchResults: (projects: Projet[], searchQuery: string) => void;
+  onFilterResults: (projects: Projet[], isSearching: boolean) => void;
   onOpenFilterModal: () => void;
 }
 
@@ -23,7 +23,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const { data: searchResults, isLoading } = useProjectsByTitle(searchQuery);
   React.useEffect(() => {
     if (searchResults && !isLoading) {
-      onSearchResults(searchResults);
+      onSearchResults(searchResults, searchQuery || "");
     }
   }, [searchResults, isLoading, onSearchResults]);
 
@@ -32,7 +32,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setSearchQuery(searchText.trim());
     } else {
       setSearchQuery(undefined);
-      onSearchResults([]);
+      onSearchResults([], "");
     }
   };
 

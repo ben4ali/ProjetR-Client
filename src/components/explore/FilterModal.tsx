@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useCourses } from "../../hooks/use-courses";
 import {
   useProjectsByCourse,
@@ -10,10 +10,10 @@ import { Projet } from "../../types/Projet";
 
 interface FilterModalProps {
   onClose: () => void;
-  onApplyFilters: (projects: Projet[]) => void;
+  onApplyFilters: (projects: Projet[], isSearching: boolean) => void;
 }
 
-export const FilterModal: React.FC<FilterModalProps> = ({
+export const FilterModal: FC<FilterModalProps> = ({
   onClose,
   onApplyFilters,
 }) => {
@@ -36,18 +36,18 @@ export const FilterModal: React.FC<FilterModalProps> = ({
     try {
       if (course) {
         const projects = await courseProjectsQuery.refetch();
-        onApplyFilters(projects.data || []);
+        onApplyFilters(projects.data || [], true);
       } else if (session) {
         const projects = await sessionProjectsQuery.refetch();
-        onApplyFilters(projects.data || []);
+        onApplyFilters(projects.data || [], true);
       } else if (teacher) {
         const projects = await teacherProjectsQuery.refetch();
-        onApplyFilters(projects.data || []);
+        onApplyFilters(projects.data || [], true);
       } else if (student) {
         const projects = await collaboratorProjectsQuery.refetch();
-        onApplyFilters(projects.data || []);
+        onApplyFilters(projects.data || [], true);
       } else {
-        onApplyFilters([]);
+        onApplyFilters([], false);
       }
       onClose();
     } catch (error) {
@@ -60,7 +60,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
     setCourse("");
     setSession("");
     setStudent("");
-    onApplyFilters([]);
+    onApplyFilters([], false);
     onClose();
   };
 

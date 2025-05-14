@@ -5,7 +5,7 @@ import { useTags } from "../../hooks/use-tags";
 import { Tag } from "../../types/Tag";
 
 interface FilterBarProps {
-  onFilterResults: (projects: Projet[]) => void;
+  onFilterResults: (projects: Projet[], isSearching: boolean) => void;
   onOpenFilterModal: () => void;
 }
 
@@ -24,9 +24,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     if (isLoading) return;
 
     if (selectedTags.length === 0) {
-      onFilterResults([]);
+      onFilterResults([], false);
     } else if (filteredProjects) {
-      onFilterResults(filteredProjects);
+      onFilterResults(filteredProjects, true);
     }
   }, [filteredProjects, isLoading, selectedTags]);
 
@@ -40,7 +40,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
   const clearFilters = () => {
     setSelectedTags([]);
-    onFilterResults([]);
+    onFilterResults([], false);
   };
 
   return (

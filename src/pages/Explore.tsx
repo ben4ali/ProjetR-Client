@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import "../styles/style-explore.css";
 import { SearchBar } from "../components/explore/SearchBar";
 import { PostList } from "../components/explore/PostList";
@@ -11,41 +11,66 @@ export const Explore = () => {
   const [searchResults, setSearchResults] = useState<Projet[]>([]);
   const [filterResults, setFilterResults] = useState<Projet[]>([]);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-  
+  const [isSearchingOrFiltering, setIsSearchingOrFiltering] = useState(false);
+
   const displayProjects = () => {
+    const result = {
+      projects: allProjets || [],
+      type: "all",
+    };
     if (searchResults.length > 0) {
-      return searchResults;
+      result.projects = searchResults;
+      result.type = "search";
     }
     if (filterResults.length > 0) {
-      return filterResults;
+      result.projects = filterResults;
+      result.type = "filter";
     }
-    return allProjets || [];
+    if (
+      searchResults.length === 0 &&
+      filterResults.length === 0 &&
+      isSearchingOrFiltering
+    ) {
+      result.projects = [];
+      result.type = "none";
+    }
+    return result;
   };
 
-  const handleSearchResults = (results: Projet[]) => {
+  const handleSearchResults = useCallback((results: Projet[], searchQuery: string) => {
     setSearchResults(results);
     setFilterResults([]);
-  };
+    if(searchQuery.trim() === "") {
+      setIsSearchingOrFiltering(false);
+    } else {
+      setIsSearchingOrFiltering(true);
+    }
+  }, []);
 
-  const handleFilterResults = (results: Projet[]) => {
+  const handleFilterResults = useCallback((results: Projet[], isSearching: boolean ) => {
     setFilterResults(results);
     setSearchResults([]);
-  };
+    if(!isSearching) {
+      setIsSearchingOrFiltering(false);
+    }else{
+      setIsSearchingOrFiltering(true);
+    }
+  }, []);
 
-  const toggleFilterModal = () => {
+  const toggleFilterModal = useCallback(() => {
     setIsFilterModalOpen(!isFilterModalOpen);
-  };
+  }, []);
 
   return (
     <div className="explore-container">
       {isFilterModalOpen && (
-        <FilterModal 
-          onClose={toggleFilterModal} 
+        <FilterModal
+          onClose={toggleFilterModal}
           onApplyFilters={handleFilterResults}
         />
       )}
-      <SearchBar 
-        onSearchResults={handleSearchResults} 
+      <SearchBar
+        onSearchResults={handleSearchResults}
         onFilterResults={handleFilterResults}
         onOpenFilterModal={toggleFilterModal}
       />
@@ -54,10 +79,29 @@ export const Explore = () => {
         <div className="loading">Chargement des projets...</div>
       ) : error ? (
         <div className="error">Erreur: {(error as Error).message}</div>
-      ) : displayProjects().length === 0 ? (
-        <div className="no-results">Aucun projet trouvé</div>
+      ) : displayProjects().projects.length === 0 ? (
+        <div className="text-slate-600 mt-6">Aucun projet trouvé</div>
       ) : (
-        <PostList projets={displayProjects()} />
+        <>
+          {displayProjects().type === "all" ? (
+            <PostList
+              className="post-holder"
+              projets={displayProjects().projects}
+            />
+          ) : displayProjects().type === "search" ? (
+            <PostList
+              className="full-post-holder gap-6"
+              fullPost
+              projets={displayProjects().projects}
+            />
+          ) : (
+            <PostList
+              className="full-post-holder gap-6"
+              fullPost
+              projets={displayProjects().projects}
+            />
+          )}
+        </>
       )}
     </div>
   );

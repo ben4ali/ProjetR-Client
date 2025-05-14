@@ -162,6 +162,7 @@ export const ProductCard = ({
           src={product.thumbnail}
           alt={product.title}
           style={{borderRadius: '0.4rem'}}
+          referrerPolicy="no-referrer"
         />
       </a>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
