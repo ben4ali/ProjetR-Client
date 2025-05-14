@@ -58,7 +58,7 @@ export const Explore = () => {
   }, []);
 
   const toggleFilterModal = useCallback(() => {
-    setIsFilterModalOpen(!isFilterModalOpen);
+    setIsFilterModalOpen(prev => !prev);
   }, []);
 
   return (
