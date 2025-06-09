@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
-import "../styles/style-explore.css";
-import { SearchBar } from "../components/explore/SearchBar";
-import { PostList } from "../components/explore/PostList";
-import { useAllProjects } from "../hooks/use-project";
-import { Projet } from "../types/Projet";
-import { FilterModal } from "../components/explore/FilterModal";
+import { useCallback, useState } from 'react';
+// import "../styles/style-explore.css"; // Unlink le fichier CSS
+import { FilterModal } from '../components/explore/FilterModal';
+import { PostList } from '../components/explore/PostList';
+import { SearchBar } from '../components/explore/SearchBar';
+import { useAllProjects } from '../hooks/use-project';
+import { Projet } from '../types/Projet';
 
 export const Explore = () => {
   const { data: allProjets, isLoading, error } = useAllProjects();
@@ -16,15 +16,15 @@ export const Explore = () => {
   const displayProjects = () => {
     const result = {
       projects: allProjets || [],
-      type: "all",
+      type: 'all',
     };
     if (searchResults.length > 0) {
       result.projects = searchResults;
-      result.type = "search";
+      result.type = 'search';
     }
     if (filterResults.length > 0) {
       result.projects = filterResults;
-      result.type = "filter";
+      result.type = 'filter';
     }
     if (
       searchResults.length === 0 &&
@@ -32,37 +32,43 @@ export const Explore = () => {
       isSearchingOrFiltering
     ) {
       result.projects = [];
-      result.type = "none";
+      result.type = 'none';
     }
     return result;
   };
 
-  const handleSearchResults = useCallback((results: Projet[], searchQuery: string) => {
-    setSearchResults(results);
-    setFilterResults([]);
-    if(searchQuery.trim() === "") {
-      setIsSearchingOrFiltering(false);
-    } else {
-      setIsSearchingOrFiltering(true);
-    }
-  }, []);
+  const handleSearchResults = useCallback(
+    (results: Projet[], searchQuery: string) => {
+      setSearchResults(results);
+      setFilterResults([]);
+      if (searchQuery.trim() === '') {
+        setIsSearchingOrFiltering(false);
+      } else {
+        setIsSearchingOrFiltering(true);
+      }
+    },
+    []
+  );
 
-  const handleFilterResults = useCallback((results: Projet[], isSearching: boolean ) => {
-    setFilterResults(results);
-    setSearchResults([]);
-    if(!isSearching) {
-      setIsSearchingOrFiltering(false);
-    }else{
-      setIsSearchingOrFiltering(true);
-    }
-  }, []);
+  const handleFilterResults = useCallback(
+    (results: Projet[], isSearching: boolean) => {
+      setFilterResults(results);
+      setSearchResults([]);
+      if (!isSearching) {
+        setIsSearchingOrFiltering(false);
+      } else {
+        setIsSearchingOrFiltering(true);
+      }
+    },
+    []
+  );
 
   const toggleFilterModal = useCallback(() => {
     setIsFilterModalOpen(prev => !prev);
   }, []);
 
   return (
-    <div className="explore-container">
+    <div className="w-full h-full flex flex-col justify-center items-center">
       {isFilterModalOpen && (
         <FilterModal
           onClose={toggleFilterModal}
@@ -74,29 +80,33 @@ export const Explore = () => {
         onFilterResults={handleFilterResults}
         onOpenFilterModal={toggleFilterModal}
       />
-      <hr />
+      <hr className="w-[90%] border border-slate-800/30" />
       {isLoading ? (
-        <div className="loading">Chargement des projets...</div>
+        <div className="text-lg text-slate-600 mt-6">
+          Chargement des projets...
+        </div>
       ) : error ? (
-        <div className="error">Erreur: {(error as Error).message}</div>
+        <div className="text-red-500 mt-6">
+          Erreur: {(error as Error).message}
+        </div>
       ) : displayProjects().projects.length === 0 ? (
         <div className="text-slate-600 mt-6">Aucun projet trouvé</div>
       ) : (
         <>
-          {displayProjects().type === "all" ? (
+          {displayProjects().type === 'all' ? (
             <PostList
-              className="post-holder"
+              className="flex flex-wrap gap-4 w-full px-[5%] py-8 h-[30rem]"
               projets={displayProjects().projects}
             />
-          ) : displayProjects().type === "search" ? (
+          ) : displayProjects().type === 'search' ? (
             <PostList
-              className="full-post-holder gap-6"
+              className="flex flex-col w-full px-[5%] py-8 gap-6"
               fullPost
               projets={displayProjects().projects}
             />
           ) : (
             <PostList
-              className="full-post-holder gap-6"
+              className="flex flex-col w-full px-[5%] py-8 gap-6"
               fullPost
               projets={displayProjects().projects}
             />
