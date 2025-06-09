@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Comment } from "../../types/Comment";
 import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
 import {
@@ -19,137 +19,125 @@ export const CommentComponent = ({
 }: CommentComponentProps) => {
   const loggedIn = isLoggedIn();
   const { data: user } = useCurrentUser();
+
   const [isReplying, setIsReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [showReplies, setShowReplies] = useState(false);
 
   const { data: commentReplies = [] } = useRepliesToComment(comment.id);
-  const [commentDate, setCommentDate] = useState(new Date(comment.createdAt));
-  const formatDate = (date: Date) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    };
-    return date.toLocaleDateString("fr-FR", options);
-  };
-  const formattedDate = formatDate(commentDate);
-  const replyMutation = useReplyToComment();
 
-  const handleReply = () => {
-    setIsReplying(!isReplying);
-  };
+  const formattedDate = new Date(comment.createdAt).toLocaleDateString("fr-FR");
+
+  const replyMutation = useReplyToComment();
+  const deleteMutation = useDeleteComment();
+
+  /* ---------- actions ---------- */
 
   const handleSubmitReply = () => {
-    if (replyText.trim() && comment.id) {
-      replyMutation.mutate(
-        {
-          projetId,
-          text: replyText.trim(),
-          parentComment: comment.id,
-        },
-        {
-          onSuccess: () => {
-            setReplyText("");
-            setIsReplying(false);
-          },
-          onError: (error) => {
-            console.error("Erreur lors de la réponse au commentaire :", error);
-          },
-        }
-      );
-    }
+    if (!replyText.trim()) return;
+    replyMutation.mutate(
+      { projetId, text: replyText.trim(), parentComment: comment.id },
+      { onSuccess: () => (setReplyText(""), setIsReplying(false)) }
+    );
   };
-
-  const deleteCommentMutation = useDeleteComment();
 
   const handleDeleteComment = () => {
-    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce commentaire ?")) {
-      deleteCommentMutation.mutate(
-        {
-          commentId: comment.id,
-          projetId,
-          parentCommentId: comment.parentComment,
-        },
-        {
-          onSuccess: () => {
-            console.log("Commentaire supprimé avec succès");
-          },
-          onError: (error) => {
-            console.error(
-              "Erreur lors de la suppression du commentaire :",
-              error
-            );
-          },
-        }
-      );
-    }
+    if (!window.confirm("Supprimer ?")) return;
+    deleteMutation.mutate({
+      commentId: comment.id,
+      projetId,
+      parentCommentId: comment.parentComment?.id,
+    });
   };
 
+  /* ---------- rendu ---------- */
+
   return (
-    <div className="comment">
-      <div className="comment-author">
-        <img src={comment.author.avatar || default_profil} alt="autheur" />
+    <div className="comment flex gap-4 w-full flex-shrink-0 justify-start">
+      {/* avatar */}
+      <div className="comment-author shrink-0">
+        <img
+          src={comment.author.avatar || default_profil}
+          alt="avatar"
+          className="h-12 w-12 rounded-full object-cover"
+        />
       </div>
-      <div className="comment-info">
-        <div className="comment-header">
-          <h4>
-            {comment.author?.firstName} {comment.author?.lastName}{" "}
-            <span className="comment-date"> - {formattedDate} </span>
+
+      {/* contenu */}
+      <div className="comment-info flex flex-col w-full">
+        {/* entête */}
+        <div className="comment-header flex justify-between items-center">
+          <h4 className="font-medium">
+            {comment.author.firstName} {comment.author.lastName}
+            <span className="comment-date ml-1 opacity-50 text-sm">
+              – {formattedDate}
+            </span>
           </h4>
+
           {user?.id === comment.author.id && (
             <button
-              className="comment-options-button"
               onClick={handleDeleteComment}
+              className="comment-options-button hover:text-red-600 transition"
             >
-              <i className="bi bi-x"></i>
+              <i className="bi bi-x text-xl" />
             </button>
           )}
         </div>
-        <p>{comment.text}</p>
 
-        <div className="reply-options">
+        {/* texte */}
+        <p className="text-base text-gray-700/80 mt-1">{comment.text}</p>
+
+        {/* options */}
+        <div className="reply-options flex items-center gap-4 mt-1">
           {!comment.parentComment && loggedIn && (
-            <button className="reply-button" onClick={handleReply}>
+            <button
+              onClick={() => setIsReplying(!isReplying)}
+              className="reply-button text-sky-600 hover:opacity-50 transition"
+            >
               Répondre
             </button>
           )}
+
           {commentReplies.length > 0 && (
             <button
-              className="show-replies-button"
               onClick={() => setShowReplies(!showReplies)}
+              className="show-replies-button text-gray-600"
             >
               {showReplies ? "Cacher réponses" : "Montrer réponses"}
             </button>
           )}
         </div>
 
-        {isReplying && isLoggedIn && (
-          <div className="reply-input">
+        {/* champ de réponse */}
+        {isReplying && loggedIn && (
+          <div className="reply-input flex gap-4 mt-3 w-full">
             <input
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
-              placeholder="Écrire une réponse..."
+              placeholder="Écrire une réponse…"
+              className="w-full bg-black/5 border border-black/10 rounded-[15px] px-3 py-2 outline-none"
             />
-            <button className="submit-reply-btn" onClick={handleSubmitReply}>
+            <button
+              onClick={handleSubmitReply}
+              className="submit-reply-btn bg-black text-white px-4 py-2 rounded-full hover:bg-neutral-700 transition"
+            >
               Soumettre
             </button>
           </div>
         )}
-        {commentReplies.length > 0 && (
-          <div className="comment-replies">
-            {showReplies && (
-              <div className="replies-list">
-                {commentReplies.map((reply) => (
-                  // Afficher chaque réponse
-                  <CommentComponent
-                    key={reply.id}
-                    comment={reply}
-                    projetId={projetId}
-                  />
-                ))}
-              </div>
-            )}
+
+        {/* sous-commentaires */}
+        {showReplies && commentReplies.length > 0 && (
+          <div className="comment-replies flex flex-col gap-8 pl-8 mt-4">
+            <div className="replies-list flex flex-col gap-4">
+              {commentReplies.map((reply) => (
+                <CommentComponent
+                  key={reply.id}
+                  comment={reply}
+                  projetId={projetId}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CommentComponent } from "./CommentComponent";
 import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
-import { Comment } from "../../types/Comment";
 import { Projet } from "../../types/Projet";
-import {
-  useCommentsByProject,
-  useCreateComment,
-} from "../../hooks/use-comments";
+import { useCommentsByProject, useCreateComment } from "../../hooks/use-comments";
 
 interface CommentSectionProps {
   projet: Projet;
@@ -15,89 +11,74 @@ interface CommentSectionProps {
 export const CommentSection = ({ projet }: CommentSectionProps) => {
   const loggedIn = isLoggedIn();
   const { data: user } = useCurrentUser();
-
   const [commentText, setCommentText] = useState("");
+
   const {
     data: allComments = [],
     isLoading,
     error,
-  } = useCommentsByProject(projet?.id);
-  const comments = allComments.filter((comment) => !comment.parentComment);
+  } = useCommentsByProject(projet.id);
+
+  const comments = allComments.filter((c) => !c.parentComment);
   const createCommentMutation = useCreateComment();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentText(e.target.value);
-  };
-
   const handleComment = () => {
-    if (projet?.id && commentText.trim()) {
-      createCommentMutation.mutate(
-        {
-          projetId: projet.id,
-          text: commentText.trim(),
-        },
-        {
-          onSuccess: () => {
-            setCommentText("");
-          },
-          onError: (error) => {
-            console.error("Erreur lors de la création du commentaire :", error);
-          },
-        }
-      );
-    }
+    if (!commentText.trim()) return;
+    createCommentMutation.mutate(
+      { projetId: projet.id, text: commentText.trim() },
+      { onSuccess: () => setCommentText("") }
+    );
   };
 
-  if (isLoading) return <div>Chargement des commentaires...</div>;
-  if (error)
-    return (
-      <div>Erreur lors du chargement des commentaires: {error.message}</div>
-    );
+  if (isLoading) return <p>Chargement des commentaires…</p>;
+  if (error) return <p>Erreur : {error.message}</p>;
 
   return (
-    <div className="comment-container">
-      <h3>{comments.length} commentaires</h3>
+    <div className="comment-container flex flex-col w-full mt-12">
+      <h3 className="text-2xl text-gray-700/80">{comments.length} commentaires</h3>
+
       {loggedIn && (
-        <div className="comment-form">
+        <div className="comment-form flex gap-4 mt-4 w-full">
           <img
-            src={`${
-              user?.avatar || "https://robohash.org/default.png"
-            }?t=${new Date().getTime()}`}
-            alt="Auteur du commentaire"
+            src={`${user?.avatar || "https://robohash.org/default.png"}?t=${Date.now()}`}
+            alt="avatar"
             crossOrigin="anonymous"
+            className="h-12 w-12 rounded-full object-cover"
           />
-          <div className="comment-input">
+          <div className="comment-input flex flex-col w-full">
             <input
               type="text"
-              placeholder="Ajouter un commentaire..."
+              placeholder="Ajouter un commentaire…"
               value={commentText}
-              onChange={handleInputChange}
+              onChange={(e) => setCommentText(e.target.value)}
+              className="w-full bg-black/5 border border-black/10 rounded-[15px] px-4 py-3
+                         outline-none focus:bg-blue-100/20 focus:border-blue-300 transition"
             />
-            <div className="comment-options">
-              <button onClick={() => setCommentText("")}>Annuler</button>
+
+            <div className="comment-options flex gap-4 justify-end mt-4">
               <button
-                className={commentText.trim() ? "commenter" : ""}
-                onClick={handleComment}
-                disabled={
-                  !commentText.trim() || createCommentMutation.isPending
-                }
+                onClick={() => setCommentText("")}
+                className="px-4 py-2 rounded-full hover:bg-black/10 transition"
               >
-                {createCommentMutation.isPending ? "En cours..." : "Commenter"}
+                Annuler
+              </button>
+
+              <button
+                disabled={!commentText.trim() || createCommentMutation.isPending}
+                onClick={handleComment}
+                className={`px-4 py-2 rounded-full text-white
+                            ${commentText.trim() ? "bg-black hover:bg-neutral-700" : "bg-gray-500 cursor-not-allowed"}`}
+              >
+                {createCommentMutation.isPending ? "En cours…" : "Commenter"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="comment-holder">
+      <div className="comment-holder flex flex-col gap-8 mt-8 pt-12 pb-16 border-t border-black/20">
         {comments.map((comment) => (
-          <CommentComponent
-            key={comment.id}
-            comment={comment}
-            allComments={allComments}
-            projetId={projet.id}
-            parentComment={null}
-          />
+          <CommentComponent key={comment.id} comment={comment} projetId={projet.id} />
         ))}
       </div>
     </div>
