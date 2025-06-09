@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import { ProfilPicture } from "./ProfilPicture";
 import { ProfilContent } from "./ProfilContent";
-import { ChangeBannerModal } from "../modals/ChangeBannerModal";
+import { ChangeBannerModal } from "../modals/changeBannerModal";
 import defaultBanner from "../../assets/images/default_banner.png";
 import { User } from "../../types/User";
 
@@ -14,7 +14,7 @@ interface ProfilHeaderProps {
   isCurrentUser?: boolean;
 }
 
-export const ProfilHeader: React.FC<ProfilHeaderProps> = ({
+export const ProfilHeader: FC<ProfilHeaderProps> = ({
   firstName,
   lastName,
   pseudo,
@@ -28,23 +28,31 @@ export const ProfilHeader: React.FC<ProfilHeaderProps> = ({
   const handleCloseBannerModal = () => setBannerModalOpen(false);
 
   return (
-    <div className="profil-header">
+    <div className="relative flex flex-col gap-4 mt-[25%] md:mt-[7%] w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-[15px]">
+      {/* Banner */}
       <div
-        className={`profil-banner ${isCurrentUser ? "banner-effect" : ""}`}
+        className={`overflow-hidden h-[62%] w-full ${
+          isCurrentUser ? "cursor-pointer group" : ""
+        }`}
         onClick={isCurrentUser ? handleOpenBannerModal : undefined}
       >
         <img
           src={`${banner || defaultBanner}?t=${new Date().getTime()}`}
           alt="Profile banner"
           crossOrigin="anonymous"
+          className="w-full h-full object-cover scale-[1.05] transition-transform duration-300 ease-in-out group-hover:scale-[1.015] group-hover:blur-md"
         />
       </div>
+
+      {/* Picture + Content */}
       <ProfilPicture user={user} isCurrentUser={isCurrentUser} />
       <ProfilContent
         firstName={firstName}
         lastName={lastName}
         pseudo={pseudo}
       />
+
+      {/* Modal */}
       <ChangeBannerModal
         currentBanner={banner || defaultBanner}
         isOpen={isBannerModalOpen}
