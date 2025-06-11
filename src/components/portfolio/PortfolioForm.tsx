@@ -165,15 +165,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <div className="flex space-x-2 mt-4">
                   <button
                     type="button"
-                    onClick={() => onPreview(value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors text-sm"
-                  >
-                    Aperçu
-                  </button>{" "}
-                  <button
-                    type="button"
                     onClick={() => onFieldUpdate("selectedTemplate", value)}
-                    className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                    className={`cursor-pointer flex-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                       formState.selectedTemplate === value
                         ? "bg-blue-600 text-white shadow-md"
                         : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700"
@@ -211,7 +204,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 type="button"
                 onClick={onPrevPage}
                 disabled={formState.currentPage === 0}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="cursor-pointer px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Précédent
               </button>
@@ -222,7 +215,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     key={i}
                     type="button"
                     onClick={() => onSetPage(i)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`cursor-pointer px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       formState.currentPage === i
                         ? "bg-blue-600 text-white"
                         : "text-gray-700 hover:bg-gray-100"
@@ -237,7 +230,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 type="button"
                 onClick={onNextPage}
                 disabled={formState.currentPage === totalPages - 1}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="cursor-pointer px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Suivant
               </button>

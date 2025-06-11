@@ -46,7 +46,7 @@ export const CreatePortfolio = () => {
         isPublic: formData.isPublic,
       });
 
-      navigate(`/portfolio/${newPortfolio.id}`);
+      navigate(`/portfolio/${newPortfolio.id}`, {replace: true});
     } catch (error) {
       console.error("Error creating portfolio:", error);
     } finally {
