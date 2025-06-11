@@ -54,7 +54,7 @@ export const BackgroundCarousel = () => {
       </div>
       <div className="bottom-path w-fit mt-4 h-fit flex items-center overflow-hidden whitespace-nowrap">
         <Slider {...sliderSettings(false)}>
-          {duplicatedImages.map((src, index) => (
+          {duplicatedImages.reverse().map((src, index) => (
             <div key={`bottom-${index}`} className="pr-8">
               <div className="background-card h-[22vh] w-[19vw] bg-neutral-900 rounded-[12px] overflow-hidden shadow-[5px_3px_10px_2px_rgba(0,0,0,0.25)] min-w-[200px]">
                 <img

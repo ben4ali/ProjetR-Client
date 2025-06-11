@@ -19,6 +19,7 @@ import gsap from "gsap";
 import { CreatePortfolio } from "./pages/CreatePortfolio";
 import { PortfolioView } from "./pages/PortfolioView";
 import { PortfolioEdit } from "./pages/PortfolioEdit";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function Navbar() {
   const loggedIn = isLoggedIn();
@@ -117,21 +118,26 @@ function Navbar() {
       <div className="flex items-center gap-4">
         <Link to="/explore" className="flex items-center gap-4">
           <img src={rosemontLogo} alt="logo" className="h-10 opacity-80" />
-          <p className="hidden lg:block text-gray-700 whitespace-nowrap">Rosemont DevHub</p>
+          <p className="hidden lg:block text-gray-700 whitespace-nowrap">
+            Rosemont DevHub
+          </p>
         </Link>
       </div>
 
       <ul className="flex gap-12 w-3/4 items-center justify-end lg:gap-5 lg:w-[90%]">
         <li>
-          <Link to="/explore" className="text-gray-600/70 no-underline transition-all duration-200 hover:text-black/90 lg:text-xl">
+          <Link
+            to="/explore"
+            className="text-gray-600/70 no-underline transition-all duration-200 hover:text-black/90 lg:text-xl"
+          >
             Explore
           </Link>
         </li>
         <div className="flex items-center gap-4 w-[30%] relative lg:hidden">
           <i className="bi bi-search absolute left-5 text-black/50"></i>
-          <input 
-            type="text" 
-            placeholder="Rechercher..." 
+          <input
+            type="text"
+            placeholder="Rechercher..."
             className="rounded-full py-2 px-4 pl-12 w-full border border-black/20 outline-none text-black/75 bg-transparent transition-all duration-200 focus:border-black/50 focus:bg-black/5"
           />
         </div>
@@ -157,17 +163,14 @@ function Navbar() {
                   crossOrigin="anonymous"
                   referrerPolicy="no-referrer"
                 />
-                <div
-                  ref={dialogRef}
-                  style={{ display: "none", opacity: 0 }}
-                >
+                <div ref={dialogRef} style={{ display: "none", opacity: 0 }}>
                   <div className="absolute top-full right-0 mt-2 w-56 bg-gradient-to-br from-white via-gray-50 to-blue-50 border border-gray-200/60 rounded-xl shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
                     <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-3 text-white">
                       <p className="font-semibold text-sm leading-tight">
                         {user?.firstName} {user?.lastName}
                       </p>
                       <p className="text-blue-100 text-xs opacity-90 mt-1">
-                        @{user?.firstName?.toLowerCase()}
+                        @{user?.username?.toLowerCase()}
                       </p>
                     </div>
 
@@ -212,7 +215,10 @@ function Navbar() {
           </>
         ) : (
           <li>
-            <Link className="h-10 w-10 text-2xl rounded-full relative hover:bg-white/30 transition-all duration-200 flex items-center justify-center lg:text-base" to="/authentification">
+            <Link
+              className="h-10 w-10 text-2xl rounded-full relative hover:bg-white/30 transition-all duration-200 flex items-center justify-center lg:text-base"
+              to="/authentification"
+            >
               <i className="bi bi-person-fill"></i>
             </Link>
           </li>
@@ -251,9 +257,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 }
 

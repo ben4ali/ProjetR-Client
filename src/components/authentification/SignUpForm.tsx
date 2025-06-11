@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { useSignup } from "../../hooks/use-auth";
+import {
+  useFirebaseGoogleLogin,
+  useGoogleLogin,
+  useSignup,
+} from "../../hooks/use-auth";
 
 interface SignupProps {
   toggleForm: () => void;
@@ -14,6 +18,8 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const signupMutation = useSignup();
+  const firebaseGoogleLoginMutation = useFirebaseGoogleLogin();
+  const googleLoginMutation = useGoogleLogin();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,11 +36,42 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
         onError: (err: Error | unknown) => {
           console.error("Erreur lors de l'inscription :", err);
         },
-      },
+      }
     );
   };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      const result = await firebaseGoogleLoginMutation.mutateAsync();
+      console.log("✅ Firebase Google Sign-Up Success:", result.user.email);
+
+      await googleLoginMutation.mutateAsync({ idToken: result.idToken });
+      console.log("✅ Backend authentication success");
+
+      // AuthManager handles token storage via the mutation's onSuccess
+      window.location.href = "/explore";
+    } catch (error: any) {
+      console.error("❌ Google Sign-Up Error:", error);
+
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("User closed the sign-up popup");
+        firebaseGoogleLoginMutation.reset();
+      } else if (error.code === "auth/popup-blocked") {
+        alert("Please allow popups for this site to sign up with Google");
+        firebaseGoogleLoginMutation.reset();
+      } else if (error.message?.includes("Firebase")) {
+        alert(
+          "Authentication service unavailable. Please check your internet connection."
+        );
+        firebaseGoogleLoginMutation.reset();
+      } else {
+        alert("Sign-up failed. Please try again.");
+        firebaseGoogleLoginMutation.reset();
+      }
+    }
+  };
   return (
-    <div className="form-container signup z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[50px] saturate-180 mt-[5%] min-h-[70vh]">
+    <div className="form-container signup z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[25px] saturate-150 mt-[5%] min-h-[70vh]">
       <div className="form-header flex justify-center w-full">
         <h3 className="text-[40px] font-light text-black/90">INSCRIPTION</h3>
       </div>
@@ -137,6 +174,43 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             S&apos;inscrire
           </button>
         </form>
+
+        {/* Google Sign-Up Section */}
+        <div className="w-full mt-6">
+          <div className="external-login-title flex justify-center items-center text-center w-full text-black/50 relative h-8 mt-4 before:content-[''] before:w-1/4 before:h-[2px] before:bg-black/50 before:mx-2 after:content-[''] after:w-1/4 after:h-[2px] after:bg-black/50 after:mx-2">
+            <h5>Services externes</h5>
+          </div>
+          <div className="link-holders flex justify-center gap-4 mt-4">
+            <button
+              type="button"
+              onClick={handleGoogleSignUp}
+              disabled={firebaseGoogleLoginMutation.isPending}
+              className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-slate-300 via-gray-200 to-slate-300 hover:from-slate-200 hover:via-gray-100 hover:to-slate-200 text-gray-800 border border-slate-400/60 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:shadow-slate-300/50 hover:scale-[1.02] font-medium"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <path
+                  fill="#4285F4"
+                  d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"
+                />
+              </svg>
+              {firebaseGoogleLoginMutation.isPending
+                ? "Connexion..."
+                : "Continuer avec Google"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

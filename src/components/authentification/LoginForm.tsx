@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-import { useGoogleLogin, useLogin } from "../../hooks/use-auth";
+import React, { useState } from "react";
+import {
+  useFirebaseGoogleLogin,
+  useGoogleLogin,
+  useLogin,
+} from "../../hooks/use-auth";
 
 interface LoginFormProps {
   toggleForm: () => void;
@@ -10,6 +14,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loginMutation = useLogin();
+  const firebaseGoogleLoginMutation = useFirebaseGoogleLogin();
   const googleLoginMutation = useGoogleLogin();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -17,46 +22,55 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     loginMutation.mutate(
       { email, password },
       {
-        onSuccess: (response) => {
-          localStorage.setItem("token", response.token);
+        onSuccess: () => {
+          // AuthManager will handle token storage via the mutation's onSuccess
           window.location.href = "/explore";
         },
-      },
+        onError: (error: Error | unknown) => {
+          console.error("Login error:", error);
+          alert(
+            (error as any)?.response?.data?.message ||
+              "Erreur de connexion. Veuillez vérifier vos identifiants."
+          );
+        },
+      }
     );
   };
 
-  useEffect(() => {
-    if (!(window as any).google || !(window as any).google.accounts) {
-      console.error("Le script Google Sign-In n'est pas chargé.");
-      return;
-    }
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await firebaseGoogleLoginMutation.mutateAsync();
+      console.log("✅ Firebase Google Sign-In Success:", result.user.email);
 
-    (window as any).google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      callback: (response: any) => {
-        googleLoginMutation.mutate(
-          { idToken: response.credential },
-          {
-            onSuccess: (apiResponse) => {
-              localStorage.setItem("token", apiResponse.token);
-              window.location.href = "/explore";
-            },
-            onError: (err: any) => {
-              console.error("Erreur lors de la connexion avec Google :", err);
-            },
-          },
+      await googleLoginMutation.mutateAsync({
+        idToken: result.idToken,
+      });
+      console.log("✅ Backend authentication success");
+
+      // AuthManager handles token storage via the mutation's onSuccess
+      window.location.href = "/explore";
+    } catch (error: any) {
+      console.error("❌ Google Sign-In Error:", error);
+
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("User closed the sign-in popup");
+      } else if (error.code === "auth/popup-blocked") {
+        alert("Please allow popups for this site to sign in with Google");
+        firebaseGoogleLoginMutation.reset();
+      } else if (error.message?.includes("Firebase")) {
+        alert(
+          "Authentication service unavailable. Please check your internet connection."
         );
-      },
-    });
-
-    (window as any).google.accounts.id.renderButton(
-      document.getElementById("google-signin-button"),
-      { theme: "outline", size: "large" },
-    );
-  }, []);
+        firebaseGoogleLoginMutation.reset();
+      } else {
+        alert("Sign-in failed. Please try again.");
+        firebaseGoogleLoginMutation.reset();
+      }
+    }
+  };
 
   return (
-    <div className="form-container z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[50px] saturate-180">
+    <div className="form-container z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[25px] saturate-180">
       <div className="form-header flex justify-center w-full">
         <h3 className="text-[40px] font-light text-black/90">CONNEXION</h3>
       </div>
@@ -112,7 +126,34 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <h5>Services externes</h5>
         </div>
         <div className="link-holders flex justify-center gap-4">
-          <div id="google-signin-button"></div>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            disabled={firebaseGoogleLoginMutation.isPending}
+            className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-slate-300 via-gray-200 to-slate-300 hover:from-slate-200 hover:via-gray-100 hover:to-slate-200 text-gray-800 border border-slate-400/60 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:shadow-slate-300/50 hover:scale-[1.02] font-medium"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18">
+              <path
+                fill="#4285F4"
+                d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"
+              />
+              <path
+                fill="#34A853"
+                d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"
+              />
+              <path
+                fill="#EA4335"
+                d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"
+              />
+            </svg>
+            {firebaseGoogleLoginMutation.isPending
+              ? "Connexion..."
+              : "Continuer avec Google"}
+          </button>
         </div>
         <div className="register-link text-black/50 text-[15px] p-0 m-0 h-fit">
           <h5 className="m-0 p-0 font-light">
