@@ -9,6 +9,12 @@ import {
   MinimalistTemplate,
   DeveloperTemplate,
   DesignerTemplate,
+  NeuralTemplate,
+  PrismTemplate,
+  CupertinoTemplate,
+  QuantumTemplate,
+  MeteorTemplate,
+  HologramTemplate,
 } from "../components/portfolio/templates";
 
 export const PortfolioView: FC = () => {
@@ -70,6 +76,18 @@ export const PortfolioView: FC = () => {
         return <DeveloperTemplate {...templateProps} />;
       case "designer":
         return <DesignerTemplate {...templateProps} />;
+      case "neural":
+        return <NeuralTemplate {...templateProps} />;
+      case "prism":
+        return <PrismTemplate {...templateProps} />;
+      case "cupertino":
+        return <CupertinoTemplate {...templateProps} />;
+      case "quantum":
+        return <QuantumTemplate {...templateProps} />;
+      case "meteor":
+        return <MeteorTemplate {...templateProps} />;
+      case "hologram":
+        return <HologramTemplate {...templateProps} />;
       default:
         return <ModernTemplate {...templateProps} />;
     }

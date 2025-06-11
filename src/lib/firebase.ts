@@ -13,13 +13,13 @@ const firebaseConfig = {
 
 const requiredKeys = ["apiKey", "authDomain", "projectId"];
 const missingKeys = requiredKeys.filter(
-  (key) => !firebaseConfig[key as keyof typeof firebaseConfig]
+  (key) => !firebaseConfig[key as keyof typeof firebaseConfig],
 );
 
 if (missingKeys.length > 0) {
   console.error("🔥 Firebase configuration missing:", missingKeys);
   console.error(
-    "Please check your .env file and ensure all Firebase variables are set"
+    "Please check your .env file and ensure all Firebase variables are set",
   );
 } else {
   console.log("🔥 Firebase configuration loaded successfully");

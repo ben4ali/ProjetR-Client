@@ -30,10 +30,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           console.error("Login error:", error);
           alert(
             (error as any)?.response?.data?.message ||
-              "Erreur de connexion. Veuillez vérifier vos identifiants."
+              "Erreur de connexion. Veuillez vérifier vos identifiants.",
           );
         },
-      }
+      },
     );
   };
 
@@ -59,7 +59,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         firebaseGoogleLoginMutation.reset();
       } else if (error.message?.includes("Firebase")) {
         alert(
-          "Authentication service unavailable. Please check your internet connection."
+          "Authentication service unavailable. Please check your internet connection.",
         );
         firebaseGoogleLoginMutation.reset();
       } else {

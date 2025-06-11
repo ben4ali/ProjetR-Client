@@ -8,6 +8,12 @@ export const PORTFOLIO_TEMPLATES = {
   MINIMALIST: "minimalist",
   DEVELOPER: "developer",
   DESIGNER: "designer",
+  NEURAL: "neural",
+  PRISM: "prism",
+  CUPERTINO: "cupertino",
+  QUANTUM: "quantum",
+  METEOR: "meteor",
+  HOLOGRAM: "hologram",
 } as const;
 
 export type PortfolioTemplate =

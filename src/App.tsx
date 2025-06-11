@@ -88,7 +88,7 @@ function Navbar() {
         y: 0,
         duration: 0.2,
         ease: "power2.out",
-      }
+      },
     );
   };
 

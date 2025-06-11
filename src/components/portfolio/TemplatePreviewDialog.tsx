@@ -9,6 +9,12 @@ import {
   MinimalistTemplate,
   DeveloperTemplate,
   DesignerTemplate,
+  NeuralTemplate,
+  PrismTemplate,
+  CupertinoTemplate,
+  QuantumTemplate,
+  MeteorTemplate,
+  HologramTemplate,
 } from "./templates";
 
 interface TemplatePreviewDialogProps {
@@ -50,6 +56,18 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <DeveloperTemplate {...templateProps} />;
       case "designer":
         return <DesignerTemplate {...templateProps} />;
+      case "neural":
+        return <NeuralTemplate {...templateProps} />;
+      case "prism":
+        return <PrismTemplate {...templateProps} />;
+      case "cupertino":
+        return <CupertinoTemplate {...templateProps} />;
+      case "quantum":
+        return <QuantumTemplate {...templateProps} />;
+      case "meteor":
+        return <MeteorTemplate {...templateProps} />;
+      case "hologram":
+        return <HologramTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
     }

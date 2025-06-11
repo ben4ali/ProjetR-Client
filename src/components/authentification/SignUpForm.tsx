@@ -36,7 +36,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
         onError: (err: Error | unknown) => {
           console.error("Erreur lors de l'inscription :", err);
         },
-      }
+      },
     );
   };
 
@@ -61,7 +61,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
         firebaseGoogleLoginMutation.reset();
       } else if (error.message?.includes("Firebase")) {
         alert(
-          "Authentication service unavailable. Please check your internet connection."
+          "Authentication service unavailable. Please check your internet connection.",
         );
         firebaseGoogleLoginMutation.reset();
       } else {

@@ -7,7 +7,13 @@ type DialogVariant =
   | "creative"
   | "minimalist"
   | "developer"
-  | "designer";
+  | "designer"
+  | "neural"
+  | "prism"
+  | "cupertino"
+  | "quantum"
+  | "meteor"
+  | "hologram";
 
 interface ProjectVideoDialogProps {
   isOpen: boolean;
@@ -134,6 +140,107 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
           githubButton: "bg-gray-900 hover:bg-gray-800 text-white",
           liveButton:
             "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white",
+        };
+
+      case "neural":
+        return {
+          overlay: "bg-black bg-opacity-90",
+          container:
+            "bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-blue-400/20",
+          header: "border-b border-blue-400/30 bg-gray-800/50",
+          title:
+            "text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent",
+          closeButton: "text-blue-300 hover:text-white",
+          content: "bg-gray-900/30",
+          description: "text-gray-300",
+          sectionTitle: "text-lg font-semibold text-blue-300 mb-2",
+          tag: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
+          githubButton: "bg-blue-600 hover:bg-blue-700 text-white",
+          liveButton: "bg-purple-600 hover:bg-purple-700 text-white",
+        };
+
+      case "prism":
+        return {
+          overlay: "bg-black bg-opacity-75",
+          container:
+            "bg-white/10 backdrop-blur-xl text-white rounded-3xl shadow-2xl border border-white/20",
+          header: "border-b border-white/20 bg-white/5",
+          title: "text-2xl font-bold text-white",
+          closeButton: "text-white/70 hover:text-white",
+          content: "bg-white/5",
+          description: "text-white/90",
+          sectionTitle: "text-lg font-semibold text-white mb-2",
+          tag: "bg-white/20 text-white border border-white/30",
+          githubButton:
+            "bg-white/20 hover:bg-white/30 text-white border border-white/30",
+          liveButton: "bg-white text-gray-900 hover:bg-white/90",
+        };
+
+      case "cupertino":
+        return {
+          overlay: "bg-black bg-opacity-50",
+          container: "bg-white text-gray-900 rounded-3xl shadow-2xl",
+          header: "border-b border-gray-100 bg-gray-50/50",
+          title: "text-2xl font-semibold text-gray-900 tracking-tight",
+          closeButton: "text-gray-400 hover:text-gray-600",
+          content: "bg-white",
+          description: "text-gray-700 leading-relaxed",
+          sectionTitle: "text-lg font-medium text-gray-900 mb-2",
+          tag: "bg-gray-100 text-gray-700 border border-gray-200",
+          githubButton: "bg-gray-900 hover:bg-gray-800 text-white",
+          liveButton: "bg-blue-500 hover:bg-blue-600 text-white",
+        };
+
+      case "quantum":
+        return {
+          overlay: "bg-black bg-opacity-90",
+          container:
+            "bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-cyan-400/30",
+          header: "border-b border-cyan-400/30 bg-gray-800/50",
+          title:
+            "text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent",
+          closeButton: "text-cyan-300 hover:text-white",
+          content: "bg-gray-900/30",
+          description: "text-gray-300",
+          sectionTitle: "text-lg font-semibold text-cyan-300 mb-2",
+          tag: "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30",
+          githubButton: "bg-cyan-600 hover:bg-cyan-700 text-white",
+          liveButton: "bg-purple-600 hover:bg-purple-700 text-white",
+        };
+
+      case "meteor":
+        return {
+          overlay: "bg-black bg-opacity-90",
+          container:
+            "bg-gradient-to-br from-gray-900 via-orange-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-orange-400/30",
+          header: "border-b border-orange-400/30 bg-gray-800/50",
+          title:
+            "text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent",
+          closeButton: "text-orange-300 hover:text-white",
+          content: "bg-gray-900/30",
+          description: "text-gray-300",
+          sectionTitle: "text-lg font-semibold text-orange-300 mb-2",
+          tag: "bg-orange-500/20 text-orange-400 border border-orange-500/30",
+          githubButton: "bg-orange-600 hover:bg-orange-700 text-white",
+          liveButton: "bg-red-600 hover:bg-red-700 text-white",
+        };
+
+      case "hologram":
+        return {
+          overlay: "bg-black bg-opacity-95",
+          container:
+            "bg-black/90 text-cyan-400 rounded-lg shadow-2xl border border-cyan-400/50 backdrop-blur-sm font-mono",
+          header: "border-b border-cyan-400/50 bg-black/50",
+          title: "text-2xl font-bold text-cyan-400 font-mono",
+          closeButton: "text-cyan-400/70 hover:text-cyan-100",
+          content: "bg-black/20",
+          description: "text-cyan-100 font-mono text-sm",
+          sectionTitle: "text-lg font-bold text-cyan-400 mb-2 font-mono",
+          tag: "bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 font-mono text-sm",
+          githubButton:
+            "bg-cyan-500/20 hover:bg-cyan-400/20 text-cyan-400 border border-cyan-400/50 font-mono",
+          liveButton:
+            "bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold",
         };
 
       default:
