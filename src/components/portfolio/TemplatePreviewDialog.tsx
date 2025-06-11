@@ -33,7 +33,6 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
 
   if (!isOpen || !user) return null;
 
-  // Create mock portfolio with user's actual projects
   const mockPortfolio = createMockPortfolio(
     user,
     template,
@@ -83,7 +82,7 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
       <div className="relative bg-white rounded-lg shadow-2xl max-w-6xl max-h-[90vh] w-full mx-4 overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
           <h2 className="text-2xl font-bold text-gray-900 capitalize">
-            {template} Template Preview
+            preview du template {template}
           </h2>
           <button
             onClick={onClose}
@@ -107,7 +106,7 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
 
         <div className="relative">
           <div className="absolute top-4 left-4 z-10 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
-            Preview Mode
+            Mode aperçu
           </div>
 
           <div className="h-[70vh] overflow-y-auto bg-gray-100">
@@ -117,15 +116,15 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
 
         <div className="flex justify-between items-center p-6 border-t border-gray-200 bg-gray-50">
           <p className="text-sm text-gray-600">
-            This is a preview of how your portfolio will look with the{" "}
-            {template} template.
+            Ceci est un apércu du template {template}. Vous pouvez le
+            personnaliser davantage dans l'éditeur de portfolio.
           </p>
           <div className="flex space-x-3">
             <button
               onClick={onClose}
               className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
-              Close Preview
+              Fermer
             </button>
           </div>
         </div>

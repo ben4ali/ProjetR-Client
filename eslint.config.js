@@ -12,6 +12,7 @@ export default [
     rules: {
       ...pluginReact.configs.flat.recommended.rules,
       "react/react-in-jsx-scope": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
