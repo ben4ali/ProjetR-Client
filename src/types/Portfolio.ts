@@ -45,7 +45,7 @@ export interface CreatePortfolioData {
   githubUrl?: string;
   linkedinUrl?: string;
   websiteUrl?: string;
-  projectIds?: number[];
+  projets?: Partial<Projet>[];
   customization?: Record<string, unknown>;
   yearsOfExperience?: number;
   cvDownloadUrl?: string;

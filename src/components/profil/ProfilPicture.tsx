@@ -29,6 +29,7 @@ export const ProfilPicture: FC<ProfilePictureProps> = ({
           alt="profil-pic"
           crossOrigin="anonymous"
           className="h-full w-full rounded-full border-[7px] border-white/30 object-cover shadow-[0px_0px_20px_5px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-in-out group-hover:scale-[1.005] group-hover:-translate-y-[1%] group-hover:shadow-[0px_15px_22px_10px_rgba(0,0,0,0.2)]"
+          referrerPolicy="no-referrer"
         />
       </div>
 

@@ -41,7 +41,7 @@ export const CreatePortfolio = () => {
         title: title || undefined,
         about: about || undefined,
         skills: skills.length > 0 ? skills : undefined,
-        projectIds: selectedProjects.length > 0 ? selectedProjects : undefined,
+        projets: selectedProjects.map(id => ({ id })),
         githubUrl: githubUrl || undefined,
         linkedinUrl: linkedinUrl || undefined,
         websiteUrl: websiteUrl || undefined,

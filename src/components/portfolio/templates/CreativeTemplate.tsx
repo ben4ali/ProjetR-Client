@@ -222,10 +222,9 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                           className="w-full h-full object-cover"
                           src={projet.demoUrl}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-neutral-800/75" />
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="text-4xl mb-4">🎨</div>
                             <h3 className="text-xl font-bold mb-2 text-white drop-shadow-lg">
                               {projet.title}
                             </h3>
@@ -243,7 +242,6 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                     ) : (
                       <div className="w-full h-full bg-black rounded-2xl flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                         <div className="text-center">
-                          <div className="text-4xl mb-4">🎨</div>
                           <h3 className="text-xl font-bold mb-2">
                             {projet.title}
                           </h3>
@@ -259,7 +257,7 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                       </div>
                     )}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-neutral-800/75 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                     <div className="flex space-x-2">
                       {projet.demoUrl ? (
                         <button className="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform">
@@ -287,7 +285,6 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                     <div className="aspect-square bg-gradient-to-br from-pink-500 via-purple-600 to-blue-600 p-1">
                       <div className="w-full h-full bg-black rounded-2xl flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                         <div className="text-center">
-                          <div className="text-4xl mb-4">🎨</div>
                           <h3 className="text-xl font-bold mb-2">
                             Projet {project}
                           </h3>
