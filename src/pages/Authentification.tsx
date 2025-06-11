@@ -1,7 +1,6 @@
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import Threads from "../blocks/Backgrounds/Threads/Threads";
-import { BackgroundCarousel } from "../components/authentification/BackgroundCarousel";
 import { LoginForm } from "../components/authentification/LoginForm";
 import { Signup } from "../components/authentification/SignUpForm";
 
@@ -96,7 +95,7 @@ export const Authentification = () => {
     <div className="authentification-container relative flex justify-center items-center h-screen w-screen overflow-hidden bg-white">
       <div
         ref={loginRef}
-        className="form-wrapper relative z-[5] backdrop-blur-[50px] saturate-180 transition-opacity transition-filter duration-500 ease-in-out"
+        className="form-wrapper bg-zinc-500/50 relative z-[5] backdrop-blur-[50px] saturate-180 transition-opacity transition-filter duration-500 ease-in-out"
         style={{
           display: isLogin ? "block" : "none",
         }}
@@ -105,13 +104,12 @@ export const Authentification = () => {
       </div>
       <div
         ref={signupRef}
-        className="form-wrapper relative z-[5] backdrop-blur-[50px] saturate-180 transition-opacity transition-filter duration-500 ease-in-out"
+        className="form-wrapper bg-zinc-500/50 relative z-[5] backdrop-blur-[50px] saturate-180 transition-opacity transition-filter duration-500 ease-in-out"
         style={{ display: !isLogin ? "block" : "none" }}
       >
         <Signup toggleForm={toggleForm} />
       </div>
-      <BackgroundCarousel />
-      <div className="thread-container absolute top-1/2 w-full h-full -translate-y-1/2 z-[1] overflow-hidden blur-[3px]">
+      <div className="thread-container absolute top-1/2 w-full h-full -translate-y-1/2 z-[1] overflow-hidden blur-[3px] bg-black/20">
         <Threads
           amplitude={4.9}
           distance={0.8}
