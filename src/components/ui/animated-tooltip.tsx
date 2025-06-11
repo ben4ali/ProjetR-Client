@@ -74,29 +74,29 @@ export const AnimatedTooltip = ({
               </motion.div>
             )}
           </AnimatePresence>
-            {item.id > 0 ? (
+          {item.id > 0 ? (
             <Link to={"/profil/" + item.id}>
               <img
-              onMouseMove={handleMouseMove}
-              height={100}
-              width={100}
-              src={item.image}
-              alt={item.name}
-              className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
+                onMouseMove={handleMouseMove}
+                height={100}
+                width={100}
+                src={item.image}
+                alt={item.name}
+                className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
               />
             </Link>
-            ) : (
+          ) : (
             <a>
               <img
-              onMouseMove={handleMouseMove}
-              height={100}
-              width={100}
-              src={item.image}
-              alt={item.name}
-              className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
+                onMouseMove={handleMouseMove}
+                height={100}
+                width={100}
+                src={item.image}
+                alt={item.name}
+                className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
               />
             </a>
-            )}
+          )}
         </div>
       ))}
     </>

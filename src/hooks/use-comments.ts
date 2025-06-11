@@ -10,7 +10,7 @@ export function useCommentsByProject(projetId?: string | number) {
     queryKey: ["comments", "project", projetId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/comments/projet/${projetId}`
+        `${API_URL}/comments/projet/${projetId}`,
       );
       return data;
     },
@@ -44,7 +44,7 @@ export function useCreateComment() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },
@@ -62,7 +62,7 @@ export function useRepliesToComment(commentId?: string | number) {
     queryKey: ["comments", "replies", commentId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/comments/replies/${commentId}`
+        `${API_URL}/comments/replies/${commentId}`,
       );
       return data;
     },
@@ -98,7 +98,7 @@ export function useReplyToComment() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },

@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import default_profil from '../assets/images/default_profil.png';
-import { useCourses } from '../hooks/use-courses';
-import { useCreateProject } from '../hooks/use-project';
-import { useTags } from '../hooks/use-tags';
-import { useSearchUsers } from '../hooks/use-users';
-import { User } from '../types/User';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import default_profil from "../assets/images/default_profil.png";
+import { useCourses } from "../hooks/use-courses";
+import { useCreateProject } from "../hooks/use-project";
+import { useTags } from "../hooks/use-tags";
+import { useSearchUsers } from "../hooks/use-users";
+import { User } from "../types/User";
 
 export const Publish = () => {
   const navigate = useNavigate();
   const [video, setVideo] = useState<File | null>(null);
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
-  const [titre, setTitre] = useState('');
-  const [description, setDescription] = useState('');
-  const [lienGitHub, setLienGitHub] = useState('');
-  const [lienGitlab, setLienGitlab] = useState('');
+  const [titre, setTitre] = useState("");
+  const [description, setDescription] = useState("");
+  const [lienGitHub, setLienGitHub] = useState("");
+  const [lienGitlab, setLienGitlab] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
   const [collaborators, setCollaborators] = useState<string[]>([]);
-  const [course, setCourse] = useState('');
-  const [session, setSession] = useState('');
-  const [teacher, setTeacher] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [course, setCourse] = useState("");
+  const [session, setSession] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Utiliser React Query hooks
   const { data: availableTags = [] } = useTags();
@@ -44,7 +44,7 @@ export const Publish = () => {
 
   // add tag
   const handleCategoryAdd = (category: string) => {
-    if (category.trim() !== '' && !categories.includes(category)) {
+    if (category.trim() !== "" && !categories.includes(category)) {
       setCategories([...categories, category]);
     }
   };
@@ -55,23 +55,23 @@ export const Publish = () => {
     if (!collaborators.includes(userName)) {
       setCollaborators([...collaborators, userName]);
     }
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   // add unknown collaborator
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && searchTerm.trim() !== '') {
+    if (event.key === "Enter" && searchTerm.trim() !== "") {
       event.preventDefault();
       const userName = searchTerm.trim();
       if (!collaborators.includes(userName)) {
         setCollaborators([...collaborators, userName]);
       }
-      setSearchTerm('');
+      setSearchTerm("");
     }
   };
 
   const handleDefaultBehavior = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
     }
   };
@@ -94,17 +94,17 @@ export const Publish = () => {
     createProjectMutation.mutate(
       { projectData, video },
       {
-        onSuccess: response => {
-          console.log('Project published successfully:', response);
+        onSuccess: (response) => {
+          console.log("Project published successfully:", response);
           navigate(`/watch/${response.id}`);
         },
-        onError: error => {
-          console.error('Error publishing project:', error);
+        onError: (error) => {
+          console.error("Error publishing project:", error);
         },
         onSettled: () => {
           resetForm();
         },
-      }
+      },
     );
   };
 
@@ -112,30 +112,30 @@ export const Publish = () => {
   const resetForm = () => {
     setVideo(null);
     setVideoPreview(null);
-    setTitre('');
-    setDescription('');
-    setLienGitHub('');
-    setLienGitlab('');
+    setTitre("");
+    setDescription("");
+    setLienGitHub("");
+    setLienGitlab("");
     setCategories([]);
     setCollaborators([]);
-    setCourse('');
-    setSession('');
-    setTeacher('');
+    setCourse("");
+    setSession("");
+    setTeacher("");
   };
 
   // form validation
   const isFormValid = () =>
-    video && titre.trim() !== '' && description.trim() !== '';
+    video && titre.trim() !== "" && description.trim() !== "";
 
   // validation message
   const getValidationMessage = () => {
     const missingFields = [];
-    if (!video) missingFields.push('Vidéo');
-    if (titre.trim() === '') missingFields.push('Titre');
-    if (description.trim() === '') missingFields.push('Description');
+    if (!video) missingFields.push("Vidéo");
+    if (titre.trim() === "") missingFields.push("Titre");
+    if (description.trim() === "") missingFields.push("Description");
     return missingFields.length > 0
-      ? `Veuillez remplir les champs suivants : ${missingFields.join(', ')}`
-      : '';
+      ? `Veuillez remplir les champs suivants : ${missingFields.join(", ")}`
+      : "";
   };
 
   return (
@@ -179,14 +179,14 @@ export const Publish = () => {
           {/* Title */}
           <div className="relative flex flex-col form-group">
             <label className="text-[1.1rem] font-semibold text-[#555] mb-2 flex items-center">
-              Titre du projet{' '}
+              Titre du projet{" "}
               <span className="text-[1.2rem] text-[#f35844]">*</span>
             </label>
             <input
               type="text"
               placeholder="Titre du projet"
               value={titre}
-              onChange={e => setTitre(e.target.value)}
+              onChange={(e) => setTitre(e.target.value)}
               onKeyDown={handleDefaultBehavior}
               className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
@@ -195,12 +195,12 @@ export const Publish = () => {
           {/* Description */}
           <div className="relative flex flex-col form-group">
             <label className="text-[1.1rem] font-semibold text-[#555] mb-2 flex items-center">
-              Description{' '}
+              Description{" "}
               <span className="text-[1.2rem] text-[#f35844]">*</span>
             </label>
             <textarea
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Décrivez votre projet..."
               onKeyDown={handleDefaultBehavior}
               className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)] resize-y min-h-[100px]"
@@ -218,14 +218,14 @@ export const Publish = () => {
             </div>
             <div className="relative flex flex-col gap-2 select-group">
               <select
-                onChange={e => handleCategoryAdd(e.target.value)}
+                onChange={(e) => handleCategoryAdd(e.target.value)}
                 defaultValue=""
                 className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               >
                 <option value="" disabled>
                   Sélectionner une catégorie
                 </option>
-                {availableTags.map(tag => (
+                {availableTags.map((tag) => (
                   <option key={tag.id} value={tag.name}>
                     {tag.name}
                   </option>
@@ -239,7 +239,7 @@ export const Publish = () => {
                   key={index}
                   className="bg-[#0d0d0e] text-white px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#282828] cursor-pointer"
                   onClick={() =>
-                    setCategories(categories.filter(cat => cat !== category))
+                    setCategories(categories.filter((cat) => cat !== category))
                   }
                 >
                   <p className="text-[0.8rem] text-[#e5e5e6] font-medium m-0">
@@ -261,7 +261,7 @@ export const Publish = () => {
               <input
                 type="url"
                 value={lienGitHub}
-                onChange={e => setLienGitHub(e.target.value)}
+                onChange={(e) => setLienGitHub(e.target.value)}
                 placeholder="Lien vers le code source GitHub"
                 className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
@@ -275,7 +275,7 @@ export const Publish = () => {
               <input
                 type="url"
                 value={lienGitlab}
-                onChange={e => setLienGitlab(e.target.value)}
+                onChange={(e) => setLienGitlab(e.target.value)}
                 placeholder="Lien vers le code source Gitlab"
                 className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
@@ -296,7 +296,7 @@ export const Publish = () => {
                 type="text"
                 placeholder="Rechercher un collaborateur"
                 value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={handleKeyPress}
               />
               <div
@@ -304,8 +304,8 @@ export const Publish = () => {
                 style={{
                   display:
                     searchResults.length > 0 && searchTerm.length >= 2
-                      ? 'flex'
-                      : 'none',
+                      ? "flex"
+                      : "none",
                 }}
               >
                 {searchResults.map((user, index) => (
@@ -332,7 +332,7 @@ export const Publish = () => {
                   className="bg-[#3e90e8] px-3 py-2 rounded-md text-sm flex justify-between items-center gap-4 collaborator-publish hover:bg-[#3e90e8bd] cursor-pointer"
                   onClick={() =>
                     setCollaborators(
-                      collaborators.filter(col => col !== collaborator)
+                      collaborators.filter((col) => col !== collaborator),
                     )
                   }
                 >
@@ -357,7 +357,7 @@ export const Publish = () => {
             <input
               type="text"
               value={teacher}
-              onChange={e => setTeacher(e.target.value)}
+              onChange={(e) => setTeacher(e.target.value)}
               placeholder="Nom de l'enseignant"
               onKeyDown={handleDefaultBehavior}
               className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
@@ -371,13 +371,13 @@ export const Publish = () => {
               <div className="relative flex flex-col gap-2 select-group">
                 <select
                   value={course}
-                  onChange={e => setCourse(e.target.value)}
+                  onChange={(e) => setCourse(e.target.value)}
                   className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
                     Sélectionner un cours
                   </option>
-                  {availableCourses.map(course => (
+                  {availableCourses.map((course) => (
                     <option key={course.id} value={course.title}>
                       {course.title}
                     </option>
@@ -392,7 +392,7 @@ export const Publish = () => {
               <div className="relative flex flex-col gap-2 select-group">
                 <select
                   value={session}
-                  onChange={e => setSession(e.target.value)}
+                  onChange={(e) => setSession(e.target.value)}
                   className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
@@ -404,11 +404,11 @@ export const Publish = () => {
                     const sessions = [];
 
                     const currentSemester =
-                      currentMonth >= 6 ? 'Automne' : 'Hiver';
+                      currentMonth >= 6 ? "Automne" : "Hiver";
 
                     for (let i = 0; i < 6; i++) {
                       const year = currentYear - Math.floor(i / 2);
-                      const semester = i % 2 === 0 ? 'Hiver' : 'Automne';
+                      const semester = i % 2 === 0 ? "Hiver" : "Automne";
 
                       if (i === 0 && semester === currentSemester) {
                         sessions.push(
@@ -417,7 +417,7 @@ export const Publish = () => {
                             value={`${semester} ${year}`}
                           >
                             {semester} {year}
-                          </option>
+                          </option>,
                         );
                       } else {
                         sessions.push(
@@ -426,7 +426,7 @@ export const Publish = () => {
                             value={`${semester} ${year}`}
                           >
                             {semester} {year}
-                          </option>
+                          </option>,
                         );
                       }
                     }
@@ -447,16 +447,16 @@ export const Publish = () => {
               className="absolute w-full h-[62%] video-preview"
               controls
             >
-              <source src={videoPreview || ''} type="video/mp4" />
+              <source src={videoPreview || ""} type="video/mp4" />
             </video>
             <div className="p-4 absolute text-center bottom-0 w-full h-[38%] flex flex-col items-center justify-center gap-2 video-information">
               <p className="text-[1.05rem] font-semibold text-blue-500">
-                https://rosemont-devhub/watch/{video ? video.name : 'no-video'}
+                https://rosemont-devhub/watch/{video ? video.name : "no-video"}
               </p>
               <p className="text-[0.9rem] text-[#ccc]">
-                {titre.trim() !== ''
+                {titre.trim() !== ""
                   ? `Titre de la vidéo : ${titre}`
-                  : 'Aucune vidéo sélectionnée'}
+                  : "Aucune vidéo sélectionnée"}
               </p>
             </div>
           </div>
@@ -467,14 +467,14 @@ export const Publish = () => {
             type="submit"
             className={`submit-button w-full py-3 px-6 text-base font-bold text-white rounded transition-colors ${
               !isFormValid()
-                ? 'bg-[#ccc] cursor-not-allowed'
-                : 'bg-[#007bff] hover:bg-[#0056b3]'
+                ? "bg-[#ccc] cursor-not-allowed"
+                : "bg-[#007bff] hover:bg-[#0056b3]"
             } md:text-[0.9rem] md:py-2 md:px-4`}
             disabled={!isFormValid() || createProjectMutation.isPending}
           >
             {createProjectMutation.isPending
-              ? 'Publication en cours...'
-              : 'Publier'}
+              ? "Publication en cours..."
+              : "Publier"}
           </button>
         </div>
       </form>

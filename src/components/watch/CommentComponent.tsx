@@ -37,7 +37,7 @@ export const CommentComponent = ({
     if (!replyText.trim()) return;
     replyMutation.mutate(
       { projetId, text: replyText.trim(), parentComment: comment.id },
-      { onSuccess: () => (setReplyText(""), setIsReplying(false)) }
+      { onSuccess: () => (setReplyText(""), setIsReplying(false)) },
     );
   };
 

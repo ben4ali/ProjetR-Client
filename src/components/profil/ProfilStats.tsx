@@ -1,4 +1,3 @@
-
 export const ProfilStats = () => {
   return (
     <div className="mt-6 flex items-center gap-4 md:gap-8 mb-8 md:mb-0">

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useProjectsByTitle } from '../../hooks/use-project';
-import { Projet } from '../../types/Projet';
-import { startVoiceRecognition } from '../../utils/VoiceTranscript';
-import { FilterBar } from './FilterBar';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useProjectsByTitle } from "../../hooks/use-project";
+import { Projet } from "../../types/Projet";
+import { startVoiceRecognition } from "../../utils/VoiceTranscript";
+import { FilterBar } from "./FilterBar";
 interface SearchBarProps {
   onSearchResults: (projects: Projet[], searchQuery: string) => void;
   onFilterResults: (projects: Projet[], isSearching: boolean) => void;
@@ -15,15 +15,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onFilterResults,
   onOpenFilterModal,
 }) => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isListening, setIsListening] = useState(false);
 
   const { data: searchResults, isLoading } = useProjectsByTitle(searchQuery);
   React.useEffect(() => {
     if (searchResults && !isLoading) {
-      onSearchResults(searchResults, searchQuery || '');
+      onSearchResults(searchResults, searchQuery || "");
     }
   }, [searchResults, isLoading, onSearchResults]);
 
@@ -32,12 +32,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setSearchQuery(searchText.trim());
     } else {
       setSearchQuery(undefined);
-      onSearchResults([], '');
+      onSearchResults([], "");
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSearch();
     }
   };
@@ -45,16 +45,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const handleVoiceInput = () => {
     setIsListening(true);
     startVoiceRecognition(
-      transcript => {
+      (transcript) => {
         setSearchText(transcript);
-        setError('');
+        setError("");
         setIsListening(false);
         setSearchQuery(transcript);
       },
-      error => {
+      (error) => {
         setError(error);
         setIsListening(false);
-      }
+      },
     );
   };
 
@@ -66,7 +66,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             type="text"
             placeholder="Rechercher..."
             value={searchText}
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
             onKeyDown={handleKeyDown}
             className="w-full h-12 text-[25px] px-4 rounded-full border-2 border-slate-800/30 outline-none bg-transparent text-slate-700 md:w-[70%] md:text-[20px]"
           />
@@ -85,8 +85,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <button
             className={`hidden md:flex ml-2 text-2xl bg-slate-100 rounded-full h-12 w-12 items-center justify-center cursor-pointer transition-colors ${
               isListening
-                ? 'bg-blue-400 text-white animate-pulse'
-                : 'text-slate-700/80'
+                ? "bg-blue-400 text-white animate-pulse"
+                : "text-slate-700/80"
             }`}
             onClick={handleVoiceInput}
             disabled={isListening || isLoading}

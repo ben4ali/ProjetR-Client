@@ -2,13 +2,7 @@
 	Installed from https://reactbits.dev/ts/default/
 */
 import React from "react";
-import {
-  forwardRef,
-  useMemo,
-  useRef,
-  useEffect,
-  RefObject,
-} from "react";
+import { forwardRef, useMemo, useRef, useEffect, RefObject } from "react";
 import { motion } from "framer-motion";
 import "./VariableProximity.css";
 

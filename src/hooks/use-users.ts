@@ -40,7 +40,7 @@ export function useChangePfp() {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },
@@ -70,7 +70,7 @@ export function useChangeBanner() {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },
@@ -98,7 +98,7 @@ export function useUserByFullName(firstName?: string, lastName?: string) {
     queryKey: ["user", "name", firstName, lastName],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/users/name/${firstName}/${lastName}`
+        `${API_URL}/users/name/${firstName}/${lastName}`,
       );
       return data;
     },

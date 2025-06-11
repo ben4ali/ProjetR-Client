@@ -2,7 +2,10 @@ import { useState } from "react";
 import { CommentComponent } from "./CommentComponent";
 import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
 import { Projet } from "../../types/Projet";
-import { useCommentsByProject, useCreateComment } from "../../hooks/use-comments";
+import {
+  useCommentsByProject,
+  useCreateComment,
+} from "../../hooks/use-comments";
 
 interface CommentSectionProps {
   projet: Projet;
@@ -26,7 +29,7 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
     if (!commentText.trim()) return;
     createCommentMutation.mutate(
       { projetId: projet.id, text: commentText.trim() },
-      { onSuccess: () => setCommentText("") }
+      { onSuccess: () => setCommentText("") },
     );
   };
 
@@ -35,7 +38,9 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
 
   return (
     <div className="comment-container flex flex-col w-full mt-12">
-      <h3 className="text-2xl text-gray-700/80">{comments.length} commentaires</h3>
+      <h3 className="text-2xl text-gray-700/80">
+        {comments.length} commentaires
+      </h3>
 
       {loggedIn && (
         <div className="comment-form flex gap-4 mt-4 w-full">
@@ -64,7 +69,9 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
               </button>
 
               <button
-                disabled={!commentText.trim() || createCommentMutation.isPending}
+                disabled={
+                  !commentText.trim() || createCommentMutation.isPending
+                }
                 onClick={handleComment}
                 className={`px-4 py-2 rounded-full text-white
                             ${commentText.trim() ? "bg-black hover:bg-neutral-700" : "bg-gray-500 cursor-not-allowed"}`}
@@ -78,7 +85,11 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
 
       <div className="comment-holder flex flex-col gap-8 mt-8 pt-12 pb-16 border-t border-black/20">
         {comments.map((comment) => (
-          <CommentComponent key={comment.id} comment={comment} projetId={projet.id} />
+          <CommentComponent
+            key={comment.id}
+            comment={comment}
+            projetId={projet.id}
+          />
         ))}
       </div>
     </div>

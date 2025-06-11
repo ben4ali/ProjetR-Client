@@ -11,11 +11,17 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
   return (
     <div className="link-holder flex flex-col gap-4 mt-8 w-full">
       {github && (
-        <div className="git-link flex items-center justify-between gap-4 h-24 w-full
-                         bg-black/5 rounded-lg px-4">
+        <div
+          className="git-link flex items-center justify-between gap-4 h-24 w-full
+                         bg-black/5 rounded-lg px-4"
+        >
           <div className="link-header flex flex-col justify-between">
-            <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">Lien GitHub</h3>
-            <p className="text-sm text-gray-600">Consulter le code source du projet</p>
+            <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">
+              Lien GitHub
+            </h3>
+            <p className="text-sm text-gray-600">
+              Consulter le code source du projet
+            </p>
           </div>
 
           <a
@@ -32,11 +38,17 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
       )}
 
       {gitlab && (
-        <div className="git-link flex items-center justify-between gap-4 h-24 w-full
-                         bg-black/5 rounded-lg px-4">
+        <div
+          className="git-link flex items-center justify-between gap-4 h-24 w-full
+                         bg-black/5 rounded-lg px-4"
+        >
           <div className="link-header flex flex-col justify-between">
-            <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">Lien GitLab</h3>
-            <p className="text-sm text-gray-600">Consulter le code source du projet</p>
+            <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">
+              Lien GitLab
+            </h3>
+            <p className="text-sm text-gray-600">
+              Consulter le code source du projet
+            </p>
           </div>
 
           <a

@@ -29,7 +29,6 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
 
   return (
     <div className="relative flex flex-col gap-4 mt-[25%] md:mt-[7%] w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-[15px]">
-      {/* Banner */}
       <div
         className={`overflow-hidden h-[62%] w-full ${
           isCurrentUser ? "cursor-pointer group" : ""
@@ -44,15 +43,14 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
         />
       </div>
 
-      {/* Picture + Content */}
       <ProfilPicture user={user} isCurrentUser={isCurrentUser} />
       <ProfilContent
         firstName={firstName}
         lastName={lastName}
         pseudo={pseudo}
+        userId={user.id}
       />
 
-      {/* Modal */}
       <ChangeBannerModal
         currentBanner={banner || defaultBanner}
         isOpen={isBannerModalOpen}

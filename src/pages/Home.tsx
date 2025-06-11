@@ -10,7 +10,7 @@ import { Navigate } from "react-router-dom";
 export const Home = () => {
   const loggedIn = isLoggedIn();
 
-  if(loggedIn) {
+  if (loggedIn) {
     return <Navigate to="/explore" replace />;
   }
   return (

@@ -29,8 +29,10 @@ export const VideoDescription = ({ projet }: VideoDescriptionProps) => {
       {description && (
         <div className="description text-lg leading-relaxed relative">
           {!isExpanded && (
-            <div className="desc-fade-in absolute bottom-0 left-0 w-full h-32 rounded-lg
-                            bg-gradient-to-t from-white to-transparent" />
+            <div
+              className="desc-fade-in absolute bottom-0 left-0 w-full h-32 rounded-lg
+                            bg-gradient-to-t from-white to-transparent"
+            />
           )}
           <p>{description}</p>
         </div>

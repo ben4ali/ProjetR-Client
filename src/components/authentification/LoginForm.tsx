@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
-import { useGoogleLogin, useLogin } from '../../hooks/use-auth';
+import React, { useEffect, useState } from "react";
+import { useGoogleLogin, useLogin } from "../../hooks/use-auth";
 
 interface LoginFormProps {
   toggleForm: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const loginMutation = useLogin();
   const googleLoginMutation = useGoogleLogin();
 
@@ -17,11 +17,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     loginMutation.mutate(
       { email, password },
       {
-        onSuccess: response => {
-          localStorage.setItem('token', response.token);
-          window.location.href = '/explore';
+        onSuccess: (response) => {
+          localStorage.setItem("token", response.token);
+          window.location.href = "/explore";
         },
-      }
+      },
     );
   };
 
@@ -37,21 +37,21 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         googleLoginMutation.mutate(
           { idToken: response.credential },
           {
-            onSuccess: apiResponse => {
-              localStorage.setItem('token', apiResponse.token);
-              window.location.href = '/explore';
+            onSuccess: (apiResponse) => {
+              localStorage.setItem("token", apiResponse.token);
+              window.location.href = "/explore";
             },
             onError: (err: any) => {
-              console.error('Erreur lors de la connexion avec Google :', err);
+              console.error("Erreur lors de la connexion avec Google :", err);
             },
-          }
+          },
         );
       },
     });
 
     (window as any).google.accounts.id.renderButton(
-      document.getElementById('google-signin-button'),
-      { theme: 'outline', size: 'large' }
+      document.getElementById("google-signin-button"),
+      { theme: "outline", size: "large" },
     );
   }, []);
 
@@ -73,7 +73,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               name="email"
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -86,7 +86,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               name="password"
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Mot de passe"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -95,7 +95,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           {loginMutation.error && (
             <p className="error-message-valdiation text-red-500 text-[15px] font-light text-center">
               {(loginMutation.error as any)?.response?.data?.message ||
-                'Erreur de connexion'}
+                "Erreur de connexion"}
             </p>
           )}
 
@@ -116,7 +116,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         </div>
         <div className="register-link text-black/50 text-[15px] p-0 m-0 h-fit">
           <h5 className="m-0 p-0 font-light">
-            Vous n&apos;avez pas de compte ?{' '}
+            Vous n&apos;avez pas de compte ?{" "}
             <a
               className="invite text-blue-600 hover:underline"
               href="#"

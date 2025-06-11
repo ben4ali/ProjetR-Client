@@ -15,8 +15,11 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
-  const { data: author, isLoading: authorLoading, error: authorError } =
-    useUserById(projet?.author?.id);
+  const {
+    data: author,
+    isLoading: authorLoading,
+    error: authorError,
+  } = useUserById(projet?.author?.id);
 
   const likeProjectMutation = useLikeProject();
   const dislikeProjectMutation = useDislikeProject();
@@ -33,7 +36,9 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
   const toggleLike = () => {
     if (!projet?.id || !loggedIn) return;
 
-    const likedProjects = JSON.parse(localStorage.getItem("liked_projects") || "[]");
+    const likedProjects = JSON.parse(
+      localStorage.getItem("liked_projects") || "[]",
+    );
     const already = likedProjects.includes(projet.id);
 
     if (already) {
@@ -41,7 +46,9 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
         onSuccess: () => {
           localStorage.setItem(
             "liked_projects",
-            JSON.stringify(likedProjects.filter((id: number) => id !== projet.id))
+            JSON.stringify(
+              likedProjects.filter((id: number) => id !== projet.id),
+            ),
           );
           setIsLiked(false);
           if (projet.likes !== undefined) projet.likes -= 1;
@@ -69,14 +76,18 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
 
   useEffect(() => {
     if (projet?.id) {
-      const likedProjects = JSON.parse(localStorage.getItem("liked_projects") || "[]");
+      const likedProjects = JSON.parse(
+        localStorage.getItem("liked_projects") || "[]",
+      );
       setIsLiked(likedProjects.includes(projet.id));
     }
   }, [projet?.id]);
 
   return (
-    <div className="video-options flex flex-col gap-4 w-full pb-8 border-b border-black/10
-                     lg:flex-row lg:justify-between mt-4">
+    <div
+      className="video-options flex flex-col gap-4 w-full pb-8 border-b border-black/10
+                     lg:flex-row lg:justify-between mt-4"
+    >
       {/* Auteur */}
       <div className="author-holder flex items-center gap-4">
         {authorLoading ? (
@@ -105,7 +116,9 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       <div className="video-interaction flex flex-wrap gap-4">
         <button
           onClick={toggleLike}
-          disabled={likeProjectMutation.isPending || dislikeProjectMutation.isPending}
+          disabled={
+            likeProjectMutation.isPending || dislikeProjectMutation.isPending
+          }
           className={`like flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
                       bg-black/5 hover:bg-black/10 transition
                       ${loggedIn && isLiked ? "interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800" : ""}`}
@@ -135,8 +148,10 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       </div>
 
       {isCopied && (
-        <div className="popup fixed left-1/2 bottom-[10%] -translate-x-1/2 flex items-center gap-4
-                        bg-black/80 text-white px-4 py-2 rounded z-50 animate-fade-in-out">
+        <div
+          className="popup fixed left-1/2 bottom-[10%] -translate-x-1/2 flex items-center gap-4
+                        bg-black/80 text-white px-4 py-2 rounded z-50 animate-fade-in-out"
+        >
           <i className="bi bi-check-circle" />
           <p>Copié dans la presse-papier !</p>
         </div>

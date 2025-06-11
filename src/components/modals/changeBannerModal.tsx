@@ -16,7 +16,7 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
 }) => {
   const [isPicked, setIsPicked] = useState(false);
   const [newBannerUrl, setNewBannerUrl] = useState<string | null>(
-    currentBanner || null
+    currentBanner || null,
   );
   const [newBannerFile, setNewBannerFile] = useState<File | null>(null);
   const changeBannerMutation = useChangeBanner();
@@ -47,10 +47,10 @@ export const ChangeBannerModal: React.FC<ChangeBannerModalProps> = ({
         onError: (error) => {
           console.error(
             "Erreur lors de la mise à jour de la bannière :",
-            error
+            error,
           );
         },
-      }
+      },
     );
   };
 

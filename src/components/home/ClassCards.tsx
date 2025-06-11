@@ -24,7 +24,7 @@ export function ClassCards() {
           end: "top 30%",
           scrub: true,
         },
-      }
+      },
     );
   }, []);
 

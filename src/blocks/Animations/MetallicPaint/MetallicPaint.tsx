@@ -4,7 +4,7 @@
 
 "use client";
 
-import React from 'react';
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import "./MetallicPaint.css";
 
@@ -473,7 +473,10 @@ export default function MetallicPaint({
 
       function getUniforms(program: WebGLProgram, gl: WebGL2RenderingContext) {
         const uniforms: Record<string, WebGLUniformLocation> = {};
-        const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+        const uniformCount = gl.getProgramParameter(
+          program,
+          gl.ACTIVE_UNIFORMS,
+        );
         for (let i = 0; i < uniformCount; i++) {
           const uniformName = gl.getActiveUniform(program, i)?.name;
           if (!uniformName) continue;

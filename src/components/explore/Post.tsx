@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Projet } from '../../types/Projet';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Projet } from "../../types/Projet";
 
 export const Post = ({
   project,
@@ -10,12 +10,12 @@ export const Post = ({
   fullPost?: boolean;
 }) => {
   const formattedDate = new Date(project.createdAt).toLocaleDateString(
-    'fr-CA',
+    "fr-CA",
     {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    },
   );
 
   const [duration, setDuration] = useState<number | null>(null);
@@ -26,21 +26,21 @@ export const Post = ({
   };
 
   const formatDuration = (seconds: number | null) => {
-    if (seconds === null) return '--:--';
+    if (seconds === null) return "--:--";
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${mins.toString().padStart(2, '0')}:${secs
+    return `${mins.toString().padStart(2, "0")}:${secs
       .toString()
-      .padStart(2, '0')}`;
+      .padStart(2, "0")}`;
   };
 
   useEffect(() => {
     if (project.demoUrl) {
-      const video = document.createElement('video');
+      const video = document.createElement("video");
       video.src = project.demoUrl;
-      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      video.addEventListener("loadedmetadata", handleLoadedMetadata);
       return () => {
-        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       };
     }
   }, [project.demoUrl]);
@@ -49,16 +49,16 @@ export const Post = ({
     return <div className="text-slate-500">Chargement...</div>;
   }
 
-  const authorAvatar = project.author?.avatar || '/default-avatar.png';
-  const authorUsername = project.author?.username || 'Utilisateur inconnu';
+  const authorAvatar = project.author?.avatar || "/default-avatar.png";
+  const authorUsername = project.author?.username || "Utilisateur inconnu";
 
   return (
     <Link
-      to={'/watch/' + project.id}
+      to={"/watch/" + project.id}
       className={
         fullPost
-          ? 'flex min-h-[15em] w-full overflow-hidden cursor-pointer gap-6'
-          : 'flex flex-col relative w-[22.9rem] h-[20rem] overflow-hidden cursor-pointer'
+          ? "flex min-h-[15em] w-full overflow-hidden cursor-pointer gap-6"
+          : "flex flex-col relative w-[22.9rem] h-[20rem] overflow-hidden cursor-pointer"
       }
     >
       {!fullPost && (
@@ -83,7 +83,7 @@ export const Post = ({
             </div>
             <div className="flex flex-col w-[85%] text-black">
               <h2 className="text-base font-semibold">
-                {project.title || 'Sans titre'}
+                {project.title || "Sans titre"}
               </h2>
               <p className="text-sm opacity-80">{authorUsername}</p>
               <p className="text-sm opacity-80">
@@ -110,7 +110,7 @@ export const Post = ({
           <div className="flex flex-col flex-1 pl-6">
             <div className="flex flex-col text-black">
               <h2 className="text-base font-semibold">
-                {project.title || 'Sans titre'}
+                {project.title || "Sans titre"}
               </h2>
               <p className="text-sm opacity-80">
                 {project.views || 0} Visionnements • {formattedDate}
@@ -127,7 +127,7 @@ export const Post = ({
               </div>
             </div>
             <p className="mt-3 text-sm text-black/80">
-              {project.description || 'Aucune description fournie.'}
+              {project.description || "Aucune description fournie."}
             </p>
           </div>
         </>

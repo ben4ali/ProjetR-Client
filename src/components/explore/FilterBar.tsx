@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useProjectsByTagsList } from '../../hooks/use-project';
-import { useTags } from '../../hooks/use-tags';
-import { Projet } from '../../types/Projet';
-import { Tag } from '../../types/Tag';
+import React, { useEffect, useState } from "react";
+import { useProjectsByTagsList } from "../../hooks/use-project";
+import { useTags } from "../../hooks/use-tags";
+import { Projet } from "../../types/Projet";
+import { Tag } from "../../types/Tag";
 
 interface FilterBarProps {
   onFilterResults: (projects: Projet[], isSearching: boolean) => void;
@@ -31,10 +31,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   }, [filteredProjects, isLoading, selectedTags]);
 
   const handleTagClick = (tag: string) => {
-    setSelectedTags(prevTags =>
+    setSelectedTags((prevTags) =>
       prevTags.includes(tag)
-        ? prevTags.filter(t => t !== tag)
-        : [...prevTags, tag]
+        ? prevTags.filter((t) => t !== tag)
+        : [...prevTags, tag],
     );
   };
 
@@ -58,8 +58,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <div
                 className={`flex items-center justify-between flex-shrink-0 bg-neutral-100 text-neutral-700/80 px-4 py-2 rounded transition-colors cursor-pointer max-h-12 ${
                   selectedTags.includes(tag.name)
-                    ? 'bg-neutral-900 text-white'
-                    : ''
+                    ? "bg-neutral-900 text-white"
+                    : ""
                 } hover:bg-neutral-900 hover:text-white`}
                 key={tag.id}
                 onClick={() => handleTagClick(tag.name)}

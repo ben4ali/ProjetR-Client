@@ -27,10 +27,14 @@ export const Watch = () => {
 
   return (
     <div className="watch-container flex flex-col items-center">
-      <div className="watch-content flex flex-col gap-4 mt-[25%] w-[95%] h-auto
-                       lg:flex-row lg:mt-[7%] lg:w-[90%] lg:h-[80vh]">
-        <section className="video-section-container w-full h-auto
-                             lg:w-[70%] lg:h-[100rem]">
+      <div
+        className="watch-content flex flex-col gap-4 mt-[25%] w-[95%] h-auto
+                       lg:flex-row lg:mt-[7%] lg:w-[90%] lg:h-[80vh]"
+      >
+        <section
+          className="video-section-container w-full h-auto
+                             lg:w-[70%] lg:h-[100rem]"
+        >
           <VideoPlayer projet={projet} />
           <VideoInfo projet={projet} />
           <VideoOptions projet={projet} />

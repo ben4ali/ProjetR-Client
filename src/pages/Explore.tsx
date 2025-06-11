@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 // import "../styles/style-explore.css"; // Unlink le fichier CSS
-import { FilterModal } from '../components/explore/FilterModal';
-import { PostList } from '../components/explore/PostList';
-import { SearchBar } from '../components/explore/SearchBar';
-import { useAllProjects } from '../hooks/use-project';
-import { Projet } from '../types/Projet';
+import { FilterModal } from "../components/explore/FilterModal";
+import { PostList } from "../components/explore/PostList";
+import { SearchBar } from "../components/explore/SearchBar";
+import { useAllProjects } from "../hooks/use-project";
+import { Projet } from "../types/Projet";
 
 export const Explore = () => {
   const { data: allProjets, isLoading, error } = useAllProjects();
@@ -16,15 +16,15 @@ export const Explore = () => {
   const displayProjects = () => {
     const result = {
       projects: allProjets || [],
-      type: 'all',
+      type: "all",
     };
     if (searchResults.length > 0) {
       result.projects = searchResults;
-      result.type = 'search';
+      result.type = "search";
     }
     if (filterResults.length > 0) {
       result.projects = filterResults;
-      result.type = 'filter';
+      result.type = "filter";
     }
     if (
       searchResults.length === 0 &&
@@ -32,7 +32,7 @@ export const Explore = () => {
       isSearchingOrFiltering
     ) {
       result.projects = [];
-      result.type = 'none';
+      result.type = "none";
     }
     return result;
   };
@@ -41,13 +41,13 @@ export const Explore = () => {
     (results: Projet[], searchQuery: string) => {
       setSearchResults(results);
       setFilterResults([]);
-      if (searchQuery.trim() === '') {
+      if (searchQuery.trim() === "") {
         setIsSearchingOrFiltering(false);
       } else {
         setIsSearchingOrFiltering(true);
       }
     },
-    []
+    [],
   );
 
   const handleFilterResults = useCallback(
@@ -60,11 +60,11 @@ export const Explore = () => {
         setIsSearchingOrFiltering(true);
       }
     },
-    []
+    [],
   );
 
   const toggleFilterModal = useCallback(() => {
-    setIsFilterModalOpen(prev => !prev);
+    setIsFilterModalOpen((prev) => !prev);
   }, []);
 
   return (
@@ -93,12 +93,12 @@ export const Explore = () => {
         <div className="text-slate-600 mt-6">Aucun projet trouvé</div>
       ) : (
         <>
-          {displayProjects().type === 'all' ? (
+          {displayProjects().type === "all" ? (
             <PostList
               className="flex flex-wrap gap-4 w-full px-[5%] py-8 h-[30rem]"
               projets={displayProjects().projects}
             />
-          ) : displayProjects().type === 'search' ? (
+          ) : displayProjects().type === "search" ? (
             <PostList
               className="flex flex-col w-full px-[5%] py-8 gap-6"
               fullPost

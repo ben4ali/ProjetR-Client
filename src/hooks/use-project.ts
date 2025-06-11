@@ -105,7 +105,7 @@ export function useLikeProject() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },
@@ -129,7 +129,7 @@ export function useDislikeProject() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return data;
     },
@@ -151,7 +151,7 @@ export const useRecommendedProjects = (tags: string[] | undefined) => {
 
       const tagsString = tags.join(",");
       const response = await axios.get(
-        `${API_URL}/projects/recommended?tags=${tagsString}`
+        `${API_URL}/projects/recommended?tags=${tagsString}`,
       );
       return response.data;
     },
@@ -181,7 +181,7 @@ export function useProjectsByTagsList(tags?: string[]) {
       }
       const tagsString = tags.join(",");
       const { data } = await axios.get(
-        `${API_URL}/projects/tags/${tagsString}`
+        `${API_URL}/projects/tags/${tagsString}`,
       );
       return data;
     },
@@ -194,7 +194,7 @@ export function useProjectsByTeacher(teacher?: string) {
     queryKey: ["projects", "teacher", teacher],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/projects/teacher/${teacher}`
+        `${API_URL}/projects/teacher/${teacher}`,
       );
       return data;
     },
@@ -207,7 +207,7 @@ export function useProjectsByCollaborator(collaborator?: string) {
     queryKey: ["projects", "collaborator", collaborator],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/projects/collaborator/${collaborator}`
+        `${API_URL}/projects/collaborator/${collaborator}`,
       );
       return data;
     },
@@ -231,7 +231,7 @@ export function useProjectsBySession(session?: string) {
     queryKey: ["projects", "session", session],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${API_URL}/projects/session/${session}`
+        `${API_URL}/projects/session/${session}`,
       );
       return data;
     },

@@ -8,7 +8,7 @@ import {
   MotionValue,
 } from "motion/react";
 import { MetallicLogo } from "./MetallicLogo";
-import TrueFocus from '../../blocks/TextAnimations/TrueFocus/TrueFocus';
+import TrueFocus from "../../blocks/TextAnimations/TrueFocus/TrueFocus";
 import ShinyText from "../../blocks/TextAnimations/ShinyText/ShinyText";
 import { Link } from "react-router-dom";
 
@@ -34,27 +34,27 @@ export const HeroParallax = ({
 
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 1000]),
-    springConfig
+    springConfig,
   );
   const translateXReverse = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, -1000]),
-    springConfig
+    springConfig,
   );
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig
+    springConfig,
   );
   const opacity = useSpring(
     useTransform(scrollYProgress, [0, 0.1], [0.05, 1]),
-    springConfig
+    springConfig,
   );
   const rotateZ = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [20, 0]),
-    springConfig
+    springConfig,
   );
   const translateY = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
-    springConfig
+    springConfig,
   );
   return (
     <div
@@ -106,28 +106,32 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div className="hero-text-holder">
-  
-        <div className="hero-logo">
-          <MetallicLogo />
-        </div>
+      <div className="hero-logo">
+        <MetallicLogo />
+      </div>
 
-        <div className="main-text">
-        <TrueFocus 
+      <div className="main-text">
+        <TrueFocus
           sentence="DEV HUB"
           manualMode={false}
           blurAmount={7}
           borderColor="rgb(56, 106, 186)"
           animationDuration={0.2}
           pauseBetweenAnimations={2}
+        />
+        <p className="">
+          Découvrez et présentez des projets informatiques innovants du Cégep de
+          Rosemont.
+        </p>
+        <Link to="/authentification" className="shinyBtn-start">
+          <ShinyText
+            text="COMMENCER"
+            disabled={false}
+            speed={3}
+            className="custom-class"
           />
-            <p className="">
-              Découvrez et présentez des projets informatiques innovants du Cégep de Rosemont.
-            </p>
-            <Link to="/authentification" className="shinyBtn-start">
-              <ShinyText text="COMMENCER" disabled={false} speed={3} className='custom-class' />
-            </Link>
-            
-        </div>
+        </Link>
+      </div>
     </div>
   );
 };
@@ -154,14 +158,11 @@ export const ProductCard = ({
       key={product.title}
       className="group/product back-thumbnail h-96 w-[30rem] relative shrink-0"
     >
-      <a
-        href={product.link}
-        className="block group-hover/product:shadow-2xl "
-      >
+      <a href={product.link} className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
           alt={product.title}
-          style={{borderRadius: '0.4rem'}}
+          style={{ borderRadius: "0.4rem" }}
           referrerPolicy="no-referrer"
         />
       </a>

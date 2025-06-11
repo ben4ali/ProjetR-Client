@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const startVoiceRecognition = (
   onResult: (transcript: string) => void,
-  onError: (error: string) => void
+  onError: (error: string) => void,
 ) => {
   if (!("webkitSpeechRecognition" in window)) {
     onError(
-      "La reconnaissance vocale n'est pas prise en charge par ce navigateur."
+      "La reconnaissance vocale n'est pas prise en charge par ce navigateur.",
     );
     return;
   }

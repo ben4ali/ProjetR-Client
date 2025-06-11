@@ -30,10 +30,10 @@ export const ChangeProfilePictureModal: React.FC<
 
         setTimeout(() => {
           const newPfpImg = document.querySelector(
-            ".newPfp"
+            ".newPfp",
           ) as HTMLImageElement;
           const oldPfpImg = document.querySelector(
-            ".oldPfp"
+            ".oldPfp",
           ) as HTMLImageElement;
 
           if (newPfpImg && oldPfpImg) {
@@ -69,10 +69,10 @@ export const ChangeProfilePictureModal: React.FC<
         onError: (error) => {
           console.error(
             "Erreur lors de la mise à jour de la photo de profil :",
-            error
+            error,
           );
         },
-      }
+      },
     );
   };
 

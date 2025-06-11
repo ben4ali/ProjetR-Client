@@ -1,170 +1,166 @@
 /* ---------------------CHANGE PFP MODAL--------------------- */
 .pfp-modal-overlay,
 .banner-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .pfp-modal-content,
 .banner-modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    width: 35vw;
-    height: 45vh;
-    gap: 2rem;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  width: 35vw;
+  height: 45vh;
+  gap: 2rem;
+  text-align: center;
 }
 
 .pfp-modal-input-holder,
 .banner-modal-input-holder {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 75%;
-    height: 15rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  height: 15rem;
 }
 
 .pfp-modal-input-holder input,
 .banner-modal-input-holder input {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 1.5rem;
-    border: 2px solid #ccc;
-    outline: none;
-    transition: border-color 0.3s ease;
-    position: absolute;
-    background-color: black;
-    opacity: 0.1;
-    z-index: 3;
-    cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: 2px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease;
+  position: absolute;
+  background-color: black;
+  opacity: 0.1;
+  z-index: 3;
+  cursor: pointer;
 }
-
 
 .oldPfp,
 .newPfp {
-    height: 14vh;
-    width: 14vh;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    object-fit: cover;
-    overflow: hidden;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+  height: 14vh;
+  width: 14vh;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  object-fit: cover;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .newPfp {
-    opacity: 0;
+  opacity: 0;
 }
 
-
 #arrow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    border-radius: 50%;
-    opacity: 0.6;
-    z-index: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pfp-modal-input-holder img {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(167, 167, 167);
-    object-fit: cover;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(167, 167, 167);
+  object-fit: cover;
 }
 
 .pfp-modal-content h2,
 .banner-modal-content h2 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    color: #333;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
 }
 
 .pfp-modal-actions,
 .banner-modal-actions {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-
+  margin-top: auto;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
 }
 
 .pfp-modal-actions button,
 .banner-modal-actions button {
-    padding: 0.5rem 1rem;
-    min-width: 10rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    background: #e1e0e0;
+  padding: 0.5rem 1rem;
+  min-width: 10rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  background: #e1e0e0;
 }
 
 .pfp-modal-actions button:disabled,
 .banner-modal-actions button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .pfp-modal-actions button:disabled:hover,
 .banner-modal-actions button:disabled:hover {
-    background: #e1e0e0;
+  background: #e1e0e0;
 }
 
 .pfp-modal-actions button:hover,
 .banner-modal-actions button:hover {
-    background: #a9a9a9;
+  background: #a9a9a9;
 }
 
 /* ----------------------CHANGE BANNER MODAL--------------------- */
 .oldBanner {
-    height: 20vh;
-    width: 100%;
-    border-radius: 10px;
+  height: 20vh;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .oldBanner img {
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-    overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .banner-modal-input-holder {
-    border: 3px dashed rgb(168, 185, 201);
-    width: 90%;
-    border-radius: 10px;
-    transition: var(--default-transition-duration);
+  border: 3px dashed rgb(168, 185, 201);
+  width: 90%;
+  border-radius: 10px;
+  transition: var(--default-transition-duration);
 }
 
 .banner-modal-input-holder:hover {
-    border: 3px dashed rgb(122, 169, 214);
-    filter: brightness(1.2);
-
+  border: 3px dashed rgb(122, 169, 214);
+  filter: brightness(1.2);
 }

@@ -1,12 +1,12 @@
-import { FC, useState } from 'react';
-import { useCourses } from '../../hooks/use-courses';
+import { FC, useState } from "react";
+import { useCourses } from "../../hooks/use-courses";
 import {
   useProjectsByCollaborator,
   useProjectsByCourse,
   useProjectsBySession,
   useProjectsByTeacher,
-} from '../../hooks/use-project';
-import { Projet } from '../../types/Projet';
+} from "../../hooks/use-project";
+import { Projet } from "../../types/Projet";
 
 interface FilterModalProps {
   onClose: () => void;
@@ -17,10 +17,10 @@ export const FilterModal: FC<FilterModalProps> = ({
   onClose,
   onApplyFilters,
 }) => {
-  const [session, setSession] = useState('');
-  const [course, setCourse] = useState('');
-  const [teacher, setTeacher] = useState('');
-  const [student, setStudent] = useState('');
+  const [session, setSession] = useState("");
+  const [course, setCourse] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [student, setStudent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { data: availableCourses = [] } = useCourses();
@@ -51,15 +51,15 @@ export const FilterModal: FC<FilterModalProps> = ({
       }
       onClose();
     } catch (error) {
-      console.error('Erreur lors de la récupération des projets:', error);
+      console.error("Erreur lors de la récupération des projets:", error);
     }
   };
 
   const handleClearFilters = () => {
-    setTeacher('');
-    setCourse('');
-    setSession('');
-    setStudent('');
+    setTeacher("");
+    setCourse("");
+    setSession("");
+    setStudent("");
     onApplyFilters([], false);
     onClose();
   };
@@ -87,7 +87,7 @@ export const FilterModal: FC<FilterModalProps> = ({
               id="enseignant"
               placeholder="Nom de l'enseignant"
               value={teacher}
-              onChange={e => setTeacher(e.target.value)}
+              onChange={(e) => setTeacher(e.target.value)}
             />
           </div>
           <div className="mb-3 flex flex-col gap-1">
@@ -100,7 +100,7 @@ export const FilterModal: FC<FilterModalProps> = ({
               id="etudiant"
               placeholder="Nom de l'étudiant"
               value={student}
-              onChange={e => setStudent(e.target.value)}
+              onChange={(e) => setStudent(e.target.value)}
             />
           </div>
           <div className="flex gap-4">
@@ -109,13 +109,13 @@ export const FilterModal: FC<FilterModalProps> = ({
               <div className="relative">
                 <select
                   value={course}
-                  onChange={e => setCourse(e.target.value)}
+                  onChange={(e) => setCourse(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 appearance-none"
                 >
                   <option value="" disabled>
                     Sélectionner un cours
                   </option>
-                  {availableCourses.map(course => (
+                  {availableCourses.map((course) => (
                     <option key={course.id} value={course.title}>
                       {course.title}
                     </option>
@@ -130,7 +130,7 @@ export const FilterModal: FC<FilterModalProps> = ({
               <div className="relative">
                 <select
                   value={session}
-                  onChange={e => setSession(e.target.value)}
+                  onChange={(e) => setSession(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 appearance-none"
                 >
                   <option value="" disabled>
@@ -142,11 +142,11 @@ export const FilterModal: FC<FilterModalProps> = ({
                     const sessions = [];
 
                     const currentSemester =
-                      currentMonth >= 6 ? 'Automne' : 'Hiver';
+                      currentMonth >= 6 ? "Automne" : "Hiver";
 
                     for (let i = 0; i < 6; i++) {
                       const year = currentYear - Math.floor(i / 2);
-                      const semester = i % 2 === 0 ? 'Hiver' : 'Automne';
+                      const semester = i % 2 === 0 ? "Hiver" : "Automne";
 
                       sessions.push(
                         <option
@@ -154,7 +154,7 @@ export const FilterModal: FC<FilterModalProps> = ({
                           value={`${semester} ${year}`}
                         >
                           {semester} {year}
-                        </option>
+                        </option>,
                       );
                     }
 
@@ -172,7 +172,7 @@ export const FilterModal: FC<FilterModalProps> = ({
               className="flex-1 bg-blue-600 text-white rounded px-4 py-2 font-semibold hover:bg-blue-700 transition-colors"
               disabled={isLoading}
             >
-              {isLoading ? 'Chargement...' : 'Confirmer'}
+              {isLoading ? "Chargement..." : "Confirmer"}
             </button>
             <button
               type="button"

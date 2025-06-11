@@ -8,7 +8,7 @@ interface VideoSuggestionProps {
 
 export const VideoSuggestion = ({ projet }: VideoSuggestionProps) => {
   const { data: recommendedProjects, isLoading } = useRecommendedProjects(
-    projet?.tags
+    projet?.tags,
   );
 
   // Filtrer le projet courant

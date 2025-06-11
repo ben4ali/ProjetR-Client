@@ -1,6 +1,13 @@
 import { useRef, useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
+import "./styles/portfolio-templates.css";
 import { Authentification } from "./pages/Authentification";
 import { Home } from "./pages/Home";
 import { Explore } from "./pages/Explore";
@@ -10,11 +17,15 @@ import { Watch } from "./pages/Watch";
 import { Publish } from "./pages/Publish";
 import { isLoggedIn, useCurrentUser, logout } from "./hooks/use-auth";
 import gsap from "gsap";
+import { CreatePortfolio } from "./pages/CreatePortfolio";
+import { PortfolioView } from "./pages/PortfolioView";
+import { PortfolioEdit } from "./pages/PortfolioEdit";
 
 function Navbar() {
   const loggedIn = isLoggedIn();
   const { data: user, isSuccess } = useCurrentUser();
   const [avatarTimestamp, setAvatarTimestamp] = useState(new Date().getTime());
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setIsDialogOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const prevAvatarRef = useRef<string | null>(null);
@@ -109,21 +120,37 @@ function Navbar() {
   );
 }
 
-function App() {
+function AppContent() {
   const loggedIn = isLoggedIn();
+  const location = useLocation();
+
+  const shouldHideNavbar =
+    location.pathname.startsWith("/portfolio/") &&
+    !location.pathname.includes("/edit");
 
   return (
-    <Router>
-      {loggedIn && <Navbar />}
+    <>
+      {loggedIn && !shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/authentification" element={<Authentification />} />
+        <Route path="/authentification" element={<Authentification />} />{" "}
         <Route path="/profil/:id" element={<Profil />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/publish" element={<Publish />} />
+        <Route path="/create-portfolio" element={<CreatePortfolio />} />
+        <Route path="/portfolio/:id" element={<PortfolioView />} />
+        <Route path="/portfolio/:id/edit" element={<PortfolioEdit />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

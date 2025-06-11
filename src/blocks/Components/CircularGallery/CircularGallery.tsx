@@ -21,11 +21,12 @@ import TodoApp from "../../../assets/images/TodoApp.png";
 import WeaponShowcase from "../../../assets/images/ValorantWeaponShowcase.png";
 import Pokedex from "../../../assets/images/Pokedex.png";
 
-
-
 type GL = Renderer["gl"];
 
-function debounce<T extends (...args: unknown[]) => void>(func: T, wait: number) {
+function debounce<T extends (...args: unknown[]) => void>(
+  func: T,
+  wait: number,
+) {
   let timeout: number;
   return function (this: unknown, ...args: Parameters<T>) {
     window.clearTimeout(timeout);
@@ -410,9 +411,9 @@ class Media {
     }
     this.scale = this.screen.height / 1500;
     this.plane.scale.y =
-      (this.viewport.height * ((1080/2) * this.scale)) / this.screen.height;
+      (this.viewport.height * ((1080 / 2) * this.scale)) / this.screen.height;
     this.plane.scale.x =
-      (this.viewport.width * ((1920/2) * this.scale)) / this.screen.width;
+      (this.viewport.width * ((1920 / 2) * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [
       this.plane.scale.x,
       this.plane.scale.y,
@@ -532,7 +533,7 @@ class App {
       },
       {
         image: Netpulse,
-          text: "Netpulse",
+        text: "Netpulse",
       },
       {
         image: WeaponShowcase,

@@ -36,7 +36,7 @@ export const Presentation = () => {
             end: "top 30%",
             scrub: true,
           },
-        }
+        },
       );
     }
   }, []);

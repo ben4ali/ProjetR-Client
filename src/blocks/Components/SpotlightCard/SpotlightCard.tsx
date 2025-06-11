@@ -5,7 +5,6 @@
 import React, { useRef } from "react";
 import "./SpotlightCard.css";
 
-
 interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
   spotlightColor?: `rgba(${number}, ${number}, ${number}, ${number})`;
