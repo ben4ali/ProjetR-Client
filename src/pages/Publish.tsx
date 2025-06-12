@@ -382,7 +382,6 @@ export const Publish = () => {
                       {course.title}
                     </option>
                   ))}
-                  <option value="Aucun">Aucun</option>
                 </select>
                 <i className="bi bi-chevron-down absolute top-1/2 right-4 -translate-y-1/2 text-[#555] text-base pointer-events-none"></i>
               </div>
@@ -451,7 +450,7 @@ export const Publish = () => {
             </video>
             <div className="p-4 absolute text-center bottom-0 w-full h-[38%] flex flex-col items-center justify-center gap-2 video-information">
               <p className="text-[1.05rem] font-semibold text-blue-500">
-                https://rosemont-devhub/watch/{video ? video.name : "no-video"}
+                {video ? `https://rosemont-devhub/watch/${video.name}` : "Aucune vidéo sélectionnée"}
               </p>
               <p className="text-[0.9rem] text-[#ccc]">
                 {titre.trim() !== ""
