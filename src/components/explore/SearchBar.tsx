@@ -8,12 +8,14 @@ interface SearchBarProps {
   onSearchResults: (projects: Projet[], searchQuery: string) => void;
   onFilterResults: (projects: Projet[], isSearching: boolean) => void;
   onOpenFilterModal: () => void;
+  initialSearchQuery?: string;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onSearchResults,
   onFilterResults,
   onOpenFilterModal,
+  initialSearchQuery,
 }) => {
   const [searchText, setSearchText] = useState('');
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
@@ -21,11 +23,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [isListening, setIsListening] = useState(false);
 
   const { data: searchResults, isLoading } = useProjectsByTitle(searchQuery);
+
+  // Gérer la recherche initiale depuis l'URL
+  React.useEffect(() => {
+    if (initialSearchQuery && initialSearchQuery.trim() !== '') {
+      setSearchText(initialSearchQuery);
+      setSearchQuery(initialSearchQuery.trim());
+    }
+  }, [initialSearchQuery]);
+
   React.useEffect(() => {
     if (searchResults && !isLoading) {
       onSearchResults(searchResults, searchQuery || '');
     }
-  }, [searchResults, isLoading, onSearchResults]);
+  }, [searchResults, isLoading, onSearchResults, searchQuery]);
 
   const handleSearch = () => {
     if (searchText.trim()) {

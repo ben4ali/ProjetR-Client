@@ -17,7 +17,7 @@ export const ProfilPicture: FC<ProfilePictureProps> = ({
   const handleCloseModal = () => setModalOpen(false);
 
   return (
-    <div className="absolute left-[3%] top-[40%] ">
+    <div className="absolute left-[3%] top-[29%] md:top-[40%] ">
       <div
         className={`absolute md:top-[42%] ${
           isCurrentUser ? 'cursor-pointer group' : ''
