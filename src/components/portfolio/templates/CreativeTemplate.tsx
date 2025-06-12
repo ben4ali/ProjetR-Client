@@ -16,6 +16,7 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -64,6 +65,11 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                 {title ? title.split(" ").slice(1).join(" ") : user.lastName}
               </span>
             </h1>
+            {hook && (
+              <p className="text-xl mb-6 text-yellow-300 font-bold animate-pulse">
+                ✨ {hook} ✨
+              </p>
+            )}
             <p className="text-2xl mb-8 text-gray-300 font-light">
               {jobTitle || "Développeur Créatif & Artiste Numérique"}
             </p>
@@ -166,11 +172,11 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                   <div className="space-y-4">
                     {skills.slice(0, 6).map((skill) => (
                       <div
-                        key={skill}
+                        key={skill.name}
                         className="flex items-center space-x-3 p-3 rounded-lg bg-gradient-to-r from-purple-900/30 to-pink-900/30 hover:from-purple-800/40 hover:to-pink-800/40 transition-all"
                       >
                         <span className="text-2xl">⚡</span>
-                        <span className="font-medium">{skill}</span>
+                        <span className="font-medium">{skill.name}</span>
                       </div>
                     ))}
                     {skills.length === 0 &&

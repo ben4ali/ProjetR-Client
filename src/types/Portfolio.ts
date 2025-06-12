@@ -19,13 +19,19 @@ export const PORTFOLIO_TEMPLATES = {
 export type PortfolioTemplate =
   (typeof PORTFOLIO_TEMPLATES)[keyof typeof PORTFOLIO_TEMPLATES];
 
+export interface Skill {
+  name: string;
+  level: number; // 0 to 100
+}
+
 export interface Portfolio {
   id: number;
   template: PortfolioTemplate;
   status: "active" | "deleted" | "archived";
   title?: string;
   about?: string;
-  skills?: string[];
+  hook?: string;
+  skills?: Skill[];
   isPublic: boolean;
   githubUrl?: string;
   linkedinUrl?: string;
@@ -46,7 +52,8 @@ export interface CreatePortfolioData {
   template: PortfolioTemplate;
   title?: string;
   about?: string;
-  skills?: string[];
+  hook?: string;
+  skills?: Skill[];
   isPublic?: boolean;
   githubUrl?: string;
   linkedinUrl?: string;
@@ -81,13 +88,18 @@ export const createMockPortfolio = (
   title: `${user.firstName} ${user.lastName} - Portfolio`,
   about:
     "Je suis un développeur passionné avec une expertise dans les technologies web modernes. J'aime créer des solutions innovantes et donner vie aux idées grâce au code.",
+  hook: "Créateur d'expériences numériques innovantes",
   skills: [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Python",
-    "PostgreSQL",
+    { name: "JavaScript", level: 90 },
+    { name: "React", level: 85 },
+    { name: "Node.js", level: 80 },
+    { name: "CSS", level: 75 },
+    { name: "HTML", level: 80 },
+    { name: "TypeScript", level: 70 },
+    { name: "GraphQL", level: 65 },
+    { name: "Docker", level: 60 },
+    { name: "AWS", level: 55 },
+    { name: "CI/CD", level: 50 },
   ],
   isPublic: true,
   githubUrl: `https://github.com/${user.username}`,

@@ -17,6 +17,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -257,12 +258,29 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
                   transition={{ duration: 0.5 }}
                   className="text-gray-300"
                 >
-                  {skills[currentSkillIndex] ||
+                  {skills[currentSkillIndex]?.name ||
                     jobTitle ||
                     "Développeur Neural"}
                 </motion.span>
               </AnimatePresence>
             </motion.div>
+
+            {hook && (
+              <motion.div
+                variants={itemVariants}
+                className="mb-8"
+              >
+                <motion.p
+                  className="text-lg text-cyan-300 font-medium px-6 py-3 rounded-full border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm inline-block"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 30px rgba(34, 211, 238, 0.3)",
+                  }}
+                >
+                  🧠 {hook}
+                </motion.p>
+              </motion.div>
+            )}
 
             <motion.p
               variants={itemVariants}
@@ -477,7 +495,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
                   ]
               ).map((skill, index) => (
                 <motion.div
-                  key={skill}
+                  key={typeof skill === 'string' ? skill : skill.name}
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -485,7 +503,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/50 transition-all duration-300"
                 >
-                  <div className="text-blue-400 font-semibold">{skill}</div>
+                  <div className="text-blue-400 font-semibold">{typeof skill === 'string' ? skill : skill.name}</div>
                 </motion.div>
               ))}
             </div>

@@ -69,6 +69,7 @@ export const PortfolioEdit: FC = () => {
           template: formData.selectedTemplate as PortfolioTemplate,
           title: formData.title || undefined,
           about: formData.about || undefined,
+          hook: formData.hook || undefined,
           skills: formData.skills.length > 0 ? formData.skills : undefined,
           projets: formData.selectedProjects.map((id) => ({ id })),
           githubUrl: formData.githubUrl || undefined,

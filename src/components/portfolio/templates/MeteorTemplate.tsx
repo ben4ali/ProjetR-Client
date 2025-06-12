@@ -20,6 +20,7 @@ export const MeteorTemplate: FC<MeteorTemplateProps> = ({
   const {
     user,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -176,10 +177,24 @@ export const MeteorTemplate: FC<MeteorTemplateProps> = ({
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.3 }}
-                  className="text-2xl md:text-3xl font-light text-orange-300 mb-8"
+                  className="text-2xl md:text-3xl font-light text-orange-300 mb-4"
                 >
                   {jobTitle || "Architecte Digital"}
                 </motion.p>
+
+                {hook && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="text-lg text-red-400 font-medium mb-8 tracking-wide"
+                    style={{
+                      textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
+                    }}
+                  >
+                    ✨ {hook} ✨
+                  </motion.p>
+                )}
 
                 <motion.div
                   initial={{ width: 0 }}
@@ -295,7 +310,7 @@ export const MeteorTemplate: FC<MeteorTemplateProps> = ({
               >
                 {skills.map((skill) => (
                   <motion.div
-                    key={skill}
+                    key={skill.name}
                     whileHover={{
                       scale: 1.1,
                       boxShadow: "0 0 20px rgba(255, 107, 53, 0.4)",
@@ -309,7 +324,7 @@ export const MeteorTemplate: FC<MeteorTemplateProps> = ({
 
                     <div className="relative z-10">
                       <div className="text-orange-400 group-hover:text-white transition-colors font-semibold text-lg">
-                        {skill}
+                        {skill.name}
                       </div>
                     </div>
                   </motion.div>

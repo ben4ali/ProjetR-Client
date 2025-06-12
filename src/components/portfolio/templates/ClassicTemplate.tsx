@@ -15,6 +15,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -79,15 +80,16 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
         </div>
       </header>
       <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center p-10 mb-30">
           {" "}
           <h2 className="text-5xl font-serif font-bold mb-6 text-gray-900">
             {jobTitle || "Créer l'Excellence Numérique"}
           </h2>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
-            {about ||
-              "Avec plus de 5 ans d'expérience en développement logiciel, je me spécialise dans la création d'applications robustes et évolutives qui favorisent le succès des entreprises."}
-          </p>{" "}
+          {hook && (
+            <p className="text-lg text-gray-700 font-medium mb-6 italic ">
+              "{hook}"
+            </p>
+          )}
           <a
             href="#portfolio"
             className="bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition-colors font-medium inline-block"
@@ -160,20 +162,19 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                 Compétences Principales
               </h4>{" "}
               <div className="space-y-4">
-                {skills.slice(0, 4).map((skill, index) => {
-                  const levels = [90, 85, 80, 75];
+                {skills.slice(0, 4).map((skill) => {
                   return (
-                    <div key={skill}>
+                    <div key={skill.name}>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">{skill}</span>
+                        <span className="text-sm font-medium">{skill.name}</span>
                         <span className="text-sm text-gray-600">
-                          {levels[index] || 75}%
+                          {skill.level}%
                         </span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div
                           className="bg-gray-900 h-2 rounded-full"
-                          style={{ width: `${levels[index] || 75}%` }}
+                          style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
                     </div>

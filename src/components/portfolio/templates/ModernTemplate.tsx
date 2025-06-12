@@ -15,6 +15,7 @@ export const ModernTemplate: FC<ModernTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -46,6 +47,11 @@ export const ModernTemplate: FC<ModernTemplateProps> = ({
           <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             {title || `${user.firstName} ${user.lastName}`}
           </h1>{" "}
+          {hook && (
+            <p className="text-xl mb-4 text-blue-300 font-medium italic">
+              "{hook}"
+            </p>
+          )}
           <p className="text-2xl mb-8 text-gray-300">
             {jobTitle || "Développeur Full Stack"}
           </p>{" "}
@@ -111,10 +117,10 @@ export const ModernTemplate: FC<ModernTemplateProps> = ({
             <div className="grid grid-cols-2 gap-4">
               {skills?.slice(0, 8).map((skill) => (
                 <div
-                  key={skill}
+                  key={skill.name}
                   className="bg-gray-800 p-3 rounded-lg text-center"
                 >
-                  {skill}
+                  {skill.name}
                 </div>
               ))}
               {skills?.length === 0 &&

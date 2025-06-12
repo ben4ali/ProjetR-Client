@@ -20,6 +20,7 @@ export const HologramTemplate: FC<HologramTemplateProps> = ({
   const {
     user,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -155,10 +156,22 @@ export const HologramTemplate: FC<HologramTemplateProps> = ({
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 1 }}
-                  className="text-2xl md:text-3xl font-light text-cyan-300 mb-8 tracking-wider"
+                  className="text-2xl md:text-3xl font-light text-cyan-300 mb-4 tracking-wider"
                 >
                   &gt; {jobTitle || "Architecte Holographique"} &lt;
                 </motion.p>
+                {hook && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, delay: 1.1 }}
+                    className="mb-8"
+                  >
+                    <p className="text-lg text-green-300 font-mono bg-black/70 border border-green-400/50 rounded px-4 py-2 inline-block backdrop-blur-sm">
+                      [SYSTEM_HOOK] {hook}
+                    </p>
+                  </motion.div>
+                )}
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
@@ -288,7 +301,7 @@ export const HologramTemplate: FC<HologramTemplateProps> = ({
               >
                 {skills.map((skill, index) => (
                   <motion.div
-                    key={skill}
+                    key={skill.name}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -310,7 +323,7 @@ export const HologramTemplate: FC<HologramTemplateProps> = ({
                     <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-cyan-400"></div>
                     <div className="relative z-10">
                       <div className="text-cyan-100 group-hover:text-white transition-colors font-mono font-bold">
-                        {skill}
+                        {skill.name}
                       </div>
                       <div className="text-xs text-cyan-400/50 mt-1 group-hover:text-cyan-300/70 transition-colors">
                         ACTIVE

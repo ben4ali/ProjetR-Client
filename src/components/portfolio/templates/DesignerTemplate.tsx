@@ -16,6 +16,7 @@ export const DesignerTemplate: FC<DesignerTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -61,6 +62,11 @@ export const DesignerTemplate: FC<DesignerTemplateProps> = ({
                 {title ? title.split(" ").slice(1).join(" ") : user.lastName}
               </span>
             </h1>
+            {hook && (
+              <p className="text-lg mb-6 text-purple-600 font-medium tracking-wide">
+                {hook}
+              </p>
+            )}
             <p className="text-2xl mb-12 text-gray-600 font-light">
               {jobTitle || "Designer Visuel & Directeur Créatif"}
             </p>
@@ -220,8 +226,8 @@ export const DesignerTemplate: FC<DesignerTemplateProps> = ({
                     <h3 className="text-lg font-medium mb-4">Compétences</h3>
                     <div className="space-y-2">
                       {skills.slice(0, 5).map((skill) => (
-                        <div key={skill} className="text-gray-600">
-                          {skill}
+                        <div key={skill.name} className="text-gray-600">
+                          {skill.name}
                         </div>
                       ))}
                       {skills.length === 0 &&

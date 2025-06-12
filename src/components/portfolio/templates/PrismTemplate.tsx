@@ -21,6 +21,7 @@ export const PrismTemplate: FC<PrismTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -191,6 +192,18 @@ export const PrismTemplate: FC<PrismTemplateProps> = ({
             >
               {jobTitle || "Développeur Prisme"}
             </motion.p>
+            {hook && (
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="glass-morphism p-4 rounded-2xl mb-8 max-w-xl mx-auto"
+              >
+                <p className="text-lg text-white/95 font-medium">
+                  ✨ {hook} ✨
+                </p>
+              </motion.div>
+            )}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -407,11 +420,11 @@ export const PrismTemplate: FC<PrismTemplateProps> = ({
                   ]
               ).map((skill) => (
                 <div
-                  key={skill}
+                  key={typeof skill === 'string' ? skill : skill.name}
                   className="skill-card glass-morphism-strong rounded-2xl p-6 text-center border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
                 >
                   <div className="text-white font-semibold text-lg">
-                    {skill}
+                    {typeof skill === 'string' ? skill : skill.name}
                   </div>
                 </div>
               ))}

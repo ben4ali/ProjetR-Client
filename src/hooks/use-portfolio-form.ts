@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { PortfolioTemplate, PORTFOLIO_TEMPLATES } from "../types/Portfolio";
+import { PortfolioTemplate, PORTFOLIO_TEMPLATES, Skill } from "../types/Portfolio";
 
 export interface PortfolioFormData {
   selectedTemplate: PortfolioTemplate | "";
   title: string;
   about: string;
-  skills: string[];
+  hook: string;
+  skills: Skill[];
   selectedProjects: number[];
   githubUrl: string;
   linkedinUrl: string;
@@ -17,7 +18,7 @@ export interface PortfolioFormData {
 }
 
 export interface PortfolioFormState extends PortfolioFormData {
-  currentSkill: string;
+  currentSkill: Skill;
   currentPage: number;
   previewTemplate: PortfolioTemplate | null;
   isSubmitting: boolean;
@@ -28,7 +29,8 @@ interface Portfolio {
   template: PortfolioTemplate;
   title?: string;
   about?: string;
-  skills?: string[];
+  hook?: string;
+  skills?: Skill[];
   projectIds?: number[];
   githubUrl?: string;
   linkedinUrl?: string;
@@ -45,6 +47,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     selectedTemplate: initialData?.template || "",
     title: initialData?.title || "",
     about: initialData?.about || "",
+    hook: initialData?.hook || "",
     skills: initialData?.skills || [],
     selectedProjects: initialData?.projectIds || [],
     githubUrl: initialData?.githubUrl || "",
@@ -54,7 +57,10 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     cvDownloadUrl: initialData?.cvDownloadUrl || "",
     jobTitle: initialData?.jobTitle || "",
     isPublic: initialData?.isPublic ?? true,
-    currentSkill: "",
+    currentSkill: {
+      name: "",
+      level: 50,
+    },
     currentPage: 0,
     previewTemplate: null,
     isSubmitting: false,
@@ -68,6 +74,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
         selectedTemplate: initialData.template,
         title: initialData.title || "",
         about: initialData.about || "",
+        hook: initialData.hook || "",
         skills: initialData.skills || [],
         selectedProjects: initialData.projectIds || [],
         githubUrl: initialData.githubUrl || "",
@@ -85,18 +92,21 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     field: K,
     value: PortfolioFormState[K],
   ) => {
+    console.log(`Updating field: ${field}, value: ${value}`);
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleAddSkill = () => {
     if (
-      formState.currentSkill.trim() &&
-      !formState.skills.includes(formState.currentSkill.trim())
+      formState.currentSkill.name.trim() &&
+      formState.currentSkill.level >= 0 &&
+      formState.currentSkill.level <= 100 &&
+      !formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase())
     ) {
       setFormState((prev) => ({
         ...prev,
-        skills: [...prev.skills, prev.currentSkill.trim()],
-        currentSkill: "",
+        skills: [...prev.skills, prev.currentSkill],
+        currentSkill: { name: "", level: 50 }, // Reset with default level of 50%
       }));
     }
   };
@@ -104,7 +114,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
   const handleRemoveSkill = (skillToRemove: string) => {
     setFormState((prev) => ({
       ...prev,
-      skills: prev.skills.filter((skill) => skill !== skillToRemove),
+      skills: prev.skills.filter((skill) => skill.name !== skillToRemove),
     }));
   };
 
@@ -156,6 +166,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
       selectedTemplate: formState.selectedTemplate,
       title: formState.title,
       about: formState.about,
+      hook: formState.hook,
       skills: formState.skills,
       selectedProjects: formState.selectedProjects,
       githubUrl: formState.githubUrl,

@@ -1,9 +1,11 @@
 import { FC } from "react";
+import React from "react";
 import { useCurrentUser } from "../../hooks/use-auth";
 import { useProjectsByUserId } from "../../hooks/use-project";
 import { PortfolioFormState } from "../../hooks/use-portfolio-form";
 import { PORTFOLIO_TEMPLATES, PortfolioTemplate } from "../../types/Portfolio";
 import { TemplatePreviewDialog } from "./TemplatePreviewDialog";
+import "../../styles/portfolio-templates.css";
 
 interface PortfolioFormProps {
   formState: PortfolioFormState;
@@ -303,6 +305,22 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 />
               </div>
 
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Accroche Personnelle
+                </label>
+                <input
+                  type="text"
+                  value={formState.hook}
+                  onChange={(e) => onFieldUpdate("hook", e.target.value)}
+                  placeholder="Une phrase d'accroche qui vous définit (ex: 'Créateur d'expériences numériques innovantes')"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Cette accroche apparaîtra dans la section héro de votre portfolio pour créer un impact immédiat
+                </p>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Lien de Téléchargement CV
@@ -319,47 +337,197 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Compétences
+                <label className="block text-sm font-medium text-gray-700 mb-4">
+                  Compétences & Niveaux d'Expertise
                 </label>
-                <div className="flex gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={formState.currentSkill}
-                    onChange={(e) =>
-                      onFieldUpdate("currentSkill", e.target.value)
-                    }
-                    onKeyPress={(e) =>
-                      e.key === "Enter" && (e.preventDefault(), onAddSkill())
-                    }
-                    placeholder="Ajouter une compétence (ex: React, Python, UI/UX)"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  <button
-                    type="button"
-                    onClick={onAddSkill}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                  >
-                    Ajouter
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {formState.skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                    >
-                      {skill}
+                
+                {/* Skill suggestions */}
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 mb-3">Suggestions populaires :</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "React", "TypeScript", "JavaScript", "Python", "Node.js", 
+                      "CSS", "HTML", "Vue.js", "Angular", "Java", "C#", 
+                      "UI/UX Design", "Figma", "Photoshop", "Git", "Docker"
+                    ].map((suggestion) => (
                       <button
+                        key={suggestion}
                         type="button"
-                        onClick={() => onRemoveSkill(skill)}
-                        className="ml-2 text-blue-600 hover:text-blue-800"
+                        onClick={() =>
+                          onFieldUpdate("currentSkill", {
+                            ...formState.currentSkill,
+                            name: suggestion
+                          })
+                        }
+                        className="cursor-pointer px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors"
                       >
-                        ×
+                        {suggestion}
                       </button>
-                    </span>
-                  ))}
+                    ))}
+                  </div>
                 </div>
+                
+                {/* Add new skill card */}
+                <div className="bg-gray-50 rounded-xl p-6 mb-6 border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors">
+                  <div className="space-y-4">
+                    <div>
+                      <input
+                        type="text"
+                        value={formState.currentSkill.name}
+                        onChange={(e) =>
+                          onFieldUpdate("currentSkill", {
+                            ...formState.currentSkill,
+                            name: e.target.value
+                          })
+                        }
+                        onKeyPress={(e) =>
+                          e.key === "Enter" && (e.preventDefault(), onAddSkill())
+                        }
+                        placeholder="Nom de la compétence (ex: React, TypeScript, Design UI/UX...)"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-gray-700">
+                          Niveau d'expertise
+                        </span>
+                        <span className="text-sm font-bold text-blue-600">
+                          {formState.currentSkill.level}%
+                        </span>
+                      </div>
+                      
+                      {/* Tailwind range slider */}
+                      <div className="relative">
+                        <div className="relative h-2 bg-gray-200 rounded-lg">
+                          <div 
+                            className="absolute h-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg transition-all duration-200"
+                            style={{ width: `${formState.currentSkill.level}%` }}
+                          ></div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            value={formState.currentSkill.level}
+                            onChange={(e) =>
+                              onFieldUpdate("currentSkill", {
+                                ...formState.currentSkill,
+                                level: parseInt(e.target.value)
+                              })
+                            }
+                            className="absolute inset-0 w-full h-2 bg-transparent appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:bg-blue-700 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-track]:bg-transparent"
+                          />
+                        </div>
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>Débutant</span>
+                          <span>Intermédiaire</span>
+                          <span>Avancé</span>
+                          <span>Expert</span>
+                        </div>
+                      </div>
+                      
+                      {/* Level description */}
+                      <div className="text-xs text-gray-600 italic">
+                        {formState.currentSkill.level <= 25 && "🌱 Notions de base, en apprentissage"}
+                        {formState.currentSkill.level > 25 && formState.currentSkill.level <= 50 && "📚 Connaissances solides, expérience pratique"}
+                        {formState.currentSkill.level > 50 && formState.currentSkill.level <= 75 && "⚡ Compétences avancées, projets complexes"}
+                        {formState.currentSkill.level > 75 && "🏆 Expertise reconnue, mentor d'autres"}
+                      </div>
+                    </div>
+                    
+                    {/* Show validation message */}
+                    {formState.currentSkill.name.trim() && formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase()) && (
+                      <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-center">
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z" />
+                        </svg>
+                        Cette compétence a déjà été ajoutée
+                      </div>
+                    )}
+                    
+                    <button
+                      type="button"
+                      onClick={onAddSkill}
+                      disabled={
+                        !formState.currentSkill.name.trim() || 
+                        formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase())
+                      }
+                      className="cursor-pointer w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      Ajouter cette compétence
+                    </button>
+                  </div>
+                </div>
+
+                {/* Skills list with scroll */}
+                {formState.skills.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700 mb-3">
+                      Compétences ajoutées ({formState.skills.length})
+                    </h4>
+                    <div className="max-h-64 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+                      {formState.skills.map((skill, index) => (
+                        <div
+                          key={index}
+                          className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-semibold text-gray-900 text-sm">
+                              {skill.name}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => onRemoveSkill(skill.name)}
+                              className="cursor-pointer text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full p-1 transition-colors"
+                              title="Supprimer cette compétence"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          </div>
+                          
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs text-gray-600">Niveau d'expertise</span>
+                              <span className="text-xs font-bold text-blue-600">{skill.level}%</span>
+                            </div>
+                            
+                            {/* Progress bar */}
+                            <div className="w-full bg-gray-200 rounded-full h-1.5">
+                              <div
+                                className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-300"
+                                style={{ width: `${skill.level}%` }}
+                              ></div>
+                            </div>
+                            
+                            <div className="text-xs text-gray-500">
+                              {skill.level <= 25 && "🌱 Débutant"}
+                              {skill.level > 25 && skill.level <= 50 && "📚 Intermédiaire"}
+                              {skill.level > 50 && skill.level <= 75 && "⚡ Avancé"}
+                              {skill.level > 75 && "🏆 Expert"}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {formState.skills.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <p className="text-sm">Aucune compétence ajoutée pour le moment</p>
+                    <p className="text-xs text-gray-400">Ajoutez vos compétences pour enrichir votre portfolio</p>
+                  </div>
+                )}
               </div>
 
               <div>

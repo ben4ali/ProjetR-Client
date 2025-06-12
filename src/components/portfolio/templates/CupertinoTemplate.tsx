@@ -21,6 +21,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -190,6 +191,18 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
             <p className="animate-element text-2xl text-gray-600 mb-8 font-light">
               {jobTitle || "Designer & Développeur"}
             </p>{" "}
+            {hook && (
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="animate-element mb-8"
+              >
+                <p className="text-lg text-blue-600 font-medium bg-blue-50 px-6 py-3 rounded-2xl inline-block">
+                  {hook}
+                </p>
+              </motion.div>
+            )}
             <div className="animate-element max-w-2xl mx-auto mb-12">
               <p className="text-lg text-gray-700 leading-relaxed">
                 {about ||
@@ -475,27 +488,27 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                   {(skills.length > 0
                     ? skills.slice(0, 6)
                     : [
-                        "Swift",
-                        "SwiftUI",
-                        "React",
-                        "TypeScript",
-                        "Node.js",
-                        "Python",
+                        { name: "Swift", level: 90 },
+                        { name: "SwiftUI", level: 85 },
+                        { name: "React", level: 88 },
+                        { name: "TypeScript", level: 82 },
+                        { name: "Node.js", level: 80 },
+                        { name: "Python", level: 75 },
                       ]
                   ).map((skill, index) => (
                     <motion.div
-                      key={skill}
+                      key={skill.name}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       viewport={{ once: true }}
                       className="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm"
                     >
-                      <span className="font-medium text-gray-900">{skill}</span>
+                      <span className="font-medium text-gray-900">{skill.name}</span>
                       <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
-                          whileInView={{ width: `${85 + Math.random() * 15}%` }}
+                          whileInView={{ width: `${skill.level}%` }}
                           transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
                           viewport={{ once: true }}
                           className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"

@@ -16,6 +16,7 @@ export const DeveloperTemplate: FC<DeveloperTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -80,6 +81,12 @@ export const DeveloperTemplate: FC<DeveloperTemplateProps> = ({
                     jobTitle || title || "Développeur Full Stack"
                   }",`}
                   <br />
+                  {hook && (
+                    <>
+                      &nbsp;&nbsp;{`"hook": "${hook}",`}
+                      <br />
+                    </>
+                  )}
                   &nbsp;&nbsp;{`"projets": ${projets.length},`}
                   <br />
                   &nbsp;&nbsp;{`"competences": ${skills.length},`}
@@ -151,8 +158,8 @@ export const DeveloperTemplate: FC<DeveloperTemplateProps> = ({
                 <div className="text-green-400 mb-4 font-bold">Compétences</div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {skills.slice(0, 6).map((skill) => (
-                    <div key={skill} className="text-sm text-gray-300">
-                      • {skill}
+                    <div key={skill.name} className="text-sm text-gray-300">
+                      • {skill.name}
                     </div>
                   ))}
                   {skills.length === 0 &&

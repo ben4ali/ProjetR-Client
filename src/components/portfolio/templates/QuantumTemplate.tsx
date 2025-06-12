@@ -17,6 +17,7 @@ export const QuantumTemplate: FC<QuantumTemplateProps> = ({
   const {
     user,
     about,
+    hook,
     skills = [],
     githubUrl,
     linkedinUrl,
@@ -60,6 +61,16 @@ export const QuantumTemplate: FC<QuantumTemplateProps> = ({
                 <p className="text-2xl md:text-3xl font-light text-cyan-300 mb-6">
                   {jobTitle || "Développeur Quantique"}
                 </p>
+                {hook && (
+                  <motion.p
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                    className="text-lg text-purple-300 font-medium mb-6 px-4 py-2 rounded-lg bg-purple-500/10 border border-purple-400/20 backdrop-blur-sm inline-block"
+                  >
+                    ⚛️ {hook}
+                  </motion.p>
+                )}
                 <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-600 mx-auto mb-8"></div>
               </motion.div>
 
@@ -168,7 +179,7 @@ export const QuantumTemplate: FC<QuantumTemplateProps> = ({
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {skills.map((skill, index) => (
                   <motion.div
-                    key={skill}
+                    key={skill.name}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -180,7 +191,7 @@ export const QuantumTemplate: FC<QuantumTemplateProps> = ({
                     className="bg-gradient-to-br from-gray-900/80 to-blue-900/40 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6 text-center cursor-pointer group hover:bg-gradient-to-br hover:from-gray-800/90 hover:to-blue-800/50"
                   >
                     <div className="text-cyan-100 group-hover:text-white transition-colors font-semibold">
-                      {skill}
+                      {skill.name}
                     </div>
                   </motion.div>
                 ))}

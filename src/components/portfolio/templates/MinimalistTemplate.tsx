@@ -16,6 +16,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
     user,
     title,
     about,
+    hook,
     skills = [],
     projets = [],
     yearsOfExperience,
@@ -94,6 +95,11 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                       : "Résolveur de Problèmes")}
                 </span>
               </h2>
+              {hook && (
+                <p className="text-lg text-gray-500 font-light italic mb-8 border-l-2 border-gray-200 pl-6">
+                  {hook}
+                </p>
+              )}
               <p className="text-xl text-gray-600 font-light leading-relaxed mb-12">
                 {about ||
                   "Je crée des expériences numériques avec du code propre et un design réfléchi. Chaque ligne sert un objectif."}
@@ -230,8 +236,8 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                   </h5>
                   <div className="space-y-2">
                     {skills.slice(0, 5).map((skill) => (
-                      <div key={skill} className="text-gray-800 font-light">
-                        {skill}
+                      <div key={skill.name} className="text-gray-800 font-light">
+                        {skill.name}
                       </div>
                     ))}
                     {skills.length === 0 &&
