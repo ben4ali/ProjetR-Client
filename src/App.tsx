@@ -11,6 +11,7 @@ import { Authentification } from './pages/Authentification';
 import { CreatePortfolio } from './pages/CreatePortfolio';
 import { Dashboard } from './pages/Dashboard';
 import { Explore } from './pages/Explore';
+import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
 import { PortfolioEdit } from './pages/PortfolioEdit';
 import { PortfolioView } from './pages/PortfolioView';
@@ -34,6 +35,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/authentification" element={<Authentification />} />{' '}
         <Route path="/profil/:id" element={<Profil />} />
         <Route path="/watch/:id" element={<Watch />} />

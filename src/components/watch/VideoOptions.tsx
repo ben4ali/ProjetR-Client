@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
-import { Projet } from "../../types/Projet";
-import { isLoggedIn } from "../../hooks/use-auth";
-import default_avatar from "../../assets/images/default_profil.png";
-import { useUserById } from "../../hooks/use-users";
-import { useLikeProject, useDislikeProject } from "../../hooks/use-project";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import default_avatar from '../../assets/images/default_profil.png';
+import { isLoggedIn, useCurrentUser } from '../../hooks/use-auth';
+import {
+  useAddFavorite,
+  useIsProjectFavoritedByUser,
+  useRemoveFavorite,
+} from '../../hooks/use-favorites';
+import { useDislikeProject, useLikeProject } from '../../hooks/use-project';
+import { useUserById } from '../../hooks/use-users';
+import { Projet } from '../../types/Projet';
 
 interface VideoOptionsProps {
   projet: Projet | null;
@@ -12,9 +17,9 @@ interface VideoOptionsProps {
 
 export const VideoOptions = ({ projet }: VideoOptionsProps) => {
   const loggedIn = isLoggedIn();
+  const { data: currentUser } = useCurrentUser();
   const [isCopied, setIsCopied] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
 
   const {
     data: author,
@@ -25,20 +30,26 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
   const likeProjectMutation = useLikeProject();
   const dislikeProjectMutation = useDislikeProject();
 
+  // Hooks pour les favoris
+  const addFavoriteMutation = useAddFavorite();
+  const removeFavoriteMutation = useRemoveFavorite();
+  const { data: isFavorited, isLoading: isFavoritedLoading } =
+    useIsProjectFavoritedByUser(projet?.id);
+
   const date = projet?.createdAt
-    ? new Intl.DateTimeFormat("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
+    ? new Intl.DateTimeFormat('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
       }).format(new Date(projet.createdAt))
-    : "";
+    : '';
 
   // Like / dislike
   const toggleLike = () => {
     if (!projet?.id || !loggedIn) return;
 
     const likedProjects = JSON.parse(
-      localStorage.getItem("liked_projects") || "[]",
+      localStorage.getItem('liked_projects') || '[]'
     );
     const already = likedProjects.includes(projet.id);
 
@@ -46,10 +57,10 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       dislikeProjectMutation.mutate(projet.id, {
         onSuccess: () => {
           localStorage.setItem(
-            "liked_projects",
+            'liked_projects',
             JSON.stringify(
-              likedProjects.filter((id: number) => id !== projet.id),
-            ),
+              likedProjects.filter((id: number) => id !== projet.id)
+            )
           );
           setIsLiked(false);
           if (projet.likes !== undefined) projet.likes -= 1;
@@ -59,7 +70,7 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       likeProjectMutation.mutate(projet.id, {
         onSuccess: () => {
           likedProjects.push(projet.id);
-          localStorage.setItem("liked_projects", JSON.stringify(likedProjects));
+          localStorage.setItem('liked_projects', JSON.stringify(likedProjects));
           setIsLiked(true);
           if (projet.likes !== undefined) projet.likes += 1;
         },
@@ -75,10 +86,21 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
     });
   };
 
+  // Gestion des favoris
+  const handleToggleFavorite = () => {
+    if (!projet?.id || !loggedIn || !currentUser) return;
+
+    if (isFavorited) {
+      removeFavoriteMutation.mutate(projet.id);
+    } else {
+      addFavoriteMutation.mutate(projet.id);
+    }
+  };
+
   useEffect(() => {
     if (projet?.id) {
       const likedProjects = JSON.parse(
-        localStorage.getItem("liked_projects") || "[]",
+        localStorage.getItem('liked_projects') || '[]'
       );
       setIsLiked(likedProjects.includes(projet.id));
     }
@@ -125,7 +147,11 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
           }
           className={`like flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
                       bg-black/5 hover:bg-black/10 transition
-                      ${loggedIn && isLiked ? "interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800" : ""}`}
+                      ${
+                        loggedIn && isLiked
+                          ? 'interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800'
+                          : ''
+                      }`}
         >
           <i className="bi bi-hand-thumbs-up" />
           <p className="hidden lg:block">{projet?.likes} J&apos;aime</p>
@@ -141,13 +167,30 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
         </button>
 
         <button
-          onClick={() => setIsSaved(!isSaved)}
+          onClick={handleToggleFavorite}
+          disabled={
+            addFavoriteMutation.isPending ||
+            removeFavoriteMutation.isPending ||
+            isFavoritedLoading
+          }
           className={`enregistrer flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
                       bg-black/5 hover:bg-black/10 transition
-                      ${isSaved ? "interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800" : ""}`}
+                      ${
+                        isFavorited
+                          ? 'interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800'
+                          : ''
+                      }`}
         >
-          <i className="bi bi-bookmark" />
-          <p className="hidden lg:block">Enregistrer</p>
+          <i
+            className={`bi ${isFavorited ? 'bi-bookmark-fill' : 'bi-bookmark'}`}
+          />
+          <p className="hidden lg:block">
+            {addFavoriteMutation.isPending || removeFavoriteMutation.isPending
+              ? '...'
+              : isFavorited
+              ? 'Enregistré'
+              : 'Enregistrer'}
+          </p>
         </button>
       </div>
 

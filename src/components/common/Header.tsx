@@ -191,6 +191,15 @@ export const Navbar = () => {
                         <span className="font-medium text-sm">Publier</span>
                       </Link>
 
+                      <Link
+                        to="/favorites"
+                        className="flex items-center px-3 py-2 text-gray-700 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-700 rounded-lg transition-all duration-200 group"
+                        onClick={closeDialog}
+                      >
+                        <i className="bi bi-heart-fill text-sm mr-2.5 group-hover:scale-110 transition-transform"></i>
+                        <span className="font-medium text-sm">Mes Favoris</span>
+                      </Link>
+
                       {/* Divider */}
                       <div className="my-1.5 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
 
