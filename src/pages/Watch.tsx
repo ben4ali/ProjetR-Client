@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 // import "../styles/style-watch.css"; 👉 supprimé
-import { VideoPlayer } from "../components/watch/VideoPlayer";
-import { VideoInfo } from "../components/watch/VideoInfo";
-import { VideoOptions } from "../components/watch/VideoOptions";
-import { VideoDescription } from "../components/watch/VideoDescription";
-import { CommentSection } from "../components/watch/CommentSection";
-import { VideoSuggestion } from "../components/watch/VideoSuggestion";
-import { VideoLinks } from "../components/watch/VideoLinks";
-import { Contributors } from "../components/watch/Contributors";
-import { useProjectById, useIncrementViewCount } from "../hooks/use-project";
 import { useParams } from "react-router-dom";
+import { CommentSection } from "../components/watch/CommentSection";
+import { Contributors } from "../components/watch/Contributors";
+import { VideoDescription } from "../components/watch/VideoDescription";
+import { VideoInfo } from "../components/watch/VideoInfo";
+import { VideoLinks } from "../components/watch/VideoLinks";
+import { VideoOptions } from "../components/watch/VideoOptions";
+import { VideoPlayer } from "../components/watch/VideoPlayer";
+import { VideoSuggestion } from "../components/watch/VideoSuggestion";
+import { useIncrementViewCount, useProjectById } from "../hooks/use-project";
 
 export const Watch = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,8 +28,8 @@ export const Watch = () => {
   return (
     <div className="watch-container flex flex-col items-center">
       <div
-        className="watch-content flex flex-col gap-4 mt-[25%] w-[95%] h-auto
-                       lg:flex-row lg:mt-[7%] lg:w-[90%] lg:h-[80vh]"
+        className="watch-content flex flex-col gap-4  w-[95%] h-auto
+                       lg:flex-row mt-10 lg:w-[90%] lg:h-[80vh]"
       >
         <section
           className="video-section-container w-full h-auto

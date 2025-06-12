@@ -1,8 +1,8 @@
-import { useMemo, useEffect, useState } from "react";
-import { AnimatedTooltip } from "../ui/animated-tooltip";
-import { Projet } from "../../types/Projet";
+import { useEffect, useMemo, useState } from "react";
 import default_profil from "../../assets/images/default_profil.png";
 import { useUserByFullName } from "../../hooks/use-users";
+import { Projet } from "../../types/Projet";
+import { AnimatedTooltip } from "../ui/animated-tooltip";
 
 interface ContributorsProps {
   projet: Projet | null;
@@ -86,7 +86,7 @@ export const Contributors = ({ projet }: ContributorsProps) => {
             <h3 className="text-lg text-gray-700/80">Enseignant</h3>
             <a
               className="teacher-card flex items-center gap-4 h-16 w-full rounded-lg px-4
-                           shadow-md bg-black/5 hover:bg-black/10 hover:translate-x-[3px] hover:translate-y-[3px] transition"
+                           shadow-md bg-black/5 border border-[#e4003950] hover:bg-black/10 hover:translate-x-[3px] hover:translate-y-[3px] transition"
             >
               <img
                 src={default_profil}
@@ -107,7 +107,7 @@ export const Contributors = ({ projet }: ContributorsProps) => {
               ({items.length}) Contributeurs
             </h3>
             <div
-              className="contributors-list flex items-center bg-black/5 shadow-md
+              className="contributors-list flex items-center border border-[#e4003950] bg-black/5 shadow-md
                              w-full h-16 rounded-lg px-8 hover:bg-black/10 hover:shadow-none
                              hover:translate-x-[3px] hover:translate-y-[3px] transition"
             >

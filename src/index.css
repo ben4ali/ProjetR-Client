@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "./styles/portfolio-templates.css";
 
@@ -9,13 +9,12 @@
   --highlight-text-color: rgb(82, 140, 234);
   --primary-text-color: rgb(108, 121, 140);
 
-  --font-family: "Inter", sans-serif;
+  --font-family: "Montserrat", sans-serif;
   --default-transition: all 0.2s ease-in-out;
 }
 
 body {
   padding: 0;
   margin: 0;
-  font-family: system-ui;
   font-family: var(--font-family);
 }

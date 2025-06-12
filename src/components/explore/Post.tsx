@@ -57,8 +57,8 @@ export const Post = ({
       to={"/watch/" + project.id}
       className={
         fullPost
-          ? "flex min-h-[15em] w-full overflow-hidden cursor-pointer gap-6"
-          : "flex flex-col relative w-[22.9rem] h-[20rem] overflow-hidden cursor-pointer"
+          ? "flex min-h-[15em] w-full overflow-hidden cursor-pointer gap-6 hover:bg-neutral-100 rounded-xl p-[0.25rem] transition-colors duration-300 ease-in-out"
+          : "flex flex-col relative w-[22.9rem] h-[20rem] overflow-hidden cursor-pointer hover:bg-neutral-200 rounded-xl p-[0.25rem] transition-colors duration-200 ease-in-out"
       }
     >
       {!fullPost && (
@@ -73,12 +73,12 @@ export const Post = ({
               {formatDuration(duration)}
             </p>
           </div>
-          <div className="flex mt-4 h-24 gap-2">
+          <div className="flex mt-4 h-24 justify-items-start">
             <div className="flex h-full aspect-square">
               <img
                 src={authorAvatar}
                 alt="Photo de profil"
-                className="w-12 h-12 object-cover rounded-full mr-4"
+                className="w-12 h-12 object-cover rounded-full"
                 crossOrigin="anonymous"
                 referrerPolicy="no-referrer"
               />

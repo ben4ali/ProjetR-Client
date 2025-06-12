@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { CommentComponent } from "./CommentComponent";
 import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
-import { Projet } from "../../types/Projet";
 import {
   useCommentsByProject,
   useCreateComment,
 } from "../../hooks/use-comments";
+import { Projet } from "../../types/Projet";
+import { CommentComponent } from "./CommentComponent";
 
 interface CommentSectionProps {
   projet: Projet;
@@ -45,7 +45,9 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
       {loggedIn && (
         <div className="comment-form flex gap-4 mt-4 w-full">
           <img
-            src={`${user?.avatar || "https://robohash.org/default.png"}?t=${Date.now()}`}
+            src={`${
+              user?.avatar || "https://robohash.org/default.png"
+            }?t=${Date.now()}`}
             alt="avatar"
             crossOrigin="anonymous"
             className="h-12 w-12 rounded-full object-cover"
@@ -56,8 +58,8 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
               placeholder="Ajouter un commentaire…"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="w-full bg-black/5 border border-black/10 rounded-[15px] px-4 py-3
-                         outline-none focus:bg-blue-100/20 focus:border-blue-300 transition"
+              className="w-full bg-black/5 border border-black/10 rounded px-4 py-3
+                         outline-none focus:bg-blue-100/20 focus:border-[#5b66cc] transition"
             />
 
             <div className="comment-options flex gap-4 justify-end mt-4">
@@ -73,8 +75,12 @@ export const CommentSection = ({ projet }: CommentSectionProps) => {
                   !commentText.trim() || createCommentMutation.isPending
                 }
                 onClick={handleComment}
-                className={`px-4 py-2 rounded-full text-white
-                            ${commentText.trim() ? "bg-black hover:bg-neutral-700" : "bg-gray-500 cursor-not-allowed"}`}
+                className={`px-4 py-2 rounded text-white
+                            ${
+                              commentText.trim()
+                                ? "bg-[#444ea5] hover:bg-[#2d2f46]"
+                                : "bg-[#444ea54f] cursor-not-allowed"
+                            }`}
               >
                 {createCommentMutation.isPending ? "En cours…" : "Commenter"}
               </button>

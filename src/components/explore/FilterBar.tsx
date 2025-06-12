@@ -56,11 +56,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           {tags &&
             tags.map((tag: Tag) => (
               <div
-                className={`flex items-center justify-between flex-shrink-0 bg-neutral-100 text-neutral-700/80 px-4 py-2 rounded transition-colors cursor-pointer max-h-12 ${
+                className={`flex items-center justify-between flex-shrink-0 text-neutral-700/80 px-4 py-2 rounded transition-colors cursor-pointer max-h-12 ${
                   selectedTags.includes(tag.name)
-                    ? "bg-neutral-900 text-white"
-                    : ""
-                } hover:bg-neutral-900 hover:text-white`}
+                    ? "bg-[#3b4494] text-white"
+                    : "bg-neutral-100 "
+                } hover:bg-[#3b4494] hover:text-white`}
                 key={tag.id}
                 onClick={() => handleTagClick(tag.name)}
               >
@@ -72,13 +72,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             ))}
         </div>
       </div>
-      <div className="flex gap-4 items-center justify-center w-12 rounded-full bg-neutral-100 cursor-pointer transition-colors hover:bg-neutral-900 hover:text-white md:w-40">
+      <div className="border border-[#e4003a] flex gap-4 items-center max-h-11 justify-center w-12 rounded-full  cursor-pointer transition-colors hover:bg-[#e4003a] hover:text-white md:w-40">
         <button
-          className="flex items-center justify-center h-12 rounded-full text-xl w-full gap-4 text-neutral-700 cursor-pointer transition-colors hover:text-white"
+          className="flex items-center justify-center rounded-full text-xl py-2 w-full gap-4 text-[#e4003a] cursor-pointer transition-colors hover:text-white"
           onClick={onOpenFilterModal}
         >
-          <i className="bi bi-filter text-xl"></i>
-          <span className="hidden md:inline">Filtrer</span>
+          <i className="bi bi-filter text-xl shrink-0"></i>
+          <span className="hidden  md:inline">Filtrer</span>
         </button>
       </div>
     </div>

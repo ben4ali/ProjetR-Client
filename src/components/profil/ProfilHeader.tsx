@@ -1,9 +1,9 @@
-import { useState, FC } from "react";
-import { ProfilPicture } from "./ProfilPicture";
-import { ProfilContent } from "./ProfilContent";
-import { ChangeBannerModal } from "../modals/changeBannerModal";
+import { FC, useState } from "react";
 import defaultBanner from "../../assets/images/default_banner.png";
 import { User } from "../../types/User";
+import { ChangeBannerModal } from "../modals/changeBannerModal";
+import { ProfilContent } from "./ProfilContent";
+import { ProfilPicture } from "./ProfilPicture";
 
 interface ProfilHeaderProps {
   firstName: string;
@@ -28,7 +28,7 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
   const handleCloseBannerModal = () => setBannerModalOpen(false);
 
   return (
-    <div className="relative flex flex-col gap-4 mt-[25%] md:mt-[7%] w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-[15px]">
+    <div className="relative flex flex-col gap-4 w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-lg">
       <div
         className={`overflow-hidden h-[62%] w-full ${
           isCurrentUser ? "cursor-pointer group" : ""
@@ -57,6 +57,11 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
         onClose={handleCloseBannerModal}
         userId={user.id}
       />
+      <div className="absolute bottom-0 right-0 flex gap-1 pointer-events-none overflow-hidden h-[38%] w-[15rem] -z-1">
+        <div className="w-120 h-3 bg-[#e4003a] bottom-0 -right-40 opacity-80 absolute -rotate-45 " />
+        <div className="w-100 h-3 bg-[#e4003a] bottom-0 -right-20 opacity-80 absolute -rotate-45" />
+        <div className="w-50 h-3 bg-[#e4003a] bottom-0 -right-15 opacity-80 absolute -rotate-45" />
+      </div>
     </div>
   );
 };

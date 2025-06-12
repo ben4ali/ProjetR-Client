@@ -1,5 +1,5 @@
-import { ProfilPost } from "./ProfilPost";
 import { Projet } from "../../types/Projet";
+import { ProfilPost } from "./ProfilPost";
 
 interface ProfilBodyProps {
   projets: Projet[];
@@ -7,7 +7,7 @@ interface ProfilBodyProps {
 
 export const ProfilBody = ({ projets }: ProfilBodyProps) => {
   return (
-    <div className="min-h-[10rem] py-8 w-[95%] md:w-[90%] bg-gray-300 rounded-b-[15px]">
+    <div className="min-h-[10rem] py-8 w-[95%] md:w-[90%] bg-gray-300 rounded-b-lg">
       {projets.length > 0 && (
         <div className="grid gap-4 p-4 [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))]">
           {projets.map((projet, index) => (

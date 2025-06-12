@@ -1,9 +1,9 @@
-import { ProfilHeader } from "../components/profil/ProfilHeader";
-import { ProfilBody } from "../components/profil/ProfilBody";
-import { useUserById } from "../hooks/use-users";
-import { useProjectsByUserId } from "../hooks/use-project";
-import { useCurrentUser } from "../hooks/use-auth";
 import { useMemo } from "react";
+import { ProfilBody } from "../components/profil/ProfilBody";
+import { ProfilHeader } from "../components/profil/ProfilHeader";
+import { useCurrentUser } from "../hooks/use-auth";
+import { useProjectsByUserId } from "../hooks/use-project";
+import { useUserById } from "../hooks/use-users";
 
 export const Profil = () => {
   const id = window.location.pathname.split("/").pop();
@@ -16,7 +16,7 @@ export const Profil = () => {
   );
 
   return (
-    <div className="flex flex-col items-center pb-12">
+    <div className="flex flex-col items-center pb-12 mt-10">
       {user && (
         <ProfilHeader
           firstName={user.firstName}

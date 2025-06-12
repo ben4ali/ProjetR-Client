@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Comment } from "../../types/Comment";
+import default_profil from "../../assets/images/default_profil.png";
 import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
 import {
-  useReplyToComment,
-  useRepliesToComment,
   useDeleteComment,
+  useRepliesToComment,
+  useReplyToComment,
 } from "../../hooks/use-comments";
-import default_profil from "../../assets/images/default_profil.png";
+import { Comment } from "../../types/Comment";
 
 interface CommentComponentProps {
   comment: Comment;
@@ -92,7 +92,7 @@ export const CommentComponent = ({
           {!comment.parentComment && loggedIn && (
             <button
               onClick={() => setIsReplying(!isReplying)}
-              className="reply-button text-sky-600 hover:opacity-50 transition"
+              className="reply-button text-[#5c67cc] cursor-pointer hover:opacity-50 transition"
             >
               Répondre
             </button>
@@ -115,11 +115,11 @@ export const CommentComponent = ({
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               placeholder="Écrire une réponse…"
-              className="w-full bg-black/5 border border-black/10 rounded-[15px] px-3 py-2 outline-none"
+              className="w-full bg-black/5 border border-black/10 rounded px-3 py-2 outline-none"
             />
             <button
               onClick={handleSubmitReply}
-              className="submit-reply-btn bg-black text-white px-4 py-2 rounded-full hover:bg-neutral-700 transition"
+              className="submit-reply-btn  text-white px-4 py-2 rounded bg-[#444ea5] hover:bg-[#2d2f46] transition"
             >
               Soumettre
             </button>

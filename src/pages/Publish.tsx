@@ -140,14 +140,14 @@ export const Publish = () => {
 
   return (
     <div className="w-full md:max-w-[65%] mx-auto p-8 rounded-lg] md:p-6">
-      <h1 className="border-b border-[#919090] pb-4 mb-8 text-2xl text-[#333] font-bold md:text-[1.8rem] mt-25">
+      <h1 className="border-b border-[#919090] pb-4 mb-8 text-3xl text-[#444ea5] font-bold md:text-[1.8rem] mt-7">
         Publier un projet
       </h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col-reverse gap-8 w-full md:flex-row md:gap-6 md:justify-between md:relative"
       >
-        <div className="w-full flex flex-col gap-8 mb-8 bg-[#f7f7f7] px-8 py-4 rounded-lg md:w-1/2 md:mb-20">
+        <div className="w-full flex flex-col gap-8 mb-8 bg-[#f7f7f7] px-8 py-4 rounded md:w-1/2 md:mb-20">
           {/* Video Upload */}
           <div className="flex gap-4 items-center justify-between label-group">
             <label
@@ -157,11 +157,11 @@ export const Publish = () => {
               Fichier vidéo
             </label>
             <i
-              className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#007bff]"
+              className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
               title="Vidéos au format MP4, MOV ou AVI, d'une taille maximale de 500 Mo."
             ></i>
           </div>
-          <div className="w-full bg-[rgba(15,15,15,0.15)] border-2 border-dashed border-[#9b9c9e] rounded-lg transition cursor-pointer hover:bg-[rgba(15,15,15,0.25)] videoUpload md:h-32 flex items-center justify-center text-center">
+          <div className="w-full bg-[#e2e4f3] border-2 border-dashed border-[#9b9c9e] rounded transition cursor-pointer hover:bg-[#d2d5e9] videoUpload md:h-32 flex items-center justify-center text-center">
             <div className="flex items-center justify-center h-32 w-full relative holder-upload md:h-full">
               <div className="flex flex-col items-center justify-center gap-2 text-[#74767c] text-[1.1rem] upload-box">
                 <p>Cliquez pour sélectionner un fichier</p>
@@ -188,7 +188,7 @@ export const Publish = () => {
               value={titre}
               onChange={(e) => setTitre(e.target.value)}
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
           </div>
 
@@ -203,7 +203,7 @@ export const Publish = () => {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Décrivez votre projet..."
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)] resize-y min-h-[100px]"
+              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)] resize-y min-h-[100px]"
             />
           </div>
 
@@ -212,7 +212,7 @@ export const Publish = () => {
             <div className="flex gap-4 items-center justify-between label-group">
               <label>Catégories (Tags)</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#007bff]"
+                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
                 title="Ajouter des tags améliore la visibilité de ton projet."
               ></i>
             </div>
@@ -220,7 +220,7 @@ export const Publish = () => {
               <select
                 onChange={(e) => handleCategoryAdd(e.target.value)}
                 defaultValue=""
-                className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               >
                 <option value="" disabled>
                   Sélectionner une catégorie
@@ -237,15 +237,15 @@ export const Publish = () => {
               {categories.map((category, index) => (
                 <span
                   key={index}
-                  className="bg-[#0d0d0e] text-white px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#282828] cursor-pointer"
+                  className="bg-[#d7dcf0] text-[#3B4395] px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#caceec] cursor-pointer"
                   onClick={() =>
                     setCategories(categories.filter((cat) => cat !== category))
                   }
                 >
-                  <p className="text-[0.8rem] text-[#e5e5e6] font-medium m-0">
+                  <p className="text-[0.8rem] text-[#3B4395] font-semibold m-0">
                     {category}
                   </p>
-                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-white cursor-pointer"></i>
+                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-[#3B4395] cursor-pointer"></i>
                 </span>
               ))}
             </div>
@@ -263,7 +263,7 @@ export const Publish = () => {
                 value={lienGitHub}
                 onChange={(e) => setLienGitHub(e.target.value)}
                 placeholder="Lien vers le code source GitHub"
-                className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
             </div>
 
@@ -277,7 +277,7 @@ export const Publish = () => {
                 value={lienGitlab}
                 onChange={(e) => setLienGitlab(e.target.value)}
                 placeholder="Lien vers le code source Gitlab"
-                className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
             </div>
           </div>
@@ -286,13 +286,13 @@ export const Publish = () => {
             <div className="flex gap-4 items-center justify-between label-group">
               <label>Collaborateurs</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#007bff]"
+                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
                 title="Si tu ne trouve pas ton collaborateur, tu peux écrire son nom et appuyer la touche entrer."
               ></i>
             </div>
             <div className="w-full relative search-input-group-publish">
               <input
-                className="relative w-full z-10 searchInput-publish p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="relative w-full z-10 searchInput-publish p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 type="text"
                 placeholder="Rechercher un collaborateur"
                 value={searchTerm}
@@ -329,17 +329,17 @@ export const Publish = () => {
               {collaborators.map((collaborator, index) => (
                 <span
                   key={index}
-                  className="bg-[#3e90e8] px-3 py-2 rounded-md text-sm flex justify-between items-center gap-4 collaborator-publish hover:bg-[#3e90e8bd] cursor-pointer"
+                  className="bg-[#d7dcf0] text-[#3B4395] px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#caceec] cursor-pointer"
                   onClick={() =>
                     setCollaborators(
                       collaborators.filter((col) => col !== collaborator),
                     )
                   }
                 >
-                  <p className="text-[0.8rem] text-white font-medium m-0">
+                  <p className="text-[0.8rem] text-[#3B4395] font-semibold m-0">
                     {collaborator}
                   </p>
-                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-white cursor-pointer"></i>
+                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-[#3B4395] cursor-pointer"></i>
                 </span>
               ))}
             </div>
@@ -350,7 +350,7 @@ export const Publish = () => {
             <div className="flex gap-4 items-center justify-between label-group">
               <label>Enseignant</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#007bff]"
+                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
                 title="Nom de l'enseignant qui a supervisé le projet."
               ></i>
             </div>
@@ -360,7 +360,7 @@ export const Publish = () => {
               onChange={(e) => setTeacher(e.target.value)}
               placeholder="Nom de l'enseignant"
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
           </div>
 
@@ -372,7 +372,7 @@ export const Publish = () => {
                 <select
                   value={course}
                   onChange={(e) => setCourse(e.target.value)}
-                  className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                  className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
                     Sélectionner un cours
@@ -392,7 +392,7 @@ export const Publish = () => {
                 <select
                   value={session}
                   onChange={(e) => setSession(e.target.value)}
-                  className="p-3 text-base border border-[#6e6b6bde] rounded-[9px] outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                  className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
                     Sélectionner une session
@@ -469,8 +469,8 @@ export const Publish = () => {
             className={`submit-button w-full py-3 px-6 text-base font-bold text-white rounded transition-colors ${
               !isFormValid()
                 ? "bg-[#ccc] cursor-not-allowed"
-                : "bg-[#007bff] hover:bg-[#0056b3]"
-            } md:text-[0.9rem] md:py-2 md:px-4`}
+                : "bg-[#5d67be] hover:bg-[#444ea5]"
+            } md:text-[0.9rem] md:py-2 md:px-4 cursor-pointer`}
             disabled={!isFormValid() || createProjectMutation.isPending}
           >
             {createProjectMutation.isPending

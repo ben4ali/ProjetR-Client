@@ -15,7 +15,7 @@ export const VideoInfo = ({ projet }: VideoInfoProps) => {
         {projet?.tags?.map((tag) => (
           <li
             key={tag}
-            className="video-tag flex-shrink-0 bg-black/10 px-4 py-2 rounded text-gray-700/80 text-base"
+            className="video-tag flex-shrink-0 bg-[rgba(53,60,124,0.9)] px-4 py-2 rounded text-white text-base"
           >
             {tag}
           </li>

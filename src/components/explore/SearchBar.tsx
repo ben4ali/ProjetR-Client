@@ -59,7 +59,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col mt-25 h-auto justify-center gap-4 mb-4 relative md:w-[90%] md:mt-30 md:h-32">
+    <div className="w-full flex flex-col mt-15 h-auto justify-center gap-4 mb-4 relative md:w-[90%] md:h-32">
       <div className="flex  gap-2 w-full justify-center items-stretch relative md:flex-row md:gap-4 md:items-center">
         <div className="flex relative w-[80%] gap-4 items-center">
           <input
@@ -68,11 +68,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full h-12 text-[25px] px-4 rounded-full border-2 border-slate-800/30 outline-none bg-transparent text-slate-700 md:w-[70%] md:text-[20px]"
+            className="w-full h-12 text-[25px] px-4 rounded border border-[#ddddec] outline-none bg-transparent text-slate-700 md:w-[70%] md:text-[20px]"
           />
           <button
-            className="hidden md:flex absolute md:right-[30.1%] md:h-[93%] md:items-center md:justify-center md:w-24 md:rounded-r-full md:bg-slate-100 md:text-slate-700/70 md:text-xl md:cursor-pointer md:transition-colors md:hover:bg-neutral-900 md:hover:text-white
-              right-[10%] w-20 text-[1.1rem] h-12 items-center justify-center rounded-full bg-slate-100 text-slate-700/70 cursor-pointer transition-colors hover:bg-neutral-900 hover:text-white"
+            className="hidden md:flex absolute md:right-[30.1%] md:h-[93%] md:items-center md:justify-center md:w-24 md:rounded-r md:bg-slate-100 md:text-slate-700/70 md:text-xl md:cursor-pointer md:transition-colors md:hover:text-white
+              right-[10%] w-20 text-[1.1rem] h-12 items-center justify-center  bg-slate-100 text-slate-700/70 cursor-pointer transition-colors hover:bg-[#444ea5] hover:text-white"
             onClick={handleSearch}
             disabled={isLoading}
           >
@@ -83,7 +83,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             )}
           </button>
           <button
-            className={`hidden md:flex ml-2 text-2xl bg-slate-100 rounded-full h-12 w-12 items-center justify-center cursor-pointer transition-colors ${
+            className={`hidden md:flex ml-2 text-2xl bg-[#3b4494] text-white rounded-full h-12 w-12 items-center justify-center cursor-pointer transition-colors ${
               isListening
                 ? "bg-blue-400 text-white animate-pulse"
                 : "text-slate-700/80"
@@ -97,7 +97,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <div className="flex w-auto justify-center md:w-[25rem] md:justify-end">
           <Link
             to="/publish"
-            className="w-12 h-12 p-0 rounded-full flex justify-center items-center text-[1.1rem] bg-blue-500 text-white text-xl cursor-pointer transition-colors hover:bg-neutral-900 hover:text-white md:w-auto md:px-8 md:rounded-full md:text-xl"
+            className="w-12 h-12 p-0 rounded-full flex justify-center items-center text-[1.1rem] bg-[#3b4494] text-white text-xl cursor-pointer transition-colors hover:bg-neutral-900 hover:text-white md:w-auto md:px-8 md:rounded-full md:text-xl"
           >
             <i className="bi bi-plus text-2xl mr-0 md:mr-2"></i>
             <p className="hidden md:block">Publier un projet</p>
