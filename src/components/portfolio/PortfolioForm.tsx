@@ -1,16 +1,16 @@
-import React, { FC } from "react";
-import { useCurrentUser } from "../../hooks/use-auth";
-import { PortfolioFormState } from "../../hooks/use-portfolio-form";
-import { useProjectsByCollaborator } from "../../hooks/use-project";
-import "../../styles/portfolio-templates.css";
-import { PORTFOLIO_TEMPLATES, PortfolioTemplate } from "../../types/Portfolio";
-import { TemplatePreviewDialog } from "./TemplatePreviewDialog";
+import React, { FC } from 'react';
+import { useCurrentUser } from '../../hooks/use-auth';
+import { PortfolioFormState } from '../../hooks/use-portfolio-form';
+import { useProjectsByCollaborator } from '../../hooks/use-project';
+import '../../styles/portfolio-templates.css';
+import { PORTFOLIO_TEMPLATES, PortfolioTemplate } from '../../types/Portfolio';
+import { TemplatePreviewDialog } from './TemplatePreviewDialog';
 
 interface PortfolioFormProps {
   formState: PortfolioFormState;
   onFieldUpdate: <K extends keyof PortfolioFormState>(
     field: K,
-    value: PortfolioFormState[K],
+    value: PortfolioFormState[K]
   ) => void;
   onAddSkill: () => void;
   onRemoveSkill: (skill: string) => void;
@@ -52,41 +52,41 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
 }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: userProjects = [] } = useProjectsByCollaborator(
-    currentUser?.firstName,
+    currentUser?.firstName
   );
   const templateDescriptions: Record<PortfolioTemplate, string> = {
     [PORTFOLIO_TEMPLATES.MODERN]:
-      "Design moderne et contemporain avec des animations fluides",
+      'Design moderne et contemporain avec des animations fluides',
     [PORTFOLIO_TEMPLATES.CLASSIC]:
-      "Mise en page intemporelle et élégante avec un style traditionnel",
+      'Mise en page intemporelle et élégante avec un style traditionnel',
     [PORTFOLIO_TEMPLATES.CREATIVE]:
-      "Design audacieux et artistique avec des mises en page uniques",
+      'Design audacieux et artistique avec des mises en page uniques',
     [PORTFOLIO_TEMPLATES.MINIMALIST]:
-      "Simple et épuré avec un focus sur le contenu",
+      'Simple et épuré avec un focus sur le contenu',
     [PORTFOLIO_TEMPLATES.DEVELOPER]:
-      "Template technique parfait pour les développeurs",
+      'Template technique parfait pour les développeurs',
     [PORTFOLIO_TEMPLATES.DESIGNER]:
-      "Template visuel pour mettre en valeur le travail de design",
+      'Template visuel pour mettre en valeur le travail de design',
     [PORTFOLIO_TEMPLATES.NEURAL]:
-      "Réseau neuronal interactif avec animations 3D et effets futuristes",
+      'Réseau neuronal interactif avec animations 3D et effets futuristes',
     [PORTFOLIO_TEMPLATES.PRISM]:
-      "Design glassmorphique avec effets de prisme et animations GSAP",
+      'Design glassmorphique avec effets de prisme et animations GSAP',
     [PORTFOLIO_TEMPLATES.CUPERTINO]:
-      "Style Apple minimaliste avec animations élégantes et attention aux détails",
+      'Style Apple minimaliste avec animations élégantes et attention aux détails',
     [PORTFOLIO_TEMPLATES.QUANTUM]:
-      "Expérience quantique immersive avec particules ThreeJS et effets holographiques",
+      'Expérience quantique immersive avec particules ThreeJS et effets holographiques',
     [PORTFOLIO_TEMPLATES.METEOR]:
-      "Design cosmique avec pluie de météores et animations GSAP dynamiques",
+      'Design cosmique avec pluie de météores et animations GSAP dynamiques',
     [PORTFOLIO_TEMPLATES.HOLOGRAM]:
-      "Interface holographique futuriste avec effets de glitch et animations cyber",
+      'Interface holographique futuriste avec effets de glitch et animations cyber',
     [PORTFOLIO_TEMPLATES.SAMURAI]:
-      "Design inspiré du Japon avec animations sakura et esthétique samouraï",
+      'Design inspiré du Japon avec animations sakura et esthétique samouraï',
     [PORTFOLIO_TEMPLATES.MATRIX]:
-      "Interface Matrix avec code vert, effets glitch et animations cyberpunk",
+      'Interface Matrix avec code vert, effets glitch et animations cyberpunk',
     [PORTFOLIO_TEMPLATES.CARTOON]:
-      "Style Adventure Time coloré et ludique avec animations rebondissantes",
+      'Style Adventure Time coloré et ludique avec animations rebondissantes',
     [PORTFOLIO_TEMPLATES.PIXEL]:
-      "Univers rétro gaming avec esthétique 8-bit et animations pixel art",
+      'Univers rétro gaming avec esthétique 8-bit et animations pixel art',
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
@@ -109,37 +109,37 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit} className="space-y-8">
-        <div className="space-y-6">
+    <div className="w-full">
+      <div className="relative w-full flex flex-row-reverse gap-5">
+        <div className="sticky top-25 w-[50%] h-fit">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {currentTemplates.map(([key, value]) => (
               <div
                 key={key}
                 className={`relative border-2 rounded-xl p-4 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 group ${
                   formState.selectedTemplate === value
-                    ? "border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-200"
-                    : "border-gray-200 bg-white hover:border-blue-300"
+                    ? 'border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-200'
+                    : 'border-gray-200 bg-white hover:border-blue-300'
                 }`}
               >
                 {/* Round checkbox in top-right corner - visible on hover or when selected */}
                 <div className="absolute top-3 right-3 z-10">
                   <button
                     type="button"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       if (formState.selectedTemplate === value) {
                         // Unselect if already selected
-                        onFieldUpdate("selectedTemplate", "");
+                        onFieldUpdate('selectedTemplate', '');
                       } else {
                         // Select if not selected
-                        onFieldUpdate("selectedTemplate", value);
+                        onFieldUpdate('selectedTemplate', value);
                       }
                     }}
                     className={`w-6 h-6 rounded-full border-2 transition-all duration-200 flex items-center justify-center cursor-pointer ${
                       formState.selectedTemplate === value
-                        ? "bg-blue-500 border-blue-500 opacity-100"
-                        : "bg-white border-gray-300 opacity-0 group-hover:opacity-100 hover:border-blue-400"
+                        ? 'bg-blue-500 border-blue-500 opacity-100'
+                        : 'bg-white border-gray-300 opacity-0 group-hover:opacity-100 hover:border-blue-400'
                     }`}
                   >
                     {formState.selectedTemplate === value && (
@@ -205,20 +205,20 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     type="button"
                     onClick={() => {
                       if (formState.selectedTemplate === value) {
-                        onFieldUpdate("selectedTemplate", "");
+                        onFieldUpdate('selectedTemplate', '');
                       } else {
-                        onFieldUpdate("selectedTemplate", value);
+                        onFieldUpdate('selectedTemplate', value);
                       }
                     }}
                     className={`cursor-pointer flex-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                       formState.selectedTemplate === value
-                        ? "bg-blue-600 text-white shadow-md"
-                        : "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700"
+                        ? 'bg-blue-600 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
                     }`}
                   >
                     {formState.selectedTemplate === value
-                      ? "✓ Sélectionné"
-                      : "Sélectionner"}
+                      ? '✓ Sélectionné'
+                      : 'Sélectionner'}
                   </button>
                 </div>
               </div>
@@ -244,8 +244,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     onClick={() => onSetPage(i)}
                     className={`cursor-pointer px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       formState.currentPage === i
-                        ? "bg-blue-600 text-white"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
                     {i + 1}
@@ -265,8 +265,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
           )}
         </div>
 
-        {formState.selectedTemplate && (
-          <div className="mt-12 bg-white rounded-lg p-8 shadow-lg">
+        <form onSubmit={onSubmit} className="flex-1">
+          <div className="bg-white rounded-lg p-8 shadow-lg">
             <h3 className="text-2xl font-bold mb-6 text-gray-900">
               Détails du Portfolio
             </h3>
@@ -278,9 +278,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="text"
                   value={formState.title}
-                  onChange={(e) => onFieldUpdate("title", e.target.value)}
+                  onChange={e => onFieldUpdate('title', e.target.value)}
                   placeholder={`${currentUser?.firstName} ${currentUser?.lastName} - Portfolio`}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -291,9 +296,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="text"
                   value={formState.jobTitle}
-                  onChange={(e) => onFieldUpdate("jobTitle", e.target.value)}
+                  onChange={e => onFieldUpdate('jobTitle', e.target.value)}
                   placeholder="Développeur Full Stack, Designer UI/UX, etc."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -304,16 +314,21 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="number"
                   value={formState.yearsOfExperience}
-                  onChange={(e) =>
+                  onChange={e =>
                     onFieldUpdate(
-                      "yearsOfExperience",
-                      e.target.value ? parseInt(e.target.value) : "",
+                      'yearsOfExperience',
+                      e.target.value ? parseInt(e.target.value) : ''
                     )
                   }
                   placeholder="5"
                   min="0"
                   max="50"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -323,10 +338,15 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 </label>
                 <textarea
                   value={formState.about}
-                  onChange={(e) => onFieldUpdate("about", e.target.value)}
+                  onChange={e => onFieldUpdate('about', e.target.value)}
                   placeholder="Parlez de vous, de votre expérience et de ce qui vous motive..."
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -337,9 +357,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="text"
                   value={formState.hook}
-                  onChange={(e) => onFieldUpdate("hook", e.target.value)}
+                  onChange={e => onFieldUpdate('hook', e.target.value)}
                   placeholder="Une phrase d'accroche qui vous définit (ex: 'Créateur d'expériences numériques innovantes')"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Cette accroche apparaîtra dans la section héro de votre
@@ -354,11 +379,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="url"
                   value={formState.cvDownloadUrl}
-                  onChange={(e) =>
-                    onFieldUpdate("cvDownloadUrl", e.target.value)
-                  }
+                  onChange={e => onFieldUpdate('cvDownloadUrl', e.target.value)}
                   placeholder="https://example.com/mon-cv.pdf"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -374,28 +402,28 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "React",
-                      "TypeScript",
-                      "JavaScript",
-                      "Python",
-                      "Node.js",
-                      "CSS",
-                      "HTML",
-                      "Vue.js",
-                      "Angular",
-                      "Java",
-                      "C#",
-                      "UI/UX Design",
-                      "Figma",
-                      "Photoshop",
-                      "Git",
-                      "Docker",
-                    ].map((suggestion) => (
+                      'React',
+                      'TypeScript',
+                      'JavaScript',
+                      'Python',
+                      'Node.js',
+                      'CSS',
+                      'HTML',
+                      'Vue.js',
+                      'Angular',
+                      'Java',
+                      'C#',
+                      'UI/UX Design',
+                      'Figma',
+                      'Photoshop',
+                      'Git',
+                      'Docker',
+                    ].map(suggestion => (
                       <button
                         key={suggestion}
                         type="button"
                         onClick={() =>
-                          onFieldUpdate("currentSkill", {
+                          onFieldUpdate('currentSkill', {
                             ...formState.currentSkill,
                             name: suggestion,
                           })
@@ -415,18 +443,23 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       <input
                         type="text"
                         value={formState.currentSkill.name}
-                        onChange={(e) =>
-                          onFieldUpdate("currentSkill", {
+                        onChange={e =>
+                          onFieldUpdate('currentSkill', {
                             ...formState.currentSkill,
                             name: e.target.value,
                           })
                         }
-                        onKeyPress={(e) =>
-                          e.key === "Enter" &&
+                        onKeyPress={e =>
+                          e.key === 'Enter' &&
                           (e.preventDefault(), onAddSkill())
                         }
                         placeholder="Nom de la compétence (ex: React, TypeScript, Design UI/UX...)"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+                        className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                          !formState.selectedTemplate
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                            : ''
+                        }`}
+                        disabled={!formState.selectedTemplate}
                       />
                     </div>
 
@@ -455,13 +488,18 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                             max="100"
                             step="5"
                             value={formState.currentSkill.level}
-                            onChange={(e) =>
-                              onFieldUpdate("currentSkill", {
+                            onChange={e =>
+                              onFieldUpdate('currentSkill', {
                                 ...formState.currentSkill,
                                 level: parseInt(e.target.value),
                               })
                             }
-                            className="absolute inset-0 w-full h-2 bg-transparent appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:bg-blue-700 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-track]:bg-transparent"
+                            className={`absolute inset-0 w-full h-2 bg-transparent appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:bg-blue-700 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-track]:bg-transparent ${
+                              !formState.selectedTemplate
+                                ? 'opacity-60 cursor-not-allowed'
+                                : ''
+                            }`}
+                            disabled={!formState.selectedTemplate}
                           />
                         </div>
                         <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -475,13 +513,13 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       {/* Level description */}
                       <div className="text-xs text-gray-600 italic">
                         {formState.currentSkill.level <= 25 &&
-                          "🌱 Notions de base, en apprentissage"}
+                          '🌱 Notions de base, en apprentissage'}
                         {formState.currentSkill.level > 25 &&
                           formState.currentSkill.level <= 50 &&
-                          "📚 Connaissances solides, expérience pratique"}
+                          '📚 Connaissances solides, expérience pratique'}
                         {formState.currentSkill.level > 50 &&
                           formState.currentSkill.level <= 75 &&
-                          "⚡ Compétences avancées, projets complexes"}
+                          '⚡ Compétences avancées, projets complexes'}
                         {formState.currentSkill.level > 75 &&
                           "🏆 Expertise reconnue, mentor d'autres"}
                       </div>
@@ -490,9 +528,9 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     {/* Show validation message */}
                     {formState.currentSkill.name.trim() &&
                       formState.skills.some(
-                        (skill) =>
+                        skill =>
                           skill.name.toLowerCase() ===
-                          formState.currentSkill.name.toLowerCase(),
+                          formState.currentSkill.name.toLowerCase()
                       ) && (
                         <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-center">
                           <svg
@@ -518,9 +556,9 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       disabled={
                         !formState.currentSkill.name.trim() ||
                         formState.skills.some(
-                          (skill) =>
+                          skill =>
                             skill.name.toLowerCase() ===
-                            formState.currentSkill.name.toLowerCase(),
+                            formState.currentSkill.name.toLowerCase()
                         )
                       }
                       className="cursor-pointer w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center"
@@ -600,14 +638,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                             </div>
 
                             <div className="text-xs text-gray-500">
-                              {skill.level <= 25 && "🌱 Débutant"}
+                              {skill.level <= 25 && '🌱 Débutant'}
                               {skill.level > 25 &&
                                 skill.level <= 50 &&
-                                "📚 Intermédiaire"}
+                                '📚 Intermédiaire'}
                               {skill.level > 50 &&
                                 skill.level <= 75 &&
-                                "⚡ Avancé"}
-                              {skill.level > 75 && "🏆 Expert"}
+                                '⚡ Avancé'}
+                              {skill.level > 75 && '🏆 Expert'}
                             </div>
                           </div>
                         </div>
@@ -648,9 +686,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="url"
                   value={formState.githubUrl}
-                  onChange={(e) => onFieldUpdate("githubUrl", e.target.value)}
+                  onChange={e => onFieldUpdate('githubUrl', e.target.value)}
                   placeholder="https://github.com/votrenom"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -661,9 +704,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="url"
                   value={formState.linkedinUrl}
-                  onChange={(e) => onFieldUpdate("linkedinUrl", e.target.value)}
+                  onChange={e => onFieldUpdate('linkedinUrl', e.target.value)}
                   placeholder="https://linkedin.com/in/votrenom"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -674,9 +722,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <input
                   type="url"
                   value={formState.websiteUrl}
-                  onChange={(e) => onFieldUpdate("websiteUrl", e.target.value)}
+                  onChange={e => onFieldUpdate('websiteUrl', e.target.value)}
                   placeholder="https://votresite.com"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    !formState.selectedTemplate
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
+                      : ''
+                  }`}
+                  disabled={!formState.selectedTemplate}
                 />
               </div>
 
@@ -685,10 +738,13 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   <input
                     type="checkbox"
                     checked={formState.isPublic}
-                    onChange={(e) =>
-                      onFieldUpdate("isPublic", e.target.checked)
-                    }
-                    className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    onChange={e => onFieldUpdate('isPublic', e.target.checked)}
+                    className={`mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded ${
+                      !formState.selectedTemplate
+                        ? 'bg-gray-100 cursor-not-allowed opacity-60'
+                        : ''
+                    }`}
+                    disabled={!formState.selectedTemplate}
                   />
                   <span className="text-sm text-gray-700">
                     Rendre le portfolio public
@@ -703,13 +759,13 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   Sélectionner les Projets à Présenter
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {userProjects.map((project) => (
+                  {userProjects.map(project => (
                     <div
                       key={project.id}
                       className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
                         formState.selectedProjects.includes(project.id)
-                          ? "border-blue-500 bg-blue-50"
-                          : "border-gray-200 hover:border-gray-300"
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
                       }`}
                       onClick={() => onProjectToggle(project.id)}
                     >
@@ -733,53 +789,53 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   ))}
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Sélectionnés {formState.selectedProjects.length} sur{" "}
+                  Sélectionnés {formState.selectedProjects.length} sur{' '}
                   {userProjects.length} projets
                 </p>
               </div>
             )}
           </div>
-        )}
 
-        <div
-          className={`flex ${
-            isEdit ? "justify-between" : "justify-center"
-          } items-center space-x-4 pt-8`}
-        >
-          {isEdit && onDelete && (
-            <button
-              type="button"
-              onClick={onDelete}
-              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
-              disabled={formState.isSubmitting}
-            >
-              Supprimer le Portfolio
-            </button>
-          )}
+          <div
+            className={`flex ${
+              isEdit ? 'justify-between' : 'justify-center'
+            } items-center space-x-4 pt-8`}
+          >
+            {isEdit && onDelete && (
+              <button
+                type="button"
+                onClick={onDelete}
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
+                disabled={formState.isSubmitting}
+              >
+                Supprimer le Portfolio
+              </button>
+            )}
 
-          <div className="flex space-x-4">
-            <button
-              type="button"
-              onClick={onCancel}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
-              disabled={formState.isSubmitting}
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              disabled={!formState.selectedTemplate || formState.isSubmitting}
-              className={`px-8 py-3 rounded-lg font-medium transition-all duration-200 ${
-                !formState.selectedTemplate || formState.isSubmitting
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
-                  : "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
-              }`}
-            >
-              {formState.isSubmitting ? "..." : submitButtonText}
-            </button>
+            <div className="flex space-x-4">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+                disabled={formState.isSubmitting}
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                disabled={!formState.selectedTemplate || formState.isSubmitting}
+                className={`px-8 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  !formState.selectedTemplate || formState.isSubmitting
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed opacity-50'
+                    : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
+                }`}
+              >
+                {formState.isSubmitting ? '...' : submitButtonText}
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       {error && (
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -794,6 +850,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
           template={formState.previewTemplate}
         />
       )}
-    </>
+    </div>
   );
 };

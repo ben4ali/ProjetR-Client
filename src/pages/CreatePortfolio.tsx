@@ -1,8 +1,8 @@
-import { useCreatePortfolio } from "../hooks/use-portfolios";
-import { useNavigate } from "react-router-dom";
-import { usePortfolioForm } from "../hooks/use-portfolio-form";
-import { PortfolioForm } from "../components/portfolio/PortfolioForm";
-import { PortfolioTemplate } from "../types/Portfolio";
+import { useNavigate } from 'react-router-dom';
+import { PortfolioForm } from '../components/portfolio/PortfolioForm';
+import { usePortfolioForm } from '../hooks/use-portfolio-form';
+import { useCreatePortfolio } from '../hooks/use-portfolios';
+import { PortfolioTemplate } from '../types/Portfolio';
 
 export const CreatePortfolio = () => {
   const createPortfolio = useCreatePortfolio();
@@ -28,7 +28,7 @@ export const CreatePortfolio = () => {
     e.preventDefault();
     if (!formState.selectedTemplate) return;
 
-    updateField("isSubmitting", true);
+    updateField('isSubmitting', true);
     try {
       const formData = getFormData();
       const newPortfolio = await createPortfolio.mutateAsync({
@@ -37,7 +37,7 @@ export const CreatePortfolio = () => {
         about: formData.about || undefined,
         hook: formData.hook || undefined,
         skills: formData.skills.length > 0 ? formData.skills : undefined,
-        projets: formData.selectedProjects.map((id) => ({ id })),
+        projets: formData.selectedProjects.map(id => ({ id })),
         githubUrl: formData.githubUrl || undefined,
         linkedinUrl: formData.linkedinUrl || undefined,
         websiteUrl: formData.websiteUrl || undefined,
@@ -50,9 +50,9 @@ export const CreatePortfolio = () => {
       window.scrollTo(0, 0);
       navigate(`/portfolio/${newPortfolio.id}`, { replace: true });
     } catch (error) {
-      console.error("Error creating portfolio:", error);
+      console.error('Error creating portfolio:', error);
     } finally {
-      updateField("isSubmitting", false);
+      updateField('isSubmitting', false);
     }
   };
 
@@ -61,10 +61,10 @@ export const CreatePortfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
+      <div className="max-w-[90vw] mx-auto">
+        <div className="text-left mb-12">
+          <h1 className="text-4xl font-bold text-[#444ea5] mb-4">
             Créer Votre Portfolio
           </h1>
           <p className="text-xl text-gray-600">

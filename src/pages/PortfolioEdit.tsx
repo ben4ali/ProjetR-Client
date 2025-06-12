@@ -1,14 +1,14 @@
-import { FC, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { FC, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PortfolioForm } from '../components/portfolio/PortfolioForm';
+import { useCurrentUser } from '../hooks/use-auth';
+import { usePortfolioForm } from '../hooks/use-portfolio-form';
 import {
+  useDeletePortfolio,
   usePortfolioById,
   useUpdatePortfolio,
-  useDeletePortfolio,
-} from "../hooks/use-portfolios";
-import { useCurrentUser } from "../hooks/use-auth";
-import { usePortfolioForm } from "../hooks/use-portfolio-form";
-import { PortfolioForm } from "../components/portfolio/PortfolioForm";
-import { PortfolioTemplate } from "../types/Portfolio";
+} from '../hooks/use-portfolios';
+import { PortfolioTemplate } from '../types/Portfolio';
 
 export const PortfolioEdit: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -60,7 +60,7 @@ export const PortfolioEdit: FC = () => {
     e.preventDefault();
     if (!portfolio) return;
 
-    updateField("isSubmitting", true);
+    updateField('isSubmitting', true);
     try {
       const formData = getFormData();
       await updatePortfolio.mutateAsync({
@@ -71,7 +71,7 @@ export const PortfolioEdit: FC = () => {
           about: formData.about || undefined,
           hook: formData.hook || undefined,
           skills: formData.skills.length > 0 ? formData.skills : undefined,
-          projets: formData.selectedProjects.map((id) => ({ id })),
+          projets: formData.selectedProjects.map(id => ({ id })),
           githubUrl: formData.githubUrl || undefined,
           linkedinUrl: formData.linkedinUrl || undefined,
           websiteUrl: formData.websiteUrl || undefined,
@@ -85,9 +85,9 @@ export const PortfolioEdit: FC = () => {
       window.scrollTo(0, 0);
       navigate(`/portfolio/${portfolio.id}`);
     } catch (error) {
-      console.error("Error updating portfolio:", error);
+      console.error('Error updating portfolio:', error);
     } finally {
-      updateField("isSubmitting", false);
+      updateField('isSubmitting', false);
     }
   };
 
@@ -98,7 +98,7 @@ export const PortfolioEdit: FC = () => {
       await deletePortfolio.mutateAsync(portfolio.id);
       navigate(`/profil/${currentUser?.id}`);
     } catch (error) {
-      console.error("Error deleting portfolio:", error);
+      console.error('Error deleting portfolio:', error);
     } finally {
       setShowDeleteConfirm(false);
     }
@@ -148,8 +148,8 @@ export const PortfolioEdit: FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-left mb-12">
+          <h1 className="text-4xl font-bold text-[#444ea5] mb-4">
             Modifier Votre Portfolio
           </h1>
           <p className="text-xl text-gray-600">

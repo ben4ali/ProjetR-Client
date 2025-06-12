@@ -1,7 +1,7 @@
-import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { isLoggedIn, logout, useCurrentUser } from "../../hooks/use-auth";
+import gsap from 'gsap';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { isLoggedIn, logout, useCurrentUser } from '../../hooks/use-auth';
 
 export const Navbar = () => {
   const loggedIn = isLoggedIn();
@@ -16,7 +16,7 @@ export const Navbar = () => {
     if (isSuccess && user && user.avatar !== prevAvatarRef.current) {
       prevAvatarRef.current = user.avatar;
       setAvatarTimestamp(new Date().getTime());
-      console.log("Avatar changed, updating timestamp:", new Date().getTime());
+      console.log('Avatar changed, updating timestamp:', new Date().getTime());
     }
   }, [user?.avatar, isSuccess]);
 
@@ -32,33 +32,33 @@ export const Navbar = () => {
     };
 
     if (isDialogOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDialogOpen]);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isDialogOpen) {
+      if (event.key === 'Escape' && isDialogOpen) {
         closeDialog();
       }
     };
 
     if (isDialogOpen) {
-      document.addEventListener("keydown", handleEscape);
+      document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, [isDialogOpen]);
 
   const openDialog = () => {
     setIsDialogOpen(true);
-    gsap.set(dialogRef.current, { display: "block" });
+    gsap.set(dialogRef.current, { display: 'block' });
     gsap.fromTo(
       dialogRef.current,
       {
@@ -69,8 +69,8 @@ export const Navbar = () => {
         opacity: 1,
         y: 0,
         duration: 0.2,
-        ease: "power2.out",
-      },
+        ease: 'power2.out',
+      }
     );
   };
 
@@ -79,9 +79,9 @@ export const Navbar = () => {
       opacity: 0,
       y: -10,
       duration: 0.15,
-      ease: "power2.in",
+      ease: 'power2.in',
       onComplete: () => {
-        gsap.set(dialogRef.current, { display: "none" });
+        gsap.set(dialogRef.current, { display: 'none' });
         setIsDialogOpen(false);
       },
     });
@@ -96,7 +96,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-neutral-100 shadow-lg z-50 w-full flex justify-between items-center px-[5%] text-gray-600/80 h-20">
+    <nav className="sticky top-0 bg-neutral-100 shadow z-50 w-full flex justify-between items-center px-[5%] text-gray-600/80 h-20">
       <div className="flex items-center gap-4">
         <Link to="/explore" className="flex items-center gap-1">
           <img
@@ -106,7 +106,7 @@ export const Navbar = () => {
           />
           <div className=" hidden lg:block text-gray-700 whitespace-nowrap border-b-1 pb-1 border-[#e4003a]">
             <span className="text-lg font-bold text-[#e4003a]">ProjetR </span>
-            {" - "}
+            {' - '}
             <span className="font-semibold text-sm">
               L’innovation étudiante en vitrine
             </span>
@@ -142,18 +142,18 @@ export const Navbar = () => {
               >
                 <img
                   src={`${
-                    user?.avatar || "https://robohash.org/default.png"
+                    user?.avatar || 'https://robohash.org/default.png'
                   }?t=${avatarTimestamp}`}
                   alt="Avatar"
                   className={`h-10 w-10 rounded-full bg-white/15 border border-gray-600 object-cover cursor-pointer transition-all duration-200 ${
                     isDialogOpen
-                      ? "ring-2 ring-[#e4003a] ring-offset-2 shadow-lg scale-105"
-                      : "ring-2 ring-transparent hover:ring-gray-300"
+                      ? 'ring-2 ring-[#e4003a] ring-offset-2 shadow-lg scale-105'
+                      : 'ring-2 ring-transparent hover:ring-gray-300'
                   }`}
                   crossOrigin="anonymous"
                   referrerPolicy="no-referrer"
                 />
-                <div ref={dialogRef} style={{ display: "none", opacity: 0 }}>
+                <div ref={dialogRef} style={{ display: 'none', opacity: 0 }}>
                   <div className="absolute top-full right-0 mt-2 w-56 bg-gradient-to-br from-white via-gray-50 to-blue-50 border border-gray-200/60 rounded shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
                     <div className="bg-gradient-to-br from-[#e4003a] to-[#444ea5] p-3 text-white">
                       <p className="font-semibold text-sm leading-tight">
