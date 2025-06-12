@@ -70,9 +70,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   };
 
   return (
-    <div className="form-container z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[25px] saturate-180">
+    <div className="backdrop-blur-md form-container z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-stone-200/60 flex flex-col p-8 items-center shadow-lg">
       <div className="form-header flex justify-center w-full">
-        <h3 className="text-[40px] font-light text-black/90">CONNEXION</h3>
+        <h3 className="text-[40px] mb-5 text-[#444ea5] font-semibold">
+          Connexion
+        </h3>
       </div>
       <div className="form-content flex flex-col w-[95%] h-full">
         <form
@@ -89,7 +91,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
 
@@ -102,7 +104,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Mot de passe"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
 
@@ -115,9 +117,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700/80 text-white border-none rounded-[4px] px-4 py-2 h-16 text-[25px] cursor-pointer w-full mt-auto transition-colors"
+            className="bg-[#414891] hover:bg-[#3b4294be] text-white border-none rounded-[4px] px-4 py-2 h-16 text-[25px] cursor-pointer w-full mt-auto transition-colors"
           >
-            Connexion
+            Se connecter
           </button>
         </form>
       </div>
@@ -130,7 +132,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
             type="button"
             onClick={handleGoogleLogin}
             disabled={firebaseGoogleLoginMutation.isPending}
-            className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-slate-300 via-gray-200 to-slate-300 hover:from-slate-200 hover:via-gray-100 hover:to-slate-200 text-gray-800 border border-slate-400/60 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:shadow-slate-300/50 hover:scale-[1.02] font-medium"
+            className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-[#3B4394]/10 via-[#3B4394]/5 to-[#3B4394]/10 hover:from-[#3B4394]/20 hover:via-[#3B4394]/10 hover:to-[#3B4394]/20 text-[#3B4394] border border-[#3B4394]/30 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow hover:shadow hover:shadow-[#3B4394]/20 hover:scale-[1.02] font-medium"
           >
             <svg width="18" height="18" viewBox="0 0 18 18">
               <path
@@ -159,7 +161,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <h5 className="m-0 p-0 font-light">
             Vous n&apos;avez pas de compte ?{' '}
             <a
-              className="invite text-blue-600 hover:underline"
+              className="invite text-[#3B4394] hover:underline"
               href="#"
               onClick={toggleForm}
             >

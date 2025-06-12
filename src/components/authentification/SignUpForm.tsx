@@ -71,9 +71,11 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
     }
   };
   return (
-    <div className="form-container signup z-[3] w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-white/50 flex flex-col p-8 items-center shadow-[5px_5px_10px_5px_rgba(0,0,0,0.2)] backdrop-blur-[25px] saturate-150 mt-[5%] min-h-[70vh]">
+    <div className="backdrop-blur-md md:scale-100 scale-90 form-container signup w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-stone-200/60 flex flex-col p-8 items-center shadow-lg mt-[5%] min-h-[70vh]  z-5 relative">
       <div className="form-header flex justify-center w-full">
-        <h3 className="text-[40px] font-light text-black/90">INSCRIPTION</h3>
+        <h3 className="text-[40px] mb-5 text-[#444ea5] font-semibold">
+          Inscription
+        </h3>
       </div>
       <div className="form-content flex flex-col w-[95%] h-full">
         <form
@@ -82,7 +84,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
           className="flex flex-col gap-4 h-full relative"
         >
           <div className="input-group duo flex flex-row gap-4">
-            <div className="input-group flex flex-col gap-1 w-full">
+            <div className="input-group flex flex-col gap-1 w-[48%]">
               <label className="text-[18px] text-black/90">Prénom</label>
               <input
                 id="firstName"
@@ -91,10 +93,10 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 value={firstName}
                 onChange={e => setFirstName(e.target.value)}
                 placeholder="Prénom"
-                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-0"
               />
             </div>
-            <div className="input-group flex flex-col gap-1 w-full">
+            <div className="input-group flex flex-col gap-1 w-[48%]">
               <label className="text-[18px] text-black/90">Nom</label>
               <input
                 id="lastName"
@@ -103,7 +105,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 value={lastName}
                 onChange={e => setLastName(e.target.value)}
                 placeholder="Nom"
-                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] outline-0 transition-colors focus:border-[rgb(157,163,221)] focus:bg-[#444ea513] "
               />
             </div>
           </div>
@@ -114,7 +116,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               value={username}
               onChange={e => setUsername(e.target.value)}
               placeholder="Pseudo"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -124,7 +126,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -134,7 +136,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Mot de passe"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -146,7 +148,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
               placeholder="Confirmer votre mot de passe"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
+              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
             />
           </div>
           {signupMutation.error && (
@@ -159,7 +161,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <h5 className="m-0 p-0 font-light">
               Vous avez déjà un compte ?{' '}
               <a
-                className="invite text-blue-600 hover:underline"
+                className="invite text-[#3B4394] hover:underline"
                 href="#"
                 onClick={toggleForm}
               >
@@ -169,9 +171,9 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
           </div>
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700/80 text-white border-none rounded-[4px] px-4 py-2 h-16 text-[25px] cursor-pointer w-full mt-auto transition-colors"
+            className="bg-[#414891] hover:bg-[#3b4294be] text-white border-none rounded-[4px] px-4 py-2 h-16 text-[25px] cursor-pointer w-full mt-auto transition-colors"
           >
-            S&apos;inscrire
+            S'inscrire
           </button>
         </form>
 
@@ -185,7 +187,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
               type="button"
               onClick={handleGoogleSignUp}
               disabled={firebaseGoogleLoginMutation.isPending}
-              className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-slate-300 via-gray-200 to-slate-300 hover:from-slate-200 hover:via-gray-100 hover:to-slate-200 text-gray-800 border border-slate-400/60 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:shadow-slate-300/50 hover:scale-[1.02] font-medium"
+              className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-[#3B4394]/10 via-[#3B4394]/5 to-[#3B4394]/10 hover:from-[#3B4394]/20 hover:via-[#3B4394]/10 hover:to-[#3B4394]/20 text-[#3B4394] border border-[#3B4394]/30 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow hover:shadow hover:shadow-[#3B4394]/20 hover:scale-[1.02] font-medium"
             >
               <svg width="18" height="18" viewBox="0 0 18 18">
                 <path
