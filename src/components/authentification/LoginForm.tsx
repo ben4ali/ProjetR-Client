@@ -48,7 +48,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       console.log('✅ Backend authentication success');
 
       // AuthManager handles token storage via the mutation's onSuccess
-      window.location.href = '/explore';
+      window.location.href = '/dashboard';
     } catch (error: any) {
       console.error('❌ Google Sign-In Error:', error);
 
