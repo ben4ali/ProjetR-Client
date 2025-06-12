@@ -2,9 +2,21 @@ import { Briefcase, ChevronRight, Rocket, Search, User } from 'lucide-react';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../../hooks/use-auth';
+import { usePortfolioByUserId } from '../../hooks/use-portfolios';
 
 export const QuickActions: FC = () => {
   const { data: currentUser } = useCurrentUser();
+  const { data: userPortfolio } = usePortfolioByUserId(currentUser?.id);
+
+  // Déterminer le lien portfolio selon si l'utilisateur a déjà un portfolio
+  const portfolioLink = userPortfolio
+    ? `/portfolio/${userPortfolio.id}/edit`
+    : '/create-portfolio';
+
+  const portfolioDescription = userPortfolio
+    ? 'Modifier votre portfolio professionnel'
+    : 'Créer votre portfolio professionnel';
+
   const actions = [
     {
       title: 'Publier un projet',
@@ -15,9 +27,9 @@ export const QuickActions: FC = () => {
     },
     {
       title: 'Mon Portfolio',
-      description: 'Gérer votre portfolio professionnel',
+      description: portfolioDescription,
       icon: Briefcase,
-      link: '/create-portfolio',
+      link: portfolioLink,
       color: 'from-blue-400 to-indigo-600',
     },
     {
