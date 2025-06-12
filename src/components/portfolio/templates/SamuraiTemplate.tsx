@@ -713,6 +713,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
             project={selectedProject}
             isOpen={!!selectedProject}
             onClose={() => setSelectedProject(null)}
+            variant="samurai"
           />
         )}
       </AnimatePresence>

@@ -731,6 +731,7 @@ export const CartoonTemplate: FC<CartoonTemplateProps> = ({
             project={selectedProject}
             isOpen={!!selectedProject}
             onClose={() => setSelectedProject(null)}
+            variant="cartoon"
           />
         )}
       </AnimatePresence>
