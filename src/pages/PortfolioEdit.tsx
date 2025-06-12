@@ -82,6 +82,7 @@ export const PortfolioEdit: FC = () => {
         },
       });
 
+      window.scrollTo(0, 0);
       navigate(`/portfolio/${portfolio.id}`);
     } catch (error) {
       console.error("Error updating portfolio:", error);
