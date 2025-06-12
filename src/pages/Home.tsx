@@ -165,18 +165,18 @@ export const Home = () => {
         <MembersComponent />
       </section>
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-[#444ea5]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Prêt à partager vos projets ?
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
             Rejoignez ProjetR Rosemont dès aujourd'hui et commencez à construire
             votre portfolio étudiant
           </p>
           <Link
             to="/authentification"
-            className="inline-block bg-gradient-to-r from-[#e4003a] to-[#444ea5] text-white px-10 py-4 rounded-full font-semibold hover:from-[#e4003a]/90 hover:to-[#444ea5]/90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-block bg-gradient-to-r from-[#e4003a] to-[#e4003a]/90 text-white px-10 py-4 rounded-full font-semibold hover:from-[#e4003a]/80 hover:to-[#e4003a]/70 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             Créer mon compte
           </Link>

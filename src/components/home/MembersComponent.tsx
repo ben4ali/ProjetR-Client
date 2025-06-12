@@ -30,7 +30,11 @@ export const MembersComponent = () => {
         />
       </div>
       <div className="membres-carousel">
-        <CircularGallery bend={3} textColor="rgb(0,0,0)" borderRadius={0.015} />
+        <CircularGallery
+          bend={3}
+          textColor="rgb(0,0,0,0)"
+          borderRadius={0.015}
+        />
       </div>
     </div>
   );
