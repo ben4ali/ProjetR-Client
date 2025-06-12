@@ -1,10 +1,9 @@
-import React from "react";
+import { useEffect, useState } from 'react';
+import logo from '../../assets/logos/Rosemont-SVG.svg';
+import logoBrute from '../../assets/logos/RosemontLogoBrute.png';
 import MetallicPaint, {
   parseLogoImage,
-} from "../../blocks/Animations/MetallicPaint/MetallicPaint";
-import { useState, useEffect } from "react";
-import logo from "../../assets/logos/Rosemont-SVG.svg";
-import logoBrute from "../../assets/logos/RosemontLogoBrute.png";
+} from '../../blocks/Animations/MetallicPaint/MetallicPaint';
 
 export const MetallicLogo = () => {
   const [imageData, setImageData] = useState(null);
@@ -14,11 +13,11 @@ export const MetallicLogo = () => {
       try {
         const response = await fetch(logo);
         const blob = await response.blob();
-        const file = new File([blob], "default.png", { type: blob.type });
+        const file = new File([blob], 'default.png', { type: blob.type });
         const { imageData } = await parseLogoImage(file);
         setImageData(imageData);
       } catch (err) {
-        console.error("Error loading default image:", err);
+        console.error('Error loading default image:', err);
       }
     }
 
@@ -40,7 +39,11 @@ export const MetallicLogo = () => {
           }}
         />
       ) : (
-        <img style={{ scale: 1.18 }} src={logoBrute} alt="logo" />
+        <img
+          style={{ height: '17rem', scale: '1.05' }}
+          src={logoBrute}
+          alt="logo"
+        />
       )}
     </div>
   );

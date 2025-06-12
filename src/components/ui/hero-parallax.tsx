@@ -1,16 +1,16 @@
-"use client";
-import React from "react";
+'use client';
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
   MotionValue,
-} from "motion/react";
-import { MetallicLogo } from "./MetallicLogo";
-import TrueFocus from "../../blocks/TextAnimations/TrueFocus/TrueFocus";
-import ShinyText from "../../blocks/TextAnimations/ShinyText/ShinyText";
-import { Link } from "react-router-dom";
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ShinyText from '../../blocks/TextAnimations/ShinyText/ShinyText';
+import TrueFocus from '../../blocks/TextAnimations/TrueFocus/TrueFocus';
+import { MetallicLogo } from './MetallicLogo';
 
 export const HeroParallax = ({
   products,
@@ -27,34 +27,34 @@ export const HeroParallax = ({
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 1000]),
-    springConfig,
+    springConfig
   );
   const translateXReverse = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, -1000]),
-    springConfig,
+    springConfig
   );
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig,
+    springConfig
   );
   const opacity = useSpring(
     useTransform(scrollYProgress, [0, 0.1], [0.05, 1]),
-    springConfig,
+    springConfig
   );
   const rotateZ = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [20, 0]),
-    springConfig,
+    springConfig
   );
   const translateY = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
-    springConfig,
+    springConfig
   );
   return (
     <div
@@ -72,7 +72,7 @@ export const HeroParallax = ({
         className=""
       >
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
-          {firstRow.map((product) => (
+          {firstRow.map(product => (
             <ProductCard
               product={product}
               translate={translateX}
@@ -81,7 +81,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         <motion.div className="flex flex-row  mb-20 space-x-20 ">
-          {secondRow.map((product) => (
+          {secondRow.map(product => (
             <ProductCard
               product={product}
               translate={translateXReverse}
@@ -90,7 +90,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
-          {thirdRow.map((product) => (
+          {thirdRow.map(product => (
             <ProductCard
               product={product}
               translate={translateX}
@@ -112,10 +112,10 @@ export const Header = () => {
 
       <div className="main-text">
         <TrueFocus
-          sentence="DEV HUB"
+          sentence="PROJET R"
           manualMode={false}
           blurAmount={7}
-          borderColor="rgb(56, 106, 186)"
+          borderColor="#444ea5"
           animationDuration={0.2}
           pauseBetweenAnimations={2}
         />
@@ -162,7 +162,7 @@ export const ProductCard = ({
         <img
           src={product.thumbnail}
           alt={product.title}
-          style={{ borderRadius: "0.4rem" }}
+          style={{ borderRadius: '0.4rem' }}
           referrerPolicy="no-referrer"
         />
       </a>
