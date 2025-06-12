@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
-import { Portfolio } from "../../../types/Portfolio";
-import { Projet } from "../../../types/Projet";
-import { ProjectVideoDialog } from "../ProjectVideoDialog";
+import { FC, useState } from 'react';
+import { Portfolio } from '../../../types/Portfolio';
+import { Projet } from '../../../types/Projet';
+import { ProjectVideoDialog } from '../ProjectVideoDialog';
 
 interface MinimalistTemplateProps {
   portfolio: Portfolio;
@@ -27,7 +27,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
 
   const handleCVDownload = () => {
     if (cvDownloadUrl) {
-      window.open(cvDownloadUrl, "_blank");
+      window.open(cvDownloadUrl, '_blank');
     }
   };
 
@@ -35,14 +35,14 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
     <>
       <div
         className={`bg-white text-gray-900 min-h-screen ${
-          isPreview ? "scale-75 origin-top" : ""
+          isPreview ? 'scale-75 origin-top' : ''
         }`}
       >
         <header className="py-8 px-6 border-b border-gray-100">
           <div className="max-w-4xl mx-auto flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img
-                src={user.avatar || "/default-avatar.png"}
+                src={user.avatar || '/default-avatar.png'}
                 alt={user.firstName}
                 className="w-12 h-12 rounded-full"
               />
@@ -82,17 +82,17 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
         </header>
         <section className="py-32 px-6">
           <div className="max-w-4xl mx-auto">
-            {" "}
+            {' '}
             <div className="max-w-2xl">
-              {" "}
+              {' '}
               <h2 className="text-6xl font-light leading-tight mb-8">
-                {title ? title.split(" ").slice(0, 2).join(" ") : "Développeur"}{" "}
+                {title ? title.split(' ').slice(0, 2).join(' ') : 'Développeur'}{' '}
                 &<br />
                 <span className="italic text-gray-600">
                   {jobTitle ||
                     (title
-                      ? title.split(" ").slice(2).join(" ")
-                      : "Résolveur de Problèmes")}
+                      ? title.split(' ').slice(2).join(' ')
+                      : 'Résolveur de Problèmes')}
                 </span>
               </h2>
               {hook && (
@@ -102,7 +102,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
               )}
               <p className="text-xl text-gray-600 font-light leading-relaxed mb-12">
                 {about ||
-                  "Je crée des expériences numériques avec du code propre et un design réfléchi. Chaque ligne sert un objectif."}
+                  'Je crée des expériences numériques avec du code propre et un design réfléchi. Chaque ligne sert un objectif.'}
               </p>
               {yearsOfExperience && (
                 <div className="mb-8">
@@ -110,7 +110,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                     {yearsOfExperience}+ années d&apos;expérience
                   </div>
                 </div>
-              )}{" "}
+              )}{' '}
               <a
                 href="#work"
                 className="border border-gray-900 px-8 py-3 hover:bg-gray-900 hover:text-white transition-colors text-sm uppercase tracking-wider inline-block"
@@ -118,11 +118,11 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                 Voir Travaux Sélectionnés
               </a>
             </div>
-          </div>{" "}
-        </section>{" "}
+          </div>{' '}
+        </section>{' '}
         <section id="work" className="py-20 px-6 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            {" "}
+            {' '}
             <h3 className="text-sm uppercase tracking-wider text-gray-600 mb-16">
               Travaux Sélectionnés
             </h3>
@@ -134,7 +134,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                   onClick={() => setSelectedProject(projet)}
                 >
                   <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {" "}
+                    {' '}
                     <div className="aspect-video relative overflow-hidden group cursor-pointer">
                       {projet.demoUrl ? (
                         <>
@@ -168,7 +168,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                         {projet.description}
                       </p>
                       <div className="flex space-x-4 text-sm text-gray-500">
-                        {projet.tags.slice(0, 3).map((tag) => (
+                        {projet.tags.slice(0, 3).map(tag => (
                           <span key={tag}>{tag}</span>
                         ))}
                       </div>
@@ -177,7 +177,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                 </div>
               ))}
               {projets.length === 0 &&
-                [1, 2, 3].map((project) => (
+                [1, 2, 3].map(project => (
                   <div key={project} className="group cursor-pointer">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                       <div className="aspect-video bg-gray-200 group-hover:bg-gray-300 transition-colors"></div>
@@ -203,24 +203,24 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                   </div>
                 ))}
             </div>
-          </div>{" "}
-        </section>{" "}
+          </div>{' '}
+        </section>{' '}
         <section id="about" className="py-32 px-6">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16">
-              {" "}
+              {' '}
               <div>
                 <h3 className="text-sm uppercase tracking-wider text-gray-600 mb-8">
                   À Propos
                 </h3>
                 <h4 className="text-3xl font-light leading-relaxed mb-8">
                   {about
-                    ? about.split(".")[0] + "."
-                    : "Je crois au pouvoir de la simplicité et à la beauté des solutions épurées."}
+                    ? about.split('.')[0] + '.'
+                    : 'Je crois au pouvoir de la simplicité et à la beauté des solutions épurées.'}
                 </h4>
                 <p className="text-gray-600 font-light leading-relaxed mb-6">
                   {about
-                    ? about.split(".").slice(1).join(".").trim()
+                    ? about.split('.').slice(1).join('.').trim()
                     : "Avec plus de 5 ans d'expérience en développement web, je me concentre sur la création d'applications qui sont non seulement fonctionnelles mais aussi maintenables et évolutives."}
                 </p>
                 {yearsOfExperience && (
@@ -235,7 +235,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                     Compétences
                   </h5>
                   <div className="space-y-2">
-                    {skills?.slice(0, 5).map((skill) => (
+                    {skills?.slice(0, 5).map(skill => (
                       <div
                         key={skill.name}
                         className="text-gray-800 font-light"
@@ -245,12 +245,12 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                     ))}
                     {skills?.length === 0 &&
                       [
-                        "JavaScript/TypeScript",
-                        "React/Next.js",
-                        "Node.js/Express",
-                        "PostgreSQL/MongoDB",
-                        "AWS/Docker",
-                      ].map((skill) => (
+                        'JavaScript/TypeScript',
+                        'React/Next.js',
+                        'Node.js/Express',
+                        'PostgreSQL/MongoDB',
+                        'AWS/Docker',
+                      ].map(skill => (
                         <div key={skill} className="text-gray-800 font-light">
                           {skill}
                         </div>
@@ -276,17 +276,17 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
               </div>
             </div>
           </div>
-        </section>{" "}
+        </section>{' '}
         <section id="contact" className="py-32 px-6 border-t border-gray-100">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16">
-              {" "}
+              {' '}
               <div>
                 <h3 className="text-sm uppercase tracking-wider text-gray-600 mb-8">
                   Contact
                 </h3>
                 <h4 className="text-3xl font-light leading-relaxed mb-8">
-                  Discutons de votre{" "}
+                  Discutons de votre{' '}
                   <span className="italic">prochain projet</span>.
                 </h4>
                 <p className="text-gray-600 font-light leading-relaxed mb-8">
@@ -295,7 +295,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                 </p>
                 <a
                   href={`mailto:${user.email}`}
-                  className="border border-gray-900 px-8 py-3 hover:bg-gray-900 hover:text-white transition-colors text-sm uppercase tracking-wider inline-block"
+                  className="border border-gray-900 w-62 text-center py-3 hover:bg-gray-900 hover:text-white transition-colors text-sm uppercase tracking-wider inline-block"
                 >
                   Envoyer un Message
                 </a>
@@ -304,7 +304,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                     href={cvDownloadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-4 border border-gray-600 text-gray-600 px-8 py-3 hover:bg-gray-600 hover:text-white transition-colors text-sm uppercase tracking-wider inline-block"
+                    className="border border-gray-600 text-gray-600  text-center py-3 w-62 hover:bg-gray-600 hover:text-white transition-colors mt-3 text-sm uppercase tracking-wider inline-block"
                   >
                     Télécharger CV
                   </a>
@@ -337,7 +337,7 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
             </div>
           </div>
         </section>
-      </div>{" "}
+      </div>{' '}
       {selectedProject && (
         <ProjectVideoDialog
           project={selectedProject}

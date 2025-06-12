@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
-import { Portfolio } from "../../../types/Portfolio";
-import { ProjectVideoDialog } from "../ProjectVideoDialog";
+import { FC, useState } from 'react';
+import { Portfolio } from '../../../types/Portfolio';
+import { ProjectVideoDialog } from '../ProjectVideoDialog';
 
 interface ClassicTemplateProps {
   portfolio: Portfolio;
@@ -31,7 +31,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
   return (
     <div
       className={`bg-white text-gray-800 min-h-screen ${
-        isPreview ? "scale-75 origin-top" : ""
+        isPreview ? 'scale-75 origin-top' : ''
       }`}
     >
       <header className="bg-gray-50 border-b-2 border-gray-200">
@@ -39,24 +39,24 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img
-                src={user.avatar || "/default-avatar.png"}
+                src={user.avatar || '/default-avatar.png'}
                 alt={user.firstName}
                 className="w-16 h-16 rounded-full border-2 border-gray-300"
-              />{" "}
+              />{' '}
               <div>
                 <h1 className="text-2xl font-serif font-bold">
                   {title || `${user.firstName} ${user.lastName}`}
                 </h1>
                 <p className="text-gray-600">Développeur Professionnel</p>
               </div>
-            </div>{" "}
+            </div>{' '}
             <nav className="hidden md:flex space-x-8">
               <a
                 href="#about"
                 className="text-gray-700 hover:text-gray-900 font-medium"
               >
                 À propos
-              </a>{" "}
+              </a>{' '}
               <a
                 href="#about"
                 className="text-gray-700 hover:text-gray-900 font-medium"
@@ -81,7 +81,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
       </header>
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center p-10 mb-30">
-          {" "}
+          {' '}
           <h2 className="text-5xl font-serif font-bold mb-6 text-gray-900">
             {jobTitle || "Créer l'Excellence Numérique"}
           </h2>
@@ -97,18 +97,18 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             Voir Mon Travail
           </a>
         </div>
-      </section>{" "}
+      </section>{' '}
       <section id="about" className="py-20 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              {" "}
+              {' '}
               <h3 className="text-3xl font-serif font-bold mb-6">
                 À Propos de Moi
               </h3>
               <p className="text-gray-700 leading-relaxed mb-6">
                 {about ||
-                  "Je suis un ingénieur logiciel dévoué avec une passion pour la création de solutions innovantes. Mon expertise couvre le développement full-stack, avec un accent particulier sur les technologies web modernes."}
+                  'Je suis un ingénieur logiciel dévoué avec une passion pour la création de solutions innovantes. Mon expertise couvre le développement full-stack, avec un accent particulier sur les technologies web modernes.'}
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="border-l-4 border-gray-900 pl-4">
@@ -160,9 +160,9 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             <div className="bg-white p-8 rounded-lg shadow-lg">
               <h4 className="text-xl font-semibold mb-6">
                 Compétences Principales
-              </h4>{" "}
+              </h4>{' '}
               <div className="space-y-4">
-                {skills?.slice(0, 4).map((skill) => {
+                {skills?.slice(0, 4).map(skill => {
                   return (
                     <div key={skill.name}>
                       <div className="flex justify-between mb-1">
@@ -186,15 +186,15 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             </div>
           </div>
         </div>
-      </section>{" "}
+      </section>{' '}
       <section id="portfolio" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          {" "}
+          {' '}
           <h3 className="text-3xl font-serif font-bold mb-12 text-center">
             Projets en Vedette
           </h3>
           <div className="space-y-8">
-            {projets.slice(0, 3).map((projet) => (
+            {projets.slice(0, 3).map(projet => (
               <div
                 key={projet.id}
                 className="border-l-4 border-gray-300 pl-8 pb-8"
@@ -206,7 +206,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                   </span>
                 </div>
                 <p className="text-gray-700 mb-2">
-                  {projet.tags?.join(", ") || "Développement Full Stack"}
+                  {projet.tags?.join(', ') || 'Développement Full Stack'}
                 </p>
                 <p className="text-gray-600 mb-4">{projet.description}</p>
 
@@ -247,10 +247,10 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             )}
           </div>
         </div>
-      </section>{" "}
+      </section>{' '}
       <section id="contact" className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          {" "}
+          {' '}
           <h3 className="text-3xl font-serif font-bold mb-8">
             Entrer en Contact
           </h3>
@@ -266,7 +266,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
               M&apos;Envoyer un Email
             </a>
             <a
-              href={cvDownloadUrl || "#"}
+              href={cvDownloadUrl || '#'}
               className="border border-white text-white px-8 py-3 hover:bg-white hover:text-gray-900 transition-colors font-medium"
               download
             >
@@ -274,7 +274,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             </a>
           </div>
         </div>
-      </section>{" "}
+      </section>{' '}
       {selectedProject && (
         <ProjectVideoDialog
           isOpen={!!selectedProject}

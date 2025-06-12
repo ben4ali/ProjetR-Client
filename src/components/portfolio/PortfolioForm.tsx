@@ -116,7 +116,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             {currentTemplates.map(([key, value]) => (
               <div
                 key={key}
-                className={`relative border-2 rounded-xl p-4 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 group ${
+                className={`relative border-2 rounded p-4 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 group ${
                   formState.selectedTemplate === value
                     ? 'border-[#444ea5] bg-[#444ea5]/5 shadow-lg ring-2 ring-[#444ea5]/20'
                     : 'border-gray-200 bg-white hover:border-[#444ea5]/30'
