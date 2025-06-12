@@ -74,11 +74,13 @@ export const Post = ({
             </p>
           </div>
           <div className="flex mt-4 h-24 gap-2">
-            <div className="flex h-full w-[15%]">
+            <div className="flex h-full aspect-square">
               <img
                 src={authorAvatar}
                 alt="Photo de profil"
                 className="w-12 h-12 object-cover rounded-full mr-4"
+                crossOrigin="anonymous"
+                referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex flex-col w-[85%] text-black">
@@ -121,6 +123,8 @@ export const Post = ({
                     className="object-cover w-full h-full"
                     src={authorAvatar}
                     alt="Photo de profil"
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <p className="text-sm">{authorUsername}</p>

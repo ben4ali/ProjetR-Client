@@ -1,7 +1,7 @@
 import { FC } from "react";
 import React from "react";
 import { useCurrentUser } from "../../hooks/use-auth";
-import { useProjectsByUserId } from "../../hooks/use-project";
+import { useProjectsByCollaborator } from "../../hooks/use-project";
 import { PortfolioFormState } from "../../hooks/use-portfolio-form";
 import { PORTFOLIO_TEMPLATES, PortfolioTemplate } from "../../types/Portfolio";
 import { TemplatePreviewDialog } from "./TemplatePreviewDialog";
@@ -52,7 +52,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
   error,
 }) => {
   const { data: currentUser } = useCurrentUser();
-  const { data: userProjects = [] } = useProjectsByUserId(currentUser?.id);
+  const { data: userProjects = [] } = useProjectsByCollaborator(currentUser?.firstName);
   const templateDescriptions: Record<PortfolioTemplate, string> = {
     [PORTFOLIO_TEMPLATES.MODERN]:
       "Design moderne et contemporain avec des animations fluides",

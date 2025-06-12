@@ -4,6 +4,7 @@ import { isLoggedIn } from "../../hooks/use-auth";
 import default_avatar from "../../assets/images/default_profil.png";
 import { useUserById } from "../../hooks/use-users";
 import { useLikeProject, useDislikeProject } from "../../hooks/use-project";
+import { Link } from "react-router-dom";
 
 interface VideoOptionsProps {
   projet: Projet | null;
@@ -96,12 +97,15 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
           <span>Erreur auteur</span>
         ) : (
           <>
-            <img
+            <Link to={`/profil/${author?.id}`} >
+              <img
               src={author?.avatar || default_avatar}
               alt="author"
               crossOrigin="anonymous"
               className="h-12 w-12 rounded-full object-cover"
+              referrerPolicy="no-referrer"
             />
+            </Link>
             <div className="author-info leading-tight">
               <h3 className="text-[1.3rem] font-medium text-neutral-900">
                 {author?.firstName} {author?.lastName}
