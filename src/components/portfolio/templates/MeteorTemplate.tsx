@@ -308,7 +308,7 @@ export const MeteorTemplate: FC<MeteorTemplateProps> = ({
                 ref={skillsRef}
                 className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
               >
-                {skills.map((skill) => (
+                {skills?.map((skill) => (
                   <motion.div
                     key={skill.name}
                     whileHover={{

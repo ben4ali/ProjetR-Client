@@ -485,7 +485,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                   Compétences Techniques
                 </h3>
                 <div className="space-y-4">
-                  {(skills.length > 0
+                  {(skills?.length > 0
                     ? skills.slice(0, 6)
                     : [
                         { name: "Swift", level: 90 },

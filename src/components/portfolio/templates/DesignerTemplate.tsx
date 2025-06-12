@@ -225,12 +225,12 @@ export const DesignerTemplate: FC<DesignerTemplateProps> = ({
                   <div>
                     <h3 className="text-lg font-medium mb-4">Compétences</h3>
                     <div className="space-y-2">
-                      {skills.slice(0, 5).map((skill) => (
+                      {skills?.slice(0, 5).map((skill) => (
                         <div key={skill.name} className="text-gray-600">
                           {skill.name}
                         </div>
                       ))}
-                      {skills.length === 0 &&
+                      {skills?.length === 0 &&
                         [
                           "Design Visuel",
                           "Identité de Marque",

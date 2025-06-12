@@ -134,7 +134,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
   // Cycling skills effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSkillIndex((prev) => (prev + 1) % Math.max(skills.length, 1));
+      setCurrentSkillIndex((prev) => (prev + 1) % Math.max(skills?.length, 1));
     }, 2000);
     return () => clearInterval(interval);
   }, [skills.length]);
@@ -481,7 +481,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
             </motion.h2>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {(skills.length > 0
+              {(skills?.length > 0
                 ? skills
                 : [
                     "Apprentissage Automatique",

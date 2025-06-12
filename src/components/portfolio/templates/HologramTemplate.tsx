@@ -299,7 +299,7 @@ export const HologramTemplate: FC<HologramTemplateProps> = ({
                 ref={gridRef}
                 className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
               >
-                {skills.map((skill, index) => (
+                {skills?.map((skill, index) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, scale: 0.8 }}

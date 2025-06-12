@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { PortfolioTemplate, PORTFOLIO_TEMPLATES, Skill } from "../types/Portfolio";
+import { Projet } from "../types/Projet";
 
 export interface PortfolioFormData {
   selectedTemplate: PortfolioTemplate | "";
@@ -31,7 +32,7 @@ interface Portfolio {
   about?: string;
   hook?: string;
   skills?: Skill[];
-  projectIds?: number[];
+  projets?: Projet[];
   githubUrl?: string;
   linkedinUrl?: string;
   websiteUrl?: string;
@@ -49,7 +50,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     about: initialData?.about || "",
     hook: initialData?.hook || "",
     skills: initialData?.skills || [],
-    selectedProjects: initialData?.projectIds || [],
+    selectedProjects: initialData?.projets?.map(proj => proj.id) || [],
     githubUrl: initialData?.githubUrl || "",
     linkedinUrl: initialData?.linkedinUrl || "",
     websiteUrl: initialData?.websiteUrl || "",
@@ -76,7 +77,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
         about: initialData.about || "",
         hook: initialData.hook || "",
         skills: initialData.skills || [],
-        selectedProjects: initialData.projectIds || [],
+        selectedProjects: initialData.projets?.map(proj => proj.id) || [],
         githubUrl: initialData.githubUrl || "",
         linkedinUrl: initialData.linkedinUrl || "",
         websiteUrl: initialData.websiteUrl || "",

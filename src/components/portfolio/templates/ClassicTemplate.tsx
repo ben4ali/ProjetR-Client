@@ -162,7 +162,7 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                 Compétences Principales
               </h4>{" "}
               <div className="space-y-4">
-                {skills.slice(0, 4).map((skill) => {
+                {skills?.slice(0, 4).map((skill) => {
                   return (
                     <div key={skill.name}>
                       <div className="flex justify-between mb-1">

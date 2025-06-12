@@ -89,7 +89,7 @@ export const DeveloperTemplate: FC<DeveloperTemplateProps> = ({
                   )}
                   &nbsp;&nbsp;{`"projets": ${projets.length},`}
                   <br />
-                  &nbsp;&nbsp;{`"competences": ${skills.length},`}
+                  &nbsp;&nbsp;{`"competences": ${skills?.length || 0},`}
                   <br />
                   {yearsOfExperience && (
                     <>
@@ -157,12 +157,12 @@ export const DeveloperTemplate: FC<DeveloperTemplateProps> = ({
                 </div>
                 <div className="text-green-400 mb-4 font-bold">Compétences</div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {skills.slice(0, 6).map((skill) => (
+                  {skills?.slice(0, 6).map((skill) => (
                     <div key={skill.name} className="text-sm text-gray-300">
                       • {skill.name}
                     </div>
                   ))}
-                  {skills.length === 0 &&
+                  {skills?.length === 0 &&
                     [
                       "React",
                       "Node.js",

@@ -170,7 +170,7 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                     Arsenal Créatif
                   </h3>{" "}
                   <div className="space-y-4">
-                    {skills.slice(0, 6).map((skill) => (
+                    {skills?.slice(0, 6).map((skill) => (
                       <div
                         key={skill.name}
                         className="flex items-center space-x-3 p-3 rounded-lg bg-gradient-to-r from-purple-900/30 to-pink-900/30 hover:from-purple-800/40 hover:to-pink-800/40 transition-all"
@@ -179,7 +179,7 @@ export const CreativeTemplate: FC<CreativeTemplateProps> = ({
                         <span className="font-medium">{skill.name}</span>
                       </div>
                     ))}
-                    {skills.length === 0 &&
+                    {skills?.length === 0 &&
                       [
                         { tool: "React/Next.js", icon: "⚛️" },
                         { tool: "Three.js/WebGL", icon: "🎮" },
