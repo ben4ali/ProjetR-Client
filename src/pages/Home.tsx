@@ -1,4 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
+import Orb from '../blocks/Backgrounds/Orb/Orb';
 import { MetallicLogo } from '../components/ui/MetallicLogo';
 import { isLoggedIn } from '../hooks/use-auth';
 
@@ -10,16 +11,19 @@ export const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#444ea527] to-gray-400">
+    <div className="min-h-screen bg-gradient-to-br from-[#444ea527] to-gray-400 relative">
+      <Link
+        to="/authentification"
+        className="sticky top-4 right-4 ml-4 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:bg-[#e4003a] hover:text-white border border-[#e4003a] text-[#e4003a] z-5"
+      >
+        Se connecter
+      </Link>{' '}
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#e4003a]/10 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#444ea5]/10 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-[#e4003a]/5 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+          <Orb hue={0} hoverIntensity={0.3} />
         </div>
-
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           {/* Logo */}
           <div className="mb-8 flex justify-center">
@@ -59,15 +63,13 @@ export const Home = () => {
             </Link>
           </div>
         </div>
-
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
@@ -126,7 +128,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="py-20 px-6 bg-gradient-to-r from-[#e4003a] to-[#444ea5]">
         <div className="max-w-4xl mx-auto text-center">
@@ -158,7 +159,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">

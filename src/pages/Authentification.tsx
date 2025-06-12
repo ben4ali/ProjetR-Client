@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { LoginForm } from '../components/authentification/LoginForm';
 import { Signup } from '../components/authentification/SignUpForm';
 
@@ -90,6 +91,12 @@ export const Authentification = () => {
 
   return (
     <div className="authentification-container relative flex justify-center items-center min-h-screen min-w-screen overflow-hidden bg-stone-200">
+      <Link
+        to="/"
+        className="absolute top-4 right-4 ml-4 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:bg-[#e4003a] hover:text-white border border-[#e4003a] text-[#e4003a] z-5"
+      >
+        Retourner à l'accueil
+      </Link>
       <div
         ref={loginRef}
         className="form-wrapper relative z-10 transition-all duration-500 ease-in-out"

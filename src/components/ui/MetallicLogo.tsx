@@ -40,11 +40,17 @@ export const MetallicLogo = () => {
         />
       ) : (
         <img
-          style={{ height: '17rem', scale: '1.05' }}
+          style={{
+            height: '17rem',
+            scale: '1.05',
+            zIndex: 5,
+            position: 'relative',
+          }}
           src={logoBrute}
           alt="logo"
         />
       )}
+      <div className="absolute -inset-75 z-0 rounded-full bg-radial-[at_50%_50%] from-[#5a62a7d0] via-transparent to-transparent" />
     </div>
   );
 };
