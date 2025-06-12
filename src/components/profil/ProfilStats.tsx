@@ -5,7 +5,7 @@ export const ProfilStats = ({ projets }: { projets: Projet[] }) => {
   const nbVues = projets.reduce((acc, p) => acc + (p.views || 0), 0);
   const nbLikes = projets.reduce((acc, p) => acc + (p.likes || 0), 0);
   return (
-    <div className="mt-6 flex items-center gap-4 md:gap-8 mb-8 md:mb-0">
+    <div className="mt-6 ml-10 flex items-center gap-4 md:gap-8 mb-8 md:mb-0">
       <p className="text-base md:text-lg opacity-40 m-0">
         {nbPublications} PUBLICATIONS
       </p>

@@ -55,7 +55,7 @@ export const ProfilContent: FC<ProfilContentProps> = ({
   return (
     <div className="mt-16 md:mt-4 flex flex-col w-full max-w-6xl mx-auto px-4 leading-[2.25rem]">
       <div className="profil-info">
-        <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="w-full flex flex-col ml-10 md:flex-row md:items-center justify-between gap-6">
           <div className="flex-1">
             <h1 className="text-3xl md:text-4xl m-0">
               {firstName} {lastName}
