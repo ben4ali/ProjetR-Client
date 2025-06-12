@@ -110,9 +110,9 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
 
   return (
     <div className="w-full">
-      <div className="relative w-full flex flex-row-reverse gap-5">
-        <div className="sticky top-25 w-[50%] h-fit">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="relative w-full flex flex-col lg:flex-row-reverse gap-5">
+        <div className="lg:sticky lg:top-25 w-full lg:w-[50%] h-fit">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {currentTemplates.map(([key, value]) => (
               <div
                 key={key}
@@ -265,7 +265,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
           )}
         </div>
 
-        <form onSubmit={onSubmit} className="flex-1">
+        <form onSubmit={onSubmit} className="w-full lg:flex-1">
           <div className="bg-white rounded-lg p-8 shadow-lg">
             <h3 className="text-2xl font-bold mb-6 text-gray-900">
               Détails du Portfolio
@@ -758,7 +758,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <h4 className="text-lg font-semibold mb-4 text-gray-900">
                   Sélectionner les Projets à Présenter
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {userProjects.map(project => (
                     <div
                       key={project.id}
