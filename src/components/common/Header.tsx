@@ -98,7 +98,7 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 bg-neutral-100 shadow z-50 w-full flex justify-between items-center px-[5%] text-gray-600/80 h-20">
       <div className="flex items-center gap-4">
-        <Link to="/explore" className="flex items-center gap-1">
+        <Link to="/dashboard" className="flex items-center gap-1">
           <img
             src="/logo_rosemont.png"
             alt="logo"

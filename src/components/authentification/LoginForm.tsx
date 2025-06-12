@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   useFirebaseGoogleLogin,
   useGoogleLogin,
   useLogin,
-} from "../../hooks/use-auth";
+} from '../../hooks/use-auth';
 
 interface LoginFormProps {
   toggleForm: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const loginMutation = useLogin();
   const firebaseGoogleLoginMutation = useFirebaseGoogleLogin();
   const googleLoginMutation = useGoogleLogin();
@@ -24,46 +24,46 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       {
         onSuccess: () => {
           // AuthManager will handle token storage via the mutation's onSuccess
-          window.location.href = "/explore";
+          window.location.href = '/dashboard';
         },
         onError: (error: Error | unknown) => {
-          console.error("Login error:", error);
+          console.error('Login error:', error);
           alert(
             (error as any)?.response?.data?.message ||
-              "Erreur de connexion. Veuillez vérifier vos identifiants.",
+              'Erreur de connexion. Veuillez vérifier vos identifiants.'
           );
         },
-      },
+      }
     );
   };
 
   const handleGoogleLogin = async () => {
     try {
       const result = await firebaseGoogleLoginMutation.mutateAsync();
-      console.log("✅ Firebase Google Sign-In Success:", result.user.email);
+      console.log('✅ Firebase Google Sign-In Success:', result.user.email);
 
       await googleLoginMutation.mutateAsync({
         idToken: result.idToken,
       });
-      console.log("✅ Backend authentication success");
+      console.log('✅ Backend authentication success');
 
       // AuthManager handles token storage via the mutation's onSuccess
-      window.location.href = "/explore";
+      window.location.href = '/explore';
     } catch (error: any) {
-      console.error("❌ Google Sign-In Error:", error);
+      console.error('❌ Google Sign-In Error:', error);
 
-      if (error.code === "auth/popup-closed-by-user") {
-        console.log("User closed the sign-in popup");
-      } else if (error.code === "auth/popup-blocked") {
-        alert("Please allow popups for this site to sign in with Google");
+      if (error.code === 'auth/popup-closed-by-user') {
+        console.log('User closed the sign-in popup');
+      } else if (error.code === 'auth/popup-blocked') {
+        alert('Please allow popups for this site to sign in with Google');
         firebaseGoogleLoginMutation.reset();
-      } else if (error.message?.includes("Firebase")) {
+      } else if (error.message?.includes('Firebase')) {
         alert(
-          "Authentication service unavailable. Please check your internet connection.",
+          'Authentication service unavailable. Please check your internet connection.'
         );
         firebaseGoogleLoginMutation.reset();
       } else {
-        alert("Sign-in failed. Please try again.");
+        alert('Sign-in failed. Please try again.');
         firebaseGoogleLoginMutation.reset();
       }
     }
@@ -87,7 +87,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               name="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -100,7 +100,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               name="password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               placeholder="Mot de passe"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -109,7 +109,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           {loginMutation.error && (
             <p className="error-message-valdiation text-red-500 text-[15px] font-light text-center">
               {(loginMutation.error as any)?.response?.data?.message ||
-                "Erreur de connexion"}
+                'Erreur de connexion'}
             </p>
           )}
 
@@ -151,13 +151,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               />
             </svg>
             {firebaseGoogleLoginMutation.isPending
-              ? "Connexion..."
-              : "Continuer avec Google"}
+              ? 'Connexion...'
+              : 'Continuer avec Google'}
           </button>
         </div>
         <div className="register-link text-black/50 text-[15px] p-0 m-0 h-fit">
           <h5 className="m-0 p-0 font-light">
-            Vous n&apos;avez pas de compte ?{" "}
+            Vous n&apos;avez pas de compte ?{' '}
             <a
               className="invite text-blue-600 hover:underline"
               href="#"

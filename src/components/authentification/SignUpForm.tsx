@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   useFirebaseGoogleLogin,
   useGoogleLogin,
   useSignup,
-} from "../../hooks/use-auth";
+} from '../../hooks/use-auth';
 
 interface SignupProps {
   toggleForm: () => void;
 }
 
 export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const signupMutation = useSignup();
   const firebaseGoogleLoginMutation = useFirebaseGoogleLogin();
   const googleLoginMutation = useGoogleLogin();
@@ -24,48 +24,48 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.error("Les mots de passe ne correspondent pas.");
+      console.error('Les mots de passe ne correspondent pas.');
       return;
     }
     signupMutation.mutate(
       { firstName, lastName, username, email, password },
       {
         onSuccess: () => {
-          window.location.href = "/explore";
+          window.location.href = '/dashboard';
         },
         onError: (err: Error | unknown) => {
           console.error("Erreur lors de l'inscription :", err);
         },
-      },
+      }
     );
   };
 
   const handleGoogleSignUp = async () => {
     try {
       const result = await firebaseGoogleLoginMutation.mutateAsync();
-      console.log("✅ Firebase Google Sign-Up Success:", result.user.email);
+      console.log('✅ Firebase Google Sign-Up Success:', result.user.email);
 
       await googleLoginMutation.mutateAsync({ idToken: result.idToken });
-      console.log("✅ Backend authentication success");
+      console.log('✅ Backend authentication success');
 
       // AuthManager handles token storage via the mutation's onSuccess
-      window.location.href = "/explore";
+      window.location.href = '/explore';
     } catch (error: any) {
-      console.error("❌ Google Sign-Up Error:", error);
+      console.error('❌ Google Sign-Up Error:', error);
 
-      if (error.code === "auth/popup-closed-by-user") {
-        console.log("User closed the sign-up popup");
+      if (error.code === 'auth/popup-closed-by-user') {
+        console.log('User closed the sign-up popup');
         firebaseGoogleLoginMutation.reset();
-      } else if (error.code === "auth/popup-blocked") {
-        alert("Please allow popups for this site to sign up with Google");
+      } else if (error.code === 'auth/popup-blocked') {
+        alert('Please allow popups for this site to sign up with Google');
         firebaseGoogleLoginMutation.reset();
-      } else if (error.message?.includes("Firebase")) {
+      } else if (error.message?.includes('Firebase')) {
         alert(
-          "Authentication service unavailable. Please check your internet connection.",
+          'Authentication service unavailable. Please check your internet connection.'
         );
         firebaseGoogleLoginMutation.reset();
       } else {
-        alert("Sign-up failed. Please try again.");
+        alert('Sign-up failed. Please try again.');
         firebaseGoogleLoginMutation.reset();
       }
     }
@@ -89,7 +89,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 name="firstName"
                 type="text"
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={e => setFirstName(e.target.value)}
                 placeholder="Prénom"
                 className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
               />
@@ -101,7 +101,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 name="lastName"
                 type="text"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={e => setLastName(e.target.value)}
                 placeholder="Nom"
                 className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
               />
@@ -112,7 +112,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={e => setUsername(e.target.value)}
               placeholder="Pseudo"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -122,7 +122,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -132,7 +132,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               placeholder="Mot de passe"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -144,7 +144,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={e => setConfirmPassword(e.target.value)}
               placeholder="Confirmer votre mot de passe"
               className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-blue-500 focus:bg-blue-100/20 outline-none"
             />
@@ -157,7 +157,7 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
           )}
           <div className="register-link text-black/50 text-[15px] p-0 m-0 h-fit">
             <h5 className="m-0 p-0 font-light">
-              Vous avez déjà un compte ?{" "}
+              Vous avez déjà un compte ?{' '}
               <a
                 className="invite text-blue-600 hover:underline"
                 href="#"
@@ -206,8 +206,8 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 />
               </svg>
               {firebaseGoogleLoginMutation.isPending
-                ? "Connexion..."
-                : "Continuer avec Google"}
+                ? 'Connexion...'
+                : 'Continuer avec Google'}
             </button>
           </div>
         </div>

@@ -1,17 +1,17 @@
-import "../styles/style-home.css";
-import { HeroParallaxComponent } from "../components/home/HeroParallaxComponent";
-import { ClassCards } from "../components/home/ClassCards";
-import { Presentation } from "../components/home/Presentation";
-import { MembersComponent } from "../components/home/MembersComponent";
-import { StartComponent } from "../components/home/StartComponent";
-import { isLoggedIn } from "../hooks/use-auth";
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { ClassCards } from '../components/home/ClassCards';
+import { HeroParallaxComponent } from '../components/home/HeroParallaxComponent';
+import { MembersComponent } from '../components/home/MembersComponent';
+import { Presentation } from '../components/home/Presentation';
+import { StartComponent } from '../components/home/StartComponent';
+import { isLoggedIn } from '../hooks/use-auth';
+import '../styles/style-home.css';
 
 export const Home = () => {
   const loggedIn = isLoggedIn();
 
   if (loggedIn) {
-    return <Navigate to="/explore" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
   return (
     <div className="home-container">
