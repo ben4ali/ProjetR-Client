@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
-import defaultBanner from "../../assets/images/default_banner.png";
-import { User } from "../../types/User";
-import { ChangeBannerModal } from "../modals/changeBannerModal";
-import { ProfilContent } from "./ProfilContent";
-import { ProfilPicture } from "./ProfilPicture";
+import { FC, useState } from 'react';
+import defaultBanner from '../../assets/images/default_banner.png';
+import { Projet } from '../../types/Projet';
+import { User } from '../../types/User';
+import { ChangeBannerModal } from '../modals/changeBannerModal';
+import { ProfilContent } from './ProfilContent';
+import { ProfilPicture } from './ProfilPicture';
 
 interface ProfilHeaderProps {
   firstName: string;
@@ -12,6 +13,7 @@ interface ProfilHeaderProps {
   user: User;
   banner: string;
   isCurrentUser?: boolean;
+  projets: Projet[];
 }
 
 export const ProfilHeader: FC<ProfilHeaderProps> = ({
@@ -21,6 +23,7 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
   user,
   banner,
   isCurrentUser,
+  projets,
 }) => {
   const [isBannerModalOpen, setBannerModalOpen] = useState(false);
 
@@ -31,7 +34,7 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
     <div className="relative flex flex-col gap-4 w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-lg">
       <div
         className={`overflow-hidden h-[62%] w-full ${
-          isCurrentUser ? "cursor-pointer group" : ""
+          isCurrentUser ? 'cursor-pointer group' : ''
         }`}
         onClick={isCurrentUser ? handleOpenBannerModal : undefined}
       >
@@ -49,6 +52,7 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
         lastName={lastName}
         pseudo={pseudo}
         userId={user.id}
+        projets={projets}
       />
 
       <ChangeBannerModal

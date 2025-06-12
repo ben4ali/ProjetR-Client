@@ -1,14 +1,16 @@
-import { FC, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useCurrentUser } from "../../hooks/use-auth";
-import { usePortfolioByUserId } from "../../hooks/use-portfolios";
-import { ProfilStats } from "./ProfilStats";
+import { FC, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCurrentUser } from '../../hooks/use-auth';
+import { usePortfolioByUserId } from '../../hooks/use-portfolios';
+import { Projet } from '../../types/Projet';
+import { ProfilStats } from './ProfilStats';
 
 interface ProfilContentProps {
   firstName: string;
   lastName: string;
   pseudo: string;
   userId: string;
+  projets: Projet[];
 }
 
 export const ProfilContent: FC<ProfilContentProps> = ({
@@ -16,19 +18,20 @@ export const ProfilContent: FC<ProfilContentProps> = ({
   lastName,
   pseudo,
   userId,
+  projets,
 }) => {
   const navigate = useNavigate();
   const { data: currentUser } = useCurrentUser();
   const isCurrentUser = useMemo(
     () => currentUser?.id === userId,
-    [currentUser?.id, userId],
+    [currentUser?.id, userId]
   );
 
   const { data: portfolio, isLoading, error } = usePortfolioByUserId(userId);
 
   const hasNoPortfolio =
     error &&
-    "response" in error &&
+    'response' in error &&
     (error as { response?: { status?: number } }).response?.status === 404;
 
   const shouldShowCreateButton =
@@ -103,7 +106,7 @@ export const ProfilContent: FC<ProfilContentProps> = ({
                     <path
                       className="opacity-75"
                       fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      d="M4 12a8 8 0 008-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
                   Chargement...
@@ -191,7 +194,7 @@ export const ProfilContent: FC<ProfilContentProps> = ({
         </div>
       </div>
 
-      <ProfilStats />
+      <ProfilStats projets={projets} />
     </div>
   );
 };

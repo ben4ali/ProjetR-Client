@@ -117,6 +117,14 @@ export const Navbar = () => {
       <ul className="flex gap-12 w-3/4 items-center justify-end lg:gap-5 lg:w-[90%]">
         <li>
           <Link
+            to="/dashboard"
+            className="text-gray-600/70 no-underline transition-all duration-200 hover:text-black/90 lg:text"
+          >
+            Tableau de bord
+          </Link>
+        </li>
+        <li>
+          <Link
             to="/explore"
             className="text-gray-600/70 no-underline transition-all duration-200 hover:text-black/90 lg:text"
           >
@@ -128,7 +136,7 @@ export const Navbar = () => {
           <input
             type="text"
             placeholder="Rechercher..."
-            className="rounded py-2 px-4 pl-12 w-full border border-black/20 outline-none text-black/75 bg-transparent transition-all duration-200 focus:border-black/50 focus:bg-black/5"
+            className="rounded-full py-2 px-4 pl-12 w-full border border-black/20 outline-none text-black/75 bg-transparent transition-all duration-200 focus:border-black/50 focus:bg-black/5"
           />
         </div>
 
