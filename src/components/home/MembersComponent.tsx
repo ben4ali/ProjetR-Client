@@ -1,7 +1,6 @@
-import React from "react";
-import RotatingText from "../../blocks/TextAnimations/RotatingText/RotatingText";
-import Squares from "../../blocks/Backgrounds/Squares/Squares";
-import CircularGallery from "../../blocks/Components/CircularGallery/CircularGallery";
+import Squares from '../../blocks/Backgrounds/Squares/Squares';
+import CircularGallery from '../../blocks/Components/CircularGallery/CircularGallery';
+import RotatingText from '../../blocks/TextAnimations/RotatingText/RotatingText';
 
 export const MembersComponent = () => {
   return (
@@ -18,15 +17,15 @@ export const MembersComponent = () => {
       <div id="titleSection">
         <h2>Des étudiants</h2>
         <RotatingText
-          texts={["Intuitifs", "Motivés", "Curieux", "Créatifs"]}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-          staggerFrom={"last"}
-          initial={{ y: "100%" }}
+          texts={['Intuitifs', 'Motivés', 'Curieux', 'Créatifs']}
+          mainClassName="!bg-[#444ea5] text-white px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+          staggerFrom={'last'}
+          initial={{ y: '100%' }}
           animate={{ y: 0 }}
-          exit={{ y: "-120%" }}
+          exit={{ y: '-120%' }}
           staggerDuration={0.025}
           splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-          transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          transition={{ type: 'spring', damping: 30, stiffness: 400 }}
           rotationInterval={3000}
         />
       </div>

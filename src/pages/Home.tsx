@@ -1,7 +1,9 @@
 import { Link, Navigate } from 'react-router-dom';
 import Orb from '../blocks/Backgrounds/Orb/Orb';
+import { MembersComponent } from '../components/home/MembersComponent';
 import { MetallicLogo } from '../components/ui/MetallicLogo';
 import { isLoggedIn } from '../hooks/use-auth';
+import '../styles/style-home.css'; // Assuming you have a CSS file for home styles
 
 export const Home = () => {
   const loggedIn = isLoggedIn();
@@ -158,6 +160,9 @@ export const Home = () => {
             </div>
           </div>
         </div>
+      </section>
+      <section className="w-full bg-white flex flex-col items-center relative">
+        <MembersComponent />
       </section>
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gray-50">
