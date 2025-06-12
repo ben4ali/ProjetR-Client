@@ -1,5 +1,5 @@
-import { User } from "./User";
 import { Projet } from "./Projet";
+import { User } from "./User";
 
 export const PORTFOLIO_TEMPLATES = {
   MODERN: "modern",
@@ -17,6 +17,7 @@ export const PORTFOLIO_TEMPLATES = {
   SAMURAI: "samurai",
   MATRIX: "matrix",
   CARTOON: "cartoon",
+  PIXEL: "pixel",
 } as const;
 
 export type PortfolioTemplate =

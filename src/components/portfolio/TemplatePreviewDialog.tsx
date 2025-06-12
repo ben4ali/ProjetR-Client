@@ -1,23 +1,24 @@
 import { FC } from "react";
-import { PortfolioTemplate, createMockPortfolio } from "../../types/Portfolio";
 import { useCurrentUser } from "../../hooks/use-auth";
 import { useProjectsByUserId } from "../../hooks/use-project";
+import { PortfolioTemplate, createMockPortfolio } from "../../types/Portfolio";
 import {
-  ModernTemplate,
+  CartoonTemplate,
   ClassicTemplate,
   CreativeTemplate,
-  MinimalistTemplate,
-  DeveloperTemplate,
-  DesignerTemplate,
-  NeuralTemplate,
-  PrismTemplate,
   CupertinoTemplate,
-  QuantumTemplate,
-  MeteorTemplate,
+  DesignerTemplate,
+  DeveloperTemplate,
   HologramTemplate,
-  SamuraiTemplate,
   MatrixTemplate,
-  CartoonTemplate,
+  MeteorTemplate,
+  MinimalistTemplate,
+  ModernTemplate,
+  NeuralTemplate,
+  PixelTemplate,
+  PrismTemplate,
+  QuantumTemplate,
+  SamuraiTemplate,
 } from "./templates";
 
 interface TemplatePreviewDialogProps {
@@ -76,6 +77,8 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <MatrixTemplate {...templateProps} />;
       case "cartoon":
         return <CartoonTemplate {...templateProps} />;
+      case "pixel":
+        return <PixelTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
     }

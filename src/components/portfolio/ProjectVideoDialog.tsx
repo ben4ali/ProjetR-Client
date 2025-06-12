@@ -16,7 +16,8 @@ type DialogVariant =
   | "hologram"
   | "samurai"
   | "matrix"
-  | "cartoon";
+  | "cartoon"
+  | "pixel";
 
 interface ProjectVideoDialogProps {
   isOpen: boolean;
@@ -297,6 +298,26 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
             "bg-purple-400 hover:bg-purple-500 text-white border-2 border-purple-600 font-comic font-bold",
           liveButton:
             "bg-yellow-400 hover:bg-yellow-500 text-purple-800 border-2 border-yellow-600 font-comic font-bold",
+        };
+
+      case "pixel":
+        return {
+          overlay: "bg-black bg-opacity-90",
+          container:
+            "bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-green-400 rounded-lg shadow-2xl border-2 border-green-400/50 font-mono",
+          header: "border-b-2 border-green-400/50 bg-black/80",
+          title:
+            "text-2xl font-bold text-green-400 font-mono uppercase tracking-wider",
+          closeButton: "text-green-400/70 hover:text-green-100",
+          content: "bg-black/40",
+          description: "text-green-300 font-mono text-sm leading-relaxed",
+          sectionTitle:
+            "text-lg font-bold text-yellow-400 mb-2 font-mono uppercase",
+          tag: "bg-green-500/20 text-green-300 border border-green-400/50 font-mono text-xs px-2 py-1",
+          githubButton:
+            "bg-green-500/20 hover:bg-green-400/30 text-green-400 border border-green-400/50 font-mono font-bold",
+          liveButton:
+            "bg-yellow-500 hover:bg-yellow-400 text-black font-mono font-bold border border-yellow-400",
         };
 
       default:

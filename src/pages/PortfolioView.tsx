@@ -1,24 +1,25 @@
 import { FC } from "react";
-import { useParams, Navigate } from "react-router-dom";
-import { usePortfolioById } from "../hooks/use-portfolios";
-import { useCurrentUser } from "../hooks/use-auth";
+import { Navigate, useParams } from "react-router-dom";
 import {
-  ModernTemplate,
+  CartoonTemplate,
   ClassicTemplate,
   CreativeTemplate,
-  MinimalistTemplate,
-  DeveloperTemplate,
-  DesignerTemplate,
-  NeuralTemplate,
-  PrismTemplate,
   CupertinoTemplate,
-  QuantumTemplate,
-  MeteorTemplate,
+  DesignerTemplate,
+  DeveloperTemplate,
   HologramTemplate,
-  SamuraiTemplate,
   MatrixTemplate,
-  CartoonTemplate,
+  MeteorTemplate,
+  MinimalistTemplate,
+  ModernTemplate,
+  NeuralTemplate,
+  PixelTemplate,
+  PrismTemplate,
+  QuantumTemplate,
+  SamuraiTemplate,
 } from "../components/portfolio/templates";
+import { useCurrentUser } from "../hooks/use-auth";
+import { usePortfolioById } from "../hooks/use-portfolios";
 
 export const PortfolioView: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -97,6 +98,8 @@ export const PortfolioView: FC = () => {
         return <MatrixTemplate {...templateProps} />;
       case "cartoon":
         return <CartoonTemplate {...templateProps} />;
+      case "pixel":
+        return <PixelTemplate {...templateProps} />;
       default:
         return <ModernTemplate {...templateProps} />;
     }

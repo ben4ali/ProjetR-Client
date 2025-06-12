@@ -1,11 +1,10 @@
-import { FC } from "react";
-import React from "react";
+import React, { FC } from "react";
 import { useCurrentUser } from "../../hooks/use-auth";
-import { useProjectsByCollaborator } from "../../hooks/use-project";
 import { PortfolioFormState } from "../../hooks/use-portfolio-form";
+import { useProjectsByCollaborator } from "../../hooks/use-project";
+import "../../styles/portfolio-templates.css";
 import { PORTFOLIO_TEMPLATES, PortfolioTemplate } from "../../types/Portfolio";
 import { TemplatePreviewDialog } from "./TemplatePreviewDialog";
-import "../../styles/portfolio-templates.css";
 
 interface PortfolioFormProps {
   formState: PortfolioFormState;
@@ -86,6 +85,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
       "Interface Matrix avec code vert, effets glitch et animations cyberpunk",
     [PORTFOLIO_TEMPLATES.CARTOON]:
       "Style Adventure Time coloré et ludique avec animations rebondissantes",
+    [PORTFOLIO_TEMPLATES.PIXEL]:
+      "Univers rétro gaming avec esthétique 8-bit et animations pixel art",
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
@@ -104,6 +105,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
     [PORTFOLIO_TEMPLATES.SAMURAI]: `/templates/${PORTFOLIO_TEMPLATES.SAMURAI}.png`,
     [PORTFOLIO_TEMPLATES.MATRIX]: `/templates/${PORTFOLIO_TEMPLATES.MATRIX}.png`,
     [PORTFOLIO_TEMPLATES.CARTOON]: `/templates/${PORTFOLIO_TEMPLATES.CARTOON}.png`,
+    [PORTFOLIO_TEMPLATES.PIXEL]: `/templates/${PORTFOLIO_TEMPLATES.PIXEL}.png`,
   };
 
   return (
@@ -740,7 +742,9 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
         )}
 
         <div
-          className={`flex ${isEdit ? "justify-between" : "justify-center"} items-center space-x-4 pt-8`}
+          className={`flex ${
+            isEdit ? "justify-between" : "justify-center"
+          } items-center space-x-4 pt-8`}
         >
           {isEdit && onDelete && (
             <button
