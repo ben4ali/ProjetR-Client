@@ -14,6 +14,9 @@ export const PORTFOLIO_TEMPLATES = {
   QUANTUM: "quantum",
   METEOR: "meteor",
   HOLOGRAM: "hologram",
+  SAMURAI: "samurai",
+  MATRIX: "matrix",
+  CARTOON: "cartoon",
 } as const;
 
 export type PortfolioTemplate =

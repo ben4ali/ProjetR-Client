@@ -134,7 +134,9 @@ export function useDeletePortfolio() {
     onSuccess: (data: Portfolio) => {
       queryClient.invalidateQueries({ queryKey: ["portfolios"] });
       queryClient.invalidateQueries({ queryKey: ["portfolio", data.id] });
-      queryClient.invalidateQueries({ queryKey: ["portfolio", "user", data.user.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["portfolio", "user", data.user.id],
+      });
     },
   });
 }

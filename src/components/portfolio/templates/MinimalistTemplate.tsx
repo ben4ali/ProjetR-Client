@@ -236,7 +236,10 @@ export const MinimalistTemplate: FC<MinimalistTemplateProps> = ({
                   </h5>
                   <div className="space-y-2">
                     {skills?.slice(0, 5).map((skill) => (
-                      <div key={skill.name} className="text-gray-800 font-light">
+                      <div
+                        key={skill.name}
+                        className="text-gray-800 font-light"
+                      >
                         {skill.name}
                       </div>
                     ))}

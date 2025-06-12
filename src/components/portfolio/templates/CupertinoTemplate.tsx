@@ -504,7 +504,9 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                       viewport={{ once: true }}
                       className="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm"
                     >
-                      <span className="font-medium text-gray-900">{skill.name}</span>
+                      <span className="font-medium text-gray-900">
+                        {skill.name}
+                      </span>
                       <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}

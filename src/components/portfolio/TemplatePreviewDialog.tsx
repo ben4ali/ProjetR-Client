@@ -15,6 +15,9 @@ import {
   QuantumTemplate,
   MeteorTemplate,
   HologramTemplate,
+  SamuraiTemplate,
+  MatrixTemplate,
+  CartoonTemplate,
 } from "./templates";
 
 interface TemplatePreviewDialogProps {
@@ -67,6 +70,12 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <MeteorTemplate {...templateProps} />;
       case "hologram":
         return <HologramTemplate {...templateProps} />;
+      case "samurai":
+        return <SamuraiTemplate {...templateProps} />;
+      case "matrix":
+        return <MatrixTemplate {...templateProps} />;
+      case "cartoon":
+        return <CartoonTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
     }

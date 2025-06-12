@@ -13,7 +13,10 @@ type DialogVariant =
   | "cupertino"
   | "quantum"
   | "meteor"
-  | "hologram";
+  | "hologram"
+  | "samurai"
+  | "matrix"
+  | "cartoon";
 
 interface ProjectVideoDialogProps {
   isOpen: boolean;
@@ -241,6 +244,59 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
             "bg-cyan-500/20 hover:bg-cyan-400/20 text-cyan-400 border border-cyan-400/50 font-mono",
           liveButton:
             "bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold",
+        };
+
+      case "samurai":
+        return {
+          overlay: "bg-black bg-opacity-90",
+          container:
+            "bg-gradient-to-br from-red-950 to-black text-white rounded-lg shadow-2xl border border-red-600/50",
+          header: "border-b border-red-600/30 bg-red-950/50",
+          title: "text-2xl font-bold text-red-400",
+          closeButton: "text-red-400/70 hover:text-red-100",
+          content: "bg-red-950/20",
+          description: "text-gray-300",
+          sectionTitle: "text-lg font-bold text-red-400 mb-2",
+          tag: "bg-red-600/20 text-red-400 border border-red-600/50",
+          githubButton:
+            "bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/50",
+          liveButton: "bg-red-600 hover:bg-red-700 text-white font-bold",
+        };
+
+      case "matrix":
+        return {
+          overlay: "bg-black bg-opacity-95",
+          container:
+            "bg-black text-green-400 rounded-lg shadow-2xl border border-green-400/50 font-mono",
+          header: "border-b border-green-400/30 bg-black/80",
+          title: "text-2xl font-bold text-green-400 font-mono",
+          closeButton: "text-green-400/70 hover:text-green-100",
+          content: "bg-black/40",
+          description: "text-green-300 font-mono text-sm",
+          sectionTitle: "text-lg font-bold text-green-400 mb-2 font-mono",
+          tag: "bg-green-500/20 text-green-300 border border-green-400/50 font-mono text-sm",
+          githubButton:
+            "bg-green-500/20 hover:bg-green-400/20 text-green-400 border border-green-400/50 font-mono",
+          liveButton:
+            "bg-green-400 hover:bg-green-300 text-black font-mono font-bold",
+        };
+
+      case "cartoon":
+        return {
+          overlay: "bg-gradient-to-br from-yellow-300/80 to-pink-300/80",
+          container:
+            "bg-gradient-to-br from-yellow-200 to-pink-200 text-purple-800 rounded-3xl shadow-2xl border-4 border-purple-400",
+          header: "border-b-4 border-purple-400 bg-yellow-100/80",
+          title: "text-2xl font-bold text-purple-800 font-comic",
+          closeButton: "text-purple-600 hover:text-purple-800",
+          content: "bg-white/60",
+          description: "text-purple-700 font-comic",
+          sectionTitle: "text-lg font-bold text-purple-800 mb-2 font-comic",
+          tag: "bg-purple-200 text-purple-800 border-2 border-purple-400 font-comic",
+          githubButton:
+            "bg-purple-400 hover:bg-purple-500 text-white border-2 border-purple-600 font-comic font-bold",
+          liveButton:
+            "bg-yellow-400 hover:bg-yellow-500 text-purple-800 border-2 border-yellow-600 font-comic font-bold",
         };
 
       default:

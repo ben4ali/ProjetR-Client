@@ -52,7 +52,9 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
   error,
 }) => {
   const { data: currentUser } = useCurrentUser();
-  const { data: userProjects = [] } = useProjectsByCollaborator(currentUser?.firstName);
+  const { data: userProjects = [] } = useProjectsByCollaborator(
+    currentUser?.firstName,
+  );
   const templateDescriptions: Record<PortfolioTemplate, string> = {
     [PORTFOLIO_TEMPLATES.MODERN]:
       "Design moderne et contemporain avec des animations fluides",
@@ -78,33 +80,30 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
       "Design cosmique avec pluie de météores et animations GSAP dynamiques",
     [PORTFOLIO_TEMPLATES.HOLOGRAM]:
       "Interface holographique futuriste avec effets de glitch et animations cyber",
+    [PORTFOLIO_TEMPLATES.SAMURAI]:
+      "Design inspiré du Japon avec animations sakura et esthétique samouraï",
+    [PORTFOLIO_TEMPLATES.MATRIX]:
+      "Interface Matrix avec code vert, effets glitch et animations cyberpunk",
+    [PORTFOLIO_TEMPLATES.CARTOON]:
+      "Style Adventure Time coloré et ludique avec animations rebondissantes",
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
-    [PORTFOLIO_TEMPLATES.MODERN]:
-      `/templates/${PORTFOLIO_TEMPLATES.MODERN}.png`,
-    [PORTFOLIO_TEMPLATES.CLASSIC]:
-      `/templates/${PORTFOLIO_TEMPLATES.CLASSIC}.png`,
-    [PORTFOLIO_TEMPLATES.CREATIVE]:
-      `/templates/${PORTFOLIO_TEMPLATES.CREATIVE}.png`,
-    [PORTFOLIO_TEMPLATES.MINIMALIST]:
-      `/templates/${PORTFOLIO_TEMPLATES.MINIMALIST}.png`,   
-    [PORTFOLIO_TEMPLATES.DEVELOPER]:
-      `/templates/${PORTFOLIO_TEMPLATES.DEVELOPER}.png`,
-    [PORTFOLIO_TEMPLATES.DESIGNER]:
-      `/templates/${PORTFOLIO_TEMPLATES.DESIGNER}.png`,
-    [PORTFOLIO_TEMPLATES.NEURAL]:
-      `/templates/${PORTFOLIO_TEMPLATES.NEURAL}.png`,
-    [PORTFOLIO_TEMPLATES.PRISM]:
-      `/templates/${PORTFOLIO_TEMPLATES.PRISM}.png`,
-    [PORTFOLIO_TEMPLATES.CUPERTINO]:
-      `/templates/${PORTFOLIO_TEMPLATES.CUPERTINO}.png`,
-    [PORTFOLIO_TEMPLATES.QUANTUM]:
-      `/templates/${PORTFOLIO_TEMPLATES.QUANTUM}.png`,
-    [PORTFOLIO_TEMPLATES.METEOR]:
-      `/templates/${PORTFOLIO_TEMPLATES.METEOR}.png`,
-    [PORTFOLIO_TEMPLATES.HOLOGRAM]:
-      `/templates/${PORTFOLIO_TEMPLATES.HOLOGRAM}.png`,
+    [PORTFOLIO_TEMPLATES.MODERN]: `/templates/${PORTFOLIO_TEMPLATES.MODERN}.png`,
+    [PORTFOLIO_TEMPLATES.CLASSIC]: `/templates/${PORTFOLIO_TEMPLATES.CLASSIC}.png`,
+    [PORTFOLIO_TEMPLATES.CREATIVE]: `/templates/${PORTFOLIO_TEMPLATES.CREATIVE}.png`,
+    [PORTFOLIO_TEMPLATES.MINIMALIST]: `/templates/${PORTFOLIO_TEMPLATES.MINIMALIST}.png`,
+    [PORTFOLIO_TEMPLATES.DEVELOPER]: `/templates/${PORTFOLIO_TEMPLATES.DEVELOPER}.png`,
+    [PORTFOLIO_TEMPLATES.DESIGNER]: `/templates/${PORTFOLIO_TEMPLATES.DESIGNER}.png`,
+    [PORTFOLIO_TEMPLATES.NEURAL]: `/templates/${PORTFOLIO_TEMPLATES.NEURAL}.png`,
+    [PORTFOLIO_TEMPLATES.PRISM]: `/templates/${PORTFOLIO_TEMPLATES.PRISM}.png`,
+    [PORTFOLIO_TEMPLATES.CUPERTINO]: `/templates/${PORTFOLIO_TEMPLATES.CUPERTINO}.png`,
+    [PORTFOLIO_TEMPLATES.QUANTUM]: `/templates/${PORTFOLIO_TEMPLATES.QUANTUM}.png`,
+    [PORTFOLIO_TEMPLATES.METEOR]: `/templates/${PORTFOLIO_TEMPLATES.METEOR}.png`,
+    [PORTFOLIO_TEMPLATES.HOLOGRAM]: `/templates/${PORTFOLIO_TEMPLATES.HOLOGRAM}.png`,
+    [PORTFOLIO_TEMPLATES.SAMURAI]: `/templates/${PORTFOLIO_TEMPLATES.SAMURAI}.png`,
+    [PORTFOLIO_TEMPLATES.MATRIX]: `/templates/${PORTFOLIO_TEMPLATES.MATRIX}.png`,
+    [PORTFOLIO_TEMPLATES.CARTOON]: `/templates/${PORTFOLIO_TEMPLATES.CARTOON}.png`,
   };
 
   return (
@@ -341,7 +340,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Cette accroche apparaîtra dans la section héro de votre portfolio pour créer un impact immédiat
+                  Cette accroche apparaîtra dans la section héro de votre
+                  portfolio pour créer un impact immédiat
                 </p>
               </div>
 
@@ -364,15 +364,30 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-4">
                   Compétences & Niveaux d'Expertise
                 </label>
-                
+
                 {/* Skill suggestions */}
                 <div className="mb-4">
-                  <p className="text-sm text-gray-600 mb-3">Suggestions populaires :</p>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Suggestions populaires :
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "React", "TypeScript", "JavaScript", "Python", "Node.js", 
-                      "CSS", "HTML", "Vue.js", "Angular", "Java", "C#", 
-                      "UI/UX Design", "Figma", "Photoshop", "Git", "Docker"
+                      "React",
+                      "TypeScript",
+                      "JavaScript",
+                      "Python",
+                      "Node.js",
+                      "CSS",
+                      "HTML",
+                      "Vue.js",
+                      "Angular",
+                      "Java",
+                      "C#",
+                      "UI/UX Design",
+                      "Figma",
+                      "Photoshop",
+                      "Git",
+                      "Docker",
                     ].map((suggestion) => (
                       <button
                         key={suggestion}
@@ -380,7 +395,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                         onClick={() =>
                           onFieldUpdate("currentSkill", {
                             ...formState.currentSkill,
-                            name: suggestion
+                            name: suggestion,
                           })
                         }
                         className="cursor-pointer px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors"
@@ -390,7 +405,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     ))}
                   </div>
                 </div>
-                
+
                 {/* Add new skill card */}
                 <div className="bg-gray-50 rounded-xl p-6 mb-6 border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors">
                   <div className="space-y-4">
@@ -401,17 +416,18 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                         onChange={(e) =>
                           onFieldUpdate("currentSkill", {
                             ...formState.currentSkill,
-                            name: e.target.value
+                            name: e.target.value,
                           })
                         }
                         onKeyPress={(e) =>
-                          e.key === "Enter" && (e.preventDefault(), onAddSkill())
+                          e.key === "Enter" &&
+                          (e.preventDefault(), onAddSkill())
                         }
                         placeholder="Nom de la compétence (ex: React, TypeScript, Design UI/UX...)"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent "
                       />
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium text-gray-700">
@@ -421,13 +437,15 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                           {formState.currentSkill.level}%
                         </span>
                       </div>
-                      
+
                       {/* Tailwind range slider */}
                       <div className="relative">
                         <div className="relative h-2 bg-gray-200 rounded-lg">
-                          <div 
+                          <div
                             className="absolute h-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg transition-all duration-200"
-                            style={{ width: `${formState.currentSkill.level}%` }}
+                            style={{
+                              width: `${formState.currentSkill.level}%`,
+                            }}
                           ></div>
                           <input
                             type="range"
@@ -438,7 +456,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                             onChange={(e) =>
                               onFieldUpdate("currentSkill", {
                                 ...formState.currentSkill,
-                                level: parseInt(e.target.value)
+                                level: parseInt(e.target.value),
                               })
                             }
                             className="absolute inset-0 w-full h-2 bg-transparent appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:bg-blue-700 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-track]:bg-transparent"
@@ -451,37 +469,72 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                           <span>Expert</span>
                         </div>
                       </div>
-                      
+
                       {/* Level description */}
                       <div className="text-xs text-gray-600 italic">
-                        {formState.currentSkill.level <= 25 && "🌱 Notions de base, en apprentissage"}
-                        {formState.currentSkill.level > 25 && formState.currentSkill.level <= 50 && "📚 Connaissances solides, expérience pratique"}
-                        {formState.currentSkill.level > 50 && formState.currentSkill.level <= 75 && "⚡ Compétences avancées, projets complexes"}
-                        {formState.currentSkill.level > 75 && "🏆 Expertise reconnue, mentor d'autres"}
+                        {formState.currentSkill.level <= 25 &&
+                          "🌱 Notions de base, en apprentissage"}
+                        {formState.currentSkill.level > 25 &&
+                          formState.currentSkill.level <= 50 &&
+                          "📚 Connaissances solides, expérience pratique"}
+                        {formState.currentSkill.level > 50 &&
+                          formState.currentSkill.level <= 75 &&
+                          "⚡ Compétences avancées, projets complexes"}
+                        {formState.currentSkill.level > 75 &&
+                          "🏆 Expertise reconnue, mentor d'autres"}
                       </div>
                     </div>
-                    
+
                     {/* Show validation message */}
-                    {formState.currentSkill.name.trim() && formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase()) && (
-                      <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-center">
-                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z" />
-                        </svg>
-                        Cette compétence a déjà été ajoutée
-                      </div>
-                    )}
-                    
+                    {formState.currentSkill.name.trim() &&
+                      formState.skills.some(
+                        (skill) =>
+                          skill.name.toLowerCase() ===
+                          formState.currentSkill.name.toLowerCase(),
+                      ) && (
+                        <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"
+                            />
+                          </svg>
+                          Cette compétence a déjà été ajoutée
+                        </div>
+                      )}
+
                     <button
                       type="button"
                       onClick={onAddSkill}
                       disabled={
-                        !formState.currentSkill.name.trim() || 
-                        formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase())
+                        !formState.currentSkill.name.trim() ||
+                        formState.skills.some(
+                          (skill) =>
+                            skill.name.toLowerCase() ===
+                            formState.currentSkill.name.toLowerCase(),
+                        )
                       }
                       className="cursor-pointer w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center"
                     >
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      <svg
+                        className="w-5 h-5 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
                       </svg>
                       Ajouter cette compétence
                     </button>
@@ -510,18 +563,32 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                               className="cursor-pointer text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full p-1 transition-colors"
                               title="Supprimer cette compétence"
                             >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
                               </svg>
                             </button>
                           </div>
-                          
+
                           <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs text-gray-600">Niveau d'expertise</span>
-                              <span className="text-xs font-bold text-blue-600">{skill.level}%</span>
+                              <span className="text-xs text-gray-600">
+                                Niveau d'expertise
+                              </span>
+                              <span className="text-xs font-bold text-blue-600">
+                                {skill.level}%
+                              </span>
                             </div>
-                            
+
                             {/* Progress bar */}
                             <div className="w-full bg-gray-200 rounded-full h-1.5">
                               <div
@@ -529,11 +596,15 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                                 style={{ width: `${skill.level}%` }}
                               ></div>
                             </div>
-                            
+
                             <div className="text-xs text-gray-500">
                               {skill.level <= 25 && "🌱 Débutant"}
-                              {skill.level > 25 && skill.level <= 50 && "📚 Intermédiaire"}
-                              {skill.level > 50 && skill.level <= 75 && "⚡ Avancé"}
+                              {skill.level > 25 &&
+                                skill.level <= 50 &&
+                                "📚 Intermédiaire"}
+                              {skill.level > 50 &&
+                                skill.level <= 75 &&
+                                "⚡ Avancé"}
                               {skill.level > 75 && "🏆 Expert"}
                             </div>
                           </div>
@@ -545,11 +616,25 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
 
                 {formState.skills.length === 0 && (
                   <div className="text-center py-8 text-gray-500">
-                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    <svg
+                      className="w-12 h-12 mx-auto mb-3 text-gray-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
                     </svg>
-                    <p className="text-sm">Aucune compétence ajoutée pour le moment</p>
-                    <p className="text-xs text-gray-400">Ajoutez vos compétences pour enrichir votre portfolio</p>
+                    <p className="text-sm">
+                      Aucune compétence ajoutée pour le moment
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      Ajoutez vos compétences pour enrichir votre portfolio
+                    </p>
                   </div>
                 )}
               </div>
@@ -679,10 +764,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             </button>
             <button
               type="submit"
-              disabled={
-                !formState.selectedTemplate ||
-                formState.isSubmitting
-              }
+              disabled={!formState.selectedTemplate || formState.isSubmitting}
               className={`px-8 py-3 rounded-lg font-medium transition-all duration-200 ${
                 !formState.selectedTemplate || formState.isSubmitting
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"

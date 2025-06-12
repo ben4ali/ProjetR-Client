@@ -15,6 +15,9 @@ import {
   QuantumTemplate,
   MeteorTemplate,
   HologramTemplate,
+  SamuraiTemplate,
+  MatrixTemplate,
+  CartoonTemplate,
 } from "../components/portfolio/templates";
 
 export const PortfolioView: FC = () => {
@@ -88,6 +91,12 @@ export const PortfolioView: FC = () => {
         return <MeteorTemplate {...templateProps} />;
       case "hologram":
         return <HologramTemplate {...templateProps} />;
+      case "samurai":
+        return <SamuraiTemplate {...templateProps} />;
+      case "matrix":
+        return <MatrixTemplate {...templateProps} />;
+      case "cartoon":
+        return <CartoonTemplate {...templateProps} />;
       default:
         return <ModernTemplate {...templateProps} />;
     }

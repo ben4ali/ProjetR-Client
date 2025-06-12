@@ -450,7 +450,9 @@ export const Publish = () => {
             </video>
             <div className="p-4 absolute text-center bottom-0 w-full h-[38%] flex flex-col items-center justify-center gap-2 video-information">
               <p className="text-[1.05rem] font-semibold text-blue-500">
-                {video ? `https://rosemont-devhub/watch/${video.name}` : "Aucune vidéo sélectionnée"}
+                {video
+                  ? `https://rosemont-devhub/watch/${video.name}`
+                  : "Aucune vidéo sélectionnée"}
               </p>
               <p className="text-[0.9rem] text-[#ccc]">
                 {titre.trim() !== ""

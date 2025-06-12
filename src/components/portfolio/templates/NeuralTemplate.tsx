@@ -266,10 +266,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
             </motion.div>
 
             {hook && (
-              <motion.div
-                variants={itemVariants}
-                className="mb-8"
-              >
+              <motion.div variants={itemVariants} className="mb-8">
                 <motion.p
                   className="text-lg text-cyan-300 font-medium px-6 py-3 rounded-full border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm inline-block"
                   whileHover={{
@@ -495,7 +492,7 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
                   ]
               ).map((skill, index) => (
                 <motion.div
-                  key={typeof skill === 'string' ? skill : skill.name}
+                  key={typeof skill === "string" ? skill : skill.name}
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -503,7 +500,9 @@ export const NeuralTemplate: FC<NeuralTemplateProps> = ({
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/50 transition-all duration-300"
                 >
-                  <div className="text-blue-400 font-semibold">{typeof skill === 'string' ? skill : skill.name}</div>
+                  <div className="text-blue-400 font-semibold">
+                    {typeof skill === "string" ? skill : skill.name}
+                  </div>
                 </motion.div>
               ))}
             </div>

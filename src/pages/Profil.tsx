@@ -12,7 +12,7 @@ export const Profil = () => {
   const { data: currentUser } = useCurrentUser();
   const isCurrentUser = useMemo(
     () => currentUser?.id === user?.id,
-    [currentUser, user]
+    [currentUser, user],
   );
 
   return (

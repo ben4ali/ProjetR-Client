@@ -420,11 +420,11 @@ export const PrismTemplate: FC<PrismTemplateProps> = ({
                   ]
               ).map((skill) => (
                 <div
-                  key={typeof skill === 'string' ? skill : skill.name}
+                  key={typeof skill === "string" ? skill : skill.name}
                   className="skill-card glass-morphism-strong rounded-2xl p-6 text-center border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
                 >
                   <div className="text-white font-semibold text-lg">
-                    {typeof skill === 'string' ? skill : skill.name}
+                    {typeof skill === "string" ? skill : skill.name}
                   </div>
                 </div>
               ))}

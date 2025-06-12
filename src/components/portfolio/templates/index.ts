@@ -10,3 +10,6 @@ export { CupertinoTemplate } from "./CupertinoTemplate";
 export { QuantumTemplate } from "./QuantumTemplate";
 export { MeteorTemplate } from "./MeteorTemplate";
 export { HologramTemplate } from "./HologramTemplate";
+export { SamuraiTemplate } from "./SamuraiTemplate";
+export { MatrixTemplate } from "./MatrixTemplate";
+export { CartoonTemplate } from "./CartoonTemplate";

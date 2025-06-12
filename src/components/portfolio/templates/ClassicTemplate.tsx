@@ -166,7 +166,9 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                   return (
                     <div key={skill.name}>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">{skill.name}</span>
+                        <span className="text-sm font-medium">
+                          {skill.name}
+                        </span>
                         <span className="text-sm text-gray-600">
                           {skill.level}%
                         </span>

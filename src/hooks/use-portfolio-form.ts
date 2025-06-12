@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { PortfolioTemplate, PORTFOLIO_TEMPLATES, Skill } from "../types/Portfolio";
+import {
+  PortfolioTemplate,
+  PORTFOLIO_TEMPLATES,
+  Skill,
+} from "../types/Portfolio";
 import { Projet } from "../types/Projet";
 
 export interface PortfolioFormData {
@@ -50,7 +54,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     about: initialData?.about || "",
     hook: initialData?.hook || "",
     skills: initialData?.skills || [],
-    selectedProjects: initialData?.projets?.map(proj => proj.id) || [],
+    selectedProjects: initialData?.projets?.map((proj) => proj.id) || [],
     githubUrl: initialData?.githubUrl || "",
     linkedinUrl: initialData?.linkedinUrl || "",
     websiteUrl: initialData?.websiteUrl || "",
@@ -77,7 +81,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
         about: initialData.about || "",
         hook: initialData.hook || "",
         skills: initialData.skills || [],
-        selectedProjects: initialData.projets?.map(proj => proj.id) || [],
+        selectedProjects: initialData.projets?.map((proj) => proj.id) || [],
         githubUrl: initialData.githubUrl || "",
         linkedinUrl: initialData.linkedinUrl || "",
         websiteUrl: initialData.websiteUrl || "",
@@ -88,6 +92,29 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
       }));
     }
   }, [initialData]);
+
+  // Set current page to show the selected template
+  useEffect(() => {
+    if (formState.selectedTemplate) {
+      const templateEntries = Object.entries(PORTFOLIO_TEMPLATES);
+      const templateIndex = templateEntries.findIndex(
+        ([, value]) => value === formState.selectedTemplate,
+      );
+
+      if (templateIndex !== -1) {
+        const TEMPLATES_PER_PAGE = 6;
+        const targetPage = Math.floor(templateIndex / TEMPLATES_PER_PAGE);
+
+        // Only update if we're not already on the correct page
+        if (formState.currentPage !== targetPage) {
+          setFormState((prev) => ({
+            ...prev,
+            currentPage: targetPage,
+          }));
+        }
+      }
+    }
+  }, [formState.selectedTemplate]);
 
   const updateField = <K extends keyof PortfolioFormState>(
     field: K,
@@ -102,7 +129,11 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
       formState.currentSkill.name.trim() &&
       formState.currentSkill.level >= 0 &&
       formState.currentSkill.level <= 100 &&
-      !formState.skills.some(skill => skill.name.toLowerCase() === formState.currentSkill.name.toLowerCase())
+      !formState.skills.some(
+        (skill) =>
+          skill.name.toLowerCase() ===
+          formState.currentSkill.name.toLowerCase(),
+      )
     ) {
       setFormState((prev) => ({
         ...prev,

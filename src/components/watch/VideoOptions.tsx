@@ -97,14 +97,14 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
           <span>Erreur auteur</span>
         ) : (
           <>
-            <Link to={`/profil/${author?.id}`} >
+            <Link to={`/profil/${author?.id}`}>
               <img
-              src={author?.avatar || default_avatar}
-              alt="author"
-              crossOrigin="anonymous"
-              className="h-12 w-12 rounded-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+                src={author?.avatar || default_avatar}
+                alt="author"
+                crossOrigin="anonymous"
+                className="h-12 w-12 rounded-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </Link>
             <div className="author-info leading-tight">
               <h3 className="text-[1.3rem] font-medium text-neutral-900">
