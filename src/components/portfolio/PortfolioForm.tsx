@@ -115,13 +115,48 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             {currentTemplates.map(([key, value]) => (
               <div
                 key={key}
-                className={`relative border-2 rounded-xl p-4 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 ${
+                className={`relative border-2 rounded-xl p-4 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 group ${
                   formState.selectedTemplate === value
                     ? "border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-200"
                     : "border-gray-200 bg-white hover:border-blue-300"
                 }`}
               >
-                {" "}
+                {/* Round checkbox in top-right corner - visible on hover or when selected */}
+                <div className="absolute top-3 right-3 z-10">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (formState.selectedTemplate === value) {
+                        // Unselect if already selected
+                        onFieldUpdate("selectedTemplate", "");
+                      } else {
+                        // Select if not selected
+                        onFieldUpdate("selectedTemplate", value);
+                      }
+                    }}
+                    className={`w-6 h-6 rounded-full border-2 transition-all duration-200 flex items-center justify-center cursor-pointer ${
+                      formState.selectedTemplate === value
+                        ? "bg-blue-500 border-blue-500 opacity-100"
+                        : "bg-white border-gray-300 opacity-0 group-hover:opacity-100 hover:border-blue-400"
+                    }`}
+                  >
+                    {formState.selectedTemplate === value && (
+                      <svg
+                        className="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+
                 <div
                   className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-md mb-4 flex items-center justify-center cursor-pointer hover:from-gray-200 hover:to-gray-300 transition-colors overflow-hidden relative group"
                   onClick={() => onPreview(value)}
@@ -130,7 +165,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     src={templatePreviewImages[value]}
                     alt={`${value} template preview`}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />{" "}
+                  />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                     <div className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 flex flex-col items-center">
                       <svg
@@ -167,7 +202,13 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 <div className="flex space-x-2 mt-4">
                   <button
                     type="button"
-                    onClick={() => onFieldUpdate("selectedTemplate", value)}
+                    onClick={() => {
+                      if (formState.selectedTemplate === value) {
+                        onFieldUpdate("selectedTemplate", "");
+                      } else {
+                        onFieldUpdate("selectedTemplate", value);
+                      }
+                    }}
                     className={`cursor-pointer flex-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                       formState.selectedTemplate === value
                         ? "bg-blue-600 text-white shadow-md"
@@ -179,23 +220,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       : "Sélectionner"}
                   </button>
                 </div>
-                {formState.selectedTemplate === value && (
-                  <div className="absolute top-4 right-4">
-                    <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -637,7 +661,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             <button
               type="button"
               onClick={onDelete}
-              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
               disabled={formState.isSubmitting}
             >
               Supprimer le Portfolio
@@ -648,7 +672,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             <button
               type="button"
               onClick={onCancel}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
               disabled={formState.isSubmitting}
             >
               Annuler
@@ -656,10 +680,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
             <button
               type="submit"
               disabled={
-                (isEdit ? false : !formState.selectedTemplate) ||
+                !formState.selectedTemplate ||
                 formState.isSubmitting
               }
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className={`px-8 py-3 rounded-lg font-medium transition-all duration-200 ${
+                !formState.selectedTemplate || formState.isSubmitting
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
+                  : "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+              }`}
             >
               {formState.isSubmitting ? "..." : submitButtonText}
             </button>
