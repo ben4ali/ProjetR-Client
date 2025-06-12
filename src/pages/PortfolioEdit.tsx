@@ -147,7 +147,7 @@ export const PortfolioEdit: FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="w-[90vw] mx-auto">
         <div className="text-left mb-12">
           <h1 className="text-4xl font-bold text-[#444ea5] mb-4">
             Modifier Votre Portfolio
@@ -180,9 +180,9 @@ export const PortfolioEdit: FC = () => {
       </div>
 
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-[#e4003a] mb-4">
               Confirmer la suppression
             </h3>
             <p className="text-gray-600 mb-6">
@@ -192,13 +192,13 @@ export const PortfolioEdit: FC = () => {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer hover:text-gray-900"
               >
                 Annuler
               </button>
               <button
                 onClick={handleDeletePortfolio}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors cursor-pointer"
               >
                 Supprimer
               </button>

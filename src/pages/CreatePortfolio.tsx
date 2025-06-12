@@ -68,7 +68,7 @@ export const CreatePortfolio = () => {
             Créer Votre Portfolio
           </h1>
           <p className="text-xl text-gray-600">
-            Choisissez un template qui représente le mieux votre style
+            Choisissez un modèle qui représente le mieux votre style
           </p>
         </div>
 
