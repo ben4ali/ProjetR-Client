@@ -9,5 +9,6 @@ export default defineConfig({
     proxy: {
       "/uploads": "http://localhost:5000",
     },
+    host: "0.0.0.0",
   },
 });

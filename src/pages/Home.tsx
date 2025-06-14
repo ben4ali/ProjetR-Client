@@ -19,12 +19,12 @@ export const Home = () => {
         className="sticky top-4 right-4 ml-4 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:bg-[#e4003a] hover:text-white border border-[#e4003a] text-[#e4003a] z-5"
       >
         Se connecter
-      </Link>{' '}
+      </Link>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
-          <Orb hue={0} hoverIntensity={0.3} />
+          <Orb />
         </div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           {/* Logo */}
@@ -155,7 +155,7 @@ export const Home = () => {
                 50+
               </div>
               <div className="text-xl text-white/80">
-                Programmes représentés
+                Cours représentés
               </div>
             </div>
           </div>

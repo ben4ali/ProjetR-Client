@@ -54,6 +54,9 @@ class AuthManager {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("tokenExpiresAt");
+    auth.signOut().catch((error) => {
+      console.error("Error signing out from Firebase:", error);
+    });
   }
 
   isTokenExpired(): boolean {
