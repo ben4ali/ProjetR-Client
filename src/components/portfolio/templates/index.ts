@@ -14,3 +14,4 @@ export { PixelTemplate } from "./PixelTemplate";
 export { PrismTemplate } from "./PrismTemplate";
 export { QuantumTemplate } from "./QuantumTemplate";
 export { SamuraiTemplate } from "./SamuraiTemplate";
+export { SilkTemplate } from "./SilkTemplate";

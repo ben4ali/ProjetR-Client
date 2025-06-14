@@ -19,6 +19,7 @@ import {
   PrismTemplate,
   QuantumTemplate,
   SamuraiTemplate,
+  SilkTemplate,
 } from './templates';
 
 interface TemplatePreviewDialogProps {
@@ -79,6 +80,8 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <CartoonTemplate {...templateProps} />;
       case 'pixel':
         return <PixelTemplate {...templateProps} />;
+      case 'silk':
+        return <SilkTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
     }

@@ -87,6 +87,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
       'Style Adventure Time coloré et ludique avec animations rebondissantes',
     [PORTFOLIO_TEMPLATES.PIXEL]:
       'Univers rétro gaming avec esthétique 8-bit et animations pixel art',
+    [PORTFOLIO_TEMPLATES.SILK]:
+      'Design fluide basé sur la soie avec animations modernes'
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
@@ -106,6 +108,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
     [PORTFOLIO_TEMPLATES.MATRIX]: `/templates/${PORTFOLIO_TEMPLATES.MATRIX}.png`,
     [PORTFOLIO_TEMPLATES.CARTOON]: `/templates/${PORTFOLIO_TEMPLATES.CARTOON}.png`,
     [PORTFOLIO_TEMPLATES.PIXEL]: `/templates/${PORTFOLIO_TEMPLATES.PIXEL}.png`,
+    [PORTFOLIO_TEMPLATES.SILK]: `/templates/${PORTFOLIO_TEMPLATES.SILK}.png`
   };
 
   return (

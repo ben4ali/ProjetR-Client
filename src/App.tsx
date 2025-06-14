@@ -19,6 +19,7 @@ import { Profil } from './pages/Profil';
 import { Publish } from './pages/Publish';
 import { Watch } from './pages/Watch';
 import './styles/portfolio-templates.css';
+import { DevNewTemplates } from './pages/DevNewTemplates';
 
 function AppContent() {
   const loggedIn = isLoggedIn();
@@ -43,6 +44,7 @@ function AppContent() {
         <Route path="/create-portfolio" element={<CreatePortfolio />} />
         <Route path="/portfolio/:id" element={<PortfolioView />} />
         <Route path="/portfolio/:id/edit" element={<PortfolioEdit />} />
+        <Route path='/portfolio/dev-new/:template' element={<DevNewTemplates />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>
