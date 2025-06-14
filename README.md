@@ -1,18 +1,31 @@
-# Firebase Google Authentication Setup Guide
+# Guide de configuration de l'authentification Google avec Firebase
 
-## Overview
+## Qu'est-ce que ce projet ?
 
-This project has been updated to use Firebase Authentication with Google Sign-In instead of the previous direct Google Identity API implementation.
+Ceci est le projet client (frontend) de la plateforme web nommée ProjetR, conçue pour faciliter la gestion de portfolios, de projets, de cours et de ressources pour les étudiants et développeurs du Cégep de Rosemont. Il propose une authentification sécurisée via Google (Firebase), une interface moderne, et une intégration complète avec un backend Node.js/Express. L'objectif est de centraliser les outils de développement, de partage et de collaboration autour de projets informatiques.
 
-## Required Environment Variables
+## Aperçu
 
-Add the following Firebase configuration variables to your `.env` file:
+Aperçu visuel de l'application :
+
+![Aperçu 1](./previews/image0.png)
+![Aperçu 2](./previews/image1.png)
+![Aperçu 3](./previews/image2.png)
+![Aperçu 4](./previews/image3.png)
+![Aperçu 5](./previews/image4.png)
+![Aperçu 6](./previews/image5.png)
+
+Ce projet a été mis à jour pour utiliser l'authentification Firebase avec la connexion Google, remplaçant l'ancienne implémentation directe de l'API Google Identity.
+
+## Variables d'environnement requises
+
+Ajoutez les variables de configuration Firebase suivantes à votre fichier `.env` :
 
 ```bash
-# API Configuration
+# Configuration de l'API
 VITE_API_URL=http://localhost:5000/api/v1
 
-# Firebase Configuration
+# Configuration Firebase
 VITE_FIREBASE_API_KEY=your_firebase_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=your_project_id
@@ -21,138 +34,138 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
-# Legacy Google Sign-In (can be removed after Firebase migration)
+# Ancienne connexion Google (peut être supprimée après la migration Firebase)
 VITE_GOOGLE_CLIENT_ID=your_legacy_google_client_id
 ```
 
-## Firebase Project Setup
+## Configuration du projet Firebase
 
-### 1. Create a Firebase Project
+### 1. Créer un projet Firebase
 
-1. Go to the [Firebase Console](https://console.firebase.google.com/)
-2. Click "Create a project" or "Add project"
-3. Follow the setup wizard
+1. Rendez-vous sur la [console Firebase](https://console.firebase.google.com/)
+2. Cliquez sur « Créer un projet » ou « Ajouter un projet »
+3. Suivez l'assistant de configuration
 
-### 2. Enable Authentication
+### 2. Activer l'authentification
 
-1. In your Firebase project, go to "Authentication" in the left sidebar
-2. Click on the "Sign-in method" tab
-3. Enable "Google" as a sign-in provider
-4. Configure the OAuth consent screen if prompted
+1. Dans votre projet Firebase, allez dans « Authentification » dans la barre latérale gauche
+2. Cliquez sur l'onglet « Méthode de connexion »
+3. Activez « Google » comme fournisseur de connexion
+4. Configurez l'écran de consentement OAuth si nécessaire
 
-### 3. Add Web App to Firebase Project
+### 3. Ajouter une application web au projet Firebase
 
-1. In your Firebase project settings, click "Add app" and select "Web"
-2. Register your app with a nickname
-3. Copy the Firebase configuration object
-4. Add the configuration values to your `.env` file
+1. Dans les paramètres de votre projet Firebase, cliquez sur « Ajouter une application » et sélectionnez « Web »
+2. Donnez un nom à votre application
+3. Copiez l'objet de configuration Firebase
+4. Ajoutez les valeurs de configuration à votre fichier `.env`
 
-### 4. Configure OAuth Settings
+### 4. Configurer les paramètres OAuth
 
-1. In the Google Cloud Console for your project
-2. Go to "APIs & Services" > "Credentials"
-3. Add `http://localhost:5173` to authorized origins for development
-4. Add your production domain when deploying
+1. Dans la console Google Cloud de votre projet
+2. Allez dans « APIs & Services » > « Identifiants »
+3. Ajoutez `http://localhost:5173` aux origines autorisées pour le développement
+4. Ajoutez votre domaine de production lors du déploiement
 
-## Backend Integration
+## Intégration backend
 
-### Google ID Token Verification
+### Vérification du jeton d'identité Google
 
-Your backend should verify the Firebase ID token sent from the frontend:
+Votre backend doit vérifier le jeton d'identité Firebase envoyé depuis le frontend :
 
 ```javascript
-// Example Node.js backend verification
+// Exemple de vérification côté backend Node.js
 const admin = require("firebase-admin");
 
-// Initialize Firebase Admin SDK
+// Initialiser le SDK Firebase Admin
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  // or use service account key
+  // ou utilisez une clé de compte de service
 });
 
-// Verify ID token
+// Vérifier le jeton d'identité
 async function verifyIdToken(idToken) {
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     return decodedToken;
   } catch (error) {
-    throw new Error("Invalid token");
+    throw new Error("Jeton invalide");
   }
 }
 ```
 
-## Code Changes Made
+## Modifications apportées au code
 
-### 1. Firebase Configuration (`src/lib/firebase.ts`)
+### 1. Configuration Firebase (`src/lib/firebase.ts`)
 
-- Initialized Firebase app with environment variables
-- Configured Google Auth Provider
-- Exported auth instance and provider
+- Initialisation de l'application Firebase avec les variables d'environnement
+- Configuration du fournisseur d'authentification Google
+- Exportation de l'instance d'authentification et du provider
 
-### 2. Authentication Hooks (`src/hooks/use-auth.ts`)
+### 2. Hooks d'authentification (`src/hooks/use-auth.ts`)
 
-- Added `useFirebaseGoogleLogin()` hook
-- Maintains existing `useGoogleLogin()` for backend communication
-- Imports Firebase auth functions
+- Ajout du hook `useFirebaseGoogleLogin()`
+- Maintien du hook existant `useGoogleLogin()` pour la communication avec le backend
+- Importation des fonctions d'auth Firebase
 
-### 3. Login/Signup Forms
+### 3. Formulaires de connexion/inscription
 
-- Replaced Google Identity API button with Firebase button
-- Added proper loading states and error handling
-- Consistent styling with custom button design
+- Remplacement du bouton Google Identity API par le bouton Firebase
+- Ajout d'états de chargement et de gestion d'erreur appropriés
+- Style cohérent avec un design de bouton personnalisé
 
-### 4. Auth Context (`src/contexts/AuthContext.tsx`)
+### 4. Contexte d'authentification (`src/contexts/AuthContext.tsx`)
 
-- Added Firebase auth state management
-- Provides current user state across the app
-- Handles sign-out functionality
+- Ajout de la gestion de l'état d'authentification Firebase
+- Fournit l'état utilisateur courant à travers l'application
+- Gère la déconnexion
 
-## Features
+## Fonctionnalités
 
-### ✅ What Works
+### ✅ Fonctionnalités opérationnelles
 
-- **Firebase Google Sign-In**: Popup-based authentication
-- **Custom Button Design**: Styled Google sign-in buttons
-- **Loading States**: Proper feedback during authentication
-- **Error Handling**: User-friendly error messages
-- **Backend Integration**: Sends Firebase ID tokens to your API
-- **Auth State Management**: React context for auth state
+- **Connexion Google via Firebase** : Authentification par popup
+- **Design de bouton personnalisé** : Boutons de connexion Google stylisés
+- **États de chargement** : Retour visuel lors de l'authentification
+- **Gestion des erreurs** : Messages d'erreur conviviaux
+- **Intégration backend** : Envoi des jetons Firebase ID à votre API
+- **Gestion de l'état d'auth** : Contexte React pour l'état d'authentification
 
-### 🔧 Development Notes
+### 🔧 Notes de développement
 
-- The old Google Identity API code has been replaced
-- Environment variables are properly structured
-- Firebase SDK handles token refresh automatically
-- Auth state persists across page refreshes
+- L'ancien code Google Identity API a été remplacé
+- Les variables d'environnement sont correctement structurées
+- Le SDK Firebase gère automatiquement le rafraîchissement des jetons
+- L'état d'authentification persiste après un rafraîchissement de la page
 
-### 🚀 Deployment Checklist
+### 🚀 Liste de vérification pour le déploiement
 
-1. Set up Firebase project with proper domain configuration
-2. Add production domain to OAuth authorized origins
-3. Configure environment variables in your hosting platform
-4. Test Google Sign-In on staging environment
-5. Update backend to verify Firebase ID tokens
+1. Configurez le projet Firebase avec le bon domaine
+2. Ajoutez le domaine de production aux origines OAuth autorisées
+3. Configurez les variables d'environnement sur votre plateforme d'hébergement
+4. Testez la connexion Google sur l'environnement de préproduction
+5. Mettez à jour le backend pour vérifier les jetons Firebase ID
 
-## Troubleshooting
+## Dépannage
 
-### Common Issues
+### Problèmes courants
 
-1. **"Auth domain not configured"**: Check `VITE_FIREBASE_AUTH_DOMAIN`
-2. **"Origin not authorized"**: Add your domain to OAuth settings
-3. **"Invalid API key"**: Verify `VITE_FIREBASE_API_KEY`
-4. **Backend errors**: Ensure your API can verify Firebase ID tokens
+1. **« Domaine d'auth non configuré »** : Vérifiez `VITE_FIREBASE_AUTH_DOMAIN`
+2. **« Origine non autorisée »** : Ajoutez votre domaine dans les paramètres OAuth
+3. **« Clé API invalide »** : Vérifiez `VITE_FIREBASE_API_KEY`
+4. **Erreurs backend** : Assurez-vous que votre API peut vérifier les jetons Firebase ID
 
-### Testing
+### Tests
 
-1. Start the development server: `npm run dev`
-2. Navigate to `/authentification`
-3. Click "Continuer avec Google"
-4. Check browser console for any errors
-5. Verify token is sent to your backend API
+1. Démarrez le serveur de développement : `npm run dev`
+2. Rendez-vous sur `/authentification`
+3. Cliquez sur « Continuer avec Google »
+4. Vérifiez la console du navigateur pour d'éventuelles erreurs
+5. Vérifiez que le jeton est bien envoyé à votre API backend
 
-## Next Steps
+## Prochaines étapes
 
-1. Add your Firebase configuration to `.env`
-2. Test the authentication flow
-3. Update your backend to handle Firebase ID tokens
-4. Remove the legacy `VITE_GOOGLE_CLIENT_ID` once confirmed working
+1. Ajoutez votre configuration Firebase dans `.env`
+2. Testez le flux d'authentification
+3. Mettez à jour votre backend pour gérer les jetons Firebase ID
+4. Supprimez la variable `VITE_GOOGLE_CLIENT_ID` une fois la migration confirmée
