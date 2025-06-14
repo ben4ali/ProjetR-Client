@@ -131,13 +131,20 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
 
         <div className="flex justify-between items-center p-6 border-t border-gray-200 bg-gray-50">
           <p className="text-sm text-gray-600">
-            Ceci est un apércu du template {template}. Vous pouvez le
-            personnaliser davantage dans l'éditeur de portfolio.
+            Ceci est un apércu du template {template}. 
           </p>
           <div className="flex space-x-3">
+            <a
+              href={`/portfolio/full-preview/${template}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-[#444ea5] text-white rounded hover:bg-[#333a7f] cursor-pointer transition-colors"
+            >
+              Voir dans un nouvel onglet
+            </a>
             <button
               onClick={onClose}
-              className="px-4 py-2 border border-[#e4003a] rounded text-[#e4003a] hover:bg-[#e4003a] hover:text-white cursor-pointer transition-colors"
+              className="p-2 border border-[#e4003a] rounded text-[#e4003a] hover:bg-[#e4003a] hover:text-white cursor-pointer transition-colors"
             >
               Fermer
             </button>
