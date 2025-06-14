@@ -29,7 +29,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
 
   return (
     <div
-      className={`relative h-600 bg-zinc-800 overflow-hidden ${
+      className={`relative h-600 bg-zinc-800 overflow-hidden min-h-screen flex flex-col ${
         isPreview ? "scale-75 origin-top" : ""
       }`}
     >
@@ -47,7 +47,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           </div>
         </a>
         {/* Links */}
-        <ul className="mt-1 flex gap-4">
+        <ul className="mt-1 flex gap-3">
           <li>
             <a
               href={"#a-propos"}
@@ -69,7 +69,15 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
               href={"#projets"}
               className="pb-2 relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:w-0 after:transition-all after:duration-300"
             >
-              Mes Projets
+              Projets
+            </a>
+          </li>
+          <li>
+            <a
+              href={"#projets"}
+              className="pb-2 relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:w-0 after:transition-all after:duration-300"
+            >
+              Contact
             </a>
           </li>
         </ul>
@@ -146,11 +154,11 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
               Télécharger mon CV
             </a>
           )}
-          <div className={
-            `hidden lg:block size-50 absolute  bottom-15 rotate-25 ${
+          <div
+            className={`hidden lg:block size-50 absolute  bottom-15 rotate-25 ${
               isPreview ? "scale-75 right-2" : "right-10"
-            }`
-          }>
+            }`}
+          >
             <CircularText
               text="NOMBRES*D'ANNÉES*D'ÉXPÈRIENCES*"
               spinDuration={20}
@@ -172,6 +180,38 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           </div>
         </div>
       </div>
+      {/* footer - copyright */}
+      <footer className="bg-zinc-800 text-white py-4 mt-auto">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="text-sm flex flex-col items-center gap-2">
+            <div>
+              <span>
+                portfolio de {user.firstName} {user.lastName} crée sur 
+              </span>{" "}
+              <a
+                href="/"
+                className="pb-1 relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:w-0 after:transition-all after:duration-300"
+              >
+                 ProjetR
+              </a>
+            </div>
+            <span className="text-gray-400">
+              © {new Date().getFullYear()} L'équipe de ProjetR - Tous droits
+              réservés.
+            </span>
+          </div>
+          <div className="flex justify-center gap-4 mt-2">
+            <a
+              href="https://git.dti.crosemont.quebec/dahamada1/nextgen-projects-projets-nouvelle-generation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              GitLab de ProjetR
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
