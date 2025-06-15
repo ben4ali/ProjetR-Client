@@ -23,7 +23,7 @@ import {
   SilkTemplate,
 } from "../components/portfolio/templates";
 
-export const DevNewTemplates: FC = () => {
+export const FullPortfolioPreview: FC = () => {
   const { data: user } = useCurrentUser();
   const { data: projects = [] } = useProjectsByUserId(user?.id);
 

@@ -17,6 +17,7 @@ import {
   PrismTemplate,
   QuantumTemplate,
   SamuraiTemplate,
+  SilkTemplate,
 } from "../components/portfolio/templates";
 import { useCurrentUser } from "../hooks/use-auth";
 import { usePortfolioById } from "../hooks/use-portfolios";
@@ -100,6 +101,8 @@ export const PortfolioView: FC = () => {
         return <CartoonTemplate {...templateProps} />;
       case "pixel":
         return <PixelTemplate {...templateProps} />;
+      case "silk":
+        return <SilkTemplate {...templateProps} />;
       default:
         return <ModernTemplate {...templateProps} />;
     }
