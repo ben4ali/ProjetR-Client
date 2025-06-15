@@ -1,9 +1,9 @@
-import { FC, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useCurrentUser } from '../../hooks/use-auth';
-import { usePortfolioByUserId } from '../../hooks/use-portfolios';
-import { Projet } from '../../types/Projet';
-import { ProfilStats } from './ProfilStats';
+import { FC, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../../hooks/use-auth";
+import { usePortfolioByUserId } from "../../hooks/use-portfolios";
+import { Projet } from "../../types/Projet";
+import { ProfilStats } from "./ProfilStats";
 
 interface ProfilContentProps {
   firstName: string;
@@ -24,14 +24,14 @@ export const ProfilContent: FC<ProfilContentProps> = ({
   const { data: currentUser } = useCurrentUser();
   const isCurrentUser = useMemo(
     () => currentUser?.id === userId,
-    [currentUser?.id, userId]
+    [currentUser?.id, userId],
   );
 
   const { data: portfolio, isLoading, error } = usePortfolioByUserId(userId);
 
   const hasNoPortfolio =
     error &&
-    'response' in error &&
+    "response" in error &&
     (error as { response?: { status?: number } }).response?.status === 404;
 
   const shouldShowCreateButton =
@@ -53,14 +53,14 @@ export const ProfilContent: FC<ProfilContentProps> = ({
     }
   };
   return (
-    <div className="mt-16 md:mt-4 flex flex-col w-full max-w-6xl mx-auto px-4 leading-[2.25rem]">
+    <div className="mx-auto mt-16 flex w-full max-w-6xl flex-col px-4 leading-[2.25rem] md:mt-4">
       <div className="profil-info">
-        <div className="w-full flex flex-col ml-10 md:flex-row md:items-center justify-between gap-6">
+        <div className="ml-10 flex w-full flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl m-0">
+            <h1 className="m-0 text-3xl md:text-4xl">
               {firstName} {lastName}
             </h1>
-            <p className="text-xl md:text-2xl text-black/50 m-0 mt-2">
+            <p className="m-0 mt-2 text-xl text-black/50 md:text-2xl">
               @{pseudo}
             </p>
           </div>
@@ -70,10 +70,10 @@ export const ProfilContent: FC<ProfilContentProps> = ({
               {shouldShowCreateButton ? (
                 <Link
                   to="/create-portfolio"
-                  className="cursor-pointer group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#444ea5] to-indigo-500 text-white rounded-xl hover:from-indigo-600 hover:to-[#444ea5] transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-102"
+                  className="group inline-flex transform cursor-pointer items-center rounded-xl bg-gradient-to-r from-[#444ea5] to-indigo-500 px-6 py-3 text-sm font-medium text-white shadow-lg transition-all duration-300 hover:scale-102 hover:from-[#444ea5] hover:to-indigo-600 hover:shadow-xl"
                 >
                   <svg
-                    className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300"
+                    className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-90"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -88,9 +88,9 @@ export const ProfilContent: FC<ProfilContentProps> = ({
                   Créer un Portfolio
                 </Link>
               ) : isLoading ? (
-                <div className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-400 rounded-xl text-sm font-medium">
+                <div className="inline-flex items-center rounded-xl bg-gray-100 px-6 py-3 text-sm font-medium text-gray-400">
                   <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-400"
+                    className="mr-2 -ml-1 h-4 w-4 animate-spin text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -115,10 +115,10 @@ export const ProfilContent: FC<ProfilContentProps> = ({
                 <div className="flex gap-3">
                   <button
                     onClick={handleViewPortfolio}
-                    className="cursor-pointer group inline-flex items-center px-5 py-3 bg-gradient-to-r from-[#444ea5] to-indigo-500 text-white rounded-xl hover:from-indigo-600 hover:to-[#444ea5] transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-102"
+                    className="group inline-flex transform cursor-pointer items-center rounded-xl bg-gradient-to-r from-[#444ea5] to-indigo-500 px-5 py-3 text-sm font-medium text-white shadow-lg transition-all duration-300 hover:scale-102 hover:from-[#444ea5] hover:to-indigo-600 hover:shadow-xl"
                   >
                     <svg
-                      className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300"
+                      className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -140,10 +140,10 @@ export const ProfilContent: FC<ProfilContentProps> = ({
                   </button>
                   <button
                     onClick={handleEditPortfolio}
-                    className="cursor-pointer group inline-flex items-center px-5 py-3 border border-[#e4003a] bg-transparent text-[#e4003a] rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:bg-[#e4003a] hover:text-white hover:shadow-xl transform hover:scale-102"
+                    className="group inline-flex transform cursor-pointer items-center rounded-xl border border-[#e4003a] bg-transparent px-5 py-3 text-sm font-medium text-[#e4003a] shadow-lg transition-all duration-300 hover:scale-102 hover:bg-[#e4003a] hover:text-white hover:shadow-xl"
                   >
                     <svg
-                      className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300"
+                      className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:rotate-12"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -166,10 +166,10 @@ export const ProfilContent: FC<ProfilContentProps> = ({
             <div className="flex-shrink-0">
               <button
                 onClick={handleViewPortfolio}
-                className="cursor-pointer group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#444ea5] to-indigo-500 text-white rounded-xl hover:from-indigo-600 hover:to-[#444ea5] transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-102"
+                className="group inline-flex transform cursor-pointer items-center rounded-xl bg-gradient-to-r from-[#444ea5] to-indigo-500 px-6 py-3 text-sm font-medium text-white shadow-lg transition-all duration-300 hover:scale-102 hover:from-indigo-600 hover:to-[#444ea5] hover:shadow-xl"
               >
                 <svg
-                  className="w-5 h-5 mr-2 group-hover:scale-100 transition-transform duration-300"
+                  className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-100"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

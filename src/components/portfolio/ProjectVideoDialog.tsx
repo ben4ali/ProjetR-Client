@@ -428,7 +428,15 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
           <div className="space-y-4">
             <div>
               <h3 className={styles.sectionTitle}>Description</h3>
-              <p className={styles.description}>{project.description}</p>
+              <p
+                className={`${styles.description} max-h-25 overflow-auto`}
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "rgb(156 163 175) transparent",
+                }}
+              >
+                {project.description}
+              </p>
             </div>
 
             {project.tags && project.tags.length > 0 && (

@@ -467,12 +467,14 @@ function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
           viewport={{ once: true }}
         >
           <video
-            className="mb-4 aspect-video w-full rounded-lg object-cover md:w-[45%]"
+            className="mb-4 aspect-video w-full rounded-lg object-cover md:w-[45%] md:min-w-[45%]"
             src={project.demoUrl}
           />
-          <div className={`${index % 2 !== 0 ? "mr-auto" : ""}`}>
+          <div className={` ${index % 2 !== 0 ? "mr-auto" : ""}`}>
             <h3 className="mb-2 text-2xl font-semibold">{project.title}</h3>
-            <p className="mb-4 text-gray-300">{project.description}</p>
+            <p className="mb-4 line-clamp-4 text-gray-300">
+              {project.description}
+            </p>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag, tagIndex) => (
                 <span
