@@ -398,6 +398,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
                 ref={videoRef}
                 className="h-full w-full rounded-lg bg-black object-contain"
                 controls
+                autoPlay
               >
                 <source src={project.demoUrl} type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture vidéo.
