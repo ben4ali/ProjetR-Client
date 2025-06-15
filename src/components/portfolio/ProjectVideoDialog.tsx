@@ -17,7 +17,8 @@ type DialogVariant =
   | "samurai"
   | "matrix"
   | "cartoon"
-  | "pixel";
+  | "pixel"
+  | "silk";
 
 interface ProjectVideoDialogProps {
   isOpen: boolean;
@@ -320,6 +321,24 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
             "bg-yellow-500 hover:bg-yellow-400 text-black font-mono font-bold border border-yellow-400",
         };
 
+      case "silk":
+        return {
+          overlay: "bg-black bg-opacity-75",
+          container:
+            "bg-emerald-950 text-white rounded-lg shadow-2xl border border-emerald-900",
+          header:
+            "bg-gradient-to-b from-emerald-950 to-emerald-900 border-b border-gray-700 bg-gray-800",
+          title: "text-2xl font-bold text-white",
+          closeButton: "text-gray-400 hover:text-white",
+          content: "bg-gradient-to-br from-emerald-950 to-black/30",
+          description: "text-gray-300",
+          sectionTitle: "text-lg font-semibold text-gray-200 mb-2",
+          tag: "bg-emerald-900 text-white ",
+          githubButton:
+            "bg-emerald-900 hover:bg-emerald-800 transition-colors duration-200 text-white",
+          liveButton: "bg-blue-600 hover:bg-blue-700 text-white",
+        };
+
       default:
         return {
           overlay: "bg-black bg-opacity-75",
@@ -346,7 +365,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
       ></div>
 
       <div
-        className={`relative ${styles.container} max-w-4xl max-h-[90vh] w-full mx-4 overflow-hidden`}
+        className={`relative ${styles.container} mx-4 max-h-[90vh] w-full max-w-4xl overflow-hidden`}
       >
         <div
           className={`flex items-center justify-between p-6 ${styles.header}`}
@@ -357,7 +376,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
             className={`${styles.closeButton} transition-colors`}
           >
             <svg
-              className="w-6 h-6"
+              className="h-6 w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -374,10 +393,10 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
         <div className={`p-6 ${styles.content}`}>
           {project.demoUrl ? (
-            <div className="aspect-video mb-6">
+            <div className="mb-6 aspect-video">
               <video
                 ref={videoRef}
-                className="w-full h-full rounded-lg object-contain bg-black"
+                className="h-full w-full rounded-lg bg-black object-contain"
                 controls
               >
                 <source src={project.demoUrl} type="video/mp4" />
@@ -385,10 +404,10 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
               </video>
             </div>
           ) : (
-            <div className="aspect-video mb-6 bg-gray-200 rounded-lg flex items-center justify-center">
+            <div className="mb-6 flex aspect-video items-center justify-center rounded-lg bg-gray-200">
               <div className="text-center text-gray-500">
                 <svg
-                  className="w-16 h-16 mx-auto mb-4"
+                  className="mx-auto mb-4 h-16 w-16"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -418,7 +437,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
                   {project.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className={`inline-block px-3 py-1 rounded-full text-sm ${styles.tag}`}
+                      className={`inline-block rounded-full px-3 py-1 text-sm ${styles.tag}`}
                     >
                       {tag}
                     </span>
@@ -433,10 +452,10 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center px-4 py-2 rounded-lg transition-colors ${styles.githubButton}`}
+                  className={`inline-flex items-center rounded-lg px-4 py-2 transition-colors ${styles.githubButton}`}
                 >
                   <svg
-                    className="w-5 h-5 mr-2"
+                    className="mr-2 h-5 w-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -453,10 +472,10 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center px-4 py-2 rounded-lg transition-colors ${styles.liveButton}`}
+                    className={`inline-flex items-center rounded-lg px-4 py-2 transition-colors ${styles.liveButton}`}
                   >
                     <svg
-                      className="w-5 h-5 mr-2"
+                      className="mr-2 h-5 w-5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
