@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Projet } from "../../types/Projet";
+import { Video } from "lucide-react";
 
 export const Post = ({
   project,
@@ -57,33 +58,46 @@ export const Post = ({
       to={"/watch/" + project.id}
       className={
         fullPost
-          ? "flex min-h-[15em] w-full overflow-hidden cursor-pointer gap-6 hover:bg-neutral-100 rounded-xl p-[0.25rem] transition-colors duration-300 ease-in-out"
-          : "flex flex-col relative w-[22.9rem] h-[20rem] overflow-hidden cursor-pointer hover:bg-neutral-200 rounded-xl p-[0.25rem] transition-colors duration-200 ease-in-out"
+          ? "flex min-h-[15em] w-full cursor-pointer gap-6 overflow-hidden rounded-xl p-[0.25rem] transition-colors duration-300 ease-in-out hover:bg-neutral-100"
+          : "relative flex h-[20rem] w-[22.9rem] cursor-pointer flex-col overflow-hidden rounded-xl p-[0.25rem] transition-colors duration-200 ease-in-out hover:bg-neutral-200"
       }
     >
       {!fullPost && (
         <>
-          <div className="overflow-hidden rounded-[10px] w-full h-[70%] relative">
-            <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-black/25 z-10 transition-all"></div>
-            <video
-              className="absolute z-0 rounded-[8px] w-full h-full object-cover scale-110 transition-all"
-              src={project.demoUrl}
-            />
-            <p className="absolute bottom-[7.5%] right-[7.5%] bg-black/50 text-white px-2 py-1 rounded-bl-[8px] z-20 text-xs">
+          <Link
+            to={`/watch/${project.id}`}
+            className="group relative aspect-video overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg"
+          >
+            {" "}
+            {project.demoUrl ? (
+              <video
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                poster={project.previewImageUrl}
+                preload="metadata"
+              >
+                <source src={project.demoUrl} type="video/mp4" />
+              </video>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gray-200">
+                <Video className="h-12 w-12 text-gray-400" />
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+            <div className="absolute right-2 bottom-2 z-20 rounded-bl-[8px] bg-black/50 px-2 py-1 text-xs text-white">
               {formatDuration(duration)}
-            </p>
-          </div>
-          <div className="flex mt-4 h-24 justify-items-start">
-            <div className="flex h-full aspect-square">
+            </div>
+          </Link>
+          <div className="mt-4 flex h-24 justify-items-start">
+            <div className="flex aspect-square h-full">
               <img
                 src={authorAvatar}
                 alt="Photo de profil"
-                className="w-12 h-12 object-cover rounded-full"
+                className="h-12 w-12 rounded-full object-cover"
                 crossOrigin="anonymous"
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="flex flex-col w-[85%] text-black">
+            <div className="flex w-[85%] flex-col text-black">
               <h2 className="text-base font-semibold">
                 {project.title || "Sans titre"}
               </h2>
@@ -97,19 +111,19 @@ export const Post = ({
       )}
       {fullPost && (
         <>
-          <div className="flex flex-col w-1/4">
-            <div className="overflow-hidden rounded-[10px] w-full h-full relative">
-              <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-black/25 z-10 transition-all"></div>
+          <div className="flex w-1/4 flex-col">
+            <div className="relative h-full w-full overflow-hidden rounded-[10px]">
+              <div className="absolute z-10 h-full w-full bg-gradient-to-b from-transparent to-black/25 transition-all"></div>
               <video
-                className="absolute z-0 rounded-[8px] w-full h-full object-cover scale-110 transition-all"
+                className="absolute z-0 h-full w-full scale-110 rounded-[8px] object-cover transition-all"
                 src={project.demoUrl}
               />
-              <p className="absolute bottom-[7.5%] right-[7.5%] bg-black/50 text-white px-2 py-1 rounded-bl-[8px] z-20 text-xs">
+              <p className="absolute right-[7.5%] bottom-[7.5%] z-20 rounded-bl-[8px] bg-black/50 px-2 py-1 text-xs text-white">
                 {formatDuration(duration)}
               </p>
             </div>
           </div>
-          <div className="flex flex-col flex-1 pl-6">
+          <div className="flex flex-1 flex-col pl-6">
             <div className="flex flex-col text-black">
               <h2 className="text-base font-semibold">
                 {project.title || "Sans titre"}
@@ -117,10 +131,10 @@ export const Post = ({
               <p className="text-sm opacity-80">
                 {project.views || 0} Visionnements • {formattedDate}
               </p>
-              <div className="flex items-center gap-2 mt-3">
-                <div className="w-8 h-8 rounded-full overflow-hidden">
+              <div className="mt-3 flex items-center gap-2">
+                <div className="h-8 w-8 overflow-hidden rounded-full">
                   <img
-                    className="object-cover w-full h-full"
+                    className="h-full w-full object-cover"
                     src={authorAvatar}
                     alt="Photo de profil"
                     crossOrigin="anonymous"
