@@ -40,26 +40,24 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
       }`}
     >
       {/* Nav */}
-      <nav className="fixed top-5 left-5 z-10 flex w-fit gap-3 rounded-lg bg-teal-900/40 p-4 px-6 text-white shadow-md backdrop-blur-lg">
+      <nav className="fixed top-5 left-2 z-10 flex w-fit gap-3 rounded-lg bg-teal-900/40 p-4 px-6 text-white shadow-md backdrop-blur-lg sm:left-5">
         {/* Avatar */}
-        <a href="#hero" className="flex items-center gap-4">
+        <a href="#hero" className="hidden items-center gap-4 sm:flex">
           <img
             src={user.avatar || "/default-avatar.png"}
             alt={`${user.firstName} ${user.lastName}`}
-            className="h-8 w-8 rounded-full"
+            className="h-6 w-6 rounded-full sm:h-8 sm:w-8"
           />
-          <div>
-            <h2 className="border-r pr-3 text-lg font-semibold">
-              {user.firstName}{" "}
-            </h2>
-          </div>
+          <h2 className="border-r pr-3 text-lg font-semibold">
+            {user.firstName}{" "}
+          </h2>
         </a>
         {/* Links */}
         <ul className="mt-1 flex gap-3">
           <li>
             <a
               href={"#a-propos"}
-              className="relative pb-2 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+              className="relative pb-2 text-sm after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full sm:text-base"
             >
               À propos
             </a>
@@ -67,7 +65,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           <li>
             <a
               href={"#competences"}
-              className="relative pb-2 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+              className="relative pb-2 text-sm after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full sm:text-base"
             >
               Compétences
             </a>
@@ -75,7 +73,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           <li>
             <a
               href={"#projets"}
-              className="relative pb-2 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+              className="relative pb-2 text-sm after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full sm:text-base"
             >
               Projets
             </a>
@@ -83,7 +81,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           <li>
             <a
               href={"#contact"}
-              className="relative pb-2 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+              className="relative pb-2 text-sm after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full sm:text-base"
             >
               Contact
             </a>
@@ -208,7 +206,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           <h2 className="mb-6 w-[60%] border-b p-3 text-3xl font-bold">
             Compétences
           </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-3">
             {skills?.map((skill, index) => (
               <motion.div
                 key={index}
@@ -459,8 +457,8 @@ function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
       {projets.map((project, index) => (
         <motion.div
           key={project.id}
-          className={`flex cursor-pointer rounded-lg ${
-            index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+          className={`flex cursor-pointer flex-col rounded-lg ${
+            index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
           } items-start gap-8 border border-transparent p-5 transition-colors duration-200 hover:border-1 hover:border-emerald-900 hover:bg-emerald-900/10`}
           onClick={() => onProjectClick(project)}
           initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
@@ -469,7 +467,7 @@ function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
           viewport={{ once: true }}
         >
           <video
-            className="mb-4 aspect-video w-[45%] rounded-lg object-cover"
+            className="mb-4 aspect-video w-full rounded-lg object-cover md:w-[45%]"
             src={project.demoUrl}
           />
           <div className={`${index % 2 !== 0 ? "mr-auto" : ""}`}>
