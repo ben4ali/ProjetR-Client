@@ -157,18 +157,18 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
   return (
     <>
       <div
-        className={`bg-gradient-to-b from-gray-900 via-red-950 to-black text-white min-h-screen relative overflow-hidden ${
-          isPreview ? "scale-75 origin-top" : ""
+        className={`relative min-h-screen overflow-hidden bg-gradient-to-b from-gray-900 via-red-950 to-black text-white ${
+          isPreview ? "origin-top scale-75" : ""
         }`}
       >
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-red-800/30">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex justify-between items-center">
+        <nav className="fixed top-0 right-0 left-0 z-50 border-b border-red-800/30 bg-black/20 backdrop-blur-md">
+          <div className="mx-auto max-w-7xl px-6 py-4">
+            <div className="flex items-center justify-between">
               <div className="text-2xl font-bold text-red-400">
                 {user.firstName} {user.lastName}
               </div>{" "}
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden space-x-8 md:flex">
                 {[
                   { japanese: "武士", french: "Samouraï", section: "hero" },
                   { japanese: "物語", french: "Histoire", section: "about" },
@@ -180,7 +180,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   { japanese: "作品", french: "Projets", section: "projects" },
                   { japanese: "連絡", french: "Contact", section: "contact" },
                 ].map((item, index) => (
-                  <div key={index} className="relative group">
+                  <div key={index} className="group relative">
                     <button
                       onClick={() => scrollToSection(index)}
                       className={`text-sm font-medium transition-colors hover:text-red-400 ${
@@ -192,7 +192,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                       {item.japanese}
                     </button>
                     {/* Tooltip */}
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                    <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       {item.french}
                     </div>
                   </div>
@@ -204,7 +204,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
         {/* Hero Section */}
         <section
           id="hero"
-          className="relative h-screen flex items-center justify-center overflow-hidden"
+          className="relative flex h-screen items-center justify-center overflow-hidden"
         >
           <div
             ref={heroRef}
@@ -213,29 +213,29 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSI5IiBjeT0iOSIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
           </div>
 
-          <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+          <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
               className="mb-8"
             >
-              <div className="relative w-48 h-48 mx-auto mb-8">
-                <div className="absolute inset-0 bg-red-600 rounded-full opacity-20 animate-pulse"></div>
+              <div className="relative mx-auto mb-8 h-48 w-48">
+                <div className="absolute inset-0 animate-pulse rounded-full bg-red-600 opacity-20"></div>
                 <img
                   src={user.avatar || "/default-avatar.png"}
                   alt={user.firstName}
-                  className="w-full h-full object-cover rounded-full border-4 border-red-600 relative z-10"
+                  className="relative z-10 h-full w-full rounded-full border-4 border-red-600 object-cover"
                 />{" "}
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-red-600 rounded-full flex items-center justify-center group">
+                <div className="group absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-red-600">
                   <span
-                    className="text-white text-xs"
+                    className="text-xs text-white"
                     title="Samouraï"
                     aria-label="Samouraï"
                   >
                     侍
                   </span>
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                  <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                     Samouraï
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-red-400 to-yellow-400 bg-clip-text text-transparent"
+              className="mb-6 bg-gradient-to-r from-red-400 to-yellow-400 bg-clip-text text-6xl font-bold text-transparent md:text-8xl"
             >
               {user.firstName}
               <br />
@@ -255,7 +255,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="text-xl md:text-2xl mb-8 text-gray-300 font-light relative group"
+              className="group relative mb-8 text-xl font-light text-gray-300 md:text-2xl"
             >
               <span
                 title={hook ? undefined : "Guerrier du Chemin du Code"}
@@ -265,7 +265,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                 {hook || "コードの道を歩む武士 - Guerrier du Chemin du Code"}
               </span>
               {!hook && (
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                   Guerrier du Chemin du Code
                 </div>
               )}
@@ -277,7 +277,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                 transition={{ duration: 1, delay: 0.9 }}
                 className="mb-8"
               >
-                <span className="inline-block bg-red-600/20 border border-red-600 px-6 py-2 rounded-full text-red-400 font-medium">
+                <span className="inline-block rounded-full border border-red-600 bg-red-600/20 px-6 py-2 font-medium text-red-400">
                   {jobTitle}
                 </span>
               </motion.div>
@@ -286,32 +286,32 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
-              className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+              className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6"
             >
-              <div className="relative group">
+              <div className="group relative">
                 <button
                   onClick={() => scrollToSection(3)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+                  className="rounded-lg bg-red-600 px-8 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-red-700"
                   aria-label="Voir mes projets"
                   title="Voir mes projets"
                 >
                   作品を見る
                 </button>
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                   Voir mes projets
                 </div>
               </div>
               {cvDownloadUrl && (
-                <div className="relative group">
+                <div className="group relative">
                   <button
                     onClick={handleCVDownload}
-                    className="border border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                    className="rounded-lg border border-red-600 px-8 py-3 font-semibold text-red-600 transition-colors hover:bg-red-600 hover:text-white"
                     aria-label="Télécharger mon CV"
                     title="Télécharger mon CV"
                   >
                     履歴書をダウンロード
                   </button>
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                  <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                     Télécharger mon CV
                   </div>
                 </div>
@@ -321,35 +321,35 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
 
           {/* Decorative elements */}
           <div className="absolute bottom-20 left-20 opacity-20">
-            <div className="w-32 h-32 border-2 border-red-600 transform rotate-45"></div>
+            <div className="h-32 w-32 rotate-45 transform border-2 border-red-600"></div>
           </div>
           <div className="absolute top-20 right-20 opacity-20">
-            <div className="w-24 h-24 border-2 border-yellow-600 rounded-full"></div>
+            <div className="h-24 w-24 rounded-full border-2 border-yellow-600"></div>
           </div>
         </section>
         {/* About Section */}
         <section
           id="about"
-          className="py-20 px-6 bg-gradient-to-r from-black to-red-950"
+          className="bg-gradient-to-r from-black to-red-950 px-6 py-20"
         >
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid items-center gap-16 md:grid-cols-2">
               {" "}
               <div>
-                <div className="relative group inline-block">
-                  <h2 className="text-5xl font-bold mb-8 text-red-400 cursor-help">
+                <div className="group relative inline-block">
+                  <h2 className="mb-8 cursor-help text-5xl font-bold text-red-400">
                     私の物語
-                    <span className="block text-2xl text-gray-400 mt-2">
+                    <span className="mt-2 block text-2xl text-gray-400">
                       Mon Histoire
                     </span>
                   </h2>
-                  <div className="absolute -bottom-2 left-0 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                  <div className="pointer-events-none absolute -bottom-2 left-0 rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                     Mon Histoire
                   </div>
                 </div>
-                <div className="relative group inline-block">
+                <div className="group relative inline-block">
                   <p
-                    className="text-lg text-gray-300 leading-relaxed mb-6 cursor-help"
+                    className="mb-6 cursor-help text-lg leading-relaxed text-gray-300"
                     title={
                       about
                         ? undefined
@@ -365,7 +365,7 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                       "武士の心を持つ開発者として、私は技術の道を歩み続けています。精神を込めて、一つ一つのコードを丁寧に書き上げます。"}
                   </p>
                   {!about && (
-                    <div className="absolute -bottom-8 left-0 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap max-w-sm">
+                    <div className="pointer-events-none absolute -bottom-8 left-0 max-w-sm rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       En tant que développeur avec l'esprit d'un samouraï, je
                       continue de marcher sur le chemin de la technologie. Avec
                       dévouement, j'écris soigneusement chaque ligne de code.
@@ -373,22 +373,22 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   )}
                 </div>
                 {yearsOfExperience && (
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mr-4">
+                  <div className="mb-6 flex items-center">
+                    <div className="mr-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-600">
                       <span className="text-2xl font-bold">
                         {yearsOfExperience}
                       </span>
                     </div>{" "}
                     <div>
-                      <div className="relative group inline-block">
+                      <div className="group relative inline-block">
                         <div
-                          className="text-xl font-semibold cursor-help"
+                          className="cursor-help text-xl font-semibold"
                           title="Années d'Expérience"
                           aria-label="Années d'Expérience"
                         >
                           年の経験
                         </div>
-                        <div className="absolute -bottom-6 left-0 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                        <div className="pointer-events-none absolute -bottom-6 left-0 rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                           Années d'Expérience
                         </div>
                       </div>
@@ -398,28 +398,28 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                 )}
               </div>
               <div className="relative">
-                <div className="bg-gradient-to-br from-red-600/20 to-yellow-600/20 p-8 rounded-2xl border border-red-600/30">
+                <div className="rounded-2xl border border-red-600/30 bg-gradient-to-br from-red-600/20 to-yellow-600/20 p-8">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-red-400">誠実 - Integrity</span>
                       <span className="text-yellow-400">100%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-red-600 to-yellow-600 h-2 rounded-full w-full"></div>
+                    <div className="h-2 w-full rounded-full bg-gray-700">
+                      <div className="h-2 w-full rounded-full bg-gradient-to-r from-red-600 to-yellow-600"></div>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-red-400">勇気 - Courage</span>
                       <span className="text-yellow-400">95%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-red-600 to-yellow-600 h-2 rounded-full w-[95%]"></div>
+                    <div className="h-2 w-full rounded-full bg-gray-700">
+                      <div className="h-2 w-[95%] rounded-full bg-gradient-to-r from-red-600 to-yellow-600"></div>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-red-400">礼儀 - Respect</span>
                       <span className="text-yellow-400">98%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-red-600 to-yellow-600 h-2 rounded-full w-[98%]"></div>
+                    <div className="h-2 w-full rounded-full bg-gray-700">
+                      <div className="h-2 w-[98%] rounded-full bg-gradient-to-r from-red-600 to-yellow-600"></div>
                     </div>
                   </div>
                 </div>
@@ -431,17 +431,17 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
         <section
           id="skills"
           ref={skillsRef}
-          className="py-20 px-6 bg-gradient-to-r from-red-950 to-black"
+          className="bg-gradient-to-r from-red-950 to-black px-6 py-20"
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="mx-auto max-w-6xl">
             {" "}
-            <h2 className="text-5xl font-bold text-center mb-16 text-red-400">
+            <h2 className="mb-16 text-center text-5xl font-bold text-red-400">
               技能
-              <span className="block text-2xl text-gray-400 mt-2">
+              <span className="mt-2 block text-2xl text-gray-400">
                 Compétences & Capacités
               </span>
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {(skills.length > 0
                 ? skills
                 : [
@@ -455,19 +455,19 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
               )
                 .slice(0, 6)
                 .map((skill) => (
-                  <div key={skill.name} className="relative group">
-                    <div className="bg-gradient-to-br from-red-900/40 to-black/60 p-6 rounded-xl border border-red-600/30 hover:border-red-400/50 transition-all duration-300">
-                      <div className="flex items-center justify-between mb-4">
+                  <div key={skill.name} className="group relative">
+                    <div className="rounded-xl border border-red-600/30 bg-gradient-to-br from-red-900/40 to-black/60 p-6 transition-all duration-300 hover:border-red-400/50">
+                      <div className="mb-4 flex items-center justify-between">
                         <h3 className="text-xl font-semibold text-white">
                           {skill.name}
                         </h3>
-                        <span className="text-red-400 font-bold">
+                        <span className="font-bold text-red-400">
                           {skill.level}%
                         </span>
                       </div>
-                      <div className="relative h-4 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="relative h-4 overflow-hidden rounded-full bg-gray-700">
                         <div
-                          className="bamboo-stick absolute top-0 left-0 h-full bg-gradient-to-r from-red-600 to-yellow-600 rounded-full transition-all duration-1000 ease-out"
+                          className="bamboo-stick absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-red-600 to-yellow-600 transition-all duration-1000 ease-out"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -484,17 +484,17 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
         <section
           id="projects"
           ref={projectsRef}
-          className="py-20 px-6 bg-gradient-to-r from-black to-red-950"
+          className="bg-gradient-to-r from-black to-red-950 px-6 py-20"
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="mx-auto max-w-7xl">
             {" "}
-            <h2 className="text-5xl font-bold text-center mb-16 text-red-400">
+            <h2 className="mb-16 text-center text-5xl font-bold text-red-400">
               作品集
-              <span className="block text-2xl text-gray-400 mt-2">
+              <span className="mt-2 block text-2xl text-gray-400">
                 Portfolio
               </span>
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {" "}
               {projets.slice(0, 6).map((projet) => (
                 <motion.div
@@ -506,53 +506,53 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   aria-label={`Voir les détails du projet ${projet.title}`}
                   title={`Voir les détails du projet ${projet.title}`}
                 >
-                  <div className="bg-gradient-to-br from-red-900/40 to-black/60 rounded-xl overflow-hidden border border-red-600/30 hover:border-red-400/50 transition-all duration-300">
-                    <div className="aspect-video relative overflow-hidden">
+                  <div className="overflow-hidden rounded-xl border border-red-600/30 bg-gradient-to-br from-red-900/40 to-black/60 transition-all duration-300 hover:border-red-400/50">
+                    <div className="relative aspect-video overflow-hidden">
                       {" "}
                       {projet.previewImageUrl ? (
                         <img
                           src={projet.previewImageUrl}
                           alt={projet.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-600 to-yellow-600 flex items-center justify-center group">
+                        <div className="group flex h-full w-full items-center justify-center bg-gradient-to-br from-red-600 to-yellow-600">
                           <span
-                            className="text-4xl text-white cursor-help"
+                            className="cursor-help text-4xl text-white"
                             title="Samouraï"
                             aria-label="Samouraï"
                           >
                             侍
                           </span>
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                          <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                             Samouraï
                           </div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300"></div>
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="relative group/button">
-                          <div className="bg-red-600 text-white px-6 py-2 rounded-full font-semibold">
+                      <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/20"></div>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <div className="group/button relative">
+                          <div className="rounded-full bg-red-600 px-6 py-2 font-semibold text-white">
                             詳細を見る
                           </div>
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/button:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                          <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover/button:opacity-100">
                             Voir les détails
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold mb-2 text-white">
+                      <h3 className="mb-2 text-xl font-bold text-white">
                         {projet.title}
                       </h3>
-                      <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                      <p className="mb-4 line-clamp-2 text-sm text-gray-300">
                         {projet.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {projet.tags?.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="bg-red-600/20 border border-red-600 text-red-400 px-2 py-1 rounded text-xs"
+                            className="rounded border border-red-600 bg-red-600/20 px-2 py-1 text-xs text-red-400"
                           >
                             {tag}
                           </span>
@@ -581,32 +581,32 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   },
                 ].map((projet, index) => (
                   <div key={index} className="project-card group">
-                    <div className="bg-gradient-to-br from-red-900/40 to-black/60 rounded-xl overflow-hidden border border-red-600/30">
+                    <div className="overflow-hidden rounded-xl border border-red-600/30 bg-gradient-to-br from-red-900/40 to-black/60">
                       {" "}
-                      <div className="aspect-video bg-gradient-to-br from-red-600 to-yellow-600 flex items-center justify-center relative group">
+                      <div className="group relative flex aspect-video items-center justify-center bg-gradient-to-br from-red-600 to-yellow-600">
                         <span
-                          className="text-4xl text-white cursor-help"
+                          className="cursor-help text-4xl text-white"
                           title="Samouraï"
                           aria-label="Samouraï"
                         >
                           侍
                         </span>
-                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                        <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                           Samouraï
                         </div>
                       </div>
                       <div className="p-6">
-                        <h3 className="text-xl font-bold mb-2 text-white">
+                        <h3 className="mb-2 text-xl font-bold text-white">
                           {projet.title}
                         </h3>
-                        <p className="text-gray-300 text-sm mb-4">
+                        <p className="mb-4 text-sm text-gray-300">
                           {projet.description}
                         </p>
                         <div className="flex flex-wrap gap-2">
                           {projet.tags?.map((tag) => (
                             <span
                               key={tag}
-                              className="bg-red-600/20 border border-red-600 text-red-400 px-2 py-1 rounded text-xs"
+                              className="rounded border border-red-600 bg-red-600/20 px-2 py-1 text-xs text-red-400"
                             >
                               {tag}
                             </span>
@@ -622,29 +622,29 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
         {/* Contact Section */}{" "}
         <section
           id="contact"
-          className="py-20 px-6 bg-gradient-to-r from-red-950 to-black"
+          className="bg-gradient-to-r from-red-950 to-black px-6 py-20"
         >
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="relative group inline-block mb-8">
-              <h2 className="text-5xl font-bold text-red-400 cursor-help">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="group relative mb-8 inline-block">
+              <h2 className="cursor-help text-5xl font-bold text-red-400">
                 連絡先
-                <span className="block text-2xl text-gray-400 mt-2">
+                <span className="mt-2 block text-2xl text-gray-400">
                   Contact
                 </span>
               </h2>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+              <div className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 Contact
               </div>
             </div>
-            <div className="relative group inline-block mb-12">
+            <div className="group relative mb-12 inline-block">
               <p
-                className="text-xl text-gray-300 cursor-help"
+                className="cursor-help text-xl text-gray-300"
                 title="Créons ensemble quelque chose de merveilleux"
                 aria-label="Créons ensemble quelque chose de merveilleux"
               >
                 一緒に素晴らしいものを作りましょう
               </p>
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+              <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 transform rounded bg-black/90 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 Créons ensemble quelque chose de merveilleux
               </div>
             </div>
@@ -655,10 +655,10 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors"
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 transition-colors hover:bg-red-700"
                 >
                   <svg
-                    className="w-8 h-8 text-white"
+                    className="h-8 w-8 text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -671,10 +671,10 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors"
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 transition-colors hover:bg-red-700"
                 >
                   <svg
-                    className="w-8 h-8 text-white"
+                    className="h-8 w-8 text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -685,10 +685,10 @@ export const SamuraiTemplate: FC<SamuraiTemplateProps> = ({
               {user.email && (
                 <a
                   href={`mailto:${user.email}`}
-                  className="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors"
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 transition-colors hover:bg-red-700"
                 >
                   <svg
-                    className="w-8 h-8 text-white"
+                    className="h-8 w-8 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

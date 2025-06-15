@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import default_avatar from '../../assets/images/default_profil.png';
-import { isLoggedIn, useCurrentUser } from '../../hooks/use-auth';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import default_avatar from "../../assets/images/default_profil.png";
+import { isLoggedIn, useCurrentUser } from "../../hooks/use-auth";
 import {
   useAddFavorite,
   useIsProjectFavoritedByUser,
   useRemoveFavorite,
-} from '../../hooks/use-favorites';
-import { useDislikeProject, useLikeProject } from '../../hooks/use-project';
-import { useUserById } from '../../hooks/use-users';
-import { Projet } from '../../types/Projet';
+} from "../../hooks/use-favorites";
+import { useDislikeProject, useLikeProject } from "../../hooks/use-project";
+import { useUserById } from "../../hooks/use-users";
+import { Projet } from "../../types/Projet";
 
 interface VideoOptionsProps {
   projet: Projet | null;
@@ -37,19 +37,19 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
     useIsProjectFavoritedByUser(projet?.id);
 
   const date = projet?.createdAt
-    ? new Intl.DateTimeFormat('fr-FR', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
+    ? new Intl.DateTimeFormat("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
       }).format(new Date(projet.createdAt))
-    : '';
+    : "";
 
   // Like / dislike
   const toggleLike = () => {
     if (!projet?.id || !loggedIn) return;
 
     const likedProjects = JSON.parse(
-      localStorage.getItem('liked_projects') || '[]'
+      localStorage.getItem("liked_projects") || "[]",
     );
     const already = likedProjects.includes(projet.id);
 
@@ -57,10 +57,10 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       dislikeProjectMutation.mutate(projet.id, {
         onSuccess: () => {
           localStorage.setItem(
-            'liked_projects',
+            "liked_projects",
             JSON.stringify(
-              likedProjects.filter((id: number) => id !== projet.id)
-            )
+              likedProjects.filter((id: number) => id !== projet.id),
+            ),
           );
           setIsLiked(false);
           if (projet.likes !== undefined) projet.likes -= 1;
@@ -70,7 +70,7 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
       likeProjectMutation.mutate(projet.id, {
         onSuccess: () => {
           likedProjects.push(projet.id);
-          localStorage.setItem('liked_projects', JSON.stringify(likedProjects));
+          localStorage.setItem("liked_projects", JSON.stringify(likedProjects));
           setIsLiked(true);
           if (projet.likes !== undefined) projet.likes += 1;
         },
@@ -100,17 +100,14 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
   useEffect(() => {
     if (projet?.id) {
       const likedProjects = JSON.parse(
-        localStorage.getItem('liked_projects') || '[]'
+        localStorage.getItem("liked_projects") || "[]",
       );
       setIsLiked(likedProjects.includes(projet.id));
     }
   }, [projet?.id]);
 
   return (
-    <div
-      className="video-options flex flex-col gap-4 w-full pb-8 border-b border-black/10
-                     lg:flex-row lg:justify-between mt-4"
-    >
+    <div className="video-options mt-4 flex w-full flex-col gap-4 border-b border-black/10 pb-8 lg:flex-row lg:justify-between">
       {/* Auteur */}
       <div className="author-holder flex items-center gap-4">
         {authorLoading ? (
@@ -145,13 +142,11 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
           disabled={
             likeProjectMutation.isPending || dislikeProjectMutation.isPending
           }
-          className={`like flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
-                      bg-black/5 hover:bg-black/10 transition
-                      ${
-                        loggedIn && isLiked
-                          ? 'interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800'
-                          : ''
-                      }`}
+          className={`like flex h-10 cursor-pointer items-center gap-2 rounded-lg border border-black/5 bg-black/5 px-5 py-1 transition hover:bg-black/10 ${
+            loggedIn && isLiked
+              ? "interaction-active border-red-600/50 bg-red-200/50 text-pink-600 hover:text-pink-800"
+              : ""
+          }`}
         >
           <i className="bi bi-hand-thumbs-up" />
           <p className="hidden lg:block">{projet?.likes} J&apos;aime</p>
@@ -159,8 +154,7 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
 
         <button
           onClick={handleShare}
-          className="share flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
-                     bg-black/5 hover:bg-black/10 transition"
+          className="share flex h-10 cursor-pointer items-center gap-2 rounded-lg border border-black/5 bg-black/5 px-5 py-1 transition hover:bg-black/10"
         >
           <i className="bi bi-reply" />
           <p className="hidden lg:block">Partager</p>
@@ -173,32 +167,27 @@ export const VideoOptions = ({ projet }: VideoOptionsProps) => {
             removeFavoriteMutation.isPending ||
             isFavoritedLoading
           }
-          className={`enregistrer flex items-center gap-2 h-10 px-5 py-1 rounded-lg border border-black/5
-                      bg-black/5 hover:bg-black/10 transition
-                      ${
-                        isFavorited
-                          ? 'interaction-active text-pink-600 bg-red-200/50 border-red-600/50 hover:text-pink-800'
-                          : ''
-                      }`}
+          className={`enregistrer flex h-10 cursor-pointer items-center gap-2 rounded-lg border border-black/5 bg-black/5 px-5 py-1 transition hover:bg-black/10 ${
+            isFavorited
+              ? "interaction-active border-red-600/50 bg-red-200/50 text-pink-600 hover:text-pink-800"
+              : ""
+          }`}
         >
           <i
-            className={`bi ${isFavorited ? 'bi-bookmark-fill' : 'bi-bookmark'}`}
+            className={`bi ${isFavorited ? "bi-bookmark-fill" : "bi-bookmark"}`}
           />
           <p className="hidden lg:block">
             {addFavoriteMutation.isPending || removeFavoriteMutation.isPending
-              ? '...'
+              ? "..."
               : isFavorited
-              ? 'Enregistré'
-              : 'Enregistrer'}
+                ? "Enregistré"
+                : "Enregistrer"}
           </p>
         </button>
       </div>
 
       {isCopied && (
-        <div
-          className="popup fixed left-1/2 bottom-[10%] -translate-x-1/2 flex items-center gap-4
-                        bg-black/80 text-white px-4 py-2 rounded z-50 animate-fade-in-out"
-        >
+        <div className="popup animate-fade-in-out fixed bottom-[10%] left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded bg-black/80 px-4 py-2 text-white">
           <i className="bi bi-check-circle" />
           <p>Copié dans la presse-papier !</p>
         </div>

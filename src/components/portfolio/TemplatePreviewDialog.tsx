@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { useCurrentUser } from '../../hooks/use-auth';
-import { useProjectsByUserId } from '../../hooks/use-project';
-import { PortfolioTemplate, createMockPortfolio } from '../../types/Portfolio';
+import { FC } from "react";
+import { useCurrentUser } from "../../hooks/use-auth";
+import { useProjectsByUserId } from "../../hooks/use-project";
+import { PortfolioTemplate, createMockPortfolio } from "../../types/Portfolio";
 import {
   CartoonTemplate,
   ClassicTemplate,
@@ -20,7 +20,7 @@ import {
   QuantumTemplate,
   SamuraiTemplate,
   SilkTemplate,
-} from './templates';
+} from "./templates";
 
 interface TemplatePreviewDialogProps {
   isOpen: boolean;
@@ -41,46 +41,46 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
   const mockPortfolio = createMockPortfolio(
     user,
     template,
-    projects.slice(0, 6)
+    projects.slice(0, 6),
   );
 
   const renderTemplate = () => {
     const templateProps = { portfolio: mockPortfolio, isPreview: true };
 
     switch (template) {
-      case 'modern':
+      case "modern":
         return <ModernTemplate {...templateProps} />;
-      case 'classic':
+      case "classic":
         return <ClassicTemplate {...templateProps} />;
-      case 'creative':
+      case "creative":
         return <CreativeTemplate {...templateProps} />;
-      case 'minimalist':
+      case "minimalist":
         return <MinimalistTemplate {...templateProps} />;
-      case 'developer':
+      case "developer":
         return <DeveloperTemplate {...templateProps} />;
-      case 'designer':
+      case "designer":
         return <DesignerTemplate {...templateProps} />;
-      case 'neural':
+      case "neural":
         return <NeuralTemplate {...templateProps} />;
-      case 'prism':
+      case "prism":
         return <PrismTemplate {...templateProps} />;
-      case 'cupertino':
+      case "cupertino":
         return <CupertinoTemplate {...templateProps} />;
-      case 'quantum':
+      case "quantum":
         return <QuantumTemplate {...templateProps} />;
-      case 'meteor':
+      case "meteor":
         return <MeteorTemplate {...templateProps} />;
-      case 'hologram':
+      case "hologram":
         return <HologramTemplate {...templateProps} />;
-      case 'samurai':
+      case "samurai":
         return <SamuraiTemplate {...templateProps} />;
-      case 'matrix':
+      case "matrix":
         return <MatrixTemplate {...templateProps} />;
-      case 'cartoon':
+      case "cartoon":
         return <CartoonTemplate {...templateProps} />;
-      case 'pixel':
+      case "pixel":
         return <PixelTemplate {...templateProps} />;
-      case 'silk':
+      case "silk":
         return <SilkTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
@@ -90,21 +90,21 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black bg-opacity-75"
+        className="bg-opacity-75 absolute inset-0 bg-black"
         onClick={onClose}
       ></div>
 
-      <div className="relative bg-white rounded shadow-2xl max-w-6xl max-h-[90vh] w-full mx-4 overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
+      <div className="relative mx-4 max-h-[90vh] w-full max-w-6xl overflow-hidden rounded bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-gray-200 bg-white p-6">
           <h2 className="text-2xl font-bold text-[#444ea5] capitalize">
             Aperçu du modèle {template}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 cursor-pointer hover:text-gray-600 transition-colors"
+            className="cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
           >
             <svg
-              className="w-6 h-6"
+              className="h-6 w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -120,7 +120,7 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         </div>
 
         <div className="relative">
-          <div className="absolute top-4 left-4 z-10 bg-[#cccfeb] bg-opacity-50 text-[#444ea5] px-3 py-1 rounded-full text-sm">
+          <div className="bg-opacity-50 absolute top-4 left-4 z-10 rounded-full bg-[#cccfeb] px-3 py-1 text-sm text-[#444ea5]">
             Mode aperçu
           </div>
 
@@ -129,22 +129,22 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
           </div>
         </div>
 
-        <div className="flex justify-between items-center p-6 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between border-t border-gray-200 bg-gray-50 p-6">
           <p className="text-sm text-gray-600">
-            Ceci est un apércu du template {template}. 
+            Ceci est un apércu du template {template}.
           </p>
           <div className="flex space-x-3">
             <a
               href={`/portfolio/full-preview/${template}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-[#444ea5] text-white rounded hover:bg-[#333a7f] cursor-pointer transition-colors"
+              className="cursor-pointer rounded bg-[#444ea5] p-2 text-white transition-colors hover:bg-[#333a7f]"
             >
               Voir dans un nouvel onglet
             </a>
             <button
               onClick={onClose}
-              className="p-2 border border-[#e4003a] rounded text-[#e4003a] hover:bg-[#e4003a] hover:text-white cursor-pointer transition-colors"
+              className="cursor-pointer rounded border border-[#e4003a] p-2 text-[#e4003a] transition-colors hover:bg-[#e4003a] hover:text-white"
             >
               Fermer
             </button>
