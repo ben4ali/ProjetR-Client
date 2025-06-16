@@ -807,7 +807,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                                     : theme === "sunny"
                                       ? "bg-yellow-800"
                                       : theme === "amber"
-                                        ? "bg-[#a8d8ea]"
+                                        ? "bg-amber-800"
                                         : ""
                         }`}
                       ></div>
