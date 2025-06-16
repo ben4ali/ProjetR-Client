@@ -20,6 +20,7 @@ export interface PortfolioFormData {
   cvDownloadUrl: string;
   jobTitle: string;
   isPublic: boolean;
+  customization?: Record<string, unknown>;
 }
 
 export interface PortfolioFormState extends PortfolioFormData {
@@ -45,6 +46,7 @@ interface Portfolio {
   jobTitle?: string;
   isPublic: boolean;
   user: { id: string };
+  customization?: Record<string, unknown>;
 }
 
 export const usePortfolioForm = (initialData?: Portfolio) => {
@@ -69,6 +71,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     currentPage: 0,
     previewTemplate: null,
     isSubmitting: false,
+    customization: initialData?.customization,
   });
 
   // Reset form data when initialData changes (for edit mode)
@@ -89,6 +92,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
         cvDownloadUrl: initialData.cvDownloadUrl || "",
         jobTitle: initialData.jobTitle || "",
         isPublic: initialData.isPublic,
+        customization: initialData.customization,
       }));
     }
   }, [initialData]);
@@ -208,6 +212,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
       cvDownloadUrl: formState.cvDownloadUrl,
       jobTitle: formState.jobTitle,
       isPublic: formState.isPublic,
+      customization: formState.customization,
     };
   };
 

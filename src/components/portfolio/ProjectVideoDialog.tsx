@@ -325,17 +325,17 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
         return {
           overlay: "bg-black bg-opacity-75",
           container:
-            "bg-emerald-950 text-white rounded-lg shadow-2xl border border-emerald-900",
+            "bg-zinc-950 text-white rounded-lg shadow-2xl border border-zinc-900",
           header:
-            "bg-gradient-to-b from-emerald-950 to-emerald-900 border-b border-gray-700 bg-gray-800",
+            "bg-gradient-to-b from-zinc-950 to-zinc-900 border-b border-gray-700 bg-gray-800",
           title: "text-2xl font-bold text-white",
           closeButton: "text-gray-400 hover:text-white",
-          content: "bg-gradient-to-br from-emerald-950 to-black/30",
+          content: "bg-gradient-to-br from-zinc-950 to-black/30",
           description: "text-gray-300",
           sectionTitle: "text-lg font-semibold text-gray-200 mb-2",
-          tag: "bg-emerald-900 text-white ",
+          tag: "bg-zinc-900 text-white ",
           githubButton:
-            "bg-emerald-900 hover:bg-emerald-800 transition-colors duration-200 text-white",
+            "bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200 text-white",
           liveButton: "bg-blue-600 hover:bg-blue-700 text-white",
         };
 

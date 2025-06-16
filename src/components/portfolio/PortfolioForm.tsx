@@ -423,6 +423,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       "Photoshop",
                       "Git",
                       "Docker",
+                      "Springboot",
                     ].map((suggestion) => (
                       <button
                         key={suggestion}
@@ -759,7 +760,62 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 </label>
               </div>
             </div>
-
+            {/* Selection de thême pour certain template */}
+            {formState.selectedTemplate === "silk" && (
+              <div>
+                <label className="mt-4 block text-sm font-medium text-gray-700">
+                  Thême de couleur
+                </label>
+                <div className="mt-2 flex items-center space-x-4">
+                  {[
+                    "coral",
+                    "floral",
+                    "neutral",
+                    "ocean",
+                    "heart",
+                    "sunny",
+                    "amber",
+                  ].map((theme) => (
+                    <button
+                      key={theme}
+                      type="button"
+                      onClick={() =>
+                        onFieldUpdate("customization", {
+                          ...formState.customization,
+                          theme,
+                        })
+                      }
+                      className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 transition-colors ${
+                        (formState.customization?.theme || "coral") === theme
+                          ? "border-[#444ea5] bg-[#444ea5]/10"
+                          : "border-gray-300 bg-white hover:border-[#444ea5]/30"
+                      }`}
+                    >
+                      <span className="sr-only">{theme} theme</span>
+                      <div
+                        className={`h-6 w-6 rounded-full ${
+                          theme === "coral"
+                            ? "bg-emerald-800"
+                            : theme === "floral"
+                              ? "bg-pink-800"
+                              : theme === "neutral"
+                                ? "bg-zinc-800"
+                                : theme === "ocean"
+                                  ? "bg-blue-800"
+                                  : theme === "heart"
+                                    ? "bg-red-800"
+                                    : theme === "sunny"
+                                      ? "bg-yellow-800"
+                                      : theme === "amber"
+                                        ? "bg-[#a8d8ea]"
+                                        : ""
+                        }`}
+                      ></div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             {userProjects.length > 0 && (
               <div className="mt-8">
                 <h4 className="mb-4 text-lg font-semibold text-gray-900">

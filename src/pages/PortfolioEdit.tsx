@@ -1,14 +1,14 @@
-import { FC, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { PortfolioForm } from '../components/portfolio/PortfolioForm';
-import { useCurrentUser } from '../hooks/use-auth';
-import { usePortfolioForm } from '../hooks/use-portfolio-form';
+import { FC, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { PortfolioForm } from "../components/portfolio/PortfolioForm";
+import { useCurrentUser } from "../hooks/use-auth";
+import { usePortfolioForm } from "../hooks/use-portfolio-form";
 import {
   useDeletePortfolio,
   usePortfolioById,
   useUpdatePortfolio,
-} from '../hooks/use-portfolios';
-import { PortfolioTemplate } from '../types/Portfolio';
+} from "../hooks/use-portfolios";
+import { PortfolioTemplate } from "../types/Portfolio";
 
 export const PortfolioEdit: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,17 +37,17 @@ export const PortfolioEdit: FC = () => {
 
   if (portfolio && portfolio.user.id !== currentUser?.id) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <h1 className="mb-4 text-2xl font-bold text-gray-900">
             Accès non autorisé
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-gray-600">
             Vous n&apos;avez pas la permission de modifier ce portfolio.
           </p>
           <button
             onClick={() => navigate(-1)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
           >
             Retour
           </button>
@@ -60,7 +60,7 @@ export const PortfolioEdit: FC = () => {
     e.preventDefault();
     if (!portfolio) return;
 
-    updateField('isSubmitting', true);
+    updateField("isSubmitting", true);
     try {
       const formData = getFormData();
       await updatePortfolio.mutateAsync({
@@ -71,7 +71,7 @@ export const PortfolioEdit: FC = () => {
           about: formData.about || undefined,
           hook: formData.hook || undefined,
           skills: formData.skills.length > 0 ? formData.skills : undefined,
-          projets: formData.selectedProjects.map(id => ({ id })),
+          projets: formData.selectedProjects.map((id) => ({ id })),
           githubUrl: formData.githubUrl || undefined,
           linkedinUrl: formData.linkedinUrl || undefined,
           websiteUrl: formData.websiteUrl || undefined,
@@ -79,15 +79,16 @@ export const PortfolioEdit: FC = () => {
           cvDownloadUrl: formData.cvDownloadUrl || undefined,
           jobTitle: formData.jobTitle || undefined,
           isPublic: formData.isPublic,
+          customization: formData.customization,
         },
       });
 
       window.scrollTo(0, 0);
       navigate(`/portfolio/${portfolio.id}`);
     } catch (error) {
-      console.error('Error updating portfolio:', error);
+      console.error("Error updating portfolio:", error);
     } finally {
-      updateField('isSubmitting', false);
+      updateField("isSubmitting", false);
     }
   };
 
@@ -98,7 +99,7 @@ export const PortfolioEdit: FC = () => {
       await deletePortfolio.mutateAsync(portfolio.id);
       navigate(`/profil/${currentUser?.id}`);
     } catch (error) {
-      console.error('Error deleting portfolio:', error);
+      console.error("Error deleting portfolio:", error);
     } finally {
       setShowDeleteConfirm(false);
     }
@@ -114,9 +115,9 @@ export const PortfolioEdit: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
           <p className="text-gray-600">Chargement du portfolio...</p>
         </div>
       </div>
@@ -125,18 +126,18 @@ export const PortfolioEdit: FC = () => {
 
   if (error || !portfolio) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <h1 className="mb-4 text-2xl font-bold text-gray-900">
             Portfolio non trouvé
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-gray-600">
             Le portfolio que vous recherchez n&apos;existe pas ou a été
             supprimé.
           </p>
           <button
             onClick={() => navigate(-1)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
           >
             Retour
           </button>
@@ -146,10 +147,10 @@ export const PortfolioEdit: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
-      <div className="w-[90vw] mx-auto">
-        <div className="text-left mb-12">
-          <h1 className="text-4xl font-bold text-[#444ea5] mb-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
+      <div className="mx-auto w-[90vw]">
+        <div className="mb-12 text-left">
+          <h1 className="mb-4 text-4xl font-bold text-[#444ea5]">
             Modifier Votre Portfolio
           </h1>
           <p className="text-xl text-gray-600">
@@ -180,25 +181,25 @@ export const PortfolioEdit: FC = () => {
       </div>
 
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-[#e4003a] mb-4">
+        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur">
+          <div className="mx-4 w-full max-w-md rounded bg-white p-6">
+            <h3 className="mb-4 text-lg font-semibold text-[#e4003a]">
               Confirmer la suppression
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="mb-6 text-gray-600">
               Êtes-vous sûr de vouloir supprimer ce portfolio ? Cette action est
               irréversible.
             </p>
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer hover:text-gray-900"
+                className="cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
               >
                 Annuler
               </button>
               <button
                 onClick={handleDeletePortfolio}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors cursor-pointer"
+                className="cursor-pointer rounded bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
               >
                 Supprimer
               </button>

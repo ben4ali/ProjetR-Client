@@ -15,6 +15,198 @@ interface SilkTemplateProps {
   isPreview?: boolean;
 }
 
+const themeVariants = {
+  neutral: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-zinc-900/40",
+    silkColor: "#71717a",
+    silkTransition: "from-transparent via-transparent to-zinc-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-zinc-950",
+    buttonGradient: "from-zinc-700 to-zinc-800",
+    buttonHoverGradient: "from-zinc-700 to-zinc-900",
+    circularTextColor: "text-zinc-300",
+    yearMobileBackground: "bg-zinc-900/20",
+    yearMobileBorder: "border-zinc-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-zinc-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-zinc-500",
+    inbetweenBackground: "bg-zinc-950",
+    inbetweenTextColor: "text-zinc-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-zinc-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-zinc-700 to-zinc-800",
+    cornerText: "text-white",
+    footerBorder: "border-zinc-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-zinc-900/10",
+    projectHoverBorder: "hover:border-zinc-900",
+    projetTagBackground: "bg-zinc-900",
+    projetTagText: "text-white",
+  },
+  coral: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-teal-900/40",
+    silkColor: "#047857",
+    silkTransition: "from-transparent via-transparent to-emerald-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-emerald-950",
+    buttonGradient: "from-emerald-700 to-emerald-800",
+    buttonHoverGradient: "from-emerald-700 to-emerald-900",
+    circularTextColor: "text-emerald-300",
+    yearMobileBackground: "bg-emerald-900/20",
+    yearMobileBorder: "border-emerald-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-emerald-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-teal-500",
+    inbetweenBackground: "bg-emerald-950",
+    inbetweenTextColor: "text-emerald-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-emerald-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-emerald-700 to-emerald-800",
+    cornerText: "text-white",
+    footerBorder: "border-emerald-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-emerald-900/10",
+    projectHoverBorder: "hover:border-emerald-900",
+    projetTagBackground: "bg-emerald-900",
+    projetTagText: "text-white",
+  },
+  floral: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-pink-900/40",
+    silkColor: "#ec4899",
+    silkTransition: "from-transparent via-transparent to-pink-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-pink-950",
+    buttonGradient: "from-pink-700 to-pink-800",
+    buttonHoverGradient: "from-pink-700 to-pink-900",
+    circularTextColor: "text-pink-300",
+    yearMobileBackground: "bg-pink-900/20",
+    yearMobileBorder: "border-pink-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-pink-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-pink-500",
+    inbetweenBackground: "bg-pink-950",
+    inbetweenTextColor: "text-pink-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-pink-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-pink-700 to-pink-800",
+    cornerText: "text-white",
+    footerBorder: "border-pink-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-pink-900/10",
+    projectHoverBorder: "hover:border-pink-900",
+    projetTagBackground: "bg-pink-900",
+    projetTagText: "text-white",
+  },
+  ocean: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-blue-900/40",
+    silkColor: "#2563eb",
+    silkTransition: "from-transparent via-transparent to-blue-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-blue-950",
+    buttonGradient: "from-blue-700 to-blue-800",
+    buttonHoverGradient: "from-blue-700 to-blue-900",
+    circularTextColor: "text-blue-300",
+    yearMobileBackground: "bg-blue-900/20",
+    yearMobileBorder: "border-blue-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-blue-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-blue-500",
+    inbetweenBackground: "bg-blue-950",
+    inbetweenTextColor: "text-blue-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-blue-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-blue-700 to-blue-800",
+    cornerText: "text-white",
+    footerBorder: "border-blue-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-blue-900/10",
+    projectHoverBorder: "hover:border-blue-900",
+    projetTagBackground: "bg-blue-900",
+    projetTagText: "text-white",
+  },
+  heart: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-red-900/40",
+    silkColor: "#ef4444",
+    silkTransition: "from-transparent via-transparent to-red-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-red-950",
+    buttonGradient: "from-red-700 to-red-800",
+    buttonHoverGradient: "from-red-700 to-red-900",
+    circularTextColor: "text-red-300",
+    yearMobileBackground: "bg-red-900/20",
+    yearMobileBorder: "border-red-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-red-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-red-500",
+    inbetweenBackground: "bg-red-950",
+    inbetweenTextColor: "text-red-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-red-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-red-700 to-red-800",
+    cornerText: "text-white",
+    footerBorder: "border-red-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-red-900/10",
+    projectHoverBorder: "hover:border-red-900",
+    projetTagBackground: "bg-red-900",
+    projetTagText: "text-white",
+  },
+  sunny: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-yellow-900/40",
+    silkColor: "#f59e0b",
+    silkTransition: "from-transparent via-transparent to-yellow-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-yellow-950",
+    buttonGradient: "from-yellow-700 to-yellow-800",
+    buttonHoverGradient: "from-yellow-700 to-yellow-900",
+    circularTextColor: "text-yellow-300",
+    yearMobileBackground: "bg-yellow-900/20",
+    yearMobileBorder: "border-yellow-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-yellow-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-yellow-500",
+    inbetweenBackground: "bg-yellow-950",
+    inbetweenTextColor: "text-yellow-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-yellow-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-yellow-700 to-yellow-800",
+    cornerText: "text-white",
+    footerBorder: "border-yellow-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-yellow-900/10",
+    projectHoverBorder: "hover:border-yellow-900",
+    projetTagBackground: "bg-yellow-900",
+    projetTagText: "text-white",
+  },
+  amber: {
+    backgroundColor: "bg-zinc-800",
+    navBackgroundColor: "bg-amber-900/40",
+    silkColor: "#92400e",
+    silkTransition: "from-transparent via-transparent to-amber-950",
+    aboutTransition: "from-zinc-800 via-zinc-800 to-amber-950",
+    buttonGradient: "from-amber-700 to-amber-800",
+    buttonHoverGradient: "from-amber-700 to-amber-900",
+    circularTextColor: "text-amber-300",
+    yearMobileBackground: "bg-amber-900/20",
+    yearMobileBorder: "border-amber-300/30",
+    competenceTransition: "from-zinc-800 via-zinc-800 to-amber-950",
+    competenceBackground: "from-zinc-800/40 to-zinc-950/40",
+    competenceProgressColor: "bg-amber-500",
+    inbetweenBackground: "bg-amber-950",
+    inbetweenTextColor: "text-amber-100",
+    projectTransition: "from-zinc-800 via-zinc-800 to-amber-950",
+    contactBackground: "from-zinc-800/40 to-zinc-950/40",
+    cornerBackground: "from-amber-700 to-amber-800",
+    cornerText: "text-white",
+    footerBorder: "border-amber-900",
+    footerBackground: "bg-zinc-800",
+    projectHoverBackground: "hover:bg-amber-900/10",
+    projectHoverBorder: "hover:border-amber-900",
+    projetTagBackground: "bg-amber-900",
+    projetTagText: "text-white",
+  },
+};
+
 export const SilkTemplate: FC<SilkTemplateProps> = ({
   portfolio,
   isPreview = false,
@@ -30,17 +222,24 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
     yearsOfExperience,
     cvDownloadUrl,
     jobTitle,
+    customization,
   } = portfolio;
   const [selectedProject, setSelectedProject] = useState<null | Projet>(null);
 
+  const theme = customization?.theme || "coral";
+  const th =
+    themeVariants[theme as keyof typeof themeVariants] || themeVariants.coral;
+
   return (
     <div
-      className={`relative flex min-h-screen flex-col overflow-hidden bg-zinc-800 ${
+      className={`relative flex min-h-screen flex-col overflow-hidden ${th.backgroundColor} ${
         isPreview ? "origin-top scale-75" : ""
       }`}
     >
       {/* Nav */}
-      <nav className="fixed top-5 left-2 z-10 flex w-fit gap-3 rounded-lg bg-teal-900/40 p-4 px-6 text-white shadow-md backdrop-blur-lg sm:left-5">
+      <nav
+        className={`fixed top-5 left-2 z-10 flex w-fit gap-3 rounded-lg ${th.navBackgroundColor} p-4 px-6 text-white shadow-md backdrop-blur-lg sm:left-5`}
+      >
         {/* Avatar */}
         <a href="#hero" className="hidden items-center gap-4 sm:flex">
           <img
@@ -101,10 +300,12 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
               className="object-cover"
             />
           ) : (
-            <Silk color="#047857" />
+            <Silk color={th.silkColor} />
           )}
         </div>
-        <div className="absolute inset-0 z-4 bg-gradient-to-b from-transparent via-transparent to-emerald-950" />
+        <div
+          className={`absolute inset-0 z-4 bg-gradient-to-b ${th.silkTransition}`}
+        />
         <div className="flex items-center justify-center gap-4 text-white">
           <SplitText
             text={`${user.firstName} ${user.lastName}`}
@@ -141,7 +342,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
       </section>
       {/* About Section */}
       <section
-        className="relative bg-gradient-to-t from-zinc-800 via-zinc-800 to-emerald-950 py-10 text-white"
+        className={`relative bg-gradient-to-t ${th.aboutTransition} py-10 text-white`}
         id="a-propos"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8">
@@ -158,7 +359,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
               download={`${user.firstName}-${user.lastName}-CV.pdf`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block max-w-fit transform rounded-lg bg-gradient-to-r from-emerald-700 to-emerald-800 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-101 hover:from-emerald-700 hover:to-emerald-900"
+              className={`mt-4 inline-block max-w-fit transform rounded-lg bg-gradient-to-r ${th.buttonGradient} px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-101 ${th.buttonHoverGradient}`}
             >
               Télécharger mon CV
             </a>
@@ -179,15 +380,21 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
             <CircularText
               text="NOMBRES*D'ANNÉES*D'ÉXPÈRIENCES*"
               spinDuration={20}
-              className="size-full text-center text-sm text-emerald-300"
+              className={`size-full text-center text-sm ${th.circularTextColor}`}
             />
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-bold text-emerald-300">
+            <div
+              className={`pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-bold ${th.circularTextColor}`}
+            >
               {yearsOfExperience ? `${yearsOfExperience} ans` : "N/A"}
             </div>
           </div>
-          <div className="mt-6 block rounded-lg border border-emerald-300/30 bg-emerald-900/20 p-4 lg:hidden">
+          <div
+            className={`mt-6 block rounded-lg border p-4 lg:hidden ${th.yearMobileBackground} ${th.yearMobileBorder}`}
+          >
             <div className="text-center">
-              <div className="mb-2 text-3xl font-bold text-emerald-300 sm:text-4xl">
+              <div
+                className={`mb-2 text-3xl font-bold ${th.circularTextColor} sm:text-4xl`}
+              >
                 {yearsOfExperience ? `${yearsOfExperience} ans` : "N/A"}
               </div>
               <div className="text-sm text-gray-300 sm:text-base">
@@ -199,7 +406,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
       </section>
       {/* Compétences */}
       <section
-        className="relative bg-gradient-to-b from-zinc-800 via-zinc-800 to-emerald-950 py-10 text-white"
+        className={`relative bg-gradient-to-b ${th.competenceTransition} py-10 text-white`}
         id="competences"
       >
         <div className="mx-auto max-w-6xl px-4 py-8">
@@ -210,7 +417,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
             {skills?.map((skill, index) => (
               <motion.div
                 key={index}
-                className="relative rounded-lg bg-gradient-to-bl from-zinc-800/40 to-zinc-950/40 p-4 shadow-md backdrop-blur-lg transition-shadow duration-300 hover:shadow-lg"
+                className={`relative rounded-lg bg-gradient-to-bl ${th.competenceBackground} p-4 shadow-md backdrop-blur-lg transition-shadow duration-300 hover:shadow-lg`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{
                   opacity: 1,
@@ -227,7 +434,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
                 <h3 className="mb-2 text-xl font-semibold">{skill.name}</h3>
                 <div className="h-1 w-full overflow-hidden rounded-full bg-gray-700">
                   <motion.div
-                    className="h-full bg-teal-500"
+                    className={`h-full ${th.competenceProgressColor}`}
                     initial={{ width: 0 }}
                     whileInView={{
                       width: `${skill.level}%`,
@@ -264,15 +471,19 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           <CircularText
             text="PASSION*COMPÉTENCES*EXPÉRIENCE*"
             spinDuration={20}
-            className="size-full text-center text-sm text-emerald-300"
+            className={`size-full text-center text-sm ${th.circularTextColor}`}
           />
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-bold text-emerald-300">
+          <div
+            className={`pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-bold ${th.circularTextColor}`}
+          >
             {"< />"}
           </div>
         </div>
       </section>
       {/* Inbetween */}
-      <section className="relative bg-emerald-950 py-10 text-emerald-100">
+      <section
+        className={`relative ${th.inbetweenBackground} py-10 ${th.inbetweenTextColor}`}
+      >
         <ParallaxText baseVelocity={-1}>
           Passion * travail * créativité * innovation *&nbsp;
         </ParallaxText>
@@ -282,7 +493,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
       </section>
       {/* Projets */}
       <section
-        className="relative bg-gradient-to-t from-zinc-800 via-zinc-800 to-emerald-950 py-10 text-white"
+        className={`relative bg-gradient-to-t ${th.projectTransition} py-10 text-white`}
         id="projets"
       >
         <div className="mx-auto max-w-6xl px-4 py-8">
@@ -297,12 +508,14 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
           {projets.length === 0 && isPreview && (
             <SilkProjectList
               projets={MOCK_PROJECTS}
+              th={th}
               onProjectClick={(project) => setSelectedProject(project)}
             />
           )}
           {projets.length > 0 && (
             <SilkProjectList
               projets={projets}
+              th={th}
               onProjectClick={(project) => setSelectedProject(project)}
             />
           )}
@@ -311,7 +524,9 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
       {/* Contact */}
       <section className="relative mb-10 py-5 text-white" id="contact">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-8">
-          <div className="relative overflow-hidden rounded-lg bg-gradient-to-bl from-zinc-800/40 to-zinc-950/40 px-4 py-8 shadow-md">
+          <div
+            className={`relative overflow-hidden rounded-lg bg-gradient-to-bl ${th.contactBackground} px-4 py-8 shadow-md`}
+          >
             <div className="flex flex-col p-3">
               <h2 className="w-fit text-3xl font-bold">Travaillons Ensemble</h2>
               <ShinyText
@@ -325,7 +540,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-700 to-emerald-800 text-white shadow-lg transition-all duration-300 hover:scale-101 hover:from-emerald-700 hover:to-emerald-900"
+                  className={`flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r ${th.buttonGradient} text-white shadow-lg transition-all duration-300 hover:scale-101 ${th.buttonHoverGradient}`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 0.8 }}
@@ -348,7 +563,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-700 to-emerald-800 text-white shadow-lg transition-all duration-300 hover:scale-101 hover:from-emerald-700 hover:to-emerald-900"
+                  className={`flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r ${th.buttonGradient} text-white shadow-lg transition-all duration-300 hover:scale-101 ${th.buttonHoverGradient}`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 0.9 }}
@@ -369,7 +584,7 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
               {user.email && (
                 <motion.a
                   href={`mailto:${user.email}`}
-                  className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-700 to-emerald-800 text-white shadow-lg transition-all duration-300 hover:scale-101 hover:from-emerald-700 hover:to-emerald-900"
+                  className={`flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r ${th.buttonGradient} text-white shadow-lg transition-all duration-300 hover:scale-101 ${th.buttonHoverGradient}`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 1.0 }}
@@ -393,7 +608,9 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
                 </motion.a>
               )}
               <div className="absolute top-0 right-0 h-16 w-16">
-                <div className="absolute top-[35px] right-[-60px] flex w-[220px] rotate-45 transform items-center justify-center bg-gradient-to-r from-emerald-700 to-emerald-800 py-1 text-sm font-semibold text-white shadow-lg">
+                <div
+                  className={`absolute top-[35px] right-[-60px] flex w-[220px] rotate-45 transform items-center justify-center bg-gradient-to-r ${th.cornerBackground} py-1 text-sm font-semibold ${th.cornerText} shadow-lg`}
+                >
                   <p className="w-[90px] text-center">Satisfaction garantie</p>
                 </div>
               </div>
@@ -402,7 +619,9 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
         </div>
       </section>
       {/* footer - copyright */}
-      <footer className="mt-auto border-t border-emerald-900 bg-zinc-800 py-4 text-white">
+      <footer
+        className={`mt-auto border-t ${th.footerBorder} ${th.footerBackground} py-4 text-white`}
+      >
         <div className="mx-auto max-w-4xl px-4 text-center">
           <div className="flex flex-col items-center gap-2 text-sm">
             <div>
@@ -448,10 +667,15 @@ export const SilkTemplate: FC<SilkTemplateProps> = ({
 
 interface SilkProjectListProps {
   projets: Projet[];
+  th: typeof themeVariants.coral;
   onProjectClick: (project: Projet) => void;
 }
 
-function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
+function SilkProjectList({
+  projets,
+  th,
+  onProjectClick,
+}: SilkProjectListProps) {
   return (
     <div className="flex flex-col gap-10">
       {projets.map((project, index) => (
@@ -459,7 +683,7 @@ function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
           key={project.id}
           className={`flex cursor-pointer flex-col rounded-lg ${
             index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-          } items-start gap-8 border border-transparent p-5 transition-colors duration-200 hover:border-1 hover:border-emerald-900 hover:bg-emerald-900/10`}
+          } items-start gap-8 border border-transparent p-5 transition-colors duration-200 hover:border-1 ${th.projectHoverBorder} ${th.projectHoverBackground}`}
           onClick={() => onProjectClick(project)}
           initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -479,7 +703,7 @@ function SilkProjectList({ projets, onProjectClick }: SilkProjectListProps) {
               {project.tags.map((tag, tagIndex) => (
                 <span
                   key={tagIndex}
-                  className="rounded-full bg-emerald-900 px-3 py-1 text-sm text-white"
+                  className={`rounded-full ${th.projetTagBackground} px-3 py-1 text-sm ${th.projetTagText}`}
                 >
                   {tag}
                 </span>
