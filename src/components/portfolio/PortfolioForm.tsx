@@ -89,6 +89,8 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
       "Univers rétro gaming avec esthétique 8-bit et animations pixel art",
     [PORTFOLIO_TEMPLATES.SILK]:
       "Design fluide basé sur la soie avec animations modernes",
+    [PORTFOLIO_TEMPLATES.RONDURE]:
+      "Design rond et doux avec des animations fluides et une esthétique apaisante",
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
@@ -109,6 +111,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
     [PORTFOLIO_TEMPLATES.CARTOON]: `/templates/${PORTFOLIO_TEMPLATES.CARTOON}.png`,
     [PORTFOLIO_TEMPLATES.PIXEL]: `/templates/${PORTFOLIO_TEMPLATES.PIXEL}.png`,
     [PORTFOLIO_TEMPLATES.SILK]: `/templates/${PORTFOLIO_TEMPLATES.SILK}.png`,
+    [PORTFOLIO_TEMPLATES.RONDURE]: `/templates/${PORTFOLIO_TEMPLATES.RONDURE}.png`,
   };
 
   return (

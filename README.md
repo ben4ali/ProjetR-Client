@@ -122,7 +122,7 @@ async function verifyIdToken(idToken) {
 
 ## Fonctionnalités
 
-### ✅ Fonctionnalités opérationnelles
+### Fonctionnalités opérationnelles
 
 - **Connexion Google via Firebase** : Authentification par popup
 - **Design de bouton personnalisé** : Boutons de connexion Google stylisés
@@ -131,14 +131,14 @@ async function verifyIdToken(idToken) {
 - **Intégration backend** : Envoi des jetons Firebase ID à votre API
 - **Gestion de l'état d'auth** : Contexte React pour l'état d'authentification
 
-### 🔧 Notes de développement
+### Notes de développement
 
 - L'ancien code Google Identity API a été remplacé
 - Les variables d'environnement sont correctement structurées
 - Le SDK Firebase gère automatiquement le rafraîchissement des jetons
 - L'état d'authentification persiste après un rafraîchissement de la page
 
-### 🚀 Liste de vérification pour le déploiement
+### Liste de vérification pour le déploiement
 
 1. Configurez le projet Firebase avec le bon domaine
 2. Ajoutez le domaine de production aux origines OAuth autorisées

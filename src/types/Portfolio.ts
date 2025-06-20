@@ -19,6 +19,7 @@ export const PORTFOLIO_TEMPLATES = {
   CARTOON: "cartoon",
   PIXEL: "pixel",
   SILK: "silk",
+  RONDURE: "rondure",
 } as const;
 
 export type PortfolioTemplate =

@@ -13,5 +13,7 @@ export { NeuralTemplate } from "./NeuralTemplate";
 export { PixelTemplate } from "./PixelTemplate";
 export { PrismTemplate } from "./PrismTemplate";
 export { QuantumTemplate } from "./QuantumTemplate";
+export { RondureTemplate } from "./RondureTemplate";
 export { SamuraiTemplate } from "./SamuraiTemplate";
 export { SilkTemplate } from "./SilkTemplate";
+

@@ -18,8 +18,9 @@ import {
   PixelTemplate,
   PrismTemplate,
   QuantumTemplate,
+  RondureTemplate,
   SamuraiTemplate,
-  SilkTemplate,
+  SilkTemplate
 } from "./templates";
 
 interface TemplatePreviewDialogProps {
@@ -82,6 +83,8 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <PixelTemplate {...templateProps} />;
       case "silk":
         return <SilkTemplate {...templateProps} />;
+      case "rondure":
+        return <RondureTemplate {...templateProps} />;
       default:
         return <div className="p-8 text-center">Template not found</div>;
     }

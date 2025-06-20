@@ -1,27 +1,28 @@
 import { FC } from "react";
+import { useParams } from "react-router-dom";
+import {
+  CartoonTemplate,
+  ClassicTemplate,
+  CreativeTemplate,
+  CupertinoTemplate,
+  DesignerTemplate,
+  DeveloperTemplate,
+  HologramTemplate,
+  MatrixTemplate,
+  MeteorTemplate,
+  MinimalistTemplate,
+  ModernTemplate,
+  NeuralTemplate,
+  PixelTemplate,
+  PrismTemplate,
+  QuantumTemplate,
+  RondureTemplate,
+  SamuraiTemplate,
+  SilkTemplate
+} from "../components/portfolio/templates";
 import { useCurrentUser } from "../hooks/use-auth";
 import { useProjectsByUserId } from "../hooks/use-project";
 import { createMockPortfolio, PortfolioTemplate } from "../types/Portfolio";
-import { useParams } from "react-router-dom";
-import {
-  ModernTemplate,
-  ClassicTemplate,
-  CreativeTemplate,
-  MinimalistTemplate,
-  DeveloperTemplate,
-  DesignerTemplate,
-  NeuralTemplate,
-  PrismTemplate,
-  CupertinoTemplate,
-  QuantumTemplate,
-  MeteorTemplate,
-  HologramTemplate,
-  SamuraiTemplate,
-  MatrixTemplate,
-  CartoonTemplate,
-  PixelTemplate,
-  SilkTemplate,
-} from "../components/portfolio/templates";
 
 export const FullPortfolioPreview: FC = () => {
   const { data: user } = useCurrentUser();
@@ -74,6 +75,8 @@ export const FullPortfolioPreview: FC = () => {
       return <PixelTemplate {...templateProps} />;
     case "silk":
       return <SilkTemplate {...templateProps} />;
+    case "rondure":
+      return <RondureTemplate {...templateProps} />;
     default:
       return <div className="p-8 text-center">Template not found</div>;
   }
