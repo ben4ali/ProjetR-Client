@@ -30,7 +30,7 @@ const LIGHT_CONFIG = {
 
 const ANIMATION_CONFIG = {
   LERP_SPEED: 0.05,
-  FADE_OUT_SPEED: 0.2,
+  FADE_OUT_SPEED: 0.05,
   FADE_IN_SPEED: 0.05,
   ROTATION_SPEED_X: 0.0,
   ROTATION_SPEED_Y: 0.0,
@@ -41,13 +41,13 @@ const GEOMETRY_CONFIG = {
   TORUS_RADIUS: 1.8,
   TORUS_TUBE: 0.5,
   TORUS_TUBULAR_SEGMENTS: 100,
-  TORUS_RADIAL_SEGMENTS: 17,
+  TORUS_RADIAL_SEGMENTS: 25,
   TORUS_P: 2,
   TORUS_Q: 3,
 };
 
 const MATERIAL_CONFIG = {
-  METALNESS: 0.999,
+  METALNESS: 0.99999,
   ROUGHNESS: 0.05,
   COLOR: 0xffffff,
   CLEARCOAT: 1.0,
@@ -64,13 +64,14 @@ const EFFECTS_CONFIG = {
   FOV: 75,
   CAMERA_NEAR: 0.1,
   CAMERA_FAR: 1000,
-  CAMERA_POSITION: { x: -4, y: 0, z: 7 },
+  CAMERA_POSITION: { x: -3.3, y: 0, z: 6.7 },
 };
 
 const ChromeSculpture: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const mouseInsideRef = useRef(true);
+  const blurRef = useRef(0);
   const lightTargets = useRef({
     keyLight: { x: 5, y: 5, z: 5 },
     fillLight: { x: -5, y: -5, z: 3 },
@@ -112,6 +113,11 @@ const ChromeSculpture: React.FC = () => {
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     currentMount.appendChild(renderer.domElement);
+
+    // Initialize blur effect
+    currentMount.style.filter = `blur(${blurRef.current}px)`;
+    currentMount.style.webkitFilter = `blur(${blurRef.current}px)`;
+
     const composer = new EffectComposer(renderer);
 
     const renderPass = new RenderPass(scene, camera);
@@ -210,6 +216,18 @@ const ChromeSculpture: React.FC = () => {
       const normalizedDistance = Math.min(distanceFromCenter / Math.sqrt(2), 1);
       const intensityMultiplier = 1 - normalizedDistance;
       const isMouseInside = mouseInsideRef.current;
+
+      // Calculate blur based on distance from center
+      // When mouse is at center (on shape): blur = 0px
+      // When mouse is at edge or outside: blur = 2.5px
+      const targetBlur = isMouseInside ? normalizedDistance * 1.5 : 1.5;
+      blurRef.current += (targetBlur - blurRef.current) * 0.1; // Smooth transition
+
+      // Update the DOM element's blur filter
+      if (currentMount) {
+        currentMount.style.filter = `blur(${blurRef.current}px)`;
+        currentMount.style.webkitFilter = `blur(${blurRef.current}px)`;
+      }
 
       if (isMouseInside) {
         intensityTargets.current.keyLight =
@@ -331,13 +349,7 @@ const ChromeSculpture: React.FC = () => {
       renderer.dispose();
     };
   }, []);
-
-  return (
-    <div
-      ref={mountRef}
-      className="h-full w-full cursor-grab active:cursor-grabbing"
-    />
-  );
+  return <div ref={mountRef} className="h-full w-full" />;
 };
 
 export default ChromeSculpture;
