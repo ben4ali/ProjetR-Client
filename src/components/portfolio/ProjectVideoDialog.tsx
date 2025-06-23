@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from "react";
 import { Projet } from "../../types/Projet";
+import { motion } from "framer-motion";
 
 type DialogVariant =
   | "modern"
@@ -47,7 +48,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
     switch (variant) {
       case "modern":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white rounded-lg shadow-2xl",
           header: "border-b border-purple-500/30 bg-slate-800/50",
@@ -63,7 +64,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "classic":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-white text-gray-900 rounded-lg shadow-2xl border-2 border-gray-200",
           header: "border-b border-gray-200 bg-gray-50",
@@ -79,7 +80,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "creative":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-gradient-to-br from-pink-500/10 via-purple-600/10 to-blue-600/10 backdrop-blur-sm text-white rounded-2xl shadow-2xl border border-pink-300/20",
           header:
@@ -99,7 +100,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "minimalist":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-white text-gray-900 rounded shadow-xl border border-gray-100",
           header: "border-b border-gray-100 bg-white",
@@ -116,7 +117,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "developer":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-gray-900 text-green-400 rounded border border-gray-700 shadow-2xl font-mono",
           header: "border-b border-gray-700 bg-gray-800",
@@ -133,7 +134,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "designer":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container: "bg-white text-gray-900 rounded-2xl shadow-2xl",
           header: "border-b border-gray-100 bg-gray-50",
           title: "text-2xl font-light text-gray-900 tracking-tight",
@@ -149,7 +150,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "neural":
         return {
-          overlay: "bg-black bg-opacity-90",
+          overlay: "bg-black/90",
           container:
             "bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-blue-400/20",
           header: "border-b border-blue-400/30 bg-gray-800/50",
@@ -166,7 +167,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "prism":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-white/10 backdrop-blur-xl text-white rounded-3xl shadow-2xl border border-white/20",
           header: "border-b border-white/20 bg-white/5",
@@ -183,7 +184,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "cupertino":
         return {
-          overlay: "bg-black bg-opacity-50",
+          overlay: "bg-black/50",
           container: "bg-white text-gray-900 rounded-3xl shadow-2xl",
           header: "border-b border-gray-100 bg-gray-50/50",
           title: "text-2xl font-semibold text-gray-900 tracking-tight",
@@ -198,7 +199,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "quantum":
         return {
-          overlay: "bg-black bg-opacity-90",
+          overlay: "bg-black/90",
           container:
             "bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-cyan-400/30",
           header: "border-b border-cyan-400/30 bg-gray-800/50",
@@ -215,7 +216,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "meteor":
         return {
-          overlay: "bg-black bg-opacity-90",
+          overlay: "bg-black/90",
           container:
             "bg-gradient-to-br from-gray-900 via-orange-900 to-gray-900 text-white rounded-2xl shadow-2xl border border-orange-400/30",
           header: "border-b border-orange-400/30 bg-gray-800/50",
@@ -232,7 +233,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "hologram":
         return {
-          overlay: "bg-black bg-opacity-95",
+          overlay: "bg-black/95",
           container:
             "bg-black/90 text-cyan-400 rounded-lg shadow-2xl border border-cyan-400/50 backdrop-blur-sm font-mono",
           header: "border-b border-cyan-400/50 bg-black/50",
@@ -250,7 +251,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "samurai":
         return {
-          overlay: "bg-black bg-opacity-90",
+          overlay: "bg-black/90",
           container:
             "bg-gradient-to-br from-red-950 to-black text-white rounded-lg shadow-2xl border border-red-600/50",
           header: "border-b border-red-600/30 bg-red-950/50",
@@ -267,7 +268,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "matrix":
         return {
-          overlay: "bg-black bg-opacity-95",
+          overlay: "bg-black/95",
           container:
             "bg-black text-green-400 rounded-lg shadow-2xl border border-green-400/50 font-mono",
           header: "border-b border-green-400/30 bg-black/80",
@@ -303,7 +304,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "pixel":
         return {
-          overlay: "bg-black bg-opacity-90",
+          overlay: "bg-black/90",
           container:
             "bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-green-400 rounded-lg shadow-2xl border-2 border-green-400/50 font-mono",
           header: "border-b-2 border-green-400/50 bg-black/80",
@@ -323,7 +324,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
       case "silk":
         return {
-          overlay: "bg-black bg-opacity-75",
+          overlay: "bg-black/75",
           container:
             "bg-zinc-950 text-white rounded-lg shadow-2xl border border-zinc-900",
           header:
@@ -358,14 +359,23 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
   const styles = getVariantStyles();
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex items-center justify-center"
+    >
       <div
-        className={`absolute inset-0 ${styles.overlay}`}
+        className={`absolute inset-0 ${styles.overlay} backdrop-blur-md`}
         onClick={onClose}
-      ></div>
-
-      <div
-        className={`relative ${styles.container} mx-4 max-h-[90vh] w-full max-w-4xl overflow-hidden`}
+      />
+      <motion.div
+        animate={{ scale: 1, opacity: 1 }}
+        initial={{ scale: 0, opacity: 0 }}
+        exit={{ scale: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2 }}
+        className={`relative ${styles.container} mx-4 max-h-[90vh] w-auto max-w-3xl overflow-hidden`}
       >
         <div
           className={`flex items-center justify-between p-6 ${styles.header}`}
@@ -393,7 +403,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
 
         <div className={`p-6 ${styles.content}`}>
           {project.demoUrl ? (
-            <div className="mb-6 aspect-video">
+            <div className="mx-auto mb-6 aspect-video max-h-100">
               <video
                 ref={videoRef}
                 className="h-full w-full rounded-lg bg-black object-contain"
@@ -502,7 +512,7 @@ export const ProjectVideoDialog: FC<ProjectVideoDialogProps> = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
