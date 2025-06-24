@@ -12,7 +12,10 @@ interface HeroSectionProps {
 
 export const HeroSection: FC<HeroSectionProps> = ({ fullName, jobTitle }) => {
   return (
-    <section className="relative flex h-[100vh] w-full items-center justify-center">
+    <section
+      id="hero"
+      className="relative flex h-[100vh] w-full items-center justify-center"
+    >
       <div className="absolute inset-0 z-0 flex items-center justify-center">
         <Squares
           speed={0.5}
@@ -83,7 +86,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ fullName, jobTitle }) => {
           duration: 3,
           ease: [0.68, -0.55, 0.27, 1.55],
         }}
-        style={{ display: "none" }}
+        // style={{ display: "none" }}
       >
         <ChromeSculpture />
       </motion.div>

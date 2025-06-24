@@ -66,7 +66,7 @@ export const SkillsSection: FC<SkillsSectionProps> = ({ skills }) => {
       <div className="relative z-10 mx-auto flex w-[65%] flex-col">
         <div className="mb-16 flex flex-col items-center">
           <GradientText
-            text="Mes compétences"
+            text="Compétences"
             variant="rondure"
             className="text-center text-5xl font-bold!"
           />

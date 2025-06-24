@@ -1,6 +1,6 @@
 // src/components/ChromeSculpture.tsx
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
@@ -72,6 +72,8 @@ const ChromeSculpture: React.FC = () => {
   const mouseRef = useRef({ x: 0, y: 0 });
   const mouseInsideRef = useRef(true);
   const blurRef = useRef(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const animationFrameRef = useRef<number | null>(null);
   const lightTargets = useRef({
     keyLight: { x: 5, y: 5, z: 5 },
     fillLight: { x: -5, y: -5, z: 3 },
@@ -208,7 +210,13 @@ const ChromeSculpture: React.FC = () => {
     currentMount.addEventListener("mouseenter", handleMouseEnter);
     currentMount.addEventListener("mouseleave", handleMouseLeave);
     const animate = () => {
-      requestAnimationFrame(animate);
+      // Arrêter l'animation si le composant n'est pas visible
+      if (!isVisible) {
+        animationFrameRef.current = null;
+        return;
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animate);
 
       const mouseX = mouseRef.current.x;
       const mouseY = mouseRef.current.y;
@@ -310,10 +318,13 @@ const ChromeSculpture: React.FC = () => {
         (lightTargets.current.rimLight.y - rimLight.position.y) * lerpFactor;
       rimLight.position.z +=
         (lightTargets.current.rimLight.z - rimLight.position.z) * lerpFactor;
-
       composer.render();
     };
-    animate();
+
+    // Démarrer l'animation seulement si visible
+    if (isVisible) {
+      animate();
+    }
 
     const handleResize = () => {
       if (!currentMount) return;
@@ -330,8 +341,11 @@ const ChromeSculpture: React.FC = () => {
     };
 
     window.addEventListener("resize", handleResize);
-
     return () => {
+      // Nettoyer l'animation frame
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
       window.removeEventListener("resize", handleResize);
       if (currentMount) {
         currentMount.removeEventListener("mousemove", handleMouseMove);
@@ -348,7 +362,41 @@ const ChromeSculpture: React.FC = () => {
       composer.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [isVisible]);
+
+  // Intersection Observer pour détecter si l'utilisateur est dans la section hero
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1, // Se déclenche quand 10% de l'élément est visible
+        rootMargin: "-50px", // Marge pour détecter plus tôt la sortie
+      },
+    );
+
+    if (mountRef.current) {
+      observer.observe(mountRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []); // Redémarrer l'animation quand la visibilité change
+  useEffect(() => {
+    // Obtenir une référence à la fonction animate depuis le useEffect principal
+    const animateRef = animationFrameRef.current;
+
+    if (isVisible && !animateRef) {
+      // Relancer l'animation - mais on a besoin d'une référence à la fonction animate
+      // Cette partie sera gérée par le useEffect principal
+    } else if (!isVisible && animateRef) {
+      // Arrêter l'animation si non visible
+      cancelAnimationFrame(animateRef);
+      animationFrameRef.current = null;
+    }
+  }, [isVisible]);
   return <div ref={mountRef} className="h-full w-full" />;
 };
 
