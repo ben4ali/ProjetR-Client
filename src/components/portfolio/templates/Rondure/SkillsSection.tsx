@@ -64,13 +64,13 @@ export const SkillsSection: FC<SkillsSectionProps> = ({ skills }) => {
         }}
       />
       <div className="relative z-10 mx-auto flex w-[65%] flex-col">
-        <div className="mb-16 flex flex-col items-center">
+        <div className="items-left mb-16 flex flex-col">
           <GradientText
             text="Compétences"
             variant="rondure"
-            className="text-center text-5xl font-bold!"
+            className="text-left text-5xl font-bold!"
           />
-          <p className="mt-4 text-center text-xl text-neutral-400">
+          <p className="mt-4 text-left text-xl text-neutral-400">
             Technologies et outils que je maîtrise
           </p>
         </div>

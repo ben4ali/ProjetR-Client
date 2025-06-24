@@ -208,13 +208,13 @@ export const ProjectsSection: FC<ProjectsSectionProps> = ({ projets }) => {
         }}
       >
         <div className="mx-auto flex w-full max-w-7xl flex-col">
-          <div className="mb-16 flex flex-col items-center">
+          <div className="items-left mb-16 flex flex-col">
             <GradientText
               text="Projets"
               variant="rondure"
-              className="text-center text-5xl font-bold!"
+              className="text-left text-5xl font-bold!"
             />
-            <p className="mt-4 text-center text-xl text-neutral-400">
+            <p className="mt-4 text-left text-xl text-neutral-400">
               Découvrez mes réalisations et créations
             </p>
           </div>

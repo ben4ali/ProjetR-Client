@@ -1,6 +1,7 @@
 import { FC } from "react";
 import type { Portfolio } from "../../../types/Portfolio";
 import AboutSection from "./Rondure/AboutSection";
+import ContactSection from "./Rondure/ContactSection";
 import Header from "./Rondure/Header";
 import HeroSection from "./Rondure/HeroSection";
 import ProjectsSection from "./Rondure/ProjectsSection";
@@ -23,6 +24,9 @@ export const RondureTemplate: FC<RondureTemplateProps> = ({
     yearsOfExperience,
     cvDownloadUrl,
     jobTitle,
+    githubUrl,
+    linkedinUrl,
+    websiteUrl,
   } = portfolio;
   const fullName = `${user.firstName} ${user.lastName}`;
 
@@ -43,9 +47,15 @@ export const RondureTemplate: FC<RondureTemplateProps> = ({
         skills={skills}
         yearsOfExperience={yearsOfExperience || 0}
         cvDownloadUrl={cvDownloadUrl}
-      />
+      />{" "}
       <SkillsSection skills={skills} />
       <ProjectsSection projets={projets} />
+      <ContactSection
+        user={user}
+        githubUrl={githubUrl}
+        linkedinUrl={linkedinUrl}
+        websiteUrl={websiteUrl}
+      />
       <footer></footer>
     </div>
   );
