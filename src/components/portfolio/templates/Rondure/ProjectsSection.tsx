@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Github, Gitlab, Video } from "lucide-react";
 import { FC, useState } from "react";
 import Slider from "react-slick";
@@ -98,12 +99,20 @@ const ProjectCard: FC<{
   isActive?: boolean;
 }> = ({ projet, onClick, isActive = false }) => {
   return (
-    <div
+    <motion.div
       className={`group relative cursor-pointer overflow-hidden rounded-2xl border border-neutral-800 transition-all duration-300 hover:border-neutral-600 ${
         isActive ? "mx-4 scale-105" : "mx-2"
       }`}
       onClick={onClick}
       style={{ height: "300px" }}
+      whileHover={{
+        scale: 1.05,
+        transition: { duration: 0.3 },
+      }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {" "}
       <div className="absolute inset-0">
@@ -155,10 +164,10 @@ const ProjectCard: FC<{
               </span>
             )}
           </div>
-        )}
+        )}{" "}
       </div>
       <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-    </div>
+    </motion.div>
   );
 };
 
@@ -196,30 +205,51 @@ export const ProjectsSection: FC<ProjectsSectionProps> = ({ projets }) => {
   if (projets.length === 0) {
     return null;
   }
-
   return (
     <>
-      <section
+      <motion.section
         id="projets"
         className="relative flex w-full items-center justify-center"
         style={{
           background: "linear-gradient(180deg, rgb(2,2,2) 0%, rgb(6,6,6) 100%)",
           paddingBlock: "8rem",
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
       >
         <div className="mx-auto flex w-full max-w-7xl flex-col">
-          <div className="items-left mb-16 flex flex-col">
+          <motion.div
+            className="items-left mb-16 flex flex-col"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <GradientText
               text="Projets"
               variant="rondure"
               className="text-left text-5xl font-bold!"
             />
-            <p className="mt-4 text-left text-xl text-neutral-400">
+            <motion.p
+              className="mt-4 text-left text-xl text-neutral-400"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
               Découvrez mes réalisations et créations
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="carousel-container">
+          <motion.div
+            className="carousel-container"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          >
             <Slider {...settings}>
               {projets.map((projet) => (
                 <ProjectCard
@@ -229,9 +259,9 @@ export const ProjectsSection: FC<ProjectsSectionProps> = ({ projets }) => {
                 />
               ))}
             </Slider>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
       <ProjectDialog
         projet={selectedProject!}
         isOpen={!!selectedProject}
