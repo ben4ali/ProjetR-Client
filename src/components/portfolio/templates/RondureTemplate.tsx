@@ -3,6 +3,7 @@ import type { Portfolio } from "../../../types/Portfolio";
 import AboutSection from "./Rondure/AboutSection";
 import Header from "./Rondure/Header";
 import HeroSection from "./Rondure/HeroSection";
+import ProjectsSection from "./Rondure/ProjectsSection";
 import SkillsSection from "./Rondure/SkillsSection";
 import "./Rondure/style-rondure.css";
 interface RondureTemplateProps {
@@ -44,6 +45,7 @@ export const RondureTemplate: FC<RondureTemplateProps> = ({
         cvDownloadUrl={cvDownloadUrl}
       />
       <SkillsSection skills={skills} />
+      <ProjectsSection projets={projets} />
       <footer></footer>
     </div>
   );

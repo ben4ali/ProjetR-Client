@@ -1,83 +1,48 @@
-/*
-	Installed from https://reactbits.dev/ts/tailwind/
-*/
+import React from "react";
+import "./GradientText.css";
 
-import React, { ReactNode } from "react";
-
-interface GradientTextProps {
-  children: ReactNode;
+export interface GradientTextProps {
+  text?: string;
+  variant?: "sunset" | "aqua" | "rainbow" | "fire" | "purple" | "rondure";
   className?: string;
-  colors?: string[];
-  animationSpeed?: number;
-  showBorder?: boolean;
+  animate?: boolean;
 }
 
-export default function GradientText({
-  children,
+const gradients: Record<string, string> = {
+  sunset: "linear-gradient(90deg, #ff5858 0%, #f09819 100%)",
+  aqua: "linear-gradient(90deg, #43cea2 0%, #185a9d 100%)",
+  rainbow:
+    "linear-gradient(90deg, #ff5858 0%, #f09819 20%, #43cea2 40%, #185a9d 60%, #a770ef 80%, #f09819 100%)",
+  fire: "linear-gradient(90deg, #ff512f 0%, #dd2476 100%)",
+  purple: "linear-gradient(90deg, #a770ef 0%, #f6d365 100%)",
+  rondure:
+    "linear-gradient(90deg, rgb(204,204,204) 0%, rgb(230,230,250) 20%, rgb(104,104,144) 60%, rgb(205,205,255) 100%)",
+};
+
+const GradientText: React.FC<GradientTextProps> = ({
+  text = "Gradient Text",
+  variant = "sunset",
   className = "",
-  colors = ["#ffaa40", "#9c40ff", "#ffaa40"],
-  animationSpeed = 8,
-  showBorder = false,
-}: GradientTextProps) {
-  const gradientStyle = {
-    backgroundImage: `linear-gradient(to right, ${colors.join(", ")})`,
-    animationDuration: `${animationSpeed}s`,
-  };
-
+  animate = false,
+}) => {
   return (
-    <div
-      className={`relative mx-auto flex max-w-fit cursor-pointer flex-row items-center justify-center overflow-hidden rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 ${className}`}
+    <span
+      className={`gradient-text ${className} ${
+        animate ? "gradient-animate" : ""
+      }`}
+      key={variant + text + animate}
+      style={{
+        background: gradients[variant],
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        color: "transparent",
+        display: "inline-block",
+      }}
     >
-      {showBorder && (
-        <div
-          className="animate-gradient pointer-events-none absolute inset-0 z-0 bg-cover"
-          style={{
-            ...gradientStyle,
-            backgroundSize: "300% 100%",
-          }}
-        >
-          <div
-            className="absolute inset-0 z-[-1] rounded-[1.25rem] bg-black"
-            style={{
-              width: "calc(100% - 2px)",
-              height: "calc(100% - 2px)",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          ></div>
-        </div>
-      )}
-      <div
-        className="animate-gradient relative z-2 inline-block bg-cover text-transparent"
-        style={{
-          ...gradientStyle,
-          backgroundClip: "text",
-          WebkitBackgroundClip: "text",
-          backgroundSize: "300% 100%",
-        }}
-      >
-        {children}
-      </div>
-    </div>
+      {text}
+    </span>
   );
-}
+};
 
-// tailwind.config.js
-// module.exports = {
-//   theme: {
-//     extend: {
-//       keyframes: {
-//         gradient: {
-//           '0%': { backgroundPosition: '0% 50%' },
-//           '50%': { backgroundPosition: '100% 50%' },
-//           '100%': { backgroundPosition: '0% 50%' },
-//         },
-//       },
-//       animation: {
-//         gradient: 'gradient 8s linear infinite'
-//       },
-//     },
-//   },
-//   plugins: [],
-// };
+export default GradientText;

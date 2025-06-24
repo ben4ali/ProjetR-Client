@@ -31,19 +31,11 @@ export const AboutSection: FC<AboutSectionProps> = ({
       <div className="mx-auto flex w-[65%] flex-col">
         <div className="mb-15 flex flex-col items-center">
           <GradientText
-            colors={[
-              "rgb(204,204,204)",
-              "rgb(70,70,100)",
-              "rgb(230,230,250)",
-              "rgb(64,64,94)",
-              "rgb(205,205,255)",
-            ]}
-            animationSpeed={0}
-            showBorder={false}
+            variant="rondure"
+            text="Qui je suis, en quelques mots."
             className="text-center text-5xl font-bold!"
-          >
-            Qui je suis, en quelques mots.
-          </GradientText>
+          />
+
           <p className="mt-4 text-center text-xl text-neutral-400">
             Tout ce qu'il faut savoir sur moi, mon parcours et mes intérêts.
           </p>
@@ -67,19 +59,10 @@ export const AboutSection: FC<AboutSectionProps> = ({
               <div className="absolute bottom-5 left-5 flex flex-col p-5">
                 <span className="text-7xl font-semibold text-neutral-400">
                   <GradientText
-                    colors={[
-                      "rgb(204,204,204)",
-                      "rgb(70,70,100)",
-                      "rgb(230,230,250)",
-                      "rgb(64,64,94)",
-                      "rgb(205,205,255)",
-                    ]}
-                    animationSpeed={0}
-                    showBorder={false}
+                    text={projets.length + "+"}
+                    variant="rondure"
                     className="mx-0! text-left text-7xl font-semibold text-neutral-400"
-                  >
-                    {projets.length}+
-                  </GradientText>
+                  />
                 </span>
                 <span className="mt-2 text-4xl font-semibold text-white">
                   Projets réalisés
@@ -92,19 +75,11 @@ export const AboutSection: FC<AboutSectionProps> = ({
             <div className="relative h-[55%] rounded-2xl border border-neutral-800">
               <div className="absolute bottom-5 left-5 flex flex-col p-5">
                 <GradientText
-                  colors={[
-                    "rgb(204,204,204)",
-                    "rgb(70,70,100)",
-                    "rgb(230,230,250)",
-                    "rgb(64,64,94)",
-                    "rgb(205,205,255)",
-                  ]}
-                  animationSpeed={0}
-                  showBorder={false}
+                  text={yearsOfExperience + "+"}
+                  variant="rondure"
                   className="mx-0! text-left text-7xl font-semibold text-neutral-400"
-                >
-                  {yearsOfExperience}+
-                </GradientText>
+                />
+
                 <span className="mt-2 text-4xl font-semibold text-white">
                   Années d'expérience
                 </span>
@@ -118,19 +93,11 @@ export const AboutSection: FC<AboutSectionProps> = ({
             {/* skills */}
             <div className="absolute bottom-5 left-5 flex flex-col p-5">
               <GradientText
-                colors={[
-                  "rgb(204,204,204)",
-                  "rgb(70,70,100)",
-                  "rgb(230,230,250)",
-                  "rgb(64,64,94)",
-                  "rgb(205,205,255)",
-                ]}
-                animationSpeed={0}
-                showBorder={false}
+                text={skills.length + "+"}
+                variant="rondure"
                 className="mx-0! text-left text-7xl font-semibold text-neutral-400"
-              >
-                {skills.length}+
-              </GradientText>
+              />
+
               <span className="mt-2 text-4xl font-semibold text-white">
                 Compétences
               </span>

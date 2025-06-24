@@ -66,19 +66,10 @@ export const SkillsSection: FC<SkillsSectionProps> = ({ skills }) => {
       <div className="relative z-10 mx-auto flex w-[65%] flex-col">
         <div className="mb-16 flex flex-col items-center">
           <GradientText
-            colors={[
-              "rgb(204,204,204)",
-              "rgb(70,70,100)",
-              "rgb(230,230,250)",
-              "rgb(64,64,94)",
-              "rgb(205,205,255)",
-            ]}
-            animationSpeed={0}
-            showBorder={false}
+            text="Mes compétences"
+            variant="rondure"
             className="text-center text-5xl font-bold!"
-          >
-            Mes compétences
-          </GradientText>
+          />
           <p className="mt-4 text-center text-xl text-neutral-400">
             Technologies et outils que je maîtrise
           </p>

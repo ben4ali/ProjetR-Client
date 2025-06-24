@@ -1,0 +1,27 @@
+.gradient-text {
+  width: fit-content;
+  transition: background 0.4s cubic-bezier(0.25,1,0.5,1);
+}
+
+.gradient-animate {
+  background-size: 300% 100% !important;
+  animation: gradient-move 4s linear infinite;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  will-change: background-position;
+  transform: translateZ(0);
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

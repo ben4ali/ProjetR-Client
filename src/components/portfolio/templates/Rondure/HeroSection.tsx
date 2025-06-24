@@ -83,6 +83,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ fullName, jobTitle }) => {
           duration: 3,
           ease: [0.68, -0.55, 0.27, 1.55],
         }}
+        style={{ display: "none" }}
       >
         <ChromeSculpture />
       </motion.div>
