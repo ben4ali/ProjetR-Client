@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useFirebaseGoogleLogin,
   useGoogleLogin,
   useSignup,
-} from '../../hooks/use-auth';
+} from "../../hooks/use-auth";
 
 interface SignupProps {
   toggleForm: () => void;
 }
 
 export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const signupMutation = useSignup();
   const firebaseGoogleLoginMutation = useFirebaseGoogleLogin();
   const googleLoginMutation = useGoogleLogin();
@@ -24,88 +24,87 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.error('Les mots de passe ne correspondent pas.');
+      console.error("Les mots de passe ne correspondent pas.");
       return;
     }
     signupMutation.mutate(
       { firstName, lastName, username, email, password },
       {
         onSuccess: () => {
-          window.location.href = '/dashboard';
+          window.location.href = "/dashboard";
         },
         onError: (err: Error | unknown) => {
           console.error("Erreur lors de l'inscription :", err);
         },
-      }
+      },
     );
   };
 
   const handleGoogleSignUp = async () => {
     try {
       const result = await firebaseGoogleLoginMutation.mutateAsync();
-      console.log('✅ Firebase Google Sign-Up Success:', result.user.email);
+      console.log("✅ Firebase Google Sign-Up Success:", result.user.email);
 
       await googleLoginMutation.mutateAsync({ idToken: result.idToken });
-      console.log('✅ Backend authentication success');
+      console.log("✅ Backend authentication success");
 
-      // AuthManager handles token storage via the mutation's onSuccess
-      window.location.href = '/explore';
+      window.location.href = "/explore";
     } catch (error: any) {
-      console.error('❌ Google Sign-Up Error:', error);
+      console.error("❌ Google Sign-Up Error:", error);
 
-      if (error.code === 'auth/popup-closed-by-user') {
-        console.log('User closed the sign-up popup');
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("User closed the sign-up popup");
         firebaseGoogleLoginMutation.reset();
-      } else if (error.code === 'auth/popup-blocked') {
-        alert('Please allow popups for this site to sign up with Google');
+      } else if (error.code === "auth/popup-blocked") {
+        alert("Please allow popups for this site to sign up with Google");
         firebaseGoogleLoginMutation.reset();
-      } else if (error.message?.includes('Firebase')) {
+      } else if (error.message?.includes("Firebase")) {
         alert(
-          'Authentication service unavailable. Please check your internet connection.'
+          "Authentication service unavailable. Please check your internet connection.",
         );
         firebaseGoogleLoginMutation.reset();
       } else {
-        alert('Sign-up failed. Please try again.');
+        alert("Sign-up failed. Please try again.");
         firebaseGoogleLoginMutation.reset();
       }
     }
   };
   return (
-    <div className="backdrop-blur-md md:scale-100 scale-90 form-container signup w-[32vw] min-w-[30rem] max-w-[28rem] rounded-[5px] bg-stone-200/60 flex flex-col p-8 items-center shadow-lg mt-[5%] min-h-[70vh]  z-5 relative">
-      <div className="form-header flex justify-center w-full">
-        <h3 className="text-[40px] mb-5 text-[#444ea5] font-semibold">
+    <div className="form-container signup relative z-5 mt-[5%] flex min-h-[70vh] w-[32vw] max-w-[28rem] min-w-[30rem] scale-90 flex-col items-center rounded-[5px] bg-stone-200/60 p-8 shadow-lg backdrop-blur-md md:scale-100">
+      <div className="form-header flex w-full justify-center">
+        <h3 className="mb-5 text-[40px] font-semibold text-[#444ea5]">
           Inscription
         </h3>
       </div>
-      <div className="form-content flex flex-col w-[95%] h-full">
+      <div className="form-content flex h-full w-[95%] flex-col">
         <form
           method="POST"
           onSubmit={handleSignUp}
-          className="flex flex-col gap-4 h-full relative"
+          className="relative flex h-full flex-col gap-4"
         >
           <div className="input-group duo flex flex-row gap-4">
-            <div className="input-group flex flex-col gap-1 w-[48%]">
+            <div className="input-group flex w-[48%] flex-col gap-1">
               <label className="text-[18px] text-black/90">Prénom</label>
               <input
                 id="firstName"
                 name="firstName"
                 type="text"
                 value={firstName}
-                onChange={e => setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Prénom"
-                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-0"
+                className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] outline-0 transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513]"
               />
             </div>
-            <div className="input-group flex flex-col gap-1 w-[48%]">
+            <div className="input-group flex w-[48%] flex-col gap-1">
               <label className="text-[18px] text-black/90">Nom</label>
               <input
                 id="lastName"
                 name="lastName"
                 type="text"
                 value={lastName}
-                onChange={e => setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
                 placeholder="Nom"
-                className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] outline-0 transition-colors focus:border-[rgb(157,163,221)] focus:bg-[#444ea513] "
+                className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] outline-0 transition-colors focus:border-[rgb(157,163,221)] focus:bg-[#444ea513]"
               />
             </div>
           </div>
@@ -114,9 +113,9 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="text"
               value={username}
-              onChange={e => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Pseudo"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
+              className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] transition-colors outline-none focus:border-[#9da3dd] focus:bg-[#444ea513]"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -124,9 +123,9 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="johndoe@gmail.com"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
+              className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] transition-colors outline-none focus:border-[#9da3dd] focus:bg-[#444ea513]"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -134,9 +133,9 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Mot de passe"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
+              className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] transition-colors outline-none focus:border-[#9da3dd] focus:bg-[#444ea513]"
             />
           </div>
           <div className="input-group flex flex-col gap-1">
@@ -146,20 +145,20 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
             <input
               type="password"
               value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirmer votre mot de passe"
-              className="bg-transparent px-2 py-2 border-2 border-black/20 rounded-[5px] text-[15px] transition-colors focus:border-[#9da3dd] focus:bg-[#444ea513] outline-none"
+              className="rounded-[5px] border-2 border-black/20 bg-transparent px-2 py-2 text-[15px] transition-colors outline-none focus:border-[#9da3dd] focus:bg-[#444ea513]"
             />
           </div>
           {signupMutation.error && (
-            <p className="error-message-valdiation text-red-500 text-[15px] font-light text-center">
+            <p className="error-message-valdiation text-center text-[15px] font-light text-red-500">
               {(signupMutation.error as any)?.response?.data?.message ||
                 "Erreur d'inscription"}
             </p>
           )}
-          <div className="register-link text-black/50 text-[15px] p-0 m-0 h-fit">
+          <div className="register-link m-0 h-fit p-0 text-[15px] text-black/50">
             <h5 className="m-0 p-0 font-light">
-              Vous avez déjà un compte ?{' '}
+              Vous avez déjà un compte ?{" "}
               <a
                 className="invite text-[#3B4394] hover:underline"
                 href="#"
@@ -171,23 +170,23 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
           </div>
           <button
             type="submit"
-            className="bg-[#414891] hover:bg-[#3b4294be] text-white border-none rounded-[4px] px-4 py-2 h-16 text-[25px] cursor-pointer w-full mt-auto transition-colors"
+            className="mt-auto h-16 w-full cursor-pointer rounded-[4px] border-none bg-[#414891] px-4 py-2 text-[25px] text-white transition-colors hover:bg-[#3b4294be]"
           >
             S'inscrire
           </button>
         </form>
 
         {/* Google Sign-Up Section */}
-        <div className="w-full mt-6">
-          <div className="external-login-title flex justify-center items-center text-center w-full text-black/50 relative h-8 mt-4 before:content-[''] before:w-1/4 before:h-[2px] before:bg-black/50 before:mx-2 after:content-[''] after:w-1/4 after:h-[2px] after:bg-black/50 after:mx-2">
+        <div className="mt-6 w-full">
+          <div className="external-login-title relative mt-4 flex h-8 w-full items-center justify-center text-center text-black/50 before:mx-2 before:h-[2px] before:w-1/4 before:bg-black/50 before:content-[''] after:mx-2 after:h-[2px] after:w-1/4 after:bg-black/50 after:content-['']">
             <h5>Services externes</h5>
           </div>
-          <div className="link-holders flex justify-center gap-4 mt-4">
+          <div className="link-holders mt-4 flex justify-center gap-4">
             <button
               type="button"
               onClick={handleGoogleSignUp}
               disabled={firebaseGoogleLoginMutation.isPending}
-              className="cursor-pointer flex items-center justify-center gap-3 bg-gradient-to-r from-[#3B4394]/10 via-[#3B4394]/5 to-[#3B4394]/10 hover:from-[#3B4394]/20 hover:via-[#3B4394]/10 hover:to-[#3B4394]/20 text-[#3B4394] border border-[#3B4394]/30 rounded-lg px-6 py-3 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow hover:shadow hover:shadow-[#3B4394]/20 hover:scale-[1.02] font-medium"
+              className="flex cursor-pointer items-center justify-center gap-3 rounded-lg border border-[#3B4394]/30 bg-gradient-to-r from-[#3B4394]/10 via-[#3B4394]/5 to-[#3B4394]/10 px-6 py-3 font-medium text-[#3B4394] shadow transition-all duration-200 hover:scale-[1.02] hover:from-[#3B4394]/20 hover:via-[#3B4394]/10 hover:to-[#3B4394]/20 hover:shadow hover:shadow-[#3B4394]/20 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <svg width="18" height="18" viewBox="0 0 18 18">
                 <path
@@ -208,8 +207,8 @@ export const Signup: React.FC<SignupProps> = ({ toggleForm }) => {
                 />
               </svg>
               {firebaseGoogleLoginMutation.isPending
-                ? 'Connexion...'
-                : 'Continuer avec Google'}
+                ? "Connexion..."
+                : "Continuer avec Google"}
             </button>
           </div>
         </div>
