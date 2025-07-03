@@ -5,7 +5,6 @@ import {
   CupertinoTemplate,
   MatrixTemplate,
   MinimalistTemplate,
-  PixelTemplate,
   RondureTemplate,
   SilkTemplate,
 } from "../components/portfolio/templates";
@@ -38,8 +37,6 @@ export const FullPortfolioPreview: FC = () => {
       return <CupertinoTemplate {...templateProps} />;
     case "matrix":
       return <MatrixTemplate {...templateProps} />;
-    case "pixel":
-      return <PixelTemplate {...templateProps} />;
     case "silk":
       return <SilkTemplate {...templateProps} />;
     case "rondure":

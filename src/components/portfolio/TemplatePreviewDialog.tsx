@@ -7,7 +7,6 @@ import {
   CupertinoTemplate,
   MatrixTemplate,
   MinimalistTemplate,
-  PixelTemplate,
   RondureTemplate,
   SilkTemplate,
 } from "./templates";
@@ -46,8 +45,6 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
         return <CupertinoTemplate {...templateProps} />;
       case "matrix":
         return <MatrixTemplate {...templateProps} />;
-      case "pixel":
-        return <PixelTemplate {...templateProps} />;
       case "silk":
         return <SilkTemplate {...templateProps} />;
       case "rondure":

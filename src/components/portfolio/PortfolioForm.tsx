@@ -63,8 +63,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
       "Interface Matrix avec code vert, effets glitch et animations cyberpunk",
     [PORTFOLIO_TEMPLATES.MINIMALIST]:
       "Simple et épuré avec un focus sur le contenu",
-    [PORTFOLIO_TEMPLATES.PIXEL]:
-      "Univers rétro gaming avec esthétique 8-bit et animations pixel art",
     [PORTFOLIO_TEMPLATES.RONDURE]:
       "Design rond et doux avec des animations fluides et une esthétique apaisante",
     [PORTFOLIO_TEMPLATES.SILK]:
@@ -76,7 +74,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
     [PORTFOLIO_TEMPLATES.CUPERTINO]: `/templates/${PORTFOLIO_TEMPLATES.CUPERTINO}.png`,
     [PORTFOLIO_TEMPLATES.MATRIX]: `/templates/${PORTFOLIO_TEMPLATES.MATRIX}.png`,
     [PORTFOLIO_TEMPLATES.MINIMALIST]: `/templates/${PORTFOLIO_TEMPLATES.MINIMALIST}.png`,
-    [PORTFOLIO_TEMPLATES.PIXEL]: `/templates/${PORTFOLIO_TEMPLATES.PIXEL}.png`,
     [PORTFOLIO_TEMPLATES.RONDURE]: `/templates/${PORTFOLIO_TEMPLATES.RONDURE}.png`,
     [PORTFOLIO_TEMPLATES.SILK]: `/templates/${PORTFOLIO_TEMPLATES.SILK}.png`,
   };

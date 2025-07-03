@@ -6,7 +6,6 @@ export const PORTFOLIO_TEMPLATES = {
   CUPERTINO: "cupertino",
   MATRIX: "matrix",
   MINIMALIST: "minimalist",
-  PIXEL: "pixel",
   RONDURE: "rondure",
   SILK: "silk",
 } as const;
