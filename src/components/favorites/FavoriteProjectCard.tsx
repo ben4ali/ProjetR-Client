@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useProjectById } from '../../hooks/use-project';
+import { Link } from "react-router-dom";
+import { useProjectById } from "../../hooks/use-project";
 
 interface FavoriteProjectCardProps {
   projectId: string;
@@ -11,13 +11,13 @@ export const FavoriteProjectCard = ({
   const { data: project, isLoading, error } = useProjectById(projectId);
   if (isLoading) {
     return (
-      <div className="animate-pulse rounded p-4 border border-gray-200">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="w-full md:w-40 h-48 md:h-24 bg-gray-200 rounded-lg"></div>
+      <div className="animate-pulse rounded border border-gray-200 p-4">
+        <div className="flex flex-col gap-4 md:flex-row">
+          <div className="h-48 w-full rounded-lg bg-gray-200 md:h-24 md:w-40"></div>
           <div className="flex-1">
-            <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-            <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
-            <div className="h-3 bg-gray-200 rounded w-1/4"></div>
+            <div className="mb-2 h-4 w-3/4 rounded bg-gray-200"></div>
+            <div className="mb-2 h-3 w-1/2 rounded bg-gray-200"></div>
+            <div className="h-3 w-1/4 rounded bg-gray-200"></div>
           </div>
         </div>
       </div>
@@ -29,12 +29,12 @@ export const FavoriteProjectCard = ({
   }
   return (
     <Link to={`/watch/${project.id}`} className="group">
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         {/* Thumbnail */}
-        <div className="relative w-full md:w-80 h-48 md:h-44 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+        <div className="relative h-48 w-full flex-shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 md:h-44 md:w-80">
           {project.demoUrl ? (
             <video
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               poster={project.previewImageUrl}
               muted
             >
@@ -44,30 +44,30 @@ export const FavoriteProjectCard = ({
             <img
               src={project.previewImageUrl}
               alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
               <i className="bi bi-play-circle text-2xl text-gray-400"></i>
             </div>
           )}
           <div className="absolute top-2 right-2">
-            <div className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium flex items-center">
+            <div className="flex items-center rounded bg-red-500 px-2 py-1 text-xs font-medium text-white">
               <i className="bi bi-heart-fill text-xs"></i>
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-blue-600">
             {project.title}
           </h3>
-          <p className="text-sm text-gray-600 mb-3 line-clamp-2 md:line-clamp-1">
+          <p className="mb-3 line-clamp-2 text-sm text-gray-600 md:line-clamp-1">
             {project.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
+          <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
             <div className="flex items-center text-sm text-gray-500">
               <i className="bi bi-eye mr-1"></i>
               <span>{project.views || 0} vues</span>
@@ -91,13 +91,13 @@ export const FavoriteProjectCard = ({
               {project.tags.slice(0, 4).map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium"
+                  className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700"
                 >
                   {tag}
                 </span>
               ))}
               {project.tags.length > 4 && (
-                <span className="text-xs text-gray-500 self-center">
+                <span className="self-center text-xs text-gray-500">
                   +{project.tags.length - 4}
                 </span>
               )}

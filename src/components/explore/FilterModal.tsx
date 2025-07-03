@@ -32,7 +32,7 @@ export const FilterModal: FC<FilterModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       if (course) {
         const projects = await courseProjectsQuery.refetch();
@@ -49,6 +49,7 @@ export const FilterModal: FC<FilterModalProps> = ({
       } else {
         onApplyFilters([], false);
       }
+      setIsLoading(false);
       onClose();
     } catch (error) {
       console.error("Erreur lors de la récupération des projets:", error);
@@ -66,7 +67,7 @@ export const FilterModal: FC<FilterModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg relative">
+      <div className="relative w-full max-w-lg rounded-lg bg-white p-8 shadow-lg">
         <button
           type="button"
           className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black"
@@ -76,14 +77,14 @@ export const FilterModal: FC<FilterModalProps> = ({
           <i className="bi bi-x"></i>
         </button>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold mb-2">Filtrage</h1>
+          <h1 className="mb-2 text-2xl font-bold">Filtrage</h1>
           <div className="mb-3 flex flex-col gap-1">
             <label htmlFor="enseignant" className="font-medium">
               Enseignant
             </label>
             <input
               type="text"
-              className="border border-gray-300 rounded px-3 py-2"
+              className="rounded border border-gray-300 px-3 py-2"
               id="enseignant"
               placeholder="Nom de l'enseignant"
               value={teacher}
@@ -96,7 +97,7 @@ export const FilterModal: FC<FilterModalProps> = ({
             </label>
             <input
               type="text"
-              className="border border-gray-300 rounded px-3 py-2"
+              className="rounded border border-gray-300 px-3 py-2"
               id="etudiant"
               placeholder="Nom de l'étudiant"
               value={student}
@@ -104,13 +105,13 @@ export const FilterModal: FC<FilterModalProps> = ({
             />
           </div>
           <div className="flex gap-4">
-            <div className="flex flex-col flex-1 gap-1">
+            <div className="flex flex-1 flex-col gap-1">
               <label className="font-medium">Cours</label>
               <div className="relative">
                 <select
                   value={course}
                   onChange={(e) => setCourse(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 appearance-none"
+                  className="w-full appearance-none rounded border border-gray-300 px-3 py-2"
                 >
                   <option value="" disabled>
                     Sélectionner un cours
@@ -122,27 +123,23 @@ export const FilterModal: FC<FilterModalProps> = ({
                   ))}
                   <option value="">Aucun</option>
                 </select>
-                <i className="bi bi-chevron-down absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <i className="bi bi-chevron-down pointer-events-none absolute top-1/2 right-3 -translate-y-1/2"></i>
               </div>
             </div>
-            <div className="flex flex-col flex-1 gap-1">
+            <div className="flex flex-1 flex-col gap-1">
               <label className="font-medium">Session</label>
               <div className="relative">
                 <select
                   value={session}
                   onChange={(e) => setSession(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 appearance-none"
+                  className="w-full appearance-none rounded border border-gray-300 px-3 py-2"
                 >
                   <option value="" disabled>
                     Sélectionner une session
                   </option>
                   {(() => {
                     const currentYear = new Date().getFullYear();
-                    const currentMonth = new Date().getMonth();
                     const sessions = [];
-
-                    const currentSemester =
-                      currentMonth >= 6 ? "Automne" : "Hiver";
 
                     for (let i = 0; i < 6; i++) {
                       const year = currentYear - Math.floor(i / 2);
@@ -162,21 +159,21 @@ export const FilterModal: FC<FilterModalProps> = ({
                   })()}
                   <option value="">Aucune</option>
                 </select>
-                <i className="bi bi-chevron-down absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <i className="bi bi-chevron-down pointer-events-none absolute top-1/2 right-3 -translate-y-1/2"></i>
               </div>
             </div>
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="mt-4 flex gap-4">
             <button
               type="submit"
-              className="flex-1 bg-blue-600 text-white rounded px-4 py-2 font-semibold hover:bg-blue-700 transition-colors"
+              className="flex-1 rounded bg-blue-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-blue-700"
               disabled={isLoading}
             >
               {isLoading ? "Chargement..." : "Confirmer"}
             </button>
             <button
               type="button"
-              className="flex-1 bg-gray-200 text-gray-700 rounded px-4 py-2 font-semibold hover:bg-gray-300 transition-colors"
+              className="flex-1 rounded bg-gray-200 px-4 py-2 font-semibold text-gray-700 transition-colors hover:bg-gray-300"
               onClick={handleClearFilters}
               disabled={isLoading}
             >

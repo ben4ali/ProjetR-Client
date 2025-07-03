@@ -4,7 +4,6 @@ import { Comment } from "../types/Comment";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// Récupérer tous les commentaires d'un projet
 export function useCommentsByProject(projetId?: string | number) {
   return useQuery<Comment[], Error>({
     queryKey: ["comments", "project", projetId],
@@ -18,7 +17,6 @@ export function useCommentsByProject(projetId?: string | number) {
   });
 }
 
-// Créer un nouveau commentaire
 export function useCreateComment() {
   const queryClient = useQueryClient();
 
@@ -56,7 +54,6 @@ export function useCreateComment() {
   });
 }
 
-// Récupèer les réponses d'un commentaire
 export function useRepliesToComment(commentId?: string | number) {
   return useQuery<Comment[], Error>({
     queryKey: ["comments", "replies", commentId],
@@ -70,7 +67,6 @@ export function useRepliesToComment(commentId?: string | number) {
   });
 }
 
-// Répondre à un commentaire (cas spécifique de la création)
 export function useReplyToComment() {
   const queryClient = useQueryClient();
 
@@ -113,8 +109,6 @@ export function useReplyToComment() {
   });
 }
 
-// Supprimer un commentaire
-// Supprimer un commentaire
 export function useDeleteComment() {
   const queryClient = useQueryClient();
 

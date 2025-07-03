@@ -3,7 +3,7 @@ import Orb from "../blocks/Backgrounds/Orb/Orb";
 import { MembersComponent } from "../components/home/MembersComponent";
 import { MetallicLogo } from "../components/ui/MetallicLogo";
 import { isLoggedIn } from "../hooks/use-auth";
-import "../styles/style-home.css"; // Assuming you have a CSS file for home styles
+import "../styles/style-home.css";
 
 export const Home = () => {
   const loggedIn = isLoggedIn();

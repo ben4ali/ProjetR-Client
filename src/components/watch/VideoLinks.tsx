@@ -9,12 +9,9 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
   const gitlab = projet?.gitLabUrl;
 
   return (
-    <div className="link-holder flex flex-col gap-4 mt-8 w-full">
+    <div className="link-holder mt-8 flex w-full flex-col gap-4">
       {github && (
-        <div
-          className="git-link flex items-center justify-between gap-4 h-24 w-full
-                         bg-black/5 rounded-lg px-4"
-        >
+        <div className="git-link flex h-24 w-full items-center justify-between gap-4 rounded-lg bg-black/5 px-4">
           <div className="link-header flex flex-col justify-between">
             <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">
               Lien GitHub
@@ -28,8 +25,7 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
             href={github}
             target="_blank"
             rel="noreferrer"
-            className="github-button flex items-center gap-2 text-lg bg-black text-white
-                       px-4 py-3 rounded hover:bg-black/80 transition"
+            className="github-button flex items-center gap-2 rounded bg-black px-4 py-3 text-lg text-white transition hover:bg-black/80"
           >
             <i className="bi bi-github" />
             <p>Voir sur GitHub</p>
@@ -38,10 +34,7 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
       )}
 
       {gitlab && (
-        <div
-          className="git-link flex items-center justify-between gap-4 h-24 w-full
-                         bg-black/5 rounded-lg px-4"
-        >
+        <div className="git-link flex h-24 w-full items-center justify-between gap-4 rounded-lg bg-black/5 px-4">
           <div className="link-header flex flex-col justify-between">
             <h3 className="text-[1.3rem] font-semibold text-neutral-900/90">
               Lien GitLab
@@ -55,8 +48,7 @@ export const VideoLinks = ({ projet }: VideoLinksProps) => {
             href={gitlab}
             target="_blank"
             rel="noreferrer"
-            className="gitlab-button flex items-center gap-2 text-lg bg-[#ff6d41] text-white
-                       px-4 py-3 rounded hover:bg-[#ff6d41cc] transition"
+            className="gitlab-button flex items-center gap-2 rounded bg-[#ff6d41] px-4 py-3 text-lg text-white transition hover:bg-[#ff6d41cc]"
           >
             <i className="bi bi-gitlab" />
             <p>Voir sur GitLab</p>

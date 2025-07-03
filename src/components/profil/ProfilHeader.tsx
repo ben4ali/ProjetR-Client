@@ -1,10 +1,10 @@
-import { FC, useState } from 'react';
-import defaultBanner from '../../assets/images/default_banner.png';
-import { Projet } from '../../types/Projet';
-import { User } from '../../types/User';
-import { ChangeBannerModal } from '../modals/changeBannerModal';
-import { ProfilContent } from './ProfilContent';
-import { ProfilPicture } from './ProfilPicture';
+import { FC, useState } from "react";
+import defaultBanner from "../../assets/images/default_banner.png";
+import { Projet } from "../../types/Projet";
+import { User } from "../../types/User";
+import { ChangeBannerModal } from "../modals/changeBannerModal";
+import { ProfilContent } from "./ProfilContent";
+import { ProfilPicture } from "./ProfilPicture";
 
 interface ProfilHeaderProps {
   firstName: string;
@@ -31,10 +31,10 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
   const handleCloseBannerModal = () => setBannerModalOpen(false);
 
   return (
-    <div className="relative flex flex-col gap-4 w-[95%] md:w-[90%] bg-black/10 lg:h-[32rem] overflow-hidden rounded-t-lg">
+    <div className="relative flex w-[95%] flex-col gap-4 overflow-hidden rounded-t-lg bg-black/10 md:w-[90%] lg:h-[32rem]">
       <div
-        className={`overflow-hidden h-[62%] w-full ${
-          isCurrentUser ? 'cursor-pointer group' : ''
+        className={`h-[62%] w-full overflow-hidden ${
+          isCurrentUser ? "group cursor-pointer" : ""
         }`}
         onClick={isCurrentUser ? handleOpenBannerModal : undefined}
       >
@@ -42,7 +42,7 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
           src={`${banner || defaultBanner}?t=${new Date().getTime()}`}
           alt="Profile banner"
           crossOrigin="anonymous"
-          className="w-full h-full object-cover scale-[1.05] transition-transform duration-300 ease-in-out group-hover:scale-[1.015] group-hover:blur-md"
+          className="h-full w-full scale-[1.05] object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.015] group-hover:blur-md"
         />
       </div>
 
@@ -61,10 +61,10 @@ export const ProfilHeader: FC<ProfilHeaderProps> = ({
         onClose={handleCloseBannerModal}
         userId={user.id}
       />
-      <div className="absolute bottom-0 right-0 flex gap-1 pointer-events-none overflow-hidden h-[38%] w-[15rem] -z-1">
-        <div className="w-120 h-3 bg-[#e4003a] bottom-0 -right-40 opacity-80 absolute -rotate-45 " />
-        <div className="w-100 h-3 bg-[#e4003a] bottom-0 -right-20 opacity-80 absolute -rotate-45" />
-        <div className="w-50 h-3 bg-[#e4003a] bottom-0 -right-15 opacity-80 absolute -rotate-45" />
+      <div className="pointer-events-none absolute right-0 bottom-0 -z-1 flex h-[38%] w-[15rem] gap-1 overflow-hidden">
+        <div className="absolute -right-40 bottom-0 h-3 w-120 -rotate-45 bg-[#e4003a] opacity-80" />
+        <div className="absolute -right-20 bottom-0 h-3 w-100 -rotate-45 bg-[#e4003a] opacity-80" />
+        <div className="absolute -right-15 bottom-0 h-3 w-50 -rotate-45 bg-[#e4003a] opacity-80" />
       </div>
     </div>
   );

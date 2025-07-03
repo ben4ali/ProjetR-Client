@@ -22,13 +22,11 @@ export const Publish = () => {
   const [teacher, setTeacher] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Utiliser React Query hooks
   const { data: availableTags = [] } = useTags();
   const { data: availableCourses = [] } = useCourses();
   const { data: searchResults = [] } = useSearchUsers(searchTerm);
   const createProjectMutation = useCreateProject();
 
-  // video upload
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -42,14 +40,12 @@ export const Publish = () => {
     }
   };
 
-  // add tag
   const handleCategoryAdd = (category: string) => {
     if (category.trim() !== "" && !categories.includes(category)) {
       setCategories([...categories, category]);
     }
   };
 
-  // add collaborator
   const handleCollaboratorSelect = (user: User) => {
     const userName = `${user.firstName} ${user.lastName}`;
     if (!collaborators.includes(userName)) {
@@ -58,7 +54,7 @@ export const Publish = () => {
     setSearchTerm("");
   };
 
-  // add unknown collaborator
+  // ajout d'un collaborateur inconnu
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter" && searchTerm.trim() !== "") {
       event.preventDefault();
@@ -76,7 +72,6 @@ export const Publish = () => {
     }
   };
 
-  // form submit
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const projectData = {
@@ -108,7 +103,6 @@ export const Publish = () => {
     );
   };
 
-  // reset fields
   const resetForm = () => {
     setVideo(null);
     setVideoPreview(null);
@@ -123,11 +117,9 @@ export const Publish = () => {
     setTeacher("");
   };
 
-  // form validation
   const isFormValid = () =>
     video && titre.trim() !== "" && description.trim() !== "";
 
-  // validation message
   const getValidationMessage = () => {
     const missingFields = [];
     if (!video) missingFields.push("Vidéo");
@@ -139,31 +131,31 @@ export const Publish = () => {
   };
 
   return (
-    <div className="w-full md:max-w-[65%] mx-auto p-8 rounded-lg] md:p-6">
-      <h1 className="border-b border-[#919090] pb-4 mb-8 text-3xl text-[#444ea5] font-bold md:text-[1.8rem] mt-7">
+    <div className="rounded-lg] mx-auto w-full p-8 md:max-w-[65%] md:p-6">
+      <h1 className="mt-7 mb-8 border-b border-[#919090] pb-4 text-3xl font-bold text-[#444ea5] md:text-[1.8rem]">
         Publier un projet
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col-reverse gap-8 w-full md:flex-row md:gap-6 md:justify-between md:relative"
+        className="flex w-full flex-col-reverse gap-8 md:relative md:flex-row md:justify-between md:gap-6"
       >
-        <div className="w-full flex flex-col gap-8 mb-8 bg-[#f7f7f7] px-8 py-4 rounded md:w-1/2 md:mb-20">
+        <div className="mb-8 flex w-full flex-col gap-8 rounded bg-[#f7f7f7] px-8 py-4 md:mb-20 md:w-1/2">
           {/* Video Upload */}
-          <div className="flex gap-4 items-center justify-between label-group">
+          <div className="label-group flex items-center justify-between gap-4">
             <label
               id="uploadlabel"
-              className="text-[1.2rem] text-[#74767c] font-semibold m-0"
+              className="m-0 text-[1.2rem] font-semibold text-[#74767c]"
             >
               Fichier vidéo
             </label>
             <i
-              className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
+              className="bi bi-info-circle cursor-pointer text-[1.2rem] text-[#555] hover:text-[#e4003a]"
               title="Vidéos au format MP4, MOV ou AVI, d'une taille maximale de 500 Mo."
             ></i>
           </div>
-          <div className="w-full bg-[#e2e4f3] border-2 border-dashed border-[#9b9c9e] rounded transition cursor-pointer hover:bg-[#d2d5e9] videoUpload md:h-32 flex items-center justify-center text-center">
-            <div className="flex items-center justify-center h-32 w-full relative holder-upload md:h-full">
-              <div className="flex flex-col items-center justify-center gap-2 text-[#74767c] text-[1.1rem] upload-box">
+          <div className="videoUpload flex w-full cursor-pointer items-center justify-center rounded border-2 border-dashed border-[#9b9c9e] bg-[#e2e4f3] text-center transition hover:bg-[#d2d5e9] md:h-32">
+            <div className="holder-upload relative flex h-32 w-full items-center justify-center md:h-full">
+              <div className="upload-box flex flex-col items-center justify-center gap-2 text-[1.1rem] text-[#74767c]">
                 <p>Cliquez pour sélectionner un fichier</p>
               </div>
               <input
@@ -171,14 +163,14 @@ export const Publish = () => {
                 accept="video/*"
                 onChange={handleVideoUpload}
                 onKeyDown={handleDefaultBehavior}
-                className="cursor-pointer opacity-0 absolute outline-none border-none w-full h-full"
+                className="absolute h-full w-full cursor-pointer border-none opacity-0 outline-none"
               />
             </div>
           </div>
 
           {/* Title */}
-          <div className="relative flex flex-col form-group">
-            <label className="text-[1.1rem] font-semibold text-[#555] mb-2 flex items-center">
+          <div className="form-group relative flex flex-col">
+            <label className="mb-2 flex items-center text-[1.1rem] font-semibold text-[#555]">
               Titre du projet{" "}
               <span className="text-[1.2rem] text-[#f35844]">*</span>
             </label>
@@ -188,13 +180,13 @@ export const Publish = () => {
               value={titre}
               onChange={(e) => setTitre(e.target.value)}
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+              className="rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
           </div>
 
           {/* Description */}
-          <div className="relative flex flex-col form-group">
-            <label className="text-[1.1rem] font-semibold text-[#555] mb-2 flex items-center">
+          <div className="form-group relative flex flex-col">
+            <label className="mb-2 flex items-center text-[1.1rem] font-semibold text-[#555]">
               Description{" "}
               <span className="text-[1.2rem] text-[#f35844]">*</span>
             </label>
@@ -203,24 +195,24 @@ export const Publish = () => {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Décrivez votre projet..."
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)] resize-y min-h-[100px]"
+              className="min-h-[100px] resize-y rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
           </div>
 
           {/* Categories */}
-          <div className="relative flex flex-col form-group">
-            <div className="flex gap-4 items-center justify-between label-group">
+          <div className="form-group relative flex flex-col">
+            <div className="label-group flex items-center justify-between gap-4">
               <label>Catégories (Tags)</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
+                className="bi bi-info-circle cursor-pointer text-[1.2rem] text-[#555] hover:text-[#e4003a]"
                 title="Ajouter des tags améliore la visibilité de ton projet."
               ></i>
             </div>
-            <div className="relative flex flex-col gap-2 select-group">
+            <div className="select-group relative flex flex-col gap-2">
               <select
                 onChange={(e) => handleCategoryAdd(e.target.value)}
                 defaultValue=""
-                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="cursor-pointer appearance-none rounded border border-[#6e6b6bde] p-3 text-base text-[#555555cc] transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               >
                 <option value="" disabled>
                   Sélectionner une catégorie
@@ -231,30 +223,30 @@ export const Publish = () => {
                   </option>
                 ))}
               </select>
-              <i className="bi bi-chevron-down absolute top-1/2 right-4 -translate-y-1/2 text-[#555] text-base pointer-events-none"></i>
+              <i className="bi bi-chevron-down pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-base text-[#555]"></i>
             </div>
-            <div className="flex flex-wrap gap-2 mt-2 tags-publish">
+            <div className="tags-publish mt-2 flex flex-wrap gap-2">
               {categories.map((category, index) => (
                 <span
                   key={index}
-                  className="bg-[#d7dcf0] text-[#3B4395] px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#caceec] cursor-pointer"
+                  className="tag-publish flex cursor-pointer items-center justify-between gap-4 rounded-md bg-[#d7dcf0] px-3 py-2 text-xs text-[#3B4395] hover:bg-[#caceec]"
                   onClick={() =>
                     setCategories(categories.filter((cat) => cat !== category))
                   }
                 >
-                  <p className="text-[0.8rem] text-[#3B4395] font-semibold m-0">
+                  <p className="m-0 text-[0.8rem] font-semibold text-[#3B4395]">
                     {category}
                   </p>
-                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-[#3B4395] cursor-pointer"></i>
+                  <i className="bi bi-x-lg cursor-pointer text-[0.8rem] text-[#3B4395] opacity-80"></i>
                 </span>
               ))}
             </div>
           </div>
           {/* Links */}
 
-          <div className="flex flex-col w-full gap-4 shared-form-group md:flex-row flex-wrap">
-            <div className="md:w-[48%] form-group w-full">
-              <label className="flex gap-4 items-center">
+          <div className="shared-form-group flex w-full flex-col flex-wrap gap-4 md:flex-row">
+            <div className="form-group w-full md:w-[48%]">
+              <label className="flex items-center gap-4">
                 <i className="bi bi-github"></i> Lien GitHub
               </label>
 
@@ -263,12 +255,12 @@ export const Publish = () => {
                 value={lienGitHub}
                 onChange={(e) => setLienGitHub(e.target.value)}
                 placeholder="Lien vers le code source GitHub"
-                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="w-full rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
             </div>
 
-            <div className="md:w-[48%] form-group w-full">
-              <label className="flex gap-4 items-center">
+            <div className="form-group w-full md:w-[48%]">
+              <label className="flex items-center gap-4">
                 <i className="bi bi-gitlab"></i> Lien Gitlab
               </label>
 
@@ -277,22 +269,22 @@ export const Publish = () => {
                 value={lienGitlab}
                 onChange={(e) => setLienGitlab(e.target.value)}
                 placeholder="Lien vers le code source Gitlab"
-                className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors w-full focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="w-full rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
               />
             </div>
           </div>
           {/* Collaborators */}
-          <div className="relative flex flex-col form-group">
-            <div className="flex gap-4 items-center justify-between label-group">
+          <div className="form-group relative flex flex-col">
+            <div className="label-group flex items-center justify-between gap-4">
               <label>Collaborateurs</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
+                className="bi bi-info-circle cursor-pointer text-[1.2rem] text-[#555] hover:text-[#e4003a]"
                 title="Si tu ne trouve pas ton collaborateur, tu peux écrire son nom et appuyer la touche entrer."
               ></i>
             </div>
-            <div className="w-full relative search-input-group-publish">
+            <div className="search-input-group-publish relative w-full">
               <input
-                className="relative w-full z-10 searchInput-publish p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                className="searchInput-publish relative z-10 w-full rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 type="text"
                 placeholder="Rechercher un collaborateur"
                 value={searchTerm}
@@ -300,7 +292,7 @@ export const Publish = () => {
                 onKeyPress={handleKeyPress}
               />
               <div
-                className="absolute top-full left-0 w-full max-h-40 bg-[#efefef] border border-[#ccc] rounded-lg p-4 overflow-y-auto z-20 flex-col search-results-publish"
+                className="search-results-publish absolute top-full left-0 z-20 max-h-40 w-full flex-col overflow-y-auto rounded-lg border border-[#ccc] bg-[#efefef] p-4"
                 style={{
                   display:
                     searchResults.length > 0 && searchTerm.length >= 2
@@ -311,46 +303,46 @@ export const Publish = () => {
                 {searchResults.map((user, index) => (
                   <div
                     key={index}
-                    className="py-4 px-4 border-b border-[#ccc] cursor-pointer flex items-center transition hover:bg-[rgba(15,15,15,0.25)] search-result-item-publish"
+                    className="search-result-item-publish flex cursor-pointer items-center border-b border-[#ccc] px-4 py-4 transition hover:bg-[rgba(15,15,15,0.25)]"
                     onClick={() => handleCollaboratorSelect(user)}
                   >
                     <img
                       src={user.avatar || default_profil}
                       alt="User Avatar"
                       crossOrigin="anonymous"
-                      className="w-8 h-8 rounded-full mr-2 bg-black object-cover overflow-hidden"
+                      className="mr-2 h-8 w-8 overflow-hidden rounded-full bg-black object-cover"
                     />
                     {user.firstName} {user.lastName}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 mt-2 collaborators">
+            <div className="collaborators mt-2 flex flex-wrap gap-2">
               {collaborators.map((collaborator, index) => (
                 <span
                   key={index}
-                  className="bg-[#d7dcf0] text-[#3B4395] px-3 py-2 rounded-md text-xs flex justify-between items-center gap-4 tag-publish hover:bg-[#caceec] cursor-pointer"
+                  className="tag-publish flex cursor-pointer items-center justify-between gap-4 rounded-md bg-[#d7dcf0] px-3 py-2 text-xs text-[#3B4395] hover:bg-[#caceec]"
                   onClick={() =>
                     setCollaborators(
                       collaborators.filter((col) => col !== collaborator),
                     )
                   }
                 >
-                  <p className="text-[0.8rem] text-[#3B4395] font-semibold m-0">
+                  <p className="m-0 text-[0.8rem] font-semibold text-[#3B4395]">
                     {collaborator}
                   </p>
-                  <i className="bi bi-x-lg opacity-80 text-[0.8rem] text-[#3B4395] cursor-pointer"></i>
+                  <i className="bi bi-x-lg cursor-pointer text-[0.8rem] text-[#3B4395] opacity-80"></i>
                 </span>
               ))}
             </div>
           </div>
 
           {/* Teacher */}
-          <div className="relative flex flex-col form-group">
-            <div className="flex gap-4 items-center justify-between label-group">
+          <div className="form-group relative flex flex-col">
+            <div className="label-group flex items-center justify-between gap-4">
               <label>Enseignant</label>
               <i
-                className="bi bi-info-circle text-[1.2rem] text-[#555] cursor-pointer hover:text-[#e4003a]"
+                className="bi bi-info-circle cursor-pointer text-[1.2rem] text-[#555] hover:text-[#e4003a]"
                 title="Nom de l'enseignant qui a supervisé le projet."
               ></i>
             </div>
@@ -360,19 +352,19 @@ export const Publish = () => {
               onChange={(e) => setTeacher(e.target.value)}
               placeholder="Nom de l'enseignant"
               onKeyDown={handleDefaultBehavior}
-              className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+              className="rounded border border-[#6e6b6bde] p-3 text-base transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
             />
           </div>
 
           {/* Course and Session */}
-          <div className="flex w-full gap-4 shared-form-group md:flex-col">
-            <div className="w-1/2 form-group md:w-full">
+          <div className="shared-form-group flex w-full gap-4 md:flex-col">
+            <div className="form-group w-1/2 md:w-full">
               <label>Cours</label>
-              <div className="relative flex flex-col gap-2 select-group">
+              <div className="select-group relative flex flex-col gap-2">
                 <select
                   value={course}
                   onChange={(e) => setCourse(e.target.value)}
-                  className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                  className="cursor-pointer appearance-none rounded border border-[#6e6b6bde] p-3 text-base text-[#555555cc] transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
                     Sélectionner un cours
@@ -383,16 +375,16 @@ export const Publish = () => {
                     </option>
                   ))}
                 </select>
-                <i className="bi bi-chevron-down absolute top-1/2 right-4 -translate-y-1/2 text-[#555] text-base pointer-events-none"></i>
+                <i className="bi bi-chevron-down pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-base text-[#555]"></i>
               </div>
             </div>
-            <div className="w-1/2 form-group md:w-full">
+            <div className="form-group w-1/2 md:w-full">
               <label>Session</label>
-              <div className="relative flex flex-col gap-2 select-group">
+              <div className="select-group relative flex flex-col gap-2">
                 <select
                   value={session}
                   onChange={(e) => setSession(e.target.value)}
-                  className="p-3 text-base border border-[#6e6b6bde] rounded outline-none transition-colors text-[#555555cc] appearance-none cursor-pointer focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
+                  className="cursor-pointer appearance-none rounded border border-[#6e6b6bde] p-3 text-base text-[#555555cc] transition-colors outline-none focus:border-[#007bff] focus:bg-[rgba(51,130,233,0.1)]"
                 >
                   <option value="" disabled>
                     Sélectionner une session
@@ -434,21 +426,21 @@ export const Publish = () => {
                   })()}
                   <option value="Aucune">Aucune</option>
                 </select>
-                <i className="bi bi-chevron-down absolute top-1/2 right-4 -translate-y-1/2 text-[#555] text-base pointer-events-none"></i>
+                <i className="bi bi-chevron-down pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-base text-[#555]"></i>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full h-fit md:sticky md:top-24 md:w-[42%] md:h-fit">
-          <div className="h-[20rem] w-full gap-4 bg-[rgb(15,15,15)] overflow-hidden rounded-lg flex flex-col relative md:h-[25rem]">
+        <div className="h-fit w-full md:sticky md:top-24 md:h-fit md:w-[42%]">
+          <div className="relative flex h-[20rem] w-full flex-col gap-4 overflow-hidden rounded-lg bg-[rgb(15,15,15)] md:h-[25rem]">
             <video
               key={videoPreview}
-              className="absolute w-full h-[62%] video-preview"
+              className="video-preview absolute h-[62%] w-full"
               controls
             >
               <source src={videoPreview || ""} type="video/mp4" />
             </video>
-            <div className="p-4 absolute text-center bottom-0 w-full h-[38%] flex flex-col items-center justify-center gap-2 video-information">
+            <div className="video-information absolute bottom-0 flex h-[38%] w-full flex-col items-center justify-center gap-2 p-4 text-center">
               <p className="text-[1.05rem] font-semibold text-blue-500">
                 {video
                   ? `https://rosemont-devhub/watch/${video.name}`
@@ -461,16 +453,16 @@ export const Publish = () => {
               </p>
             </div>
           </div>
-          <p className="text-center text-red-600 text-[0.9rem] my-4 validation-message">
+          <p className="validation-message my-4 text-center text-[0.9rem] text-red-600">
             {getValidationMessage()}
           </p>
           <button
             type="submit"
-            className={`submit-button w-full py-3 px-6 text-base font-bold text-white rounded transition-colors ${
+            className={`submit-button w-full rounded px-6 py-3 text-base font-bold text-white transition-colors ${
               !isFormValid()
-                ? "bg-[#ccc] cursor-not-allowed"
+                ? "cursor-not-allowed bg-[#ccc]"
                 : "bg-[#5d67be] hover:bg-[#444ea5]"
-            } md:text-[0.9rem] md:py-2 md:px-4 cursor-pointer`}
+            } cursor-pointer md:px-4 md:py-2 md:text-[0.9rem]`}
             disabled={!isFormValid() || createProjectMutation.isPending}
           >
             {createProjectMutation.isPending

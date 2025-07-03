@@ -14,8 +14,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onOpenFilterModal,
 }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [isHovering, setIsHovering] = useState(false);
-  const { data: tags, isLoading: isLoadingTags } = useTags();
+  const [, setIsHovering] = useState(false);
+  const { data: tags } = useTags();
 
   const { data: filteredProjects, isLoading } =
     useProjectsByTagsList(selectedTags);
@@ -38,28 +38,23 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     );
   };
 
-  const clearFilters = () => {
-    setSelectedTags([]);
-    onFilterResults([], false);
-  };
-
   return (
-    <div className="flex w-full gap-4 relative justify-between">
-      <div className="flex w-[80%] gap-4 relative md:w-[56.5%]">
-        <div className="absolute left-0 top-0 h-full w-[10%] z-10 pointer-events-none rounded bg-gradient-to-l from-transparent to-white"></div>
-        <div className="absolute right-0 top-0 h-full w-[10%] z-10 pointer-events-none rounded bg-gradient-to-r from-transparent to-white"></div>
+    <div className="relative flex w-full justify-between gap-4">
+      <div className="relative flex w-[80%] gap-4 md:w-[56.5%]">
+        <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-[10%] rounded bg-gradient-to-l from-transparent to-white"></div>
+        <div className="pointer-events-none absolute top-0 right-0 z-10 h-full w-[10%] rounded bg-gradient-to-r from-transparent to-white"></div>
         <div
-          className={`flex gap-4 relative pl-8 pr-16 h-full min-h-16 overflow-x-scroll scrollbar-none`}
+          className={`scrollbar-none relative flex h-full min-h-16 gap-4 overflow-x-scroll pr-16 pl-8`}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           {tags &&
             tags.map((tag: Tag) => (
               <div
-                className={`flex items-center justify-between flex-shrink-0 text-neutral-700/80 px-4 py-2 rounded transition-colors cursor-pointer max-h-12 ${
+                className={`flex max-h-12 flex-shrink-0 cursor-pointer items-center justify-between rounded px-4 py-2 text-neutral-700/80 transition-colors ${
                   selectedTags.includes(tag.name)
                     ? "bg-[#3b4494] text-white"
-                    : "bg-neutral-100 "
+                    : "bg-neutral-100"
                 } hover:bg-[#3b4494] hover:text-white`}
                 key={tag.id}
                 onClick={() => handleTagClick(tag.name)}
@@ -72,13 +67,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             ))}
         </div>
       </div>
-      <div className="border border-[#e4003a] flex gap-4 items-center max-h-11 justify-center w-12 rounded-full  cursor-pointer transition-colors hover:bg-[#e4003a] hover:text-white md:w-40">
+      <div className="flex max-h-11 w-12 cursor-pointer items-center justify-center gap-4 rounded-full border border-[#e4003a] transition-colors hover:bg-[#e4003a] hover:text-white md:w-40">
         <button
-          className="flex items-center justify-center rounded-full text-xl py-2 w-full gap-4 text-[#e4003a] cursor-pointer transition-colors hover:text-white"
+          className="flex w-full cursor-pointer items-center justify-center gap-4 rounded-full py-2 text-xl text-[#e4003a] transition-colors hover:text-white"
           onClick={onOpenFilterModal}
         >
-          <i className="bi bi-filter text-xl shrink-0"></i>
-          <span className="hidden  md:inline">Filtrer</span>
+          <i className="bi bi-filter shrink-0 text-xl"></i>
+          <span className="hidden md:inline">Filtrer</span>
         </button>
       </div>
     </div>

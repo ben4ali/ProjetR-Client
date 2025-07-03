@@ -33,10 +33,7 @@ export const VideoSuggestion = ({ projet }: VideoSuggestionProps) => {
     );
 
   return (
-    <div
-      className="video-suggestion-holder flex flex-col gap-2 w-full mt-8
-                 lg:w-[30%] lg:mt-0 lg:h-[100rem]"
-    >
+    <div className="video-suggestion-holder mt-8 flex w-full flex-col gap-2 lg:mt-0 lg:h-[100rem] lg:w-[30%]">
       {filteredProjects.map((p: Projet) => {
         const date = new Date(p.createdAt).toLocaleDateString("fr-CA");
 
@@ -44,24 +41,18 @@ export const VideoSuggestion = ({ projet }: VideoSuggestionProps) => {
           <Link
             key={p.id}
             to={`/watch/${p.id}`}
-            className="video-suggestion flex flex-col items-start p-1 rounded-lg
-                       hover:bg-black/10 transition
-                       lg:flex-row"
+            className="video-suggestion flex flex-col items-start rounded-lg p-1 transition hover:bg-black/10 lg:flex-row"
           >
             <video
               src={p.demoUrl || "https://wallpapercave.com/wp/wp4877950.jpg"}
-              className="h-28 w-full object-cover rounded-lg
-                         lg:w-48 lg:mr-4"
+              className="h-28 w-full rounded-lg object-cover lg:mr-4 lg:w-48"
             />
 
-            <div
-              className="video-suggestion-info flex flex-col gap-2 pt-2
-                         lg:pt-1 w-full"
-            >
+            <div className="video-suggestion-info flex w-full flex-col gap-2 pt-2 lg:pt-1">
               <h4 className="text-[1.35rem] text-gray-700/80">{p.title}</h4>
               <p className="text-gray-600">{p.author.username}</p>
 
-              <div className="video-suggestion-data flex items-center gap-2 text-sm opacity-70 mt-auto mb-2 lg:mb-0">
+              <div className="video-suggestion-data mt-auto mb-2 flex items-center gap-2 text-sm opacity-70 lg:mb-0">
                 <p>{p.views} Visionnements</p>
                 <p>{date}</p>
               </div>

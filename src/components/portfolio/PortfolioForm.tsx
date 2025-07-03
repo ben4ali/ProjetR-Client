@@ -364,7 +364,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   Compétences & Niveaux d'Expertise
                 </label>
 
-                {/* Skill suggestions */}
+                {/* Suggestions skills */}
                 <div className="mb-4">
                   <p className="mb-3 text-sm text-gray-600">
                     Suggestions populaires :
@@ -406,7 +406,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   </div>
                 </div>
 
-                {/* Add new skill card */}
                 <div className="mb-6 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 p-6 transition-colors hover:border-[#444ea5]/40">
                   <div className="space-y-4">
                     <div>
@@ -443,7 +442,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                         </span>
                       </div>
 
-                      {/* Tailwind range slider */}
                       <div className="relative">
                         <div className="relative h-2 rounded bg-gray-200">
                           <div
@@ -480,7 +478,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                         </div>
                       </div>
 
-                      {/* Level description */}
                       <div className="text-xs text-gray-600 italic">
                         {formState.currentSkill.level <= 25 &&
                           "Notions de base, en apprentissage"}
@@ -495,7 +492,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                       </div>
                     </div>
 
-                    {/* Show validation message */}
                     {formState.currentSkill.name.trim() &&
                       formState.skills.some(
                         (skill) =>
@@ -551,7 +547,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                   </div>
                 </div>
 
-                {/* Skills list with scroll */}
                 {formState.skills.length > 0 && (
                   <div className="space-y-3">
                     <h4 className="mb-3 text-sm font-medium text-gray-700">
@@ -599,7 +594,6 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                               </span>
                             </div>
 
-                            {/* Progress bar */}
                             <div className="h-1.5 w-full rounded-full bg-gray-200">
                               <div
                                 className="h-1.5 rounded-full bg-gradient-to-r from-[#444ea5] to-[#5d67be] transition-all duration-300"
@@ -724,6 +718,7 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                 </label>
               </div>
             </div>
+
             {/* Selection de thême pour certain template */}
             {formState.selectedTemplate === "silk" && (
               <div>

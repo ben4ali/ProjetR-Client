@@ -36,7 +36,6 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
   const heroContentRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
 
-  // Live clock for Apple-style attention to detail
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
@@ -47,7 +46,6 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
   useEffect(() => {
     if (isPreview) return;
 
-    // Smooth reveal animations
     if (heroContentRef.current) {
       const elements =
         heroContentRef.current.querySelectorAll(".animate-element");
@@ -68,7 +66,6 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
       );
     }
 
-    // Projects card animations
     if (projectsRef.current) {
       const cards = projectsRef.current.querySelectorAll(".project-card");
 
@@ -111,46 +108,46 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
   return (
     <>
       <div
-        className={`bg-gray-50 text-gray-900 min-h-screen ${
-          isPreview ? "scale-75 origin-top" : ""
+        className={`min-h-screen bg-gray-50 text-gray-900 ${
+          isPreview ? "origin-top scale-75" : ""
         }`}
       >
-        {/* Header - Apple style */}
+        {/* Header */}
         <motion.header
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50"
+          className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/80 backdrop-blur-xl"
         >
-          <nav className="max-w-6xl mx-auto px-6 py-4">
+          <nav className="mx-auto max-w-6xl px-6 py-4">
             <div className="flex items-center justify-between">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-3"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+                  <span className="text-sm font-bold text-white">
                     {user.firstName[0]}
                   </span>
                 </div>
-                <span className="font-semibold text-lg">{user.firstName}</span>
+                <span className="text-lg font-semibold">{user.firstName}</span>
               </motion.div>{" "}
-              <div className="hidden md:flex items-center space-x-8">
+              <div className="hidden items-center space-x-8 md:flex">
                 {["À Propos", "Travaux", "Compétences", "Contact"].map(
                   (item, index) => (
                     <motion.a
                       key={item}
                       href={`#${["about", "work", "skills", "contact"][index]}`}
                       whileHover={{ y: -2 }}
-                      className="text-gray-600 hover:text-gray-900 font-medium transition-colors relative group"
+                      className="group relative font-medium text-gray-600 transition-colors hover:text-gray-900"
                     >
                       {item}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+                      <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                     </motion.a>
                   ),
                 )}
               </div>
-              <div className="text-sm text-gray-500 font-mono">
+              <div className="font-mono text-sm text-gray-500">
                 {time.toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -161,34 +158,34 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
         </motion.header>
 
         {/* Hero Section */}
-        <section className="py-20 px-6">
-          <div ref={heroContentRef} className="max-w-4xl mx-auto text-center">
+        <section className="px-6 py-20">
+          <div ref={heroContentRef} className="mx-auto max-w-4xl text-center">
             <div className="animate-element mb-8">
               <motion.div
                 whileHover={{ scale: 1.1, rotateY: 10 }}
-                className="w-32 h-32 mx-auto mb-8 relative"
+                className="relative mx-auto mb-8 h-32 w-32"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl shadow-2xl"></div>
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-2xl"></div>
                 <img
                   src={user.avatar || "/default-avatar.png"}
                   alt={user.firstName}
-                  className="w-full h-full object-cover rounded-3xl relative z-10"
+                  className="relative z-10 h-full w-full rounded-3xl object-cover"
                 />
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/20 to-transparent z-20"></div>
+                <div className="absolute inset-0 z-20 rounded-3xl bg-gradient-to-t from-black/20 to-transparent"></div>
               </motion.div>
             </div>{" "}
-            <h1 className="animate-element text-5xl md:text-7xl font-light mb-6 tracking-tight">
+            <h1 className="animate-element mb-6 text-5xl font-light tracking-tight md:text-7xl">
               {title || (
                 <>
                   <span className="font-extralight">Bonjour, je suis</span>
                   <br />
-                  <span className="font-semibold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text font-semibold text-transparent">
                     {user.firstName} {user.lastName}
                   </span>
                 </>
               )}
             </h1>
-            <p className="animate-element text-2xl text-gray-600 mb-8 font-light">
+            <p className="animate-element mb-8 text-2xl font-light text-gray-600">
               {jobTitle || "Designer & Développeur"}
             </p>{" "}
             {hook && (
@@ -198,13 +195,13 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="animate-element mb-8"
               >
-                <p className="text-lg text-blue-600 font-medium bg-blue-50 px-6 py-3 rounded-2xl inline-block">
+                <p className="inline-block rounded-2xl bg-blue-50 px-6 py-3 text-lg font-medium text-blue-600">
                   {hook}
                 </p>
               </motion.div>
             )}
-            <div className="animate-element max-w-2xl mx-auto mb-12">
-              <p className="text-lg text-gray-700 leading-relaxed">
+            <div className="animate-element mx-auto mb-12 max-w-2xl">
+              <p className="text-lg leading-relaxed text-gray-700">
                 {about ||
                   "Je crée des expériences numériques réfléchies qui donnent vie aux idées avec la même attention aux détails et à l&apos;innovation qui définit un grand design."}
               </p>
@@ -214,11 +211,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 href="#work"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-4 bg-blue-500 text-white rounded-2xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-blue-600"
+                className="inline-flex items-center rounded-2xl bg-blue-500 px-8 py-4 font-medium text-white shadow-lg transition-all duration-300 hover:bg-blue-600 hover:shadow-xl"
               >
                 Voir Mes Travaux
                 <svg
-                  className="ml-2 w-4 h-4"
+                  className="ml-2 h-4 w-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -236,7 +233,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 href="#contact"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-4 bg-gray-100 text-gray-900 rounded-2xl font-medium hover:bg-gray-200 transition-all duration-300"
+                className="inline-flex items-center rounded-2xl bg-gray-100 px-8 py-4 font-medium text-gray-900 transition-all duration-300 hover:bg-gray-200"
               >
                 Entrer en Contact
               </motion.a>
@@ -245,27 +242,27 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
         </section>
 
         {/* Work Section */}
-        <section id="work" className="py-20 px-6 bg-white">
-          <div className="max-w-6xl mx-auto">
+        <section id="work" className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="mb-16 text-center"
             >
               {" "}
-              <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-tight">
+              <h2 className="mb-4 text-4xl font-light tracking-tight md:text-5xl">
                 Travaux Sélectionnés
               </h2>
-              <div className="w-16 h-0.5 bg-gray-300 mx-auto"></div>
+              <div className="mx-auto h-0.5 w-16 bg-gray-300"></div>
             </motion.div>
 
             <div ref={projectsRef} className="space-y-20">
               {projets.slice(0, 4).map((projet, index) => (
                 <div
                   key={projet.id}
-                  className={`project-card grid md:grid-cols-2 gap-12 items-center ${
+                  className={`project-card grid items-center gap-12 md:grid-cols-2 ${
                     index % 2 === 1 ? "md:grid-flow-col-dense" : ""
                   }`}
                 >
@@ -274,18 +271,18 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                     whileHover={{ scale: 1.02 }}
                     onClick={() => setSelectedProject(projet)}
                   >
-                    <div className="group cursor-pointer bg-gray-100 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
+                    <div className="group cursor-pointer overflow-hidden rounded-3xl bg-gray-100 shadow-xl transition-all duration-500 hover:shadow-2xl">
                       {projet.demoUrl ? (
                         <div className="relative">
                           <video
-                            className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700"
+                            className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src={projet.demoUrl}
                           />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-white/90 text-gray-900 rounded-full p-4 shadow-lg">
+                          <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10"></div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <div className="rounded-full bg-white/90 p-4 text-gray-900 shadow-lg">
                               <svg
-                                className="w-8 h-8"
+                                className="h-8 w-8"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
@@ -295,11 +292,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                           </div>
                         </div>
                       ) : (
-                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <div className="flex aspect-video items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
                           <div className="text-center text-gray-500">
-                            <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-lg">
                               <svg
-                                className="w-8 h-8"
+                                className="h-8 w-8"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
@@ -316,10 +313,10 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                   <div className={`${index % 2 === 1 ? "md:col-start-1" : ""}`}>
                     <div className="space-y-6">
                       <div>
-                        <h3 className="text-3xl font-semibold mb-3 tracking-tight">
+                        <h3 className="mb-3 text-3xl font-semibold tracking-tight">
                           {projet.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed text-lg">
+                        <p className="text-lg leading-relaxed text-gray-600">
                           {projet.description}
                         </p>
                       </div>
@@ -328,7 +325,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                         {projet.tags.slice(0, 4).map((tag) => (
                           <span
                             key={tag}
-                            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                            className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
                           >
                             {tag}
                           </span>
@@ -340,11 +337,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                           onClick={() => setSelectedProject(projet)}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="flex items-center text-blue-500 hover:text-blue-600 font-medium"
+                          className="flex items-center font-medium text-blue-500 hover:text-blue-600"
                         >
                           Voir le Projet
                           <svg
-                            className="ml-2 w-4 h-4"
+                            className="ml-2 h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -363,11 +360,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                             href={projet.githubUrl}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="flex items-center text-gray-600 hover:text-gray-900 font-medium"
+                            className="flex items-center font-medium text-gray-600 hover:text-gray-900"
                           >
                             Code Source
                             <svg
-                              className="ml-2 w-4 h-4"
+                              className="ml-2 h-4 w-4"
                               fill="currentColor"
                               viewBox="0 0 24 24"
                             >
@@ -380,7 +377,6 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                   </div>
                 </div>
               ))}
-              {/* Fallback projects */}{" "}
               {projets.length === 0 &&
                 [
                   {
@@ -401,7 +397,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 ].map((project, index) => (
                   <div
                     key={index}
-                    className={`project-card grid md:grid-cols-2 gap-12 items-center ${
+                    className={`project-card grid items-center gap-12 md:grid-cols-2 ${
                       index % 2 === 1 ? "md:grid-flow-col-dense" : ""
                     }`}
                   >
@@ -409,11 +405,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                       className={`${index % 2 === 1 ? "md:col-start-2" : ""}`}
                       whileHover={{ scale: 1.02 }}
                     >
-                      <div className="bg-gray-100 rounded-3xl overflow-hidden shadow-xl aspect-video flex items-center justify-center">
+                      <div className="flex aspect-video items-center justify-center overflow-hidden rounded-3xl bg-gray-100 shadow-xl">
                         <div className="text-center text-gray-500">
-                          <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-lg">
                             <svg
-                              className="w-8 h-8"
+                              className="h-8 w-8"
                               fill="currentColor"
                               viewBox="0 0 24 24"
                             >
@@ -430,10 +426,10 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                     >
                       <div className="space-y-6">
                         <div>
-                          <h3 className="text-3xl font-semibold mb-3 tracking-tight">
+                          <h3 className="mb-3 text-3xl font-semibold tracking-tight">
                             {project.name}
                           </h3>
-                          <p className="text-gray-600 leading-relaxed text-lg">
+                          <p className="text-lg leading-relaxed text-gray-600">
                             {project.desc}
                           </p>
                         </div>
@@ -442,7 +438,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                           {project.tech.map((tech) => (
                             <span
                               key={tech}
-                              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                              className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
                             >
                               {tech}
                             </span>
@@ -457,23 +453,23 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 px-6 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
+        <section id="skills" className="bg-gray-50 px-6 py-20">
+          <div className="mx-auto max-w-4xl">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="mb-16 text-center"
             >
               {" "}
-              <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-tight">
+              <h2 className="mb-4 text-4xl font-light tracking-tight md:text-5xl">
                 Compétences & Expertise
               </h2>
-              <div className="w-16 h-0.5 bg-gray-300 mx-auto"></div>
+              <div className="mx-auto h-0.5 w-16 bg-gray-300"></div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <motion.div
                 initial={{ x: -50, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
@@ -481,7 +477,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <h3 className="text-2xl font-semibold mb-6">
+                <h3 className="mb-6 text-2xl font-semibold">
                   Compétences Techniques
                 </h3>
                 <div className="space-y-4">
@@ -502,18 +498,18 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm"
+                      className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm"
                     >
                       <span className="font-medium text-gray-900">
                         {skill.name}
                       </span>
-                      <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-2 w-24 overflow-hidden rounded-full bg-gray-200">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
                           viewport={{ once: true }}
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
                         ></motion.div>
                       </div>
                     </motion.div>
@@ -529,7 +525,7 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 className="space-y-6"
               >
                 {" "}
-                <h3 className="text-2xl font-semibold mb-6">
+                <h3 className="mb-6 text-2xl font-semibold">
                   Philosophie Design
                 </h3>
                 <div className="space-y-6">
@@ -553,12 +549,12 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.2 }}
                       viewport={{ once: true }}
-                      className="p-6 bg-white rounded-2xl shadow-sm"
+                      className="rounded-2xl bg-white p-6 shadow-sm"
                     >
-                      <h4 className="font-semibold text-gray-900 mb-2">
+                      <h4 className="mb-2 font-semibold text-gray-900">
                         {item.title}
                       </h4>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="leading-relaxed text-gray-600">
                         {item.desc}
                       </p>
                     </motion.div>
@@ -573,11 +569,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center mt-16"
+                className="mt-16 text-center"
               >
-                <div className="inline-block p-8 bg-white rounded-3xl shadow-lg">
+                <div className="inline-block rounded-3xl bg-white p-8 shadow-lg">
                   {" "}
-                  <div className="text-5xl font-light text-gray-900 mb-2">
+                  <div className="mb-2 text-5xl font-light text-gray-900">
                     {yearsOfExperience}+
                   </div>
                   <div className="text-gray-600">Années d&apos;Expérience</div>
@@ -588,8 +584,8 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-6 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
+        <section id="contact" className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -598,11 +594,11 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
               className="mb-16"
             >
               {" "}
-              <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">
+              <h2 className="mb-6 text-4xl font-light tracking-tight md:text-5xl">
                 Travaillons Ensemble
               </h2>
-              <div className="w-16 h-0.5 bg-gray-300 mx-auto mb-8"></div>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              <div className="mx-auto mb-8 h-0.5 w-16 bg-gray-300"></div>
+              <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
                 Je suis toujours enthousiaste à l&apos;idée de collaborer sur
                 des projets qui repoussent les limites et créent un impact
                 significatif.
@@ -620,10 +616,10 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 href={`mailto:${user.email}`}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-4 bg-blue-500 text-white rounded-2xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-blue-600"
+                className="inline-flex items-center rounded-2xl bg-blue-500 px-8 py-4 font-medium text-white shadow-lg transition-all duration-300 hover:bg-blue-600 hover:shadow-xl"
               >
                 <svg
-                  className="mr-3 w-5 h-5"
+                  className="mr-3 h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -644,10 +640,10 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                   onClick={handleCVDownload}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center px-8 py-4 bg-gray-100 text-gray-900 rounded-2xl font-medium hover:bg-gray-200 transition-all duration-300"
+                  className="inline-flex items-center rounded-2xl bg-gray-100 px-8 py-4 font-medium text-gray-900 transition-all duration-300 hover:bg-gray-200"
                 >
                   <svg
-                    className="mr-3 w-5 h-5"
+                    className="mr-3 h-5 w-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -664,22 +660,21 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
               )}
             </motion.div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="flex justify-center space-x-6 mt-12"
+              className="mt-12 flex justify-center space-x-6"
             >
               {githubUrl && (
                 <motion.a
                   href={githubUrl}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300"
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-600 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -692,10 +687,10 @@ export const CupertinoTemplate: FC<CupertinoTemplateProps> = ({
                 <motion.a
                   href={linkedinUrl}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300"
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-600 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >

@@ -32,7 +32,9 @@ export const RondureTemplate: FC<RondureTemplateProps> = ({
 
   return (
     <div
-      className="relative flex min-h-screen flex-col overflow-hidden text-white"
+      className={`relative flex min-h-screen flex-col overflow-hidden text-white ${
+        isPreview ? "origin-top scale-75" : ""
+      }`}
       style={{
         background:
           "radial-gradient(ellipse at top left, rgb(30,30,30) 0%, rgb(10,10,10) 25%, rgb(0,0,0) 60%, rgb(0,0,0) 100%)",

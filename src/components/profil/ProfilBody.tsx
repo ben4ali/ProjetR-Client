@@ -7,16 +7,16 @@ interface ProfilBodyProps {
 
 export const ProfilBody = ({ projets }: ProfilBodyProps) => {
   return (
-    <div className="min-h-[10rem] py-8 w-[95%] md:w-[90%] bg-gray-300 rounded-b-lg">
+    <div className="min-h-[10rem] w-[95%] rounded-b-lg bg-gray-300 py-8 md:w-[90%]">
       {projets.length > 0 && (
-        <div className="grid gap-4 p-4 [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))]">
+        <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 p-4 md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))]">
           {projets.map((projet, index) => (
             <ProfilPost projet={projet} key={index} />
           ))}
         </div>
       )}
       {projets.length === 0 && (
-        <div className="flex items-center justify-center w-full h-full text-center">
+        <div className="flex h-full w-full items-center justify-center text-center">
           <p className="text-2xl text-black/50">Aucune publication trouvée.</p>
         </div>
       )}

@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOutUser = async () => {
     await signOut(auth);
-    // Also clear the local token
     localStorage.removeItem("token");
   };
 

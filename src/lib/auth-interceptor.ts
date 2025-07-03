@@ -178,8 +178,8 @@ axios.interceptors.request.use(
       const token = await authManager.getValidToken();
       config.headers.Authorization = `Bearer ${token}`;
     } catch {
-      // If we can't get a valid token, let the request proceed without auth
-      // The response interceptor will handle the 401 error
+      console.error("Failed to get valid token");
+      // L'erreur d'authorization sera gérée dans l'intercepteur de réponse
     }
 
     return config;

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useProjectsByTitle } from '../../hooks/use-project';
-import { Projet } from '../../types/Projet';
-import { startVoiceRecognition } from '../../utils/VoiceTranscript';
-import { FilterBar } from './FilterBar';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useProjectsByTitle } from "../../hooks/use-project";
+import { Projet } from "../../types/Projet";
+import { startVoiceRecognition } from "../../utils/VoiceTranscript";
+import { FilterBar } from "./FilterBar";
+
 interface SearchBarProps {
   onSearchResults: (projects: Projet[], searchQuery: string) => void;
   onFilterResults: (projects: Projet[], isSearching: boolean) => void;
@@ -17,16 +18,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onOpenFilterModal,
   initialSearchQuery,
 }) => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isListening, setIsListening] = useState(false);
 
   const { data: searchResults, isLoading } = useProjectsByTitle(searchQuery);
 
   // Gérer la recherche initiale depuis l'URL
   React.useEffect(() => {
-    if (initialSearchQuery && initialSearchQuery.trim() !== '') {
+    if (initialSearchQuery && initialSearchQuery.trim() !== "") {
       setSearchText(initialSearchQuery);
       setSearchQuery(initialSearchQuery.trim());
     }
@@ -34,7 +35,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   React.useEffect(() => {
     if (searchResults && !isLoading) {
-      onSearchResults(searchResults, searchQuery || '');
+      onSearchResults(searchResults, searchQuery || "");
     }
   }, [searchResults, isLoading, onSearchResults, searchQuery]);
 
@@ -43,12 +44,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setSearchQuery(searchText.trim());
     } else {
       setSearchQuery(undefined);
-      onSearchResults([], '');
+      onSearchResults([], "");
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSearch();
     }
   };
@@ -56,34 +57,33 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const handleVoiceInput = () => {
     setIsListening(true);
     startVoiceRecognition(
-      transcript => {
+      (transcript) => {
         setSearchText(transcript);
-        setError('');
+        setError("");
         setIsListening(false);
         setSearchQuery(transcript);
       },
-      error => {
+      (error) => {
         setError(error);
         setIsListening(false);
-      }
+      },
     );
   };
 
   return (
-    <div className="w-full flex flex-col mt-15 h-auto justify-center gap-4 mb-4 relative md:w-[90%] md:h-32">
-      <div className="flex  gap-2 w-full justify-center items-stretch relative md:flex-row md:gap-4 md:items-center">
-        <div className="flex relative w-[80%] gap-4 items-center">
+    <div className="relative mt-15 mb-4 flex h-auto w-full flex-col justify-center gap-4 md:h-32 md:w-[90%]">
+      <div className="relative flex w-full items-stretch justify-center gap-2 md:flex-row md:items-center md:gap-4">
+        <div className="relative flex w-[80%] items-center gap-4">
           <input
             type="text"
             placeholder="Rechercher..."
             value={searchText}
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full h-12 text-[25px] px-4 rounded border border-[#ddddec] outline-none bg-transparent text-slate-700 md:w-[70%] md:text-[20px]"
+            className="h-12 w-full rounded border border-[#ddddec] bg-transparent px-4 text-[25px] text-slate-700 outline-none md:w-[70%] md:text-[20px]"
           />
           <button
-            className="hidden md:flex absolute md:right-[30.1%] md:h-[93%] md:items-center md:justify-center md:w-24 md:rounded-r md:bg-slate-100 md:text-slate-700/70 md:text-xl md:cursor-pointer md:transition-colors md:hover:text-white
-              right-[10%] w-20 text-[1.1rem] h-12 items-center justify-center  bg-slate-100 text-slate-700/70 cursor-pointer transition-colors hover:bg-[#444ea5] hover:text-white"
+            className="absolute right-[10%] hidden h-12 w-20 cursor-pointer items-center justify-center bg-slate-100 text-[1.1rem] text-slate-700/70 transition-colors hover:bg-[#444ea5] hover:text-white md:right-[30.1%] md:flex md:h-[93%] md:w-24 md:cursor-pointer md:items-center md:justify-center md:rounded-r md:bg-slate-100 md:text-xl md:text-slate-700/70 md:transition-colors md:hover:text-white"
             onClick={handleSearch}
             disabled={isLoading}
           >
@@ -94,10 +94,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             )}
           </button>
           <button
-            className={`hidden md:flex ml-2 text-2xl bg-[#3b4494] text-white rounded-full h-12 w-12 items-center justify-center cursor-pointer transition-colors ${
+            className={`ml-2 hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#3b4494] text-2xl text-white transition-colors md:flex ${
               isListening
-                ? 'bg-blue-400 text-white animate-pulse'
-                : 'text-slate-700/80'
+                ? "animate-pulse bg-blue-400 text-white"
+                : "text-slate-700/80"
             }`}
             onClick={handleVoiceInput}
             disabled={isListening || isLoading}
@@ -108,16 +108,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <div className="flex w-auto justify-center md:w-[25rem] md:justify-end">
           <Link
             to="/publish"
-            className="w-12 h-12 p-0 rounded-full flex justify-center items-center text-[1.1rem] bg-[#3b4494] text-white text-xl cursor-pointer transition-colors hover:bg-neutral-900 hover:text-white md:w-auto md:px-8 md:rounded-full md:text-xl"
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#3b4494] p-0 text-xl text-[1.1rem] text-white transition-colors hover:bg-neutral-900 hover:text-white md:w-auto md:rounded-full md:px-8 md:text-xl"
           >
-            <i className="bi bi-plus text-2xl mr-0 md:mr-2"></i>
+            <i className="bi bi-plus mr-0 text-2xl md:mr-2"></i>
             <p className="hidden md:block">Publier un projet</p>
           </Link>
         </div>
       </div>
 
       {error && (
-        <p className="absolute text-red-500 text-sm left-2 -top-5">{error}</p>
+        <p className="absolute -top-5 left-2 text-sm text-red-500">{error}</p>
       )}
 
       <FilterBar

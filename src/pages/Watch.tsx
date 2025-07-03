@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import "../styles/style-watch.css"; 👉 supprimé
 import { useParams } from "react-router-dom";
 import { CommentSection } from "../components/watch/CommentSection";
 import { Contributors } from "../components/watch/Contributors";
@@ -27,14 +26,8 @@ export const Watch = () => {
 
   return (
     <div className="watch-container flex flex-col items-center">
-      <div
-        className="watch-content flex flex-col gap-4  w-[95%] h-auto
-                       lg:flex-row mt-10 lg:w-[90%] lg:h-[80vh]"
-      >
-        <section
-          className="video-section-container w-full h-auto
-                             lg:w-[70%] lg:h-[100rem]"
-        >
+      <div className="watch-content mt-10 flex h-auto w-[95%] flex-col gap-4 lg:h-[80vh] lg:w-[90%] lg:flex-row">
+        <section className="video-section-container h-auto w-full lg:h-[100rem] lg:w-[70%]">
           <VideoPlayer projet={projet} />
           <VideoInfo projet={projet} />
           <VideoOptions projet={projet} />

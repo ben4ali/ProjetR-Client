@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { User } from '../../types/User';
-import GradientText from './GradientText';
+import { FC } from "react";
+import { User } from "../../types/User";
+import GradientText from "./GradientText";
 
 interface WelcomeSectionProps {
   user: User;
@@ -9,18 +9,18 @@ interface WelcomeSectionProps {
 export const WelcomeSection: FC<WelcomeSectionProps> = ({ user }) => {
   const currentHour = new Date().getHours();
   const getGreeting = () => {
-    if (currentHour < 12) return 'Bonjour';
-    if (currentHour < 18) return 'Bon après-midi';
-    return 'Bonsoir';
+    if (currentHour < 12) return "Bonjour";
+    if (currentHour < 18) return "Bon après-midi";
+    return "Bonsoir";
   };
 
   return (
     <div className="welcome-section">
       <div className="relative z-10 mb-10">
-        {' '}
+        {" "}
         <GradientText
           text={`${getGreeting()}, ${user.firstName} ! `}
-          className="text-5xl font-bold py-2"
+          className="py-2 text-5xl font-bold"
           variant="rosemont"
         />
         <p className="text-gray/90 text-lg">
@@ -29,9 +29,8 @@ export const WelcomeSection: FC<WelcomeSectionProps> = ({ user }) => {
         </p>
       </div>
 
-      {/* Floating elements for visual appeal */}
-      <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
-      <div className="absolute bottom-6 left-6 w-12 h-12 bg-white/20 rounded-full blur-lg"></div>
+      <div className="absolute top-4 right-4 h-16 w-16 rounded-full bg-white/10 blur-xl"></div>
+      <div className="absolute bottom-6 left-6 h-12 w-12 rounded-full bg-white/20 blur-lg"></div>
     </div>
   );
 };

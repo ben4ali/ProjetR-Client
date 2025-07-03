@@ -18,8 +18,8 @@ export const PostList: React.FC<PostListProps> = ({
       className={
         className ||
         (fullPost
-          ? "flex flex-col w-full px-[5%] py-8 gap-6"
-          : "flex flex-wrap gap-4 w-full px-[5%] py-8 h-[30rem]")
+          ? "flex w-full flex-col gap-6 px-[5%] py-8"
+          : "flex h-[30rem] w-full flex-wrap gap-4 px-[5%] py-8")
       }
     >
       {projets.map((projet) => (

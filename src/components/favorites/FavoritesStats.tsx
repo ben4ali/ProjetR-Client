@@ -1,4 +1,4 @@
-import { Favorite } from '../../types/Favorite';
+import { Favorite } from "../../types/Favorite";
 
 interface FavoritesStatsProps {
   favorites: Favorite[];
@@ -10,7 +10,7 @@ export const FavoritesStats = ({ favorites }: FavoritesStatsProps) => {
   }
 
   return (
-    <div className="bg-white rounded shadow p-6 mb-8">
+    <div className="mb-8 rounded bg-white p-6 shadow">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-6">
           <div className="text-center">
@@ -18,8 +18,8 @@ export const FavoritesStats = ({ favorites }: FavoritesStatsProps) => {
               {favorites.length}
             </div>
             <div className="text-sm text-gray-600">
-              Projet{favorites.length > 1 ? 's' : ''} favori
-              {favorites.length > 1 ? 's' : ''}
+              Projet{favorites.length > 1 ? "s" : ""} favori
+              {favorites.length > 1 ? "s" : ""}
             </div>
           </div>
         </div>

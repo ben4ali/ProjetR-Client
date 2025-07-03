@@ -17,12 +17,12 @@ const missingKeys = requiredKeys.filter(
 );
 
 if (missingKeys.length > 0) {
-  console.error("🔥 Firebase configuration missing:", missingKeys);
+  console.error("Firebase configuration missing:", missingKeys);
   console.error(
     "Please check your .env file and ensure all Firebase variables are set",
   );
 } else {
-  console.log("🔥 Firebase configuration loaded successfully");
+  console.log("Firebase configuration loaded successfully");
 }
 
 const app = initializeApp(firebaseConfig);

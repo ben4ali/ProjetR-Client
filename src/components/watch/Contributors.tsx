@@ -75,23 +75,17 @@ export const Contributors = ({ projet }: ContributorsProps) => {
   }, [userData, isSuccess, current, idx, collaborators]);
 
   return (
-    <div className="contributors-container flex flex-col mt-6 w-full">
-      <div
-        className="contributors-holder flex items-center gap-4 w-full pt-4
-                       border-t-2 border-black/10 flex-wrap lg:flex-nowrap"
-      >
+    <div className="contributors-container mt-6 flex w-full flex-col">
+      <div className="contributors-holder flex w-full flex-wrap items-center gap-4 border-t-2 border-black/10 pt-4 lg:flex-nowrap">
         {/* Enseignant */}
         {projet?.teacher && (
           <div className="teacher-holder flex flex-col gap-2">
             <h3 className="text-lg text-gray-700/80">Enseignant</h3>
-            <a
-              className="teacher-card flex items-center gap-4 h-16 w-full rounded-lg px-4
-                           shadow-md bg-black/5 border border-[#e4003950] hover:bg-black/10 hover:translate-x-[3px] hover:translate-y-[3px] transition"
-            >
+            <a className="teacher-card flex h-16 w-full items-center gap-4 rounded-lg border border-[#e4003950] bg-black/5 px-4 shadow-md transition hover:translate-x-[3px] hover:translate-y-[3px] hover:bg-black/10">
               <img
                 src={default_profil}
                 alt="Profil"
-                className="h-12 w-12 rounded-full object-cover hover:scale-105 transition"
+                className="h-12 w-12 rounded-full object-cover transition hover:scale-105"
               />
               <h4 className="text-[1.2rem] text-gray-700/80">
                 {projet.teacher}
@@ -106,12 +100,8 @@ export const Contributors = ({ projet }: ContributorsProps) => {
             <h3 className="text-lg text-gray-700/80">
               ({items.length}) Contributeurs
             </h3>
-            <div
-              className="contributors-list flex items-center border border-[#e4003950] bg-black/5 shadow-md
-                             w-full h-16 rounded-lg px-8 hover:bg-black/10 hover:shadow-none
-                             hover:translate-x-[3px] hover:translate-y-[3px] transition"
-            >
-              <div className="inner-container flex items-center w-full">
+            <div className="contributors-list flex h-16 w-full items-center rounded-lg border border-[#e4003950] bg-black/5 px-8 shadow-md transition hover:translate-x-[3px] hover:translate-y-[3px] hover:bg-black/10 hover:shadow-none">
+              <div className="inner-container flex w-full items-center">
                 <AnimatedTooltip items={items} />
               </div>
             </div>
@@ -120,11 +110,11 @@ export const Contributors = ({ projet }: ContributorsProps) => {
 
         {/* Cours et session */}
         {projet && (
-          <div className="course-holder flex flex-col lg:ml-auto opacity-80 gap-1">
-            <h3 className="text-[1.2rem] text-gray-700/80 px-4">
+          <div className="course-holder flex flex-col gap-1 opacity-80 lg:ml-auto">
+            <h3 className="px-4 text-[1.2rem] text-gray-700/80">
               {projet.course ?? ""}
             </h3>
-            <h3 className="text-[1.2rem] text-gray-700/80 px-4">
+            <h3 className="px-4 text-[1.2rem] text-gray-700/80">
               {projet.session ?? ""}
             </h3>
           </div>

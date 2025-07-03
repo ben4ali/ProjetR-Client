@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
-import { Portfolio } from '../../../types/Portfolio';
-import { ProjectVideoDialog } from '../ProjectVideoDialog';
+import { FC, useState } from "react";
+import { Portfolio } from "../../../types/Portfolio";
+import { ProjectVideoDialog } from "../ProjectVideoDialog";
 
 interface ClassicTemplateProps {
   portfolio: Portfolio;
@@ -30,48 +30,48 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
 
   return (
     <div
-      className={`bg-white text-gray-800 min-h-screen ${
-        isPreview ? 'scale-75 origin-top' : ''
+      className={`min-h-screen bg-white text-gray-800 ${
+        isPreview ? "origin-top scale-75" : ""
       }`}
     >
-      <header className="bg-gray-50 border-b-2 border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-8">
+      <header className="border-b-2 border-gray-200 bg-gray-50">
+        <div className="mx-auto max-w-6xl px-6 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img
-                src={user.avatar || '/default-avatar.png'}
+                src={user.avatar || "/default-avatar.png"}
                 alt={user.firstName}
-                className="w-16 h-16 rounded-full border-2 border-gray-300"
-              />{' '}
+                className="h-16 w-16 rounded-full border-2 border-gray-300"
+              />{" "}
               <div>
-                <h1 className="text-2xl font-serif font-bold">
+                <h1 className="font-serif text-2xl font-bold">
                   {title || `${user.firstName} ${user.lastName}`}
                 </h1>
                 <p className="text-gray-600">Développeur Professionnel</p>
               </div>
-            </div>{' '}
-            <nav className="hidden md:flex space-x-8">
+            </div>{" "}
+            <nav className="hidden space-x-8 md:flex">
               <a
                 href="#about"
-                className="text-gray-700 hover:text-gray-900 font-medium"
+                className="font-medium text-gray-700 hover:text-gray-900"
               >
                 À propos
-              </a>{' '}
+              </a>{" "}
               <a
                 href="#about"
-                className="text-gray-700 hover:text-gray-900 font-medium"
+                className="font-medium text-gray-700 hover:text-gray-900"
               >
                 Expérience
               </a>
               <a
                 href="#portfolio"
-                className="text-gray-700 hover:text-gray-900 font-medium"
+                className="font-medium text-gray-700 hover:text-gray-900"
               >
                 Portfolio
               </a>
               <a
                 href="#contact"
-                className="text-gray-700 hover:text-gray-900 font-medium"
+                className="font-medium text-gray-700 hover:text-gray-900"
               >
                 Contact
               </a>
@@ -79,36 +79,36 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
           </div>
         </div>
       </header>
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center p-10 mb-30">
-          {' '}
-          <h2 className="text-5xl font-serif font-bold mb-6 text-gray-900">
+      <section className="px-6 py-20">
+        <div className="mx-auto mb-30 max-w-4xl p-10 text-center">
+          {" "}
+          <h2 className="mb-6 font-serif text-5xl font-bold text-gray-900">
             {jobTitle || "Créer l'Excellence Numérique"}
           </h2>
           {hook && (
-            <p className="text-lg text-gray-700 font-medium mb-6 italic ">
+            <p className="mb-6 text-lg font-medium text-gray-700 italic">
               "{hook}"
             </p>
           )}
           <a
             href="#portfolio"
-            className="bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition-colors font-medium inline-block"
+            className="inline-block bg-gray-900 px-8 py-3 font-medium text-white transition-colors hover:bg-gray-800"
           >
             Voir Mon Travail
           </a>
         </div>
-      </section>{' '}
-      <section id="about" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      </section>{" "}
+      <section id="about" className="bg-gray-50 px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              {' '}
-              <h3 className="text-3xl font-serif font-bold mb-6">
+              {" "}
+              <h3 className="mb-6 font-serif text-3xl font-bold">
                 À Propos de Moi
               </h3>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="mb-6 leading-relaxed text-gray-700">
                 {about ||
-                  'Je suis un ingénieur logiciel dévoué avec une passion pour la création de solutions innovantes. Mon expertise couvre le développement full-stack, avec un accent particulier sur les technologies web modernes.'}
+                  "Je suis un ingénieur logiciel dévoué avec une passion pour la création de solutions innovantes. Mon expertise couvre le développement full-stack, avec un accent particulier sur les technologies web modernes."}
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="border-l-4 border-gray-900 pl-4">
@@ -125,14 +125,14 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                 </div>
               </div>
               {(githubUrl || linkedinUrl) && (
-                <div className="flex space-x-4 mt-6">
+                <div className="mt-6 flex space-x-4">
                   {githubUrl && (
                     <a
                       href={githubUrl}
-                      className="text-gray-600 hover:text-gray-900 transition-colors"
+                      className="text-gray-600 transition-colors hover:text-gray-900"
                     >
                       <svg
-                        className="w-6 h-6"
+                        className="h-6 w-6"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -143,10 +143,10 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                   {linkedinUrl && (
                     <a
                       href={linkedinUrl}
-                      className="text-gray-600 hover:text-gray-900 transition-colors"
+                      className="text-gray-600 transition-colors hover:text-gray-900"
                     >
                       <svg
-                        className="w-6 h-6"
+                        className="h-6 w-6"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -157,15 +157,15 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                 </div>
               )}
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h4 className="text-xl font-semibold mb-6">
+            <div className="rounded-lg bg-white p-8 shadow-lg">
+              <h4 className="mb-6 text-xl font-semibold">
                 Compétences Principales
-              </h4>{' '}
+              </h4>{" "}
               <div className="space-y-4">
-                {skills?.slice(0, 4).map(skill => {
+                {skills?.slice(0, 4).map((skill) => {
                   return (
                     <div key={skill.name}>
-                      <div className="flex justify-between mb-1">
+                      <div className="mb-1 flex justify-between">
                         <span className="text-sm font-medium">
                           {skill.name}
                         </span>
@@ -173,11 +173,11 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
                           {skill.level}%
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="h-2 w-full rounded-full bg-gray-200">
                         <div
-                          className="bg-gray-900 h-2 rounded-full"
+                          className="h-2 rounded-full bg-gray-900"
                           style={{ width: `${skill.level}%` }}
-                        ></div>
+                        />
                       </div>
                     </div>
                   );
@@ -186,42 +186,42 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             </div>
           </div>
         </div>
-      </section>{' '}
-      <section id="portfolio" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          {' '}
-          <h3 className="text-3xl font-serif font-bold mb-12 text-center">
+      </section>{" "}
+      <section id="portfolio" className="px-6 py-20">
+        <div className="mx-auto max-w-4xl">
+          {" "}
+          <h3 className="mb-12 text-center font-serif text-3xl font-bold">
             Projets en Vedette
           </h3>
           <div className="space-y-8">
-            {projets.slice(0, 3).map(projet => (
+            {projets.slice(0, 3).map((projet) => (
               <div
                 key={projet.id}
-                className="border-l-4 border-gray-300 pl-8 pb-8"
+                className="border-l-4 border-gray-300 pb-8 pl-8"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="mb-2 flex items-center justify-between">
                   <h4 className="text-xl font-semibold">{projet.title}</h4>
                   <span className="text-gray-600">
                     {new Date(projet.createdAt).getFullYear()}
                   </span>
                 </div>
-                <p className="text-gray-700 mb-2">
-                  {projet.tags?.join(', ') || 'Développement Full Stack'}
+                <p className="mb-2 text-gray-700">
+                  {projet.tags?.join(", ") || "Développement Full Stack"}
                 </p>
-                <p className="text-gray-600 mb-4">{projet.description}</p>
+                <p className="mb-4 text-gray-600">{projet.description}</p>
 
                 <div className="flex space-x-4">
                   {projet.githubUrl && (
                     <a
                       href={projet.githubUrl}
-                      className="inline-flex items-center text-gray-900 hover:text-gray-700 font-medium"
+                      className="inline-flex items-center font-medium text-gray-900 hover:text-gray-700"
                     >
                       Voir le Projet →
                     </a>
                   )}
                   <button
                     onClick={() => setSelectedProject(projet)}
-                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                    className="inline-flex items-center font-medium text-blue-600 hover:text-blue-700"
                   >
                     🎥 Voir la Vidéo
                   </button>
@@ -229,14 +229,14 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
               </div>
             ))}
             {projets.length === 0 && (
-              <div className="border-l-4 border-gray-300 pl-8 pb-8">
-                <div className="flex items-center justify-between mb-2">
+              <div className="border-l-4 border-gray-300 pb-8 pl-8">
+                <div className="mb-2 flex items-center justify-between">
                   <h4 className="text-xl font-semibold">
                     Développeur Full Stack Senior
                   </h4>
                   <span className="text-gray-600">2022 - Présent</span>
                 </div>
-                <p className="text-gray-700 mb-2">Tech Solutions Inc.</p>
+                <p className="mb-2 text-gray-700">Tech Solutions Inc.</p>
                 <p className="text-gray-600">
                   Dirigé le développement d&apos;applications d&apos;entreprise
                   servant plus de 10 000 utilisateurs. Implémenté une
@@ -247,34 +247,34 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({
             )}
           </div>
         </div>
-      </section>{' '}
-      <section id="contact" className="py-20 px-6 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          {' '}
-          <h3 className="text-3xl font-serif font-bold mb-8">
+      </section>{" "}
+      <section id="contact" className="bg-gray-900 px-6 py-20 text-white">
+        <div className="mx-auto max-w-4xl text-center">
+          {" "}
+          <h3 className="mb-8 font-serif text-3xl font-bold">
             Entrer en Contact
           </h3>
-          <p className="text-xl text-gray-300 mb-12">
+          <p className="mb-12 text-xl text-gray-300">
             Prêt à discuter de votre prochain projet ? J&apos;aimerais avoir de
             vos nouvelles.
           </p>
           <div className="flex justify-center space-x-6">
             <a
               href={`mailto:${user.email}`}
-              className="bg-white text-gray-900 px-8 py-3 hover:bg-gray-100 transition-colors font-medium"
+              className="bg-white px-8 py-3 font-medium text-gray-900 transition-colors hover:bg-gray-100"
             >
               M&apos;Envoyer un Email
             </a>
             <a
-              href={cvDownloadUrl || '#'}
-              className="border border-white text-white px-8 py-3 hover:bg-white hover:text-gray-900 transition-colors font-medium"
+              href={cvDownloadUrl || "#"}
+              className="border border-white px-8 py-3 font-medium text-white transition-colors hover:bg-white hover:text-gray-900"
               download
             >
               Télécharger mon CV
             </a>
           </div>
         </div>
-      </section>{' '}
+      </section>{" "}
       {selectedProject && (
         <ProjectVideoDialog
           isOpen={!!selectedProject}

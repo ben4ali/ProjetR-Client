@@ -1,26 +1,32 @@
 .landing-button {
-    cursor: pointer;
-    isolation: isolate;
-    z-index: 15;
-    text-shadow: 0 1px 2px #0000001a;
-    letter-spacing: .5px;
-    background: linear-gradient(135deg, #acabae, #2a2a3f99) 0 0 / 150% 100%;
-    border: none;
-    border-radius: 50px;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.6rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all .4s cubic-bezier(.175,.885,.32,1.275);
-    animation: 3s ease-in-out infinite alternate glow-pulse;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 40px #37373766, 0 0 80px #5050504d, 0 8px 32px #0000004d;
+  cursor: pointer;
+  isolation: isolate;
+  z-index: 15;
+  text-shadow: 0 1px 2px #0000001a;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #acabae, #2a2a3f99) 0 0 / 150% 100%;
+  border: none;
+  border-radius: 50px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: 3s ease-in-out infinite alternate glow-pulse;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px #37373766,
+    0 0 80px #5050504d,
+    0 8px 32px #0000004d;
 }
 
 .landing-button:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 0 40px #37373799, 0 0 80px #50505099, 0 8px 32px #00000099;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 40px #37373799,
+    0 0 80px #50505099,
+    0 8px 32px #00000099;
 }

@@ -1,13 +1,10 @@
-// src/components/ChromeSculpture.tsx
-
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
-// Configuration Constants
 const LIGHT_CONFIG = {
   KEY_LIGHT_INTENSITY: 1500,
   FILL_LIGHT_INTENSITY: 1200,
@@ -116,7 +113,6 @@ const ChromeSculpture: React.FC = () => {
     renderer.setPixelRatio(window.devicePixelRatio);
     currentMount.appendChild(renderer.domElement);
 
-    // Initialize blur effect
     currentMount.style.filter = `blur(${blurRef.current}px)`;
     currentMount.style.webkitFilter = `blur(${blurRef.current}px)`;
 
@@ -210,7 +206,6 @@ const ChromeSculpture: React.FC = () => {
     currentMount.addEventListener("mouseenter", handleMouseEnter);
     currentMount.addEventListener("mouseleave", handleMouseLeave);
     const animate = () => {
-      // Arrêter l'animation si le composant n'est pas visible
       if (!isVisible) {
         animationFrameRef.current = null;
         return;
@@ -225,13 +220,9 @@ const ChromeSculpture: React.FC = () => {
       const intensityMultiplier = 1 - normalizedDistance;
       const isMouseInside = mouseInsideRef.current;
 
-      // Calculate blur based on distance from center
-      // When mouse is at center (on shape): blur = 0px
-      // When mouse is at edge or outside: blur = 2.5px
       const targetBlur = isMouseInside ? normalizedDistance * 1.5 : 1.5;
-      blurRef.current += (targetBlur - blurRef.current) * 0.1; // Smooth transition
+      blurRef.current += (targetBlur - blurRef.current) * 0.1;
 
-      // Update the DOM element's blur filter
       if (currentMount) {
         currentMount.style.filter = `blur(${blurRef.current}px)`;
         currentMount.style.webkitFilter = `blur(${blurRef.current}px)`;

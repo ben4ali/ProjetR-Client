@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { DashboardStats } from '../components/dashboard/DashboardStats';
-import { QuickActions } from '../components/dashboard/QuickActions';
-import { RecentVideos } from '../components/dashboard/RecentVideos';
-import { TrendingProjects } from '../components/dashboard/TrendingProjects';
-import { WelcomeSection } from '../components/dashboard/WelcomeSection';
-import { useCurrentUser } from '../hooks/use-auth';
-import { useAllProjects, useProjectsByUserId } from '../hooks/use-project';
+import { Link } from "react-router-dom";
+import { DashboardStats } from "../components/dashboard/DashboardStats";
+import { QuickActions } from "../components/dashboard/QuickActions";
+import { RecentVideos } from "../components/dashboard/RecentVideos";
+import { TrendingProjects } from "../components/dashboard/TrendingProjects";
+import { WelcomeSection } from "../components/dashboard/WelcomeSection";
+import { useCurrentUser } from "../hooks/use-auth";
+import { useAllProjects, useProjectsByUserId } from "../hooks/use-project";
 
 export const Dashboard = () => {
   const { data: currentUser } = useCurrentUser();
@@ -21,17 +21,17 @@ export const Dashboard = () => {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900">
             Accès non autorisé
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-gray-600">
             Vous devez être connecté pour accéder au tableau de bord.
           </p>
           <Link
             to="/authentification"
-            className="bg-[#444ea5] text-white px-6 py-3 rounded-lg hover:bg-[#3a4193] transition-colors"
+            className="rounded-lg bg-[#444ea5] px-6 py-3 text-white transition-colors hover:bg-[#3a4193]"
           >
             Se connecter
           </Link>
@@ -42,7 +42,7 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard-container min-h-screen bg-gray-50">
-      <div className="dashboard-content max-w-[85vw] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="dashboard-content mx-auto max-w-[85vw] px-4 py-8 sm:px-6 lg:px-8">
         {/* Section de bienvenue */}
         <WelcomeSection user={currentUser} />
 
@@ -53,14 +53,14 @@ export const Dashboard = () => {
         <DashboardStats userProjects={userProjects || []} />
 
         {/* Grille principale */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-8">
+        <div className="mt-8 grid grid-cols-1 gap-8 xl:grid-cols-3">
           {/* Colonne principale - Vidéos récentes */}
           <div className="xl:col-span-2">
             <RecentVideos projects={recentProjects} />
           </div>
 
           {/* Sidebar - Projets tendances et guide */}
-          <div className="xl:col-span-1 space-y-6">
+          <div className="space-y-6 xl:col-span-1">
             <TrendingProjects projects={trendingProjects} />
           </div>
         </div>
