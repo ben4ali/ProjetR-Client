@@ -3,24 +3,13 @@ import { useCurrentUser } from "../../hooks/use-auth";
 import { useProjectsByUserId } from "../../hooks/use-project";
 import { PortfolioTemplate, createMockPortfolio } from "../../types/Portfolio";
 import {
-  CartoonTemplate,
   ClassicTemplate,
-  CreativeTemplate,
   CupertinoTemplate,
-  DesignerTemplate,
-  DeveloperTemplate,
-  HologramTemplate,
   MatrixTemplate,
-  MeteorTemplate,
   MinimalistTemplate,
-  ModernTemplate,
-  NeuralTemplate,
   PixelTemplate,
-  PrismTemplate,
-  QuantumTemplate,
   RondureTemplate,
-  SamuraiTemplate,
-  SilkTemplate
+  SilkTemplate,
 } from "./templates";
 
 interface TemplatePreviewDialogProps {
@@ -49,36 +38,14 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
     const templateProps = { portfolio: mockPortfolio, isPreview: true };
 
     switch (template) {
-      case "modern":
-        return <ModernTemplate {...templateProps} />;
       case "classic":
         return <ClassicTemplate {...templateProps} />;
-      case "creative":
-        return <CreativeTemplate {...templateProps} />;
       case "minimalist":
         return <MinimalistTemplate {...templateProps} />;
-      case "developer":
-        return <DeveloperTemplate {...templateProps} />;
-      case "designer":
-        return <DesignerTemplate {...templateProps} />;
-      case "neural":
-        return <NeuralTemplate {...templateProps} />;
-      case "prism":
-        return <PrismTemplate {...templateProps} />;
       case "cupertino":
         return <CupertinoTemplate {...templateProps} />;
-      case "quantum":
-        return <QuantumTemplate {...templateProps} />;
-      case "meteor":
-        return <MeteorTemplate {...templateProps} />;
-      case "hologram":
-        return <HologramTemplate {...templateProps} />;
-      case "samurai":
-        return <SamuraiTemplate {...templateProps} />;
       case "matrix":
         return <MatrixTemplate {...templateProps} />;
-      case "cartoon":
-        return <CartoonTemplate {...templateProps} />;
       case "pixel":
         return <PixelTemplate {...templateProps} />;
       case "silk":
@@ -86,7 +53,7 @@ export const TemplatePreviewDialog: FC<TemplatePreviewDialogProps> = ({
       case "rondure":
         return <RondureTemplate {...templateProps} />;
       default:
-        return <div className="p-8 text-center">Template not found</div>;
+        return <div className="p-8 text-center">Template introuvable</div>;
     }
   };
 

@@ -1,19 +1,7 @@
-export { CartoonTemplate } from "./CartoonTemplate";
 export { ClassicTemplate } from "./ClassicTemplate";
-export { CreativeTemplate } from "./CreativeTemplate";
 export { CupertinoTemplate } from "./CupertinoTemplate";
-export { DesignerTemplate } from "./DesignerTemplate";
-export { DeveloperTemplate } from "./DeveloperTemplate";
-export { HologramTemplate } from "./HologramTemplate";
 export { MatrixTemplate } from "./MatrixTemplate";
-export { MeteorTemplate } from "./MeteorTemplate";
 export { MinimalistTemplate } from "./MinimalistTemplate";
-export { ModernTemplate } from "./ModernTemplate";
-export { NeuralTemplate } from "./NeuralTemplate";
 export { PixelTemplate } from "./PixelTemplate";
-export { PrismTemplate } from "./PrismTemplate";
-export { QuantumTemplate } from "./QuantumTemplate";
 export { RondureTemplate } from "./RondureTemplate";
-export { SamuraiTemplate } from "./SamuraiTemplate";
 export { SilkTemplate } from "./SilkTemplate";
-

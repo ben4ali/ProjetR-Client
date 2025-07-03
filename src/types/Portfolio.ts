@@ -2,24 +2,13 @@ import { Projet } from "./Projet";
 import { User } from "./User";
 
 export const PORTFOLIO_TEMPLATES = {
-  MODERN: "modern",
   CLASSIC: "classic",
-  CREATIVE: "creative",
-  MINIMALIST: "minimalist",
-  DEVELOPER: "developer",
-  DESIGNER: "designer",
-  NEURAL: "neural",
-  PRISM: "prism",
   CUPERTINO: "cupertino",
-  QUANTUM: "quantum",
-  METEOR: "meteor",
-  HOLOGRAM: "hologram",
-  SAMURAI: "samurai",
   MATRIX: "matrix",
-  CARTOON: "cartoon",
+  MINIMALIST: "minimalist",
   PIXEL: "pixel",
-  SILK: "silk",
   RONDURE: "rondure",
+  SILK: "silk",
 } as const;
 
 export type PortfolioTemplate =

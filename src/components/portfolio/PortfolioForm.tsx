@@ -55,63 +55,30 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
     currentUser?.firstName,
   );
   const templateDescriptions: Record<PortfolioTemplate, string> = {
-    [PORTFOLIO_TEMPLATES.MODERN]:
-      "Design moderne et contemporain avec des animations fluides",
     [PORTFOLIO_TEMPLATES.CLASSIC]:
       "Mise en page intemporelle et élégante avec un style traditionnel",
-    [PORTFOLIO_TEMPLATES.CREATIVE]:
-      "Design audacieux et artistique avec des mises en page uniques",
-    [PORTFOLIO_TEMPLATES.MINIMALIST]:
-      "Simple et épuré avec un focus sur le contenu",
-    [PORTFOLIO_TEMPLATES.DEVELOPER]:
-      "Template technique parfait pour les développeurs",
-    [PORTFOLIO_TEMPLATES.DESIGNER]:
-      "Template visuel pour mettre en valeur le travail de design",
-    [PORTFOLIO_TEMPLATES.NEURAL]:
-      "Réseau neuronal interactif avec animations 3D et effets futuristes",
-    [PORTFOLIO_TEMPLATES.PRISM]:
-      "Design glassmorphique avec effets de prisme et animations GSAP",
     [PORTFOLIO_TEMPLATES.CUPERTINO]:
       "Style Apple minimaliste avec animations élégantes et attention aux détails",
-    [PORTFOLIO_TEMPLATES.QUANTUM]:
-      "Expérience quantique immersive avec particules ThreeJS et effets holographiques",
-    [PORTFOLIO_TEMPLATES.METEOR]:
-      "Design cosmique avec pluie de météores et animations GSAP dynamiques",
-    [PORTFOLIO_TEMPLATES.HOLOGRAM]:
-      "Interface holographique futuriste avec effets de glitch et animations cyber",
-    [PORTFOLIO_TEMPLATES.SAMURAI]:
-      "Design inspiré du Japon avec animations sakura et esthétique samouraï",
     [PORTFOLIO_TEMPLATES.MATRIX]:
       "Interface Matrix avec code vert, effets glitch et animations cyberpunk",
-    [PORTFOLIO_TEMPLATES.CARTOON]:
-      "Style Adventure Time coloré et ludique avec animations rebondissantes",
+    [PORTFOLIO_TEMPLATES.MINIMALIST]:
+      "Simple et épuré avec un focus sur le contenu",
     [PORTFOLIO_TEMPLATES.PIXEL]:
       "Univers rétro gaming avec esthétique 8-bit et animations pixel art",
-    [PORTFOLIO_TEMPLATES.SILK]:
-      "Design fluide basé sur la soie avec animations modernes",
     [PORTFOLIO_TEMPLATES.RONDURE]:
       "Design rond et doux avec des animations fluides et une esthétique apaisante",
+    [PORTFOLIO_TEMPLATES.SILK]:
+      "Design fluide basé sur la soie avec animations modernes",
   };
 
   const templatePreviewImages: Record<PortfolioTemplate, string> = {
-    [PORTFOLIO_TEMPLATES.MODERN]: `/templates/${PORTFOLIO_TEMPLATES.MODERN}.png`,
     [PORTFOLIO_TEMPLATES.CLASSIC]: `/templates/${PORTFOLIO_TEMPLATES.CLASSIC}.png`,
-    [PORTFOLIO_TEMPLATES.CREATIVE]: `/templates/${PORTFOLIO_TEMPLATES.CREATIVE}.png`,
-    [PORTFOLIO_TEMPLATES.MINIMALIST]: `/templates/${PORTFOLIO_TEMPLATES.MINIMALIST}.png`,
-    [PORTFOLIO_TEMPLATES.DEVELOPER]: `/templates/${PORTFOLIO_TEMPLATES.DEVELOPER}.png`,
-    [PORTFOLIO_TEMPLATES.DESIGNER]: `/templates/${PORTFOLIO_TEMPLATES.DESIGNER}.png`,
-    [PORTFOLIO_TEMPLATES.NEURAL]: `/templates/${PORTFOLIO_TEMPLATES.NEURAL}.png`,
-    [PORTFOLIO_TEMPLATES.PRISM]: `/templates/${PORTFOLIO_TEMPLATES.PRISM}.png`,
     [PORTFOLIO_TEMPLATES.CUPERTINO]: `/templates/${PORTFOLIO_TEMPLATES.CUPERTINO}.png`,
-    [PORTFOLIO_TEMPLATES.QUANTUM]: `/templates/${PORTFOLIO_TEMPLATES.QUANTUM}.png`,
-    [PORTFOLIO_TEMPLATES.METEOR]: `/templates/${PORTFOLIO_TEMPLATES.METEOR}.png`,
-    [PORTFOLIO_TEMPLATES.HOLOGRAM]: `/templates/${PORTFOLIO_TEMPLATES.HOLOGRAM}.png`,
-    [PORTFOLIO_TEMPLATES.SAMURAI]: `/templates/${PORTFOLIO_TEMPLATES.SAMURAI}.png`,
     [PORTFOLIO_TEMPLATES.MATRIX]: `/templates/${PORTFOLIO_TEMPLATES.MATRIX}.png`,
-    [PORTFOLIO_TEMPLATES.CARTOON]: `/templates/${PORTFOLIO_TEMPLATES.CARTOON}.png`,
+    [PORTFOLIO_TEMPLATES.MINIMALIST]: `/templates/${PORTFOLIO_TEMPLATES.MINIMALIST}.png`,
     [PORTFOLIO_TEMPLATES.PIXEL]: `/templates/${PORTFOLIO_TEMPLATES.PIXEL}.png`,
-    [PORTFOLIO_TEMPLATES.SILK]: `/templates/${PORTFOLIO_TEMPLATES.SILK}.png`,
     [PORTFOLIO_TEMPLATES.RONDURE]: `/templates/${PORTFOLIO_TEMPLATES.RONDURE}.png`,
+    [PORTFOLIO_TEMPLATES.SILK]: `/templates/${PORTFOLIO_TEMPLATES.SILK}.png`,
   };
 
   return (
@@ -128,17 +95,14 @@ export const PortfolioForm: FC<PortfolioFormProps> = ({
                     : "border-gray-200 bg-white hover:border-[#444ea5]/30"
                 }`}
               >
-                {/* Round checkbox in top-right corner - visible on hover or when selected */}
                 <div className="absolute top-3 right-3 z-10">
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       if (formState.selectedTemplate === value) {
-                        // Unselect if already selected
                         onFieldUpdate("selectedTemplate", "");
                       } else {
-                        // Select if not selected
                         onFieldUpdate("selectedTemplate", value);
                       }
                     }}

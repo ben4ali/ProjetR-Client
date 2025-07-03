@@ -74,7 +74,6 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     customization: initialData?.customization,
   });
 
-  // Reset form data when initialData changes (for edit mode)
   useEffect(() => {
     if (initialData) {
       setFormState((prev) => ({
@@ -97,7 +96,6 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     }
   }, [initialData]);
 
-  // Set current page to show the selected template
   useEffect(() => {
     if (formState.selectedTemplate) {
       const templateEntries = Object.entries(PORTFOLIO_TEMPLATES);
@@ -109,7 +107,6 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
         const TEMPLATES_PER_PAGE = 6;
         const targetPage = Math.floor(templateIndex / TEMPLATES_PER_PAGE);
 
-        // Only update if we're not already on the correct page
         if (formState.currentPage !== targetPage) {
           setFormState((prev) => ({
             ...prev,
@@ -142,7 +139,7 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
       setFormState((prev) => ({
         ...prev,
         skills: [...prev.skills, prev.currentSkill],
-        currentSkill: { name: "", level: 50 }, // Reset with default level of 50%
+        currentSkill: { name: "", level: 50 },
       }));
     }
   };
@@ -171,7 +168,6 @@ export const usePortfolioForm = (initialData?: Portfolio) => {
     setFormState((prev) => ({ ...prev, previewTemplate: null }));
   };
 
-  // Pagination logic
   const TEMPLATES_PER_PAGE = 6;
   const templateEntries = Object.entries(PORTFOLIO_TEMPLATES);
   const totalPages = Math.ceil(templateEntries.length / TEMPLATES_PER_PAGE);
